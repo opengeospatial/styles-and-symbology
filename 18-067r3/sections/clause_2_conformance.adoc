@@ -1,0 +1,9 @@
+== Conformance
+
+This document defines a standardization target for encodings that implement the OGC Symbology Conceptual Core Model. The goal is to allow different encodings to have equivalent content and semantics so that they can be interoperable. This document establishes a core requirements class with a URI of http://www.opengis.net/spec/symbology/2.0/req/core.
+
+Requirements and conformance test URIs defined in this document are relative to http://www.opengis.net/spec/symbology/2.0. All requirements in this standard are part of the core requirement class stated above.
+
+Conformance with this standard shall be checked using all the relevant tests specified in Annex A (normative) of this document. The framework, concepts, and methodology for testing, and the criteria to be achieved to claim conformance are specified in the OGC Compliance Testing Policies and Procedures and the OGC Compliance Testing web site1.
+
+All requirements-classes and conformance-classes described in this document are owned by the standard(s) identified.

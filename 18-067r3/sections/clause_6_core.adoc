@@ -1,0 +1,311 @@
+== CORE CONCEPTUAL MODEL
+
+=== Overview
+The requirements described in this section define the symbology core requirement class. The UML diagram (<<img-uml-class>>) shows the fundamental concepts of the Symbology Conceptual Core Model.
+
+[#img-uml-class]
+.UML Class Diagram of the Symbology core
+image::figures/figure3.png[]
+
+
+.Requirements Class
+[width="90%",options="header"]
+|===
+2+| Requirements Class Core
+2+| http://www.opengis.net/spec/symbology/2.0/req/core
+| Target type	| Token
+| Dependencies | 	none
+| Req 1	| http://www.opengis.net/spec/symbology/2.0/req/core/StyleClass Implementations shall support the encoding of all properties of the StyleClass and meet all of the tabulated constraints and notes.
+| Req 2	| http://www.opengis.net/spec/symbology/2.0/req/core/RuleClass Implementations shall support the encoding of all RuleClass properties and meet all of the tabulated constraints and notes.
+| Req 3	| http://www.opengis.net/spec/symbology/2.0/req/core/SymbolizerClass Implementations shall support the encoding of all SymbolizerClass properties and meet all of the tabulated constraints and notes.
+| Req 4	| http://www.opengis.net/spec/symbology/2.0/req/core/ParameterValueClass Implementations shall support the encoding of all ParameterValue parameters class and meet all of the tabulated constraints and notes.
+| Req 5	| http://www.opengis.net/spec/symbology/2.0/req/core/LiteralClass Implementations shall support the encoding of all parameters of the LiteralClass and meet all of the tabulated constraints and notes.
+| Req 6	| http://www.opengis.net/spec/symbology/2.0/req/core/UOMClass Implementations shall support the encoding of all properties of the UOMClass and meet all of the tabulated constraints and notes.
+| Req 7	| http://www.opengis.net/spec/symbology/2.0/req/core/ColorClass Implementations shall support the encoding of all properties of the ColorClass and meet all of the tabulated constraints and notes.
+| Req 8	| http://www.opengis.net/spec/symbology/2.0/req/core/FillClass Implementations shall support the encoding of all properties of the FillClass and meet all of the tabulated constraints and notes.
+| Req 9	| http://www.opengis.net/spec/symbology/2.0/req/core/StrokeClass Implementations shall support the encoding of all properties of the StrokeClass and meet all of the tabulated constraints and notes.
+| Req 10	| http://www.opengis.net/spec/symbology/2.0/req/core/GraphicClass Implementations shall support the encoding of all properties of the GraphicClass and meet all of the tabulated constraints and note.
+| Req 11 | http://www.opengis.net/spec/symbology/2.0/req/core/GraphicSizeClass Implementations shall support the encoding of all properties of the GraphicSizeClass and meet all of the tabulated constraints and notes.
+| Req 12	| http://www.opengis.net/spec/symbology/2.0/req/core/LabelClass Implementations shall support the encoding of all properties of the LabelClass and meet all of the tabulated constraints and notes.
+| Req 13	| http://www.opengis.net/spec/symbology/2.0/req/core/FontClass Implementations shall support the encoding of all properties of the FontClass and meet all of the tabulated constraints and notes.
+|===
+
+Each concept in the model can be extended according to two main extension principles:
+
+- either globally related to an abstract class (in yellow); and
+- or locally related to the extension property defined within each class of the model.
+
+The role of each class and property in the model above is described in the tables below.
+
+=== Class Style
+
+[quote,%unnumbered]
+----
+ Req 1 Implementations shall support the encoding of all properties of the StyleClass and meet all of the tabulated constraints and notes.
+http://www.opengis.net/spec/symbology/2.0/req/core/StyleClass
+----
+
+This class is the root concept of the Symbology Conceptual Core Model. This class organizes the rules of symbolizing instructions to be applied by a rendering engine on a layer of geographic features (e.g., vector based spatial data or raster data). As an abstract class, it is designed to be extended (e.g., the FeatureTypeStyle extension for vector data).
+
+Please note that the graphic pipeline of the rendering engine must be expressed unambiguously for each concrete implementation of a Style in order to enable cartographic portrayal interoperability.
+
+The StyleClass properties are documented in the following table.
+
+.StyleClass
+[width="90%",options="header"]
+|===
+| Name	| Definition	| Data type and value	| Multiplicity
+| name	| A string value to reference the Style	| ParameterValue data type	| Zero or one
+| title	| Human readable title	| ParameterValue data type	| One
+| abstract	| Human readable description	| ParameterValue data type	| Zero or one
+| rule	| Rule(s) that drive(s) the rendering engine	| Rule	| One or more
+| extension	| Any encoding should allow the user to extend the class to include custom items	| Any	| Zero or more
+|===
+
+=== Class Rule
+
+[quote,%unnumbered]
+----
+ Req 2 Implementations shall support the encoding of all RuleClass properties and meet all of the tabulated constraints and notes.
+http://www.opengis.net/spec/symbology/2.0/req/core/RuleClass
+----
+
+This core class describes the concept of a rule in the Symbology model. Rules are used to organize symbolizing instructions and potentially to define conditions of application of these associated symbolizers (e.g., feature-property conditions or map scales).
+
+The RuleClass properties are documented in the following table.
+
+.RuleClass
+[width="90%",options="header"]
+|===
+| Name	| Definition	| Data type and value	| Multiplicity
+| name	| A string value to reference the Rule	| ParameterValue data type	| Zero or one
+| title	| Human readable title	| ParameterValue data type	| One
+| abstract	| Human readable description	| ParameterValue data type	| Zero or one
+| symbolizer	| Symbolize(s) to apply by the rendering engine	| Symbolizer	| One or more
+| extension	| Any encoding should allow the user to extend the class to include custom properties	| Any	| Zero or more
+|===
+
+=== Class Symbolizer
+
+[%unnumbered]
+----
+ Req 3 Implementations shall support the encoding of all SymbolizerClass properties and meet all of the tabulated constraints and notes.
+http://www.opengis.net/spec/symbology/2.0/req/core/SymbolizerClass
+----
+
+This class describes how to portray geographic data given a shape (e.g., area fill, line stroke, point marker, etc.) and graphical properties (e.g., color, opacity, font-family, etc.). As an abstract class, it is designed to be extended.
+
+The SymbolizerClass properties are documented in the following table.
+
+.SymbolizerClass
+[width="90%",options="header"]
+|===
+| Name	| Definition	| Data type and value	| Multiplicity
+| name	| A string value to reference the Symbolizer	| ParameterValue data type	| Zero or one
+| title	| Human readable title	| ParameterValue data type	| One
+| abstract	| Human readable description	| ParameterValue data type	| Zero or one
+| uom	| Unit of measure to apply to all graphical properties of a Symbolizer	| uom code	| Zero or one
+| extension	| Any encoding should allow the user to extend the class to include custom items	| Any	| Zero or more
+|===
+
+To understand what the symbolizer concept is, consider a “Lake” feature type represented by a Polygon that is to be symbolized as a “blue” filled polygon with its boundary drawn as a “black” line. As symbolizer is an abstract class: a concrete extension called here, for example, AreaSymbolizer, which must be provided to render an interior “fill” and an outlining “stroke.” Consequently, the AreaSymbolizer extension will implement concrete extensions of the abstract Stroke and Fill classes of the conceptual model.
+
+Depending on the type of geographical object, a set of symbolizer extensions can be conceived. For example a LineSymbolizer to draw a river, a PointSymbolizer to represent the “Hospitals,” or a LabelSymbolizer to render the road name along a line.
+
+=== Class ParameterValue
+
+[%unnumbered]
+----
+ Req 4 Implementations shall support the encoding of all ParameterValue parameters class and meet all of the tabulated constraints and notes.
+http://www.opengis.net/spec/symbology/2.0/req/core/ParameterValueClass
+----
+
+The ParameterValue class represents a gateway that provides the value to be used by a parameter in a styling context of use (almost all styling parameters such as width, opacity, displacement, etc. are “parameter-values”). This class has a similar meaning to Expression as defined in the OGC Filter Encoding 2.0 standard. As an abstract class, it is designed to be extended (e.g., Literal).
+
+The ParameterValue properties are documented in the following table.
+
+.ParameterValue
+[width="90%",options="header"]
+|===
+| Name	| Definition	| Data type and value	| Multiplicity
+| language	| Language identifier for the ParameterValue element. (a)	| Character String. This language identifier shall be as specified in IETF RFC 4646.	| zero or more
+| extension	| Any encoding should allow the ability to extend the class to include custom items	| Any	| zero or more
+|===
+
+(a) The language identifier should offer a way to adapt the ParameterValue to a specified language, e.g., display the title of a Rule element both in English and French.
+
+=== Class Literal
+
+[%unnumbered]
+----
+ Req 5 Implementations shall support the encoding of all parameters of the LiteralClass and meet all of the tabulated constraints and notes.
+http://www.opengis.net/spec/symbology/2.0/req/core/LiteralClass
+----
+
+The Literal class is a concrete implementation of the ParameterValue class. LiteralClass represents a typed atomic literal value as a constant explicitly specified. It was originally defined in the OGC Filter Encoding 2.0 standard section 7.5.1.
+
+LiteralClass properties are documented in the following table.
+
+.LiteralClass
+[width="90%",options="header"]
+|===
+| Name	| Definition	| Data type and value	| Multiplicity
+| value	| A value for the literal data	| Any	| one
+|===
+
+=== Class UOM Codelist
+
+[%unnumbered]
+----
+ Req 6 Implementations shall support the encoding of all properties of the UOMClass and meet all of the tabulated constraints and notes.
+http://www.opengis.net/spec/symbology/2.0/req/core/UOMClass
+----
+
+For styling parameters that define sizing and positioning of graphical objects (width, displacement, etc.) the unit of measure needs to be provided for the rendering engine. Therefore, for different levels of elements (e.g., Symbolizer, Stroke, Fill, GraphicSize, etc.) the model allows using different uom codes. Consequently, either the unit of measure is determined through the uom code directly associated to each element or it is determined by the innermost parent uom code (e.g., an uom code defined at the Symbolizer level implies that this unit is applied for all sizing and positioning values inside the Symbolizer).
+
+Below is the list of allowed units of measure as per UCUM (except for pixel): * portrayal units: pixel, millimeter, inch, percentage; and * ground units: meter, foot.
+
+The portrayal unit “pixel” is the default unit of measure. If available, the pixel size depends on the viewer client resolution, otherwise it is equal to 0.28mm * 0.28mm (~ 90 DPI).
+
+=== Class Color
+
+[%unnumbered]
+----
+ Req 7 Implementations shall support the encoding of all properties of the ColorClass and meet all of the tabulated constraints and notes.
+http://www.opengis.net/spec/symbology/2.0/req/core/ColorClass
+----
+
+The ColorClass allows the definition of color. As an abstract class and part of the base of the core graphical concepts, this class is a global point of extension for specifying concrete definitions of colors (e.g., RGBColor extension).
+
+The ColorClass properties are documented in the following table.
+
+.ColorClass
+[width="90%",options="header"]
+|===
+| Name	| Definition	| Data type and value	| Multiplicity
+| extension	| Any encoding should allow the extension of ColorClass with custom items	| Any type	| zero or more
+|===
+
+=== Class Fill
+
+[%unnumbered]
+----
+ Req 8 Implementations shall support the encoding of all properties of the FillClass and meet all of the tabulated constraints and notes.
+http://www.opengis.net/spec/symbology/2.0/req/core/FillClass
+----
+
+FillClass defines the graphical symbolizing parameters required to draw the filling of a two-dimensional shape such as a polygon. As an abstract class and part of the base of the core graphical concepts, FillClass is a global point of extension for specifying concrete definitions for shape fill operations (e.g., the SolidFill and GraphicFill extensions).
+
+The FillClass properties are documented in the following table.
+
+.FillClass
+[width="90%",options="header"]
+|===
+| Name	| Definition	| Data type and value	| Multiplicity
+| uom	| Unit of measure to apply to all graphical properties within a Fill	| uom code	| zero or one
+| extension	| Any encoding should allow the extension of a Fill operation with custom items	| Any type	| zero or more
+|===
+
+=== Class Stroke
+
+[%unnumbered]
+----
+ Req 9 Implementations shall support the encoding of all properties of the StrokeClass and meet all of the tabulated constraints and notes.
+http://www.opengis.net/spec/symbology/2.0/req/core/StrokeClass
+----
+
+StrokeClass defines the graphical symbolizing parameters for drawing an outline (e.g., for linear geometries or the exterior of a polygon geometry). As an abstract class and part of the base of the core graphical concepts, StrokeClass is a global point of extension to specify concrete ways to draw outlines (e.g., the PenStroke and GraphicStroke extensions). The StrokeClass properties are documented in the following table.
+
+.StrokeClass
+[width="90%",options="header"]
+|===
+| Name	| Definition	| Data type and value	| Multiplicity
+| uom	| Unit of measure to apply to all graphical properties inside a Stroke	| uom code	| zero or one
+| extension	Any encoding should allow to extend a Stroke with custom items	| Any type	| zero or more
+|===
+
+=== Class Graphic
+
+[%unnumbered]
+----
+ Req 10 Implementations shall support the encoding of all properties of the GraphicClass and meet all of the tabulated constraints and notes.
+http://www.opengis.net/spec/symbology/2.0/req/core/GraphicClass
+----
+
+The Graphic class defines the parameters for drawing a graphic symbol such as shape, color(s), and size. A graphic can be informally defined as “a little picture” and can be either a bitmap or scaled vector (the term “graphic” is used instead of the term “symbol” to avoid confusion with Symbolizer, which is used in a different context in this model). As an abstract class and part of the base of the core graphical concepts, GraphicClass is a global point of extension to specify concrete ways to draw “graphic symbol” (e.g., ExternalGraphic and MarkGraphic extensions).
+
+The GraphicClass properties are documented in the following table.
+
+.GraphicClass
+[width="90%",options="header"]
+|===
+| Name	| Definition	| Data type and value	| Multiplicity
+| uom	| Unit of measure to apply to all graphical properties within a Graphic	| uom code	| zero or one
+| graphicSize	| Rendering size of the graphic	| GraphicSize data type	| zero or one
+| extension	| Any encoding should allow to extend a Graphic with custom items	| Any type	| zero or more
+|===
+
+=== Class GraphicSize
+
+[%unnumbered]
+----
+ Req 11 Implementations shall support the encoding of all properties of the GraphicSizeClass and meet all of the tabulated constraints and notes.
+http://www.opengis.net/spec/symbology/2.0/req/core/GraphicSizeClass
+----
+
+The GraphicSize class determines the size of the graphic when it is rendered. As an abstract class, it is designed to be extended to support the various ways the size could be specified such as by a single value, a rectangular box, or by a three-dimensional cube. The GraphicSize properties are documented in the following table.
+
+.GraphicSize
+[width="90%",options="header"]
+|===
+| Name	| Definition	| Data type and value	| Multiplicity
+| extension	| Any encoding should allow to extend a GraphicSize with custom items	| Any type	| zero or more
+|===
+
+=== Class Label
+
+[%unnumbered]
+----
+ Req 12 Implementations shall support the encoding of all properties of the LabelClass and meet all of the tabulated constraints and notes.
+http://www.opengis.net/spec/symbology/2.0/req/core/LabelClass
+----
+
+LabelClass defines the graphical symbolizing properties for drawing a text label. As an abstract class and part of the base of the core graphical concepts, LabelClass is a point of extension to specify concrete ways to draw text label according to placement behaviors (e.g., a PointLabel or LineLabel).
+
+LabelClass properties are documented in the following table.
+
+.LabelClass
+[width="90%",options="header"]
+|===
+| Name	| Definition	| Data type and value	| Multiplicity
+| uom	| Unit of measure to apply to the affected graphical properties within a Label	| uom code	| zero or one
+| labelText	| Text-label content to draw	| ParameterValue data type String	| one
+| font	| Font definition to draw the text-label content	| Font data type Default value: system-dependent	| zero or one
+| fill	| Filling style to draw the glyphs	| Fill data type	| zero or one
+| extension	| Any encoding should allow to extend a Label with custom items	| Any type	| zero or more
+|===
+
+=== Class Font
+
+[%unnumbered]
+----
+ Req 13 Implementations shall support the encoding of all properties of the FontClass and meet all of the tabulated constraints and notes.
+http://www.opengis.net/spec/symbology/2.0/req/core/FontClass
+----
+
+The FontClass describes the font properties to apply for the rendering of a text string. It refers to the W3C CSS Fonts chapter.
+
+FontClass properties are documented in the following table.
+
+.FontClass
+[width="90%",options="header"]
+|===
+| Name	| Definition	| Data type and value	| Multiplicity
+| uom	| Unit of measure to apply to the affected graphical properties within a Font	| uom code	| zero or one
+| fontFamily	| Font family name (a)	| ParameterValue data type CharacterString	| zero or more
+| fontSize	| Font size when applying the font to a text string (b)	| ParameterValue data type Float	| zero or one
+| fontWeight	| Amount of weight or boldness to use for a font	| ParameterValue data type CharacterString	| zero or one
+| fontStyle	| Style to use for a font	| ParameterValue data type CharacterString	| zero or one
+| extension	| Any encoding should allow to extend a Font with custom items	| Any type	| zero or more
+|===
+(a) Any number of FontFamily parameters may be given and they are assumed to be in preferred order. (b) The size unit is specified by the uom code if defined or by the innermost parent unit of measure definition otherwise.  

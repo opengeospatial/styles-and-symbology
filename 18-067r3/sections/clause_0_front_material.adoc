@@ -1,0 +1,36 @@
+.Preface
+
+////
+*OGC Declaration*
+////
+
+Attention is drawn to the possibility that some of the elements of this document may be the subject of patent rights. The Open Geospatial Consortium shall not be held responsible for identifying any or all such patent rights.
+
+Recipients of this document are requested to submit, with their comments, notification of any relevant patent claims or other intellectual property rights of which they may be aware that might be infringed by any implementation of the standard set forth in this document, and to provide supporting documentation.
+
+[abstract]
+== Abstract
+
+This document presents the requirements for defining the Symbology Conceptual Core Model (SymCore), the conceptual basis to define symbology rules for the portrayal of geographical data. It is modular and extensible (one core model, many extensions), also encoding agnostic (one symbology model, many encodings). It contains a minimal set of abstract classes representing explicit extension points of the model.
+
+Note, that this document does not define any extensions.
+
+[example%unnumbered]
+====
+The SWG work that led to this proposal has been done in the continuation of the Symbology Encoding standard (SE 1.1). While portrayal concerns the complete picture of what can be called a “cartographic ecosystem,” the description of symbology rules rather concerns the subpart of it about the instructions to be applied by a rendering engine to symbolize geodata. That’s why this proposal has a focus on symbology versus concerns close to WMS Style Layer Descriptor profile (SLD) considerations. In other words, while a set of “layer styles” describe the links between some geodata and some styles to build a map, each of these styles are built of a set of symbology rules in accordance with SymCore.
+
+The overall motivation that lead to this proposal is related to the issue “how to make richer the symbology abilities.” The first answer is modularity which comes with extensibility. SE 1.1 is not modular per se, while this proposal is designed to be so with a core model extensible to host the diversity of such abilities in relation to various data models. It means that the core model is somewhat abstract and does not define concrete visualizations (e.g., red dashed line of wide thickness to draw features of type cable car).
+
+The second answer that follows from the first is about extensions. As soon as the conceptual basis is set out in a specification document (this document), then extensions have to document the concrete symbology concepts to portray geodata structured according to a given data model. It is worth to notice that conceptually, the core model is not related to any specific underlying data model to be represented. It is up to an extension to define styling abilities in relation to a specific data model (e.g., FeatureTypeStyle).
+
+The third answer is about encodings. As soon as the conceptual basis is established and extensions packaged, then the task is to define encodings to formalize the concrete conceptual symbology abilities.
+
+In summary, SymCore concerns the first answer with a consistent approach to:
+
+* provide the flexibility required to achieve adequate symbology rules for a variety of information communities; e.g., aviation symbols, weather symbols, thematic maps, etc,; and
+* achieve high-level styling interoperability without encoding dependencies.
+
+As a consequence, this document follows the same motivation that split up SLD 1.0 (SLD 1.1 and SE 1.1). This document puts together parts that are not specific to any service (e.g., Web Map Service), are independent, and allow the concepts to be reused by other standards willing to address aspects related to cartography. So a more general and portable symbology model is defined for use across the broad OGC standards baseline, to be applied to geospatial datasets as well as online geospatial data and mapping services.
+
+Potential implementations of SymCore are expected to enhance OGC standards such as the Web Map Service, Web Feature Service, GeoPackage, and others. By sharing a common core, and using an extension mechanism, integration of these standards for the purposes of cartographic representation could be greatly simplified.
+====

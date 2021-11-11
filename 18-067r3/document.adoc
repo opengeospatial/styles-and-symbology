@@ -1,0 +1,63 @@
+= OGC Symbology Conceptual Model: Core Part
+:doctype: standard
+:docsubtype: conceptual-model
+:status: Published
+:encoding: utf-8
+:lang: en
+:committee: technical
+:draft: 1.0
+:abbrev: SymCore
+:edition: 1.0
+:external-id: http://www.opengis.net/doc/IS/{abbrev}/{edition}
+:docnumber: 18-067r3
+:received-date: 2018-09-07
+:issued-date: 2020-08-24
+:published-date: 2020-10-15
+:fullname: Erwan Bocher
+:fullname_2: Olivier Ertz
+:keywords: ogcdoc, OGC document, style, symbology, conceptual, core, modular, neutral, portrayal
+:submitting-organizations: HEIG-VD (School of Management and Engineering Vaud); CNRS (National Center for Scientific Research); Strategic ACI; IGN
+:docfile: document.adoc
+:mn-document-class: ogc
+:mn-output-extensions: html,doc,xml,pdf
+:local-cache-only:
+:data-uri-image:
+:pdf-uri: ./18-067r3.pdf
+:xml-uri: ./18-067r3.xml
+:doc-uri: ./18-067r3.doc
+
+
+////
+Make sure to complete each included document
+////
+include::sections/clause_0_front_material.adoc[]
+
+include::sections/clause_1_scope.adoc[]
+
+include::sections/clause_2_conformance.adoc[]
+
+include::sections/clause_3_references.adoc[]
+
+include::sections/clause_4_terms_and_definitions.adoc[]
+
+include::sections/clause_5_conventions.adoc[]
+
+include::sections/clause_6_core.adoc[]
+
+
+////
+add or remove annexes after "A" as necessary
+////
+include::sections/annex_a.adoc[]
+
+include::sections/annex_b.adoc[]
+
+include::sections/annex_c.adoc[]
+
+////
+Revision History should be the last annex before the Bibliography
+Bibliography should be the last annex
+////
+include::sections/annex_history.adoc[]
+
+// include::sections/annex-bibliography.adoc[]

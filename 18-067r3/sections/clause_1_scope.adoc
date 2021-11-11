@@ -1,0 +1,18 @@
+== Scope
+
+This document presents the requirements that define the Symbology Conceptual Core Model (SymCore). The SymCore is a conceptual, modular, neutral model for the portrayal of geographical data. The model contains a minimal set of abstract classes representing explicit extension points of the model. Note: this document does not define any extensions.
+
+Even though the SymCore could be extended in many places (such as Color or ParameterValue), the abstract Style class must be considered as the root element for portraying a geographic data model and for defining a concrete style model, e.g., specific style dedicated to render 2D vector data or a style for 3D, Virtual Reality, or Augmented Reality topics (Figure 1).
+
+The SymCore is a new approach (Bocher E., Ertz O., 2018, see Annex B):
+
+- to provide the flexibility required to achieve adequate cartographic styling and fill the needs of a variety of information communities; e.g., aviation symbols, weather symbols, thematic maps, etc.; and
+- to achieve high level styling interoperability without encoding dependencies.
+
+.The core model and its potential extensions
+image::figures/figure1.png[]
+
+Figure 2 explains the relation between the core, the potential extensions, and their encodings. A community style extension must be based on a core element and will be encoding-independent. An extension should have a concrete encoding. As the figure shows encoding could be implemented in various formats.
+
+.From core and extensions to encodings: principles of implementation
+image::figures/figure2.png[]
