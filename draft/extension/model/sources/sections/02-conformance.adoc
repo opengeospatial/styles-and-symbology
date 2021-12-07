@@ -1,0 +1,19 @@
+
+== Conformance
+
+This document defines a standardisation target for encodings which
+implement the OGC Symbology conceptual model in order to allow different
+encodings to have equivalent content and semantics so that they can be
+interoperable. It establishes a set of extensions with URI of
+http://www.opengis.net/spec/symbology/2.0/req/FeatureTypeStyle[_http://www.opengis.net/spec/symbology/2.0/req/FeatureTypeStyle_].
+
+Requirements and conformance test URIs defined in this document are
+relative to
+http://www.opengis.net/spec/symbology/2.0/FeatureTypeStyle[_http://www.opengis.net/spec/symbology/2.0/FeatureTypeStyle_].
+
+Conformance with this standard shall be checked using all the relevant
+tests specified in Chapter 6 of this document. The framework, concepts,
+and methodology for testing, and the criteria to be achieved to claim
+conformance are specified in the OGC Compliance Testing Policies and
+Procedures and the OGC Compliance Testing web site.
+ and conformance-classes described in this document are owned by the standard(s) identified.

@@ -1,0 +1,6 @@
+
+== Scope
+
+This document proposes a set of concrete extensions of the Symbology
+Conceptual Core Model standard to control how the features data (eg.
+vector layer) are rendered.

@@ -1,0 +1,1979 @@
+
+== Overview
+
+The FeatureType Style extensions provide a set of concrete Symbology
+Core Model implementations to renderer 2D features (eg. vector data).
+
+The extensions are organized as packages (<<img_ft_style>>).
+
+[#img_ft_style]
+.FeatureType style packages in white, symbology core model dependency in yellow
+image::figure1.png[]
+
+=== FeatureTypeStyle
+
+**Requirement Class:
+**http://www.opengis.net/spec/symbology/2.0/req/FeatureTypeStyle[_http://www.opengis.net/spec/symbology/2.0/req/FeatureTypeStyle_]
+
+**Scope: **All requirements in this subsection relate to the above
+requirement class.
+
+*Dependencies:*
+http://www.opengis.net/spec/symbology/2.0/req/core[_http://www.opengis.net/spec/symbology/2.0/req/core_]
+
+*Description:* The FeatureTypeStyle extension defines the styling that
+is to be applied to a single feature type.
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/FeatureTypeStyleClass[_http://www.opengis.net/spec/symbology/2.0/req/FeatureTypeStyleClass_]** +
+Requirement Txt:** Implementations shall support the encoding of all
+parameters of the FeatureTypeStyleClass and meet all of the tabulated
+constraints and notes.
+
+This class extends the abstract Style class described in the core. It
+defines the ability to portray a Layer built of N instances of GML
+AbstractFeatureType (Portele, 2007) with the ability to access features
+according to Simple Feature SF-2 (Van den Brink et al., 2012).
+
+The rendering engine is driven according to the following execution: all
+features are applied to each symbolizer in sequence as they appear
+nested in rule and following the “painters model” with the first item in
+a list being the first item plotted and hence being on the “bottom”.
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+
+|featureTypeName |Identifies the specific feature type that the
+feature-type style is for |Literal data type |zero or one
+|===
+
+To define the access to the exact feature type geometry to style, the
+extension adds a geometry property to the PointSymbolizer,
+LineSymbolizer, AreaSymbolizer and TextSymbolizer classes with the
+related behaviours (described below for each requirement).
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/PointSymbolizerClass/Geomerty[_http://www.opengis.net/spec/symbology/2.0/req/PointSymbolizerClass/Geomerty_]** +
+Requirement Txt:** Implementations shall support the encoding of the
+below added property to the PointSymbolizer class and meet all of the
+tabulated constraints and notes.
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/LineSymbolizerClass/Geomerty[_http://www.opengis.net/spec/symbology/2.0/req/LineSymbolizerClass/Geomerty_]** +
+Requirement Txt:** Implementations shall support the encoding of the
+below added property to the LineSymbolizer class and meet all of the
+tabulated constraints and notes.
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/AreaSymbolizerClass/Geomerty[_http://www.opengis.net/spec/symbology/2.0/req/AreaSymbolizerClass/Geomerty_]** +
+Requirement Txt:** Implementations shall support the encoding of the
+below added property to the AreaSymbolizer class and meet all of the
+tabulated constraints and notes.
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/TextSymbolizerClass/Geomerty[_http://www.opengis.net/spec/symbology/2.0/req/TextSymbolizerClass/Geomerty_]** +
+Requirement Txt:** Implementations shall support the encoding of the
+below added property to the TextSymbolizer class and meet all of the
+tabulated constraints and notes.
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+
+|geometry |Geometry attribute or sub-element of a geometry attribute (a)
+added to the Symbolizer |ParameterValue data type +
+Geometry^[multiblock footnote omitted]^ |one
+|===
+
+=== Rule extensions
+
+==== ​ScaledRule extension
+
+**Requirement Class:
+**http://www.opengis.net/spec/symbology/2.0/req/ScaledRule[_http://www.opengis.net/spec/symbology/2.0/req/ScaledRule_]
+
+**Scope: **All requirements in this subsection relate to the above
+requirement class.
+
+**Dependency:
+**http://www.opengis.net/spec/symbology/2.0/req/core[_http://www.opengis.net/spec/symbology/2.0/req/core_]
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/ScaledRuleExtension[_http://www.opengis.net/spec/symbology/2.0/req/RuleClass/Scal_]http://www.opengis.net/spec/symbology/2.0/req/ScaledRuleExtension[_eDenominator_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+properties of the ScaledRule extension and meet all of the tabulated
+constraints and notes.
+
+The ScaledRule extension extends the Rule class with two properties
+(MinScaleDenominator and MaxScaleDenominator) defining the range of
+map-rendering scales for which the rule should be applied. See some more
+explanations about link:#_lcow2wanmeoo[_Annexe A - ScaledRule_].
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+
+|minScaleDenominator |Minimum of map scale range for which a rule should
+apply a|
+ParameterValue data type (Float)
+
+Value: (0;+∞)
+
+Default value: 0
+
+|zero or one
+
+|maxScaleDenominator |Maximum of map scale range for which a rule should
+apply a|
+ParameterValue data type (Float)
+
+Value: (0;+∞)
+
+Default value: +∞
+
+|zero or one
+|===
+
+==== FilteredRule extension
+
+**Requirement Class:
+**http://www.opengis.net/spec/symbology/2.0/req/FilteredRule[_http://www.opengis.net/spec/symbology/2.0/req/FilteredRule_]
+
+**Scope: **All requirements in this subsection relate to the above
+requirement class.
+
+**Dependency:
+**http://www.opengis.net/spec/symbology/2.0/req/core[_http://www.opengis.net/spec/symbology/2.0/req/core_]
+
+**Dependency: **Filter Encoding 2.0
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/ScaledRuleExtension[_http://www.opengis.net/spec/symbology/2.0/req/RuleClass/Filter_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+properties of the FilteredRule extension and meet all of the tabulated
+constraints and notes.
+
+The FilteredRule extension extends the Rule class with a property
+(Filter) to specify a filter mechanism. It is "used to identify a subset
+of resources from a collection of resources whose property values
+satisfy a set of logically connected predicates. If the property values
+of a resource satisfy all the predicates in a filter then that resource
+is considered to be part of the resulting subset"^footnote:[ from
+http://www.opengis.net/doc/IS/FES/2.0/clause/7.1]^ such as a subset of
+features to style by applying a given Symbolizer. An encoding shall
+offer a mechanism to select features according to a where clause using
+comparison and logical operators and additional functions (see
+ParameterValue subclause). More explanations about the filtering
+mechanism in link:#_tfvpwf4g1vr[_Annexe B - FilteredRule_].
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+|filter |Filtering mechanism |Expression data type |zero or one
+|===
+
+=== ​Symbolizer extensions
+
+==== AreaSymbolizer extension
+
+**Requirement Class:
+**http://www.opengis.net/spec/symbology/2.0/req/AreaSymbolizer[_http://www.opengis.net/spec/symbology/2.0/req/AreaSymbolizer_]
+
+**Scope: **All requirements in this subsection relate to the above
+requirement class.
+
+**Dependency:
+**http://www.opengis.net/spec/symbology/2.0/req/core[_http://www.opengis.net/spec/symbology/2.0/req/core_]
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/style/AreaSymbolizerExtension[_http://www.opengis.net/spec/symbology/2.0/req/_]http://www.opengis.net/spec/symbology/2.0/req/style/AreaSymbolizerExtension[_AreaSymbolizerClass_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+properties of the AreaSymbolizer extension and meet all of the tabulated
+constraints and notes.
+
+An AreaSymbolizer is used to symbolize a geometry into an area including
+filling its interior and stroking its outline. It is typically used for
+a 2-dimensional geometry (e.g. Polygon).
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+
+|fill |Filling style to draw the interior area |Fill data type |Zero or
+one
+
+|stroke |Stroke style to draw the outline |Stroke data type |Zero or one
+|===
+
+[loweralpha]
+. If a geometry has “holes,” then they are not filled, but the borders
+around the holes are stroked in the usual way if a Stroke parameter is
+mentioned. “Islands” within holes are filled and stroked, and so on. If
+a point is used, then a small, square, orthogonal-normal area should be
+constructed for rendering. If a line is used, then the line (string) is
+closed for filling (only) by connecting its end point to its start
+point, any line crossings are corrected in some way, and only the
+original line is stroked.
+. A missing Fill property means that the geometry will not be filled. A
+missing Stroke property means that the geometry will not be stroked.
+When both are used, the filling is rendered first and then the stroking
+rendered on top of the filling.
+
+==== LineSymbolizer extension
+
+**Requirement class:
+**http://www.opengis.net/spec/symbology/2.0/req/AreaSymbolizer[_http://www.opengis.net/spec/symbology/2.0/req/LineSymbolizer_]
+
+**Scope: **All requirements in this subsection relate to the above
+requirement class.
+
+*Dependency:*
+http://www.opengis.net/spec/symbology/2.0/req/core[_http://www.opengis.net/spec/symbology/2.0/req/core_]
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req//LineSymbolizerClass[_http://www.opengis.net/spec/symbology/2.0/req//LineSymbolizerClass_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+properties of the LineSymbolizer extension and meet all of the tabulated
+constraints and notes.
+
+​The LineSymbolizer extension is used to symbolize a geometry into a
+stroke, typically along an 1-dimensional geometry, such as a LineString.
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+|stroke |Stroke style to draw the line |Stroke data type |one
+|===
+
+[loweralpha]
+. For a 0-dimensional geometry (e.g. point) the stroke is applied on a
+line of “epsilon” length (arbitrarily small) with a horizontal
+orientation centered on the rendered geometry with two end caps. For a
+2-dimensional geometry (e.g. polygon) the stroke is applied on its
+closed outline as the line rendered with no end caps.
+
+==== PointSymbolizer extension
+
+**Requirement Class:
+**http://www.opengis.net/spec/symbology/2.0/req/PointSymbolizer[_http://www.opengis.net/spec/symbology/2.0/req/PointSymbolizer_]
+
+**Scope: **All requirements in this subsection relate to the above
+requirement class.
+
+**Dependency:
+**http://www.opengis.net/spec/symbology/2.0/req/core[_http://www.opengis.net/spec/symbology/2.0/req/core_]
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/PointSymbolizerClass[_http://www.opengis.net/spec/symbology/2.0/req/PointSymbolizerClass_]** +
+Requirement Txt:** Implementations shall support the encoding of all
+properties of the PointSymbolizer extension and meet all of the
+tabulated constraints and notes.
+
+The PointSymbolizer extension is used to symbolize a geometry into a
+point at which a graphic is placed.
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+|graphic |Graphic to draw at the point |Graphic data type |One
+|===
+
+[loweralpha]
+. For a geometry type other than 0-dimensional (e.g. a line, polygon)
+the semantic is to compute and use a representative interior central
+point as the point placement (i.e. guaranteed to lie on the line or the
+surface interior).
+
+==== TextSymbolizer extension
+
+**Requirement Class:
+**http://www.opengis.net/spec/symbology/2.0/req/TextSymbolizer[_http://www.opengis.net/spec/symbology/2.0/req/TextSymbolizer_]
+
+**Scope: **All requirements in this subsection relate to the above
+requirement class.
+
+**Dependency:
+**http://www.opengis.net/spec/symbology/2.0/req/core[_http://www.opengis.net/spec/symbology/2.0/req/core_]
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/TextSymbolizerClass[_http://www.opengis.net/spec/symbology/2.0/req/TextSymbolizerClass_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+properties of the TextSymbolizer extension and meet all of the tabulated
+constraints and notes.
+
+The TextSymbolizer extension is used to symbolize a geometry into text
+labels, whatever is the geometry type.
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+|label |Label text and styling details |Label data type |One
+|===
+
+=== Graphical extensions
+
+==== Fill extensions
+
+===== SolidFill extension
+
+**Requirement class:
+**http://www.opengis.net/spec/symbology/2.0/req/SolidFill[_http://www.opengis.net/spec/symbology/2.0/req/SolidFill_]
+
+**Scope: **All requirements in this subsection relate to the above
+requirement class.
+
+*Dependency:*
+http://www.opengis.net/spec/symbology/2.0/req/core[_http://www.opengis.net/spec/symbology/2.0/req/core_]
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/SolidFillClass[_http://www.opengis.net/spec/symbology/2.0/req/SolidFillClass_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+properties of the SolidFill class and meet all of the tabulated
+constraints and notes.
+
+The SolidFill class is a concrete implementation of the Fill class and
+allows to formulate a filling of an area (e.g. a polygon geometry or any
+kind of symbol).
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+|color |The color to fill the area |Color data type |zero or one
+|opacity |Opacity of the Color a|
+ParameterValue type (Float) +
+Value: [0;1] (1 means 100% opaque)
+
+Default value: 0
+
+|zero or one
+|===
+
+===== GraphicFill extension
+
+**Requirement class:
+**http://www.opengis.net/spec/symbology/2.0/req/SolidFill[_http://www.opengis.net/spec/symbology/2.0/req/GraphicFill_]
+
+**Scope: **All requirements in this subsection relate to the above
+requirement class.
+
+*Dependency:*
+http://www.opengis.net/spec/symbology/2.0/req/core[_http://www.opengis.net/spec/symbology/2.0/req/core_]
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/GraphicFillClass[_http://www.opengis.net/spec/symbology/2.0/req/GraphicFillClass_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+properties of the GraphicFill class and meet all of the tabulated
+constraints and notes.
+
+The GraphicFill extension is a concrete implementation of the Fill
+class. It repeats a rectangular tiling pattern over an area (i.e.
+mosaïc). A graphic can be defined very informally as “a little picture”.
+The appearance of the graphic is defined with the embedded Graphic class
+parameter.
+
+The graphic fill repeats the Graphic in a rectangular tiling pattern
+with a TileGap between tiles. The TileGap parameter allows to define
+vertical and horizontal gaps between tiles.
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+
+|graphic |The graphic to repeat within the area |Graphic data type |one
+
+|tileGap |Allow to define a empty space to put between two consecutive
+tile (i.e. graphic) |TileGap data type |zero or one
+|===
+
+TileGap is introduced as an extension. It shall meet all of the
+tabulated constraints and notes.
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+|x |Horizontal gap between two tiles a|
+Double ParameterValue data type, see
+
+Value range is [0:+∞[.
+
+Default is 0.
+
+|zero or one
+|y |Vertical gap between two tiles a|
+Double ParameterValue data type, Value range is [0:+∞[.
+
+Default is 0.
+
+|zero or one
+|===
+
+[loweralpha]
+. The X parameter indicates the horizontal gap between two consecutive
+tiles. This value is a non-negative real number.
+. The Y parameter has the same definition as the X one, but for the
+vertical gap. The default gap size is zero units in each direction.
+
+The graphicFill mechanism is illustrated in link:#_z186k8oiqz0b[_Annexe
+B - GraphicFill_].
+
+===== HatchedFill extension
+
+**Requirement class:
+**http://www.opengis.net/spec/symbology/2.0/req/HatchedFill[_http://www.opengis.net/spec/symbology/2.0/req/HatchedFill_]
+
+**Scope: **All requirements in this subsection relate to the above
+requirement class.
+
+*Dependency:*
+http://www.opengis.net/spec/symbology/2.0/req/core[_http://www.opengis.net/spec/symbology/2.0/req/core_]
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/HatchedFillClass[_http://www.opengis.net/spec/symbology/2.0/req/HatchedFillClass_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+properties of the HatchedFill class and meet all of the tabulated
+constraints and notes.
+
+The HatchedFill extension is a concrete implementation of Fill class. It
+offers simple parameters which allows to control a hatching easily in a
+way conventional in cartography.
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+
+|stroke |The stroke to use to style hatches |Stroke data type |zero or
+one
+
+|angle |Hatches orientation, clockwise degree a|
+Double ParameterValue data type, +
+Value range is ]-∞;+∞[.
+
+Default is 45.
+
+|zero or one
+
+|distance |Distance between geometry bases of two consecutive hatches a|
+Double ParameterValue data type, +
+Value range is [0;+∞[.
+
+Default is equivalent to 2mm.
+
+|zero or one
+
+|offset |Allow to define a empty space to put between two consecutive
+tile (i.e. graphic) a|
+Double, ParameterValue data type, +
+Value range is [0;+∞[.
+
+Default is 0.
+
+|zero or one
+|===
+
+[loweralpha]
+. Hatching is defined by a juxtaposed hatches. A hatch is rendered by a
+Stroke and oriented given an Angle. The Distance parameter defines the
+perpendicular space between two consecutive hatches. +
+Hatches are organized according to a reference line which is defined as
+the line that crosses a system-dependent anchor point and is oriented
+given the provided Angle. Also, the complementary Offset parameter
+allows to move the anchor point according to a displacement in the
+direction of value Angle+90° (see link:#_z186k8oiqz0b[_Annexe B -
+GraphicFill_]).
+. Clockwise is the rotation of Angle because of the coordinate system of
+the view box with X axis advancing to the right of the origin and the Y
+axis advancing downward.
+
+==== Stroke extensions
+
+===== PenStroke extension
+
+**Requirement class:
+**http://www.opengis.net/spec/symbology/2.0/req/PenStroke[_http://www.opengis.net/spec/symbology/2.0/req/PenStroke_]
+
+**Scope: **All requirements in this subsection relate to the above
+requirement class.
+
+*Dependency:*
+http://www.opengis.net/spec/symbology/2.0/req/core[_http://www.opengis.net/spec/symbology/2.0/req/core_]
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/PenStrokeClass[_http://www.opengis.net/spec/symbology/2.0/req/PenStrokeClass_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+properties of the PenStroke class and meet all of the tabulated
+constraints and notes.
+
+The PenStroke extension is a concrete implementation of the Stroke
+class. It allows to draw a line (e.g. a 1-dimensional geometry, the
+outline of a marker, etc) analogously to how a pen is used with ink,
+that is to say by filling the area formed by the thickness of the line.
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+
+|width |Thickness of the line which gives form to an area to fill (a) a|
+ParameterValue data type (Float) +
+Value: [0;+∞)
+
+Default value: 1px
+
+|zero or one
+
+|fill |The filling style to draw the linear area |Fill data type |zero
+or one
+|===
+
+[loweralpha]
+. The Width parameter is in the context of a UnitOfMeasure code (that
+may be inherited from a parent element).
+
+===== GraphicStroke extension
+
+**Requirement class:
+**http://www.opengis.net/spec/symbology/2.0/req/GraphicStroke[_http://www.opengis.net/spec/symbology/2.0/req/GraphicStroke_]
+
+**Scope: **All requirements in this subsection relate to the above
+requirement class.
+
+*Dependency:*
+http://www.opengis.net/spec/symbology/2.0/req/core[_http://www.opengis.net/spec/symbology/2.0/req/core_]
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/GraphicStrokeClass[_http://www.opengis.net/spec/symbology/2.0/req/GraphicStrokeClass_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+properties of the GraphicStroke class and meet all of the tabulated
+constraints and notes.
+
+The GraphicStroke extension is a concrete implementation of the Stroke
+class. It is about one graphic repeated along a line. A renderer may
+apply some aesthetic embellishments like trying to bend a graphic around
+corners or avoid a graphic to be cut at the start or at the end.
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+
+|graphic |The graphic to plot |Graphic data type |one
+
+|length |Linear length to reserve along the line to plot a single
+graphic (a) a|
+ParameterValue data type (Float)
+
+Value: [0;+∞)
+
+Default: graphic natural length
+
+|zero or one
+|===
+
+[loweralpha]
+. The Length property specifies the linear length to reserve along the
+line for one of the repeated graphics to plot. By default, the linear
+length is equal to the Graphic natural length (which depends on the view
+box of the graphic). It has the effect to perfectly juxtapose the
+repeated graphics all along the line. Zero length value means the
+graphic is not repeated within all the available linear space. Notice
+that a single graphic is not plotted if the size of the available linear
+space smaller than the Length.
+
+===== TextStroke extension
+
+**Requirement class:
+**http://www.opengis.net/spec/symbology/2.0/req/TextStroke[_http://www.opengis.net/spec/symbology/2.0/req/TextStroke_]
+
+**Scope: **All requirements in this subsection relate to the above
+requirement class.
+
+*Dependency:*
+http://www.opengis.net/spec/symbology/2.0/req/core[_http://www.opengis.net/spec/symbology/2.0/req/core_]
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/TextStrokeClass[_http://www.opengis.net/spec/symbology/2.0/req/TextStrokeClass_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+properties of the TextStroke class and meet all of the tabulated
+constraints and notes.
+
+The TextStroke extension is a concrete implementation of the Stroke
+class. It is about the repetition of a text label along a line in a
+similar way GraphicStroke does by repeating a graphic. The text glyphs
+are plotted as integral rotated units following the line.
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+
+|lineLabel |The label configuration |LineLabel data type |one
+
+|length |Linear length to reserve along the line to plot the label (a)
+a|
+ParameterValue data type (Float)
+
+Value: [0;+∞)
+
+Default: label natural length
+
+|zero or one
+|===
+
+[loweralpha]
+. The Length parameter specifies the linear length to reserve along the
+line for one of the repeated labels to plot. By default, the linear
+length is equal to the label natural length (which depends on the
+LalbelText and Font configurations extensions). It has the effect to
+perfectly juxtapose the repeated labels all along the line. Zero length
+value means the label is not repeated.
+
+==== Color extensions
+
+===== HexaColor extension
+
+**Requirement class:
+**http://www.opengis.net/spec/symbology/2.0/req/HexaColor[*_http://www.opengis.net/spec/symbology/2.0/req/HexaColor_*]
+
+**Scope: **All requirements in this subsection relate to the above
+requirement class.
+
+*Dependency:*
+http://www.opengis.net/spec/symbology/2.0/req/core[_http://www.opengis.net/spec/symbology/2.0/req/core_]
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/HexaColorClass[_http://www.opengis.net/spec/symbology/2.0/req/HexaColorClass_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+properties of the HexaColor extension and meet all of the tabulated
+constraints and notes.
+
+The HexaColor extension is a concrete implementation of the Color class
+to express a RGB color model. The format of the color is in hexadecimal
+notation. It is a ‘#’ immediately followed by either three or six
+hexadecimal characters.
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+
+|color |The hexadecimal notation of the color |ParameterValue data type
+(String) Default value: #000000 |one
+|===
+
+===== RGBColor extension
+
+**Requirement class:
+**http://www.opengis.net/spec/symbology/2.0/req/RGBColor[_http://www.opengis.net/spec/symbology/2.0/req/RGBColor_]
+
+**Scope: **All requirements in this subsection relate to the above
+requirement class.
+
+*Dependency:*
+http://www.opengis.net/spec/symbology/2.0/req/core[_http://www.opengis.net/spec/symbology/2.0/req/core_]
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/RGBColorClass[_http://www.opengis.net/spec/symbology/2.0/req/RGBColorClass_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+properties of the RGBColor extension and meet all of the tabulated
+constraints and notes.
+
+The RGBColor extension is a concrete implementation of the Color class
+where the color is expressed as three integer properties in conformance
+with the sRGB standardized color space.
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+|red |The red value of the color a|
+ParameterValue data type (Integer) +
+Value: (0;255)
+
+Default value: 0
+
+|one
+|green |The green value of the colorR a|
+ParameterValue data type (Integer) +
+Value: (0;255)
+
+Default value: 0
+
+|one
+|blue |The blue value of the color a|
+ParameterValue data type (Integer) +
+Value: (0;255)
+
+Default value: 0
+
+|one
+|===
+
+===== WellKnownNameColor extension
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/WellKnownNameColorClass[*_http://www.opengis.net/spec/symbology/2.0/req/WellKnownNameColorClass_*]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+properties of the WellKnownNameColor and meet all of the tabulated
+constraints and notes.
+
+WellKnownNameColor is a codeList element that provides a list of color
+names to define a Color. The color names are case-insensitive. The list
+is based of thehttps://en.wikipedia.org/wiki/X11_color_names[
+]https://en.wikipedia.org/wiki/X11_color_names[_X11 colors_].
+
+==== Graphic extensions
+
+===== ExternalGraphic extension
+
+**Requirement class:
+**http://www.opengis.net/spec/symbology/2.0/req/ExternalGraphic[_http://www.opengis.net/spec/symbology/2.0/req/ExternalGraphic_]
+
+**Scope: **All requirements in this subsection relate to the above
+requirement class.
+
+*Dependency:*
+http://www.opengis.net/spec/symbology/2.0/req/core[_http://www.opengis.net/spec/symbology/2.0/req/core_]
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/ExternalGraphicClass[_http://www.opengis.net/spec/symbology/2.0/req/ExternalGraphicClass_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+properties of the ExternalGraphic extension and meet all of the
+tabulated constraints and notes.
+
+The ExternalGraphic extension extends the abstract Graphic type. It
+allows to reference a graphic resource to use as a graphic symbolizer
+(e.g. PNG bitmap graphic, SVG vector graphic, ...).
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+
+|onlineResource |Reference to on-line resource from which a graphic can
+be obtained (a) a|
+ParameterValue data type (CharacterString)
+
+Value: an URL identifier
+
+|one (exclusive with InlineContent)
+
+|inlineContent |Inline content of a graphic object (a,b) |Literal data
+type |one (exclusive with OnlineResource)
+
+|encoding |Expected inline content encoding (b) |Literal data type |one
+(exclusive with OnlineResource)
+
+|format |Expected content format of a successful fetch (a) a|
+Literal data type
+
+Value: a MIME type identifier
+
+|one
+
+|opacity |Opacity of the graphic a|
+ParameterValue data type (Float) +
+Value: [0;1] +
+(1 means 100% opaque)
+
+Default values: 0
+
+|zero or one
+|===
+
+[loweralpha]
+. There are two ways to define an external format graphic, either using
+OnlineResource or InlineContent. They can't be defined together. The
+external Format of the graphic shall be mentioned as the expected
+content MIME type of a successful fetch.
+. When using the alternative InlineContent parameter to include in-line
+the content of an external graphic object, then the inline encoding
+shall be mentioned. The two choices for encoding are XML and
+Base-64-encoded binary.
+
+===== MarkGraphic extension
+
+**Requirement class:
+**http://www.opengis.net/spec/symbology/2.0/req/MarkGraphic[_http://www.opengis.net/spec/symbology/2.0/req/MarkGraphic_]
+
+**Scope: **All requirements in this subsection relate to the above
+requirement class.
+
+*Dependency:*
+http://www.opengis.net/spec/symbology/2.0/req/core[_http://www.opengis.net/spec/symbology/2.0/req/core_]
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/MarkGraphicClass[_http://www.opengis.net/spec/symbology/2.0/req/MarkGraphicClass_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+properties of the MarkGraphic extension and meet all of the tabulated
+constraints and notes.
+
+The MarkGraphic extension extends the abstract Graphic type. It allows a
+graphic to be created by stroking and filling a shape.
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+
+|wellKnownName |Name of the shape to stroke and fill (a,b)
+|WellKnownName code |one (exclusive with OnlineResource and
+InlineContent)
+
+|onlineResource |Online location of a mark objects archive (a,c) a|
+ParameterValue data type (CharacterString)
+
+Value: an URL identifier
+
+|One (exclusive with WellKnownName and InlineContent)
+
+|inlineContent |Inline content of a mark objects archive (a,c) |Literal
+data type |One (exclusive with OnlineResource and WellKnownName)
+
+|encoding |Expected inline content encoding (c) a|
+Literal data type
+
+Value: XML | base64
+
+|One (exclusive with OnlineResource and WellKnownName)
+
+|format |Expected content format of a successful fetch (c) a|
+Literal data type
+
+Value: a MIME type identifier
+
+|One (exclusive with WellKnownName)
+
+|markIndex |Index of a mark from a mark objects archive (c) a|
+ParameterValue data type (Integer)
+
+Value: [0;+∞)
+
+|One (exclusive with WellKnownName)
+
+|fill |The filling style to fill the shape (d) |Fill data type |Zero or
+one
+
+|stroke |The stroke style to draw the outline of the shape (d) |Stroke
+data type |Zero or one
+|===
+
+[loweralpha]
+. There are three ways to define a mark shape, either using
+WellKnownName, OnlineResource or InlineContent. They can't be defined
+together.
+. WellKnownName is used to draw predefined internal marks. The center of
+the view box is the default anchor point, except for star and triangle.
+. OnlineResource and InlineContent are two ways to select a mark from an
+external mark archive (e.g. glyph from TrueType or SVG font). The
+MarkIndex property represents a numeric identifier which allows an
+individual mark in a mark archive to be selected. The default anchor
+point is format-dependent, while the center of the view box shall be
+used if no information is available.
+. A missing Fill parameter means that the geometry will not be filled. A
+missing Stroke parameter means that the geometry will not be stroked.
+When both are used, the filling is rendered first and then the stroking
+rendered on top of the filling. A missing Halo parameter means no halo
+is drawn.
+. The encoding must describe the order in which transformations are
+executed.
+
+The extension introduces also WellKnownName code list extension, used to
+draw predefined shape of mark graphics. It includes the following codes
+: square, circle, triangle, star, cross, x.
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+
+|wellKnownName |Shall support an optional codelist parameter. |Literal
+data type |one
+
+|extension |Any encoding should allow the user to extend the codelist to
+include custom items |Any |zero or more
+|===
+
+==== Shape extensions
+
+===== Halo extension
+
+**Requirement class:
+**http://www.opengis.net/spec/symbology/2.0/req/Halo[_http://www.opengis.net/spec/symbology/2.0/req/Halo_]
+
+**Scope: **All requirements in this subsection relate to the above
+requirement class.
+
+*Dependency:* None.
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/HaloClass[_http://www.opengis.net/spec/symbology/2.0/req/HaloClass_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+properties of the Halo extension and meet all of the tabulated
+constraints and notes.
+
+The Halo extension may be used to improve the visibility of shapes like
+font glyphs or graphics by drawing an extended area surrounding the
+shapes.
+
+* the extension adds a new class Halo: the halo is calculated according
+to a radius (in context of an UnitOfMeasure) and then filled adequately
+so as to highlight the shapes.
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+
+|unitOfMeasure |Unit of measure to apply to all graphical properties
+inside a Halo |UnitOfMeasure code |zero or one
+
+|radius |Span size of the surrounding halo area (a) a|
+ParameterValue data type (Float)
+
+Value: [0;+∞)
+
+Default value: 1px
+
+|zero or one
+
+|fill |Fill style to fill the halo area |Fill data type |zero or one
+
+|extension |Any encoding should allow the user to extend the halo to
+include custom items |Any |zero or more
+|===
+
+[loweralpha]
+. To calculate the halo area, the radius is taken from the outside edge
+of a shape (and the inside edge of “holes” in the shape)
+
+* the extension adds a property to the classes MarkGraphic,
+ExternalGraphic, PointLabel and LineLabel.
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+|halo |Fill a halo around the shape |Halo data type |zero or one
+|===
+
+===== PerpendicularOffset extension
+
+**Requirement Class:
+**http://www.opengis.net/spec/symbology/2.0/req/PerpendicularOffset[_http://www.opengis.net/spec/symbology/2.0/req/PerpendicularOffset_]
+
+**Scope: **All requirements in this subsection relate to the above
+requirement class.
+
+*Description:* The extension allows to construct parallel lines around a
+geometry. It adds a property to the classes LineSymbolizer,
+AreaSymbolizer and TextSymbolizer with related behaviours (described
+below for each requirement).
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+
+|perpendicularOffset |Construct parallel lines around of the original
+geometry a|
+ParameterValue data type (Float)
+
+Value: (-∞;+∞)
+
+|zero or one
+|===
+
+**Requirement ID: +
+**http://www.opengis.net/spec/symbology/2.0/req/style/LineSymbolizerExtension[_http://www.opengis.net/spec/symbology/2.0/req/LineSymbolizerClass_]http://www.opengis.net/spec/symbology/2.0/req/LinePerpendicularOffset[_/PerpendicularOffset_] +
+*Requirement Txt:* Implementations shall support the encoding of the
+added property of the LineSymbolizer extension and meet all of the
+tabulated constraints and notes.
+
+For a LineSymbolizer, the distance between original geometry and drawn
+line stays equal. This construction can result in drawn lines that are
+actually smaller or longer than the original geometry. The distance is
+in the context of the UnitOfMeasure property and is positive to the
+left-hand side of the line string. Negative numbers mean right (see
+link:#_pkauxqlap12e[_Annexe B - PerpendicularOffset_]).
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/style/LineSymbolizerExtension[_http://www.opengis.net/spec/symbology/2.0/req/AreaSymbolizerClass_]http://www.opengis.net/spec/symbology/2.0/req/LinePerpendicularOffset[_/PerpendicularOffset_] +
+*Requirement Txt:* Implementations shall support the encoding of the
+added property of the AreaSymbolizer extension and meet all of the
+tabulated constraints and notes.
+
+For a AreaSymbolizer, the extension allows to shrink or grow the area
+impacting both the stroking of the outline and the filling of the area.
+The distance is in the context of the UnitOfMeasure parameter and is
+positive to the outside of the polygon. Negative numbers mean drawing
+the polygon smaller (see link:#_pkauxqlap12e[_Annexe B -
+PerpendicularOffset_]).
+
+**Requirement ID:
+**http://www.opengis.net/spec/symbology/2.0/req/style/LineSymbolizerExtension[_http://www.opengis.net/spec/symbology/2.0/req/TextSymbolizerClass_]http://www.opengis.net/spec/symbology/2.0/req/LinePerpendicularOffset[_/PerpendicularOffset_]** +
+Requirement Txt:** Implementations shall support the encoding of the
+added property of the TextSymbolizer extension and meet all of the
+tabulated constraints and notes.
+
+For a TextSymbolizer, the extension has the same meaning as for
+LineSymbolizer and for AreaSymbolizer, but can be ignored for punctual
+geometry. Before symbolizing the geometry into a text label, the
+geometry is transformed according to a perpendicular offset which
+produces a parallel line. The text label is then drawn according to that
+parallel line.
+
+==== Properties extensions
+
+===== LineProperties extension
+
+**Requirement Class:
+**http://www.opengis.net/spec/symbology/2.0/req/LineProperties[_http://www.opengis.net/spec/symbology/2.0/req/LineProperties_]
+
+**Scope: **All requirements in this subsection relate to the above
+requirement class.
+
+**Dependency:
+**http://www.opengis.net/spec/symbology/2.0/req/core[_http://www.opengis.net/spec/symbology/2.0/req/core_]
+
+*Description:* The extension extends the PenStroke class with two
+properties LineJoin and LineCap used to define the the line style.
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+
+|lineJoin |Type of joining at the corners between the line segments (c)
+|LineJoin code |zero or one
+
+|lineCap |Type of cap to be used at the two ends of an open line (c)
+|LineCap code |zero or one
+|===
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/PenStrokeClass/LineJoinProperty[_http://www.opengis.net/spec/symbology/2.0/req/PenStrokeClass/LineJoinProperty_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+properties of the LineJoinProperty extension and meet all of the
+tabulated constraints and notes.
+
+The extension introduces a code list used to define the the line style.
+The semantic of LineJoin is similar to their SVG equivalents. It
+includes the following codes : mitre, round and level.
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+
+|lineJoin |Type of joining at the corners between the line segments (c)
+a|
+Literal data type
+
+Default value: mitre
+
+|one
+
+|extension |Any encoding should allow the user to extend the codelist to
+include custom items |Any |zero or more
+|===
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/PenStrokeClass/LineCapProperty[_http://www.opengis.net/spec/symbology/2.0/req/PenStrokeClass/LineCapProperty_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+properties of the LineCapProperty extension and meet all of the
+tabulated constraints and notes.
+
+The extension introduces a code list used to define the the line style.
+The semantic of LineCap is similar to their SVG equivalents. It includes
+the following codes : butt, round and square.
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+
+|lineCap |Type of cap to be used at the two ends of an open line (c) a|
+Literal data type
+
+Default value: butt
+
+|one
+
+|extension |Any encoding should allow the user to extend the codelist to
+include custom items |Any |zero or more
+|===
+
+===== DashProperties extension
+
+**Requirement Class:
+**http://www.opengis.net/spec/symbology/2.0/req/DashProperties[_http://www.opengis.net/spec/symbology/2.0/req/DashProperties_]
+
+**Scope: **All requirements in this subsection relate to the above
+requirement class.
+
+**Dependency:
+**http://www.opengis.net/spec/symbology/2.0/req/core[_http://www.opengis.net/spec/symbology/2.0/req/core_]
+
+*Description:* The extension extends the PenStroke class with two
+properties DashArray and DashOffset used to manage dash values on a
+line.
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/PenStrokeClass/DashArrayProperties[_http://www.opengis.net/spec/symbology/2.0/req/PenStrokeClass/_]http://www.opengis.net/spec/symbology/2.0/req/PenStrokeClass/DashArrayProperties[_DashArrayProperties_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+properties of the DashArrayProperty extension and meet all of the
+tabulated constraints and notes.
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+|dashArray |Dash pattern to repeat (a)(b) a|
+ParameterValue data type (Float) +
+Value: ]0;+∞)
+
+Default value: unbroken line
+
+|zero or more
+|===
+
+[loweralpha]
+. DashArray property is in the context of a UnitOfMeasure code (that may
+be inherited from a parent element).
+. The Dasharray property specifies a dash pattern as a sequence of
+floating values strictly positive. The first number gives the length of
+dash to draw, the second gives the amount of space to leave, and this
+pattern repeats. If an odd number of values is given, then the pattern
+is expanded by repeating it twice to give an even number of values.
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/PenStrokeClass/DashOffsetProperties[_http://www.opengis.net/spec/symbology/2.0/req/PenStrokeClass/DashOffsetProperties_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+properties of the DashOffsetProperty extension and meet all of the
+tabulated constraints and notes.
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+|dashOffset |Offset into a dash pattern at which to start drawing (a) a|
+ParameterValue data type (Float)
+
+Value: (∞;+∞)
+
+Default value: 0
+
+|zero or one
+|===
+
+[loweralpha]
+. DashOffset property is in the context of a UnitOfMeasure code (that
+may be inherited from a parent element).
+
+=== ParameterValue extensions
+
+==== ValueReference extension
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/ValueReferenceClass[_http://www.opengis.net/spec/symbology/2.0/req/ValueReferenceClass_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+parameters of the ValueReference extension and meet all of the tabulated
+constraints and notes.
+
+The ValueReference extension is a concrete implementation of the
+ParameterValue class. A value reference is a string that represents a
+value that is to be evaluated by a predicate. It has a relatively
+straightforward meaning as conceptually defined by Filter Encoding 2.0
+specification (OGC® Filter Encoding 2.0 Encoding Standard , section
+7.4.1).
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+|name |Specify the name of any property |Any |one
+|===
+
+==== Function extension
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/FunctionClass[_http://www.opengis.net/spec/symbology/2.0/req/FunctionClass_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+parameters of the Function extension and meet all of the tabulated
+constraints and notes.
+
+The Function extension is a concrete implementation of the
+ParameterValue class. A function is a named procedure that performs a
+distinct computation. It has a relatively straightforward meaning as
+conceptually defined by Filter Encoding 2.0 specification (OGC® Filter
+Encoding 2.0 Encoding Standard , section 7.6.1).
+
+=== Transformation extensions
+
+==== Transform extension
+
+**Requirement class:
+**http://www.opengis.net/spec/symbology/2.0/req/AreaSymbolizer[_http://www.opengis.net/spec/symbology/2.0/req/Transform_]
+
+**Scope: **All requirements in this subsection relate to the above
+requirement class.
+
+**Dependencies: +
+**http://www.opengis.net/spec/symbology/2.0/req/style/LineSymbolizerExtension[_http://www.opengis.net/spec/symbology/2.0/core_]** +
+**http://www.opengis.net/spec/symbology/2.0/req/PointLabelClass[_http://www.opengis.net/spec/symbology/2.0/req/PointLabelClass_]
+
+*Description:* This class describes the extension of the Graphic
+abstract class and the PointLabel class to support the transformation of
+the anchor point to hang up a graphic or a label. The extension
+introduces a new Transform data type and adds a property of this type to
+the Graphic class and one to the PointLabel class. +
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/core/TranslateClass[_http://www.opengis.net/spec/symbology/2.0/req/Transform_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+parameters of the Transform class and meet all of the tabulated
+constraints and notes.
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+
+|unitOfMeasure |Unit of measure to use for the tranformation
+|UnitOfMeasure code |zero or one
+
+|extension |Any encoding should allow to extend with custom items |Any
+type |zero or more
+|===
+
+**Requirement ID: +
+**http://www.opengis.net/spec/symbology/2.0/req/style/LineSymbolizerExtension[_http://www.opengis.net/spec/symbology/2.0/req/core/GraphicClass_]http://www.opengis.net/spec/symbology/2.0/req/LinePerpendicularOffset[_/Transform_] +
+*Requirement Txt:* Implementations shall support the encoding of the
+below added property to the Graphic class and meet all of the tabulated
+constraints and notes.
+
+**Requirement ID: +
+**http://www.opengis.net/spec/symbology/2.0/req/PointLabel/Transform[_http://www.opengis.net/spec/symbology/2.0/req/PointLabel/Transform_]* +
+Requirement Txt:* Implementations shall support the encoding of the
+below added property to the PointLabel class and meet all of the
+tabulated constraints and notes.
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+
+|Transform |The affine transformations to apply on the graphic
+|Transform data type |zero or more
+|===
+
+==== Translate extension
+
+**Requirement class:
+**http://www.opengis.net/spec/symbology/2.0/req/AreaSymbolizer[_http://www.opengis.net/spec/symbology/2.0/req/Translate_]
+
+**Scope: **All requirements in this subsection relate to the above
+requirement class.
+
+**Dependency: **None.
+
+*Description:* The extension introduces the ability to define the
+translation of a graphical object. It defines the new Translate class
+and adds a property of that new class type to the AreaSymbolizer,
+TextSymbolizer, LineSymbolizer, PointSymbolizer, MarkGraphic,
+ExternalGraphic, PointLabel classes with the related behaviours
+(described below for each requirement).
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/core/TranslateClass[_http://www.opengis.net/spec/symbology/2.0/req/TranslateClass_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+properties of the TranslateClass and meet all of the tabulated
+constraints and notes.
+
+According to the object coordinate system, a positive X value translates
+the object to the right and a positive Y value translates it downward.
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+
+|UnitOfMeasure |Unit of measure to use for the translation
+|UnitOfMeasure code |zero or one
+
+|X |Horizontal displacement a|
+ParameterValue date type Float
+
+Value: (-∞;+∞)
+
+Default value: 0
+
+|one
+
+|Y |Vertical displacement a|
+ParameterValue date type Float
+
+Value: (-∞;+∞)
+
+Default value: 0
+
+|one
+
+|Extension |Any encoding should allow to extend a Translate with custom
+items |Any type |zero or more
+|===
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/core/TranslateClass[_http://www.opengis.net/spec/symbology/2.0/req/AreaSymbolizerClass/Displacement_]
+
+**Requirement Txt: **Implementations shall support the encoding of the
+added property of the AreaSymbolizer extension and meet all of the
+tabulated constraints and notes.
+
+For a AreaSymbolizer, the Displacement parameter offers X and Y
+translation that may be used to avoid overplotting of multiple
+AreaSymbolizer for one geometry or produce shadow effects. When drawing
+a geometry, it is transformed from the coordinate reference system into
+the view coordinate space before any translation.
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/core/TranslateClass[_http://www.opengis.net/spec/symbology/2.0/req/TextSymbolizerClass/Displacement_]
+
+**Requirement Txt: **Implementations shall support the encoding of the
+added property of the LineSymbolizer extension and meet all of the
+tabulated constraints and notes.
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/PointSymbolizerClass/Displacement[_http://www.opengis.net/spec/symbology/2.0/req/PointSymbolizerClass/Displacement_]
+
+**Requirement Txt: **Implementations shall support the encoding of the
+added property of the PointSymbolizer extension and meet all of the
+tabulated constraints and notes.
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/LineSymbolizerClass/Displacement[_http://www.opengis.net/spec/symbology/2.0/req/LineSymbolizerClass/Displacement_]
+
+**Requirement Txt: **Implementations shall support the encoding of the
+added property of the LineSymbolizer extension and meet all of the
+tabulated constraints and notes.
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/ExternalGraphicClass/Displacement[_http://www.opengis.net/spec/symbology/2.0/req/ExternalGraphicClass/Translate_]
+
+**Requirement Txt: **Implementations shall support the encoding of the
+added property of the ExternalGraphic extension and meet all of the
+tabulated constraints and notes.
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/MarkGraphicClass/Translate[_http://www.opengis.net/spec/symbology/2.0/req/MarkGraphicClass/Translate_]
+
+**Requirement Txt: **Implementations shall support the encoding of the
+added property of the MarkGraphic extension and meet all of the
+tabulated constraints and notes.
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/MarkGraphicClass/Translate[_http://www.opengis.net/spec/symbology/2.0/req/PointLabelClass/Translate_]
+
+**Requirement Txt: **Implementations shall support the encoding of the
+added property of the PointLabel extension and meet all of the tabulated
+constraints and notes.
+
+==== Rotate extension
+
+Requirement class:
+
+Scope:
+
+Dependency:
+
+Description:
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/core/RotateClass
+
+*Requirement Txt:* Implementations shall support the encoding of all
+parameters of the RotateClass and meet all of the tabulated constraints
+and notes.
+
+The Rotate data type specifies the rotation of an object given a
+rotation center point combined with a rotation angle.
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+
+|UnitOfMeasure |Unit of measure to use for the X and Y displacement
+|UnitOfMeasure code |zero or one
+
+|X a|
+Rotation center horizontal displacement (a)
+
+a|
+ParameterValue date type Float
+
+Value: (-∞;+∞)
+
+Default value: 0
+
+|zero or one
+
+|Y |Rotation center vertical displacement (a) a|
+ParameterValue date type Float
+
+Value: (-∞;+∞)
+
+Default value: 0
+
+|zero or one
+
+|Angle |Rotation angle in clockwise degrees a|
+ParameterValue date type Float
+
+Value: (-∞;+∞)
+
+|one
+
+|Extension |Any encoding should allow to extend a Rotate with custom
+items |Any type |zero or more
+|===
+
+[loweralpha]
+. If X and Y are not supplied, the rotation is about the origin of the
+current object coordinate system. If supplied, it is about the point (X,
+Y). The operation is then the equivalent of the following sequence:
+translate(X,Y) rotate(Angle) translate(-X, -Y).
+
+==== Scale extension
+
+Requirement class:
+
+Scope:
+
+Dependency:
+
+Description:
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/core/ScaleClass
+
+*Requirement Txt:* Implementations shall support the encoding of all
+parameters of the ScaleClass and meet all of the tabulated constraints
+and notes.
+
+The Scale data type specifies a scaling operation with the homothetic
+center which corresponds to the object coordinate system origin. Scaling
+factors are unitless.
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+
+|X |Horizontal factor a|
+ParameterValue date type Float
+
+Default value: Y value if defined, otherwise 1
+
+|zero or one
+
+|Y |Vertical factor a|
+ParameterValue date type Float
+
+Default value: X value if defined, otherwise 1
+
+|zero or one
+
+|Extension |Any encoding should allow to extend a Scale with custom
+items |Any type |zero or more
+|===
+
+==== Matrix extension
+
+Requirement class:
+
+Scope:
+
+Dependency:
+
+Description:
+
+​**Requirement ID:**
+http://www.opengis.net/spec/symbology/2.0/req/core/MatrixClass
+
+*Requirement Txt:* Implementations shall support the encoding of all
+parameters of the MatrixClass and meet all of the tabulated constraints
+and notes.
+
+The Matrix data type specifies a transformation in the form of a
+transformation matrix of six values. Matrix values are unitless.
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+|A |A cell a|
+ParameterValue date type Float
+
+Value: (-∞;+∞)
+
+Default value: 1
+
+|zero or one
+|B |B cell a|
+ParameterValue date type Float
+
+Value: (-∞;+∞)
+
+Default value: 0
+
+|zero or one
+|C |C cell a|
+ParameterValue date type Float
+
+Value: (-∞;+∞)
+
+Default value: 0
+
+|zero or one
+|D |D cell a|
+ParameterValue date type Float
+
+Value: (-∞;+∞)
+
+Default value: 1
+
+|zero or one
+|E |E cell a|
+ParameterValue date type Float
+
+Value: (-∞;+∞)
+
+Default value: 0
+
+|zero or one
+|F |F cell a|
+ParameterValue date type Float
+
+Value: (-∞;+∞)
+
+Default value: 0
+
+|zero or one
+|===
+
+=== Labelling extensions
+
+==== PointLabel extension
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/PointLabelClass[_http://www.opengis.net/spec/symbology/2.0/req/PointLabelClass_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+parameters of the PointLabel extension and meet all of the tabulated
+constraints and notes.
+
+PointLabel extends the abstract Label type. It is used by
+TextSymbolizer. It draws a text label relative to a point placement. The
+latter is defined the same way it is for a Graphic within a
+PointSymbolizer.
+
+It draws a text label relative to a point placement:
+
+* for 0-dimensional geometry, it is the geometry itself
+* for 1 or 2-dimensional geometry the semantic is to compute and use a
+representative interior central point as the point placement (i.e.
+guaranteed to lie on the line or the surface interior
+* For a collection of geometry, the label is just repeated at each part.
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+
+|unitOfMeasure |Unit of measure to use for the PointLabel |UnitOfMeasure
+code |zero or one
+
+|extension |Any encoding should allow to extend a PointLabel with custom
+items |Any type |zero or more
+|===
+
+==== LineLabel extension
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/style/LineLabelExtension[_http://www.opengis.net/spec/symbology/2.0/req/LineLabelExtension_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+parameters of the TextSymbolizer extension and meet all of the tabulated
+constraints and notes.
+
+LineLabel extends the abstract Label type. It is used by TextSymbolizer
+and TextStroke extension. It draws an aligned text label relative to a
+placement line:
+
+* for 0-dimensional geometry, it is a line of “epsilon” length
+(arbitrarily small)
+* for 1-dimensional geometry, it is the line itself
+* for 2-dimensional geometry, it is a line following the shape of the
+geometry
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+
+|unitOfMeasure |Unit of measure to use for the LineLabel |UnitOfMeasure
+code |zero or one
+
+|extension |Any encoding should allow to extend a LineLabel with custom
+items |Any type |zero or more
+|===
+
+==== LabelAlignment extension
+
+**Requirement Class:
+**http://www.opengis.net/spec/symbology/2.0/req/LabelAligmentProperties[_http://www.opengis.net/spec/symbology/2.0/req/LabelAligmentProperties_]
+
+**Scope: **All requirements in this subsection relate to the above
+requirement class.
+
+**Description: **The LabelAlignment extensions extends the PointLabel
+and LineLabel classes with two properties VerticalAlignment and
+HorizontalAlignment.
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+
+|VerticalAlignment |Shall support an optional codelist parameter to
+define the vertical alignment of the label.(a) a|
+Literal data type
+
+Default value: top
+
+|One
+
+|HorizontalAlignment |Shall support an optional codelist parameter to
+define the horizontal alignment of the label.(b) a|
+Literal data type
+
+Default value: center
+
+|One
+|===
+
+[loweralpha]
+. The list of supported vertical alignments is top, bottom, middle or
+baseline.
+. The list of supported horizontal alignments is left , right or center.
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/PointLabelClass/LineAligmentProperties[_http://www.opengis.net/spec/symbology/2.0/req/PointLabelClass/LineAligmentProperties_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+properties of the PointLabel extension and meet all of the tabulated
+constraints and notes.
+
+The label is aligned vertically. Relative to the placement point, it is
+either aligned at the top, at the bottom, through its middle line or
+through its baseline (see link:#_p4awyw17d0uv[_Annexe B -
+LabelAlignment_]).
+
+The label is aligned horizontally. Relative to the placement point, it
+is either drawn at the left, centered, or at the right (see
+link:#_p4awyw17d0uv[_Annexe B - LabelAlignment_]).
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/LineLabelClass/LineAligmentProperties[_http://www.opengis.net/spec/symbology/2.0/req/LineLabelClass/LineAligmentProperties_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+properties of the LineLabel extension and meet all of the tabulated
+constraints and notes.
+
+VerticalAlignement is a preference hint of where to draw vertically the
+label relative to the placement line. It is drawn either aligned at the
+top, at the bottom, through its middle line or through its baseline.
+
+HorizontalAlignment is a preference hint of where to draw horizontally
+the label along the placement line. It is aligned either at the left
+(start point side), at the right (end point side) or centered to the
+line.
+
+The semantic of top, middle, bottom, baseline, left, center and right is
+relative to the orientation of the curve.
+
+==== ExclusionZone extension
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/style/ExclusionZoneExtension[_http://www.opengis.net/spec/symbology/2.0/req/ExclusionZoneClass_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+parameters of the ExclusionZone class and meet all of the tabulated
+constraints and notes.
+
+The ExclusionZone element is an abstract class to prevent to plot the
+label within a zone for a PointLabel extension.
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+
+|unitOfMeasure |Unit of measure to use for the ExclusionZone
+|UnitOfMeasure code |zero or one
+
+|extension |Any encoding should allow to extend a ExclusionZone with
+custom items |Any type |zero or more
+|===
+
+==== ExclusionRadius extension
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/ExclusionRadiusExtension[_http://www.opengis.net/spec/symbology/2.0/req/ExclusionRadiusExtension_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+parameters of the ExclusionRadius extension and meet all of the
+tabulated constraints and notes.
+
+Concrete implementation of the ExclusionZone class. It is used to define
+a circular zone of exclusion, centered on a plotting point, in which it
+can not be plotted (see link:#_mogtfnrfcqhw[_Annexe B -
+ExclusionZone_]).
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+|radius |The radius value to define the circular exclusion zone a|
+ParameterValue data type (Float)
+
+Value: (0;+∞)
+
+|one
+|===
+
+==== ExclusionRectangle extension
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/ExclusionRectangleExtension[_http://www.opengis.net/spec/symbology/2.0/req/ExclusionRectangleExtension_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+parameters of the ExclusionRectangle extension and meet all of the
+tabulated constraints and notes.
+
+Concrete implementation of the ExclusionZone class. It defines a
+rectangular zone of exclusion, centered on a plotting point, in which it
+can not be plotted (see link:#_mogtfnrfcqhw[_Annexe B -
+ExclusionZone_]).
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+|width |The width value to define the rectangular exclusion zone a|
+ParameterValue data type (Float)
+
+Value: (0;+∞)
+
+|one
+|height |The height value to define the rectangular exclusion zone a|
+ParameterValue data type (Float)
+
+Value: (0;+∞)
+
+|one
+|===
+
+==== Clip extension
+
+**Requirement Class:
+**http://www.opengis.net/spec/symbology/2.0/req/Clip[_http://www.opengis.net/spec/symbology/2.0/req/Clip_]
+
+**Scope: **All requirements in this subsection relate to the above
+requirement class.
+
+*Description:* The extension indicates if a geometry to be labeled has
+to be clipped to the map view. It adds a property to the class
+TextSymbolizer with the related behaviour.
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/TextSymbolizerClass/Clip[_http://www.opengis.net/spec/symbology/2.0/req/TextSymbolizerClass/Clip_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+parameters of the Clip extension and meet all of the tabulated
+constraints and notes.
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+|clip |Indicates if the geometry is clipped to the map view |Boolean +
+Default value: false |zero or one
+|===
+
+==== LabelRotation extension
+
+**Requirement Class:
+**http://www.opengis.net/spec/symbology/2.0/req/LabelRotation[_http://www.opengis.net/spec/symbology/2.0/req/LabelRotation_]
+
+**Scope: **All requirements in this subsection relate to the above
+requirement class.
+
+*Description:* The extension indicates the rotation angle of a label. It
+adds a property to the class PointLabel with the related behaviour.
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/PointLabelClass/LabelRotation[_http://www.opengis.net/spec/symbology/2.0/req/PointLabelClass/LabelRotation_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+parameters of the PointLabel extension and meet all of the tabulated
+constraints and notes.
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+|labelRotation |Rotation angle of the label (in clockwise degrees) a|
+ParameterValue data type (Float)
+
+Value: (-∞;+∞)
+
+Default value: 0°
+
+|zero or one
+|===
+
+=== Orientation extensions
+
+==== RelativeOrientation extension
+
+**Requirement Class:
+**http://www.opengis.net/spec/symbology/2.0/req/RelativeOrientation[_http://www.opengis.net/spec/symbology/2.0/req/RelativeOrientation_]
+
+**Scope: **All requirements in this subsection relate to the above
+requirement class.
+
+*Description:* The extension allows to rotate a label text or a graphic
+against the line according to several possible orientations. It adds a
+property to the classes LineLabel and GraphicStroke with related
+behaviours.
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/LineLabelClass/RelativeOrientation[_http://www.opengis.net/spec/symbology/2.0/req/LineLabelClass/RelativeOrientation_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+parameters of the LineLabel extension and meet all of the tabulated
+constraints and notes.
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/GraphicStrokelClass/RelativeOrientation[_http://www.opengis.net/spec/symbology/2.0/req/GraphicStrokelClass/RelativeOrientation_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+parameters of the GraphicStroke extension and meet all of the tabulated
+constraints and notes.
+
+The height of the graphic view box is used for line and lineUp
+orientations, and the width is used for normal, normalUp and portrayal
+orientations. The codelist of supported orientation is therefore line,
+lineUp,normal or portrayal. See link:#_vr8la71ldbbv[_Annexe B -
+RelativeOrientation_] for a correct understanding of the semantics of
+these orientations.
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+
+|relativeOrientation |Shall support an optional codelist parameter to
+define the relative orientation of the label. a|
+Literal data type
+
+Default value: line
+
+|One
+
+|extension |Any encoding should allow to extend a RelativeOrientation
+with custom items |Any type |zero or more
+|===
+
+==== RelativePosition extension
+
+**Requirement Class:
+**http://www.opengis.net/spec/symbology/2.0/req/RelativePosition[_http://www.opengis.net/spec/symbology/2.0/req/RelativePosition_]
+
+**Scope: **All requirements in this subsection relate to the above
+requirement class.
+
+**Dependency: **none
+
+*Description:* The extension extension allows to rotate a label text or
+a graphic against the line according to several possible orientations.
+It adds a property to the classes GraphicStroke and TextStroke with
+related behaviours.
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+
+|relativePosition |Relative position on the reserved linear length to
+plot the label or a graphic(a) a|
+ParameterValue data type (Float)
+
+Value: [0;1]
+
+Default: 0.5
+
+|zero to one
+|===
+
+[loweralpha]
+. The RelativePosition property is a decimal number from 0 (start of
+reserved linear length) to 1 (end of reserved linear length). By
+default, the value 0.5 means the graphic or the label is plotted at the
+midpoint of the linear length.
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/GraphicStrokeClass/RelativePositionClass[_http://www.opengis.net/spec/symbology/2.0/req/GraphicStrokeClass/_]http://www.opengis.net/spec/symbology/2.0/req/GraphicStrokeClass/RelativePositionClass[_RelativePosition_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+parameters of the GraphicStroke extension and meet all of the tabulated
+constraints and notes.
+
+For a GraphicStroke, it defines the relative position on the reserved
+linear length to plot the graphic.
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/TextStrokeClass/RelativePositionClass[_http://www.opengis.net/spec/symbology/2.0/req/TextStrokeClass/RelativePosition_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+parameters of the TextStroke extension and meet all of the tabulated
+constraints and notes.
+
+For a TextStroke, it defines the relative position on the reserved
+linear length to plot the label.
+
+=== Rendering extensions
+
+==== SymbolizerLevel extension
+
+**Requirement Class:
+**http://www.opengis.net/spec/symbology/2.0/req/SymbolizerLevel[_http://www.opengis.net/spec/symbology/2.0/req/SymbolizerLevel_]
+
+**Scope: **All requirements in this subsection relate to the above
+requirement class.
+
+*Description:* The extension extension allows to control the rendering
+order of the symbolizers. It adds a property to the symbolizer class
+with related behaviour.
+
+*Requirement ID:*
+http://www.opengis.net/spec/symbology/2.0/req/core/SymbolizerClass/SymbolizerLevel[_http://www.opengis.net/spec/symbology/2.0/req/core/SymbolizerClass/SymbolizerLevel_]
+
+*Requirement Txt:* Implementations shall support the encoding of all
+parameters of the symbolizer extensions and meet all of the tabulated
+constraints and notes.
+
+[cols=",,,",]
+|===
+|Name |Definition |Data type and value |Multiplicity
+|level |The level of the symbolizer a|
+ParameterValue data type (Integer)
+
+Value: (0;+∞)
+
+|one
+|===
