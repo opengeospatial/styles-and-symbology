@@ -15,7 +15,7 @@ Presentation of information to humans (Note 1 to entry: Within the scope of this
 Abstraction of reality specified by a geographic data model (feature, coverage…​). A layer may be represented using a set of symbols (Style). A layer contributes to a single geographic subject and may be a theme.
 
 === Style
-Set of rules of symbolizing instructions to be applied by a rendering engine on a layer of geographic features (e.g., feature, coverage…​).
+A sequence of rules of symbolizing instructions to be applied by a rendering engine on one or more features and/or coverages.
 
 === Rendering engine
 Automated process that produces graphics using a pipeline of layers and styles as inputs.
