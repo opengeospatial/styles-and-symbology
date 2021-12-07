@@ -1,18 +1,18 @@
 = OGC Symbology Conceptual Model: Core Part
 :doctype: standard
 :docsubtype: conceptual-model
-:status: Published
+:status: draft
 :encoding: utf-8
 :lang: en
 :committee: technical
-:draft: 1.0
+:draft: 1.1
 :abbrev: SymCore
-:edition: 1.0
+:edition: 1.1
 :external-id: http://www.opengis.net/doc/IS/{abbrev}/{edition}
-:docnumber: 18-067r3
-:received-date: 2018-09-07
-:issued-date: 2020-08-24
-:published-date: 2020-10-15
+:docnumber: 18-067r4
+:received-date: 2029-01-01
+:issued-date: 2029-01-01
+:published-date: 2029-01-01
 :fullname: Erwan Bocher
 :fullname_2: Olivier Ertz
 :keywords: ogcdoc, OGC document, style, symbology, conceptual, core, modular, neutral, portrayal
@@ -22,9 +22,9 @@
 :mn-output-extensions: html,doc,xml,pdf
 :local-cache-only:
 :data-uri-image:
-:pdf-uri: ./18-067r3.pdf
-:xml-uri: ./18-067r3.xml
-:doc-uri: ./18-067r3.doc
+:pdf-uri: ./18-067r4.pdf
+:xml-uri: ./18-067r4.xml
+:doc-uri: ./18-067r4.doc
 
 
 ////
