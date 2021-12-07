@@ -1,0 +1,75 @@
+[appendix,obligation="normative"]
+== some illustrations
+
+This annexe give a set of illustrations to prevent any ambiguity and
+make everything comprehensible the best we can.
+
+=== GraphicFill
+
+​The following figure illustrates two examples using GraphicFill. The
+nested graphic is a simple 5mm wide light-orange circle. In a) the
+GraphicFill only defines the circle and, in b), a TileGap of 1mm in both
+directions is added.
+
+image::figureb1.png[]
+
+Notice, the tiling shall be consistent between neighboring features.
+Moreover, tiles shall be organized according to a system-dependent
+geographic anchor point, which implies each feature is filled by the
+pattern in a unique way at a given scale level, as shown in next figure.
+
+image::figureb2.png[]
+
+​The features are always filled in the same way at a given scale,
+whatever the map bounding-box is.
+
+=== HatchedFill
+
+The following figure illustrates the effect inducted by adding an offset
+(no offset in a), offset in b)).
+
+image::figureb3.png[]
+
+{empty}a) illustrates how hatches shall be generated according to an
+anchor-point. b) shows the same but with the addition of an offset
+
+=== PerpendicularOffset
+
+.Positive and negative perpendicular offset against a 1-dimensional geometry
+image::figureb4.png[]
+
+NOTE: Add a figure here. To be titled: Positive and negative perpendicular offset against a 2-dimensional geometry
+.Positive and negative perpendicular offset against a 2-dimensional geometry
+//image::figureb5.png[]
+
+=== RelativeOrientation
+
+RelativeOrientation tells what angle to rotate the graphic to when it is
+plotted. Allowed values are “normal” (default) meaning rotated to the
+mathematical normal (perpendicular) of the line at the plotting point,
+“line” which means to rotate to the direction of the line at the
+plotting point, “portrayal” which means always upright with respect to
+the parent portrayal environment (usually the map), and “normalUp” which
+means to rotate with respect to the normal of the line, but rotate an
+additional 180 degrees if the graphic would otherwise end up pointing
+downward with respect to the parent portrayal environment.
+
+.{TITLE for figure b6}
+image::figureb6.png[]
+
+.{TITLE for figure b7}
+image::figureb7.png[]
+
+
+=== LabelAlignment
+
+.PointLabel alignments
+image::figureb8.png[]
+
+=== ExclusionZone
+
+.PointLabel alignments with a radius exclusion zone
+image::figureb9.png[]
+
+.PointLabel alignments with a rectangle exclusion zone
+image::figureb10.png[]

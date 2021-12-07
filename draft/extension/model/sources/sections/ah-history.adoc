@@ -1,0 +1,27 @@
+
+[appendix]
+== Revision History
+
+[%unnumbered]
+[width="90%",options="header"]
+|===
+|Date |Release |Editor | Primary clauses modified |Description
+|Purpose |When |Who
+|2021-04-06 | 0 |E. Bocher (CNRS) +
+O. Ertz (HEIG-VD) | All |Remove ExpressionParameter, FunctionParameter type is enough
+|2020-12-10 | 0 |E. Bocher (CNRS) | All |Clean up extension modules
+|2019-03-29 | 0 |E. Bocher (CNRS) +
+O. Ertz (HEIG-VD) | All |Edits considering the received comments coming from the early public
+comment
+| 2018-02-01 | 0 |O. Ertz (HEIG-VD) | All |Introducing the idea of “core/extensions” (split into two specdocs:
+core + extensions)
+| 2016-09-30 | 0 |E. Bocher (CNRS) | All a| First edits applying the principles described in
+
+https://peerj.com/articles/cs-143/
+| 2015-04-03 | 0 |O. Ertz (HEIG-VD) | All |Proposition about modularization
+| 2014-02-28 | 0 a|
+E. Bocher (CNRS)
+
+O. Ertz (HEIG-VD) | All |Initial document  
+
+|===

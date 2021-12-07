@@ -1,0 +1,142 @@
+
+== Conformance Class Abstract Test Suite (Normative)
+
+A FeatureTypeStyle implementation shall satisfy the following
+characteristics to be conformant with this specification.
+
+=== Conformance Test Class : FeatureTypeStyle
+
+The OGC URI identifier of this conformance class is:
+http://www.opengis.net/spec/symbology/2.0/conf/FeatureTypeStyle[_http://www.opengis.net/spec/symbology/2.0/conf/FeatureTypeStyle_]
+
+It is the root of the test identifiers described below.
+
+==== Implements the FeatureTypeStyle class
+
+*Test ID:*
+http://www.opengis.net/spec/symbology/2.0/conf/core/FeatureTypeStyleClass[_http://www.opengis.net/spec/symbology/2.0/conf/core/FeatureTypeStyleClass_]
+
+**Test Purpose: **To test requirement
+http://www.opengis.net/spec/symbology/2.0/conf/req/FeatureTypeStyleClass[_http://www.opengis.net/spec/symbology/2.0/conf/req/FeatureTypeStyleClass_]
+
+**Test Method: +
+**Review all rows of the FeatureTypeStyle class and confirm that an
+encoding rule is defined for each element in the encoding specification.
+
+==== Implements the geometry property for
+PointSymbolizer class
+
+*Test ID:*
+http://www.opengis.net/spec/symbology/2.0/conf/PointSymbolizerClass/Geometry[_http://www.opengis.net/spec/symbology/2.0/conf/PointSymbolizerClass/Geometry_]
+
+**Test Purpose: **To test requirement
+http://www.opengis.net/spec/symbology/2.0/conf/req/PointSymbolizerClass/Geometry[_http://www.opengis.net/spec/symbology/2.0/conf/req/PointSymbolizerClass/Geometry_]
+
+**Test Method: +
+**If the PointSymbolizer class is implemented, review the geometry
+property and confirm that an encoding rule is defined for this element
+in the encoding specification.
+
+==== Implements the geometry property for
+LineSymbolizer class
+
+*Test ID:*
+http://www.opengis.net/spec/symbology/2.0/conf/LineSymbolizerClass/Geometry[_http://www.opengis.net/spec/symbology/2.0/conf/LineSymbolizerClass/Geometry_]
+
+**Test Purpose: **To test requirement
+http://www.opengis.net/spec/symbology/2.0/conf/req/LineSymbolizerClass/Geometry[_http://www.opengis.net/spec/symbology/2.0/conf/req/LineSymbolizerClass/Geometry_]
+
+**Test Method: +
+**If the LineSymbolizer class is implemented, review the geometry
+property and confirm that an encoding rule is defined for this element
+in the encoding specification.
+
+==== Implements the geometry property for
+AreaSymbolizer class
+
+*Test ID:*
+http://www.opengis.net/spec/symbology/2.0/conf/AreaSymbolizerClass/Geometry[_http://www.opengis.net/spec/symbology/2.0/conf/AreaSymbolizerClass/Geometry_]
+
+**Test Purpose: **To test requirement
+http://www.opengis.net/spec/symbology/2.0/conf/req/AreaSymbolizerClass/Geometry[_http://www.opengis.net/spec/symbology/2.0/conf/req/AreaSymbolizerClass/Geometry_]
+
+**Test Method: +
+**If the AreaSymbolizer class is implemented, review the geometry
+property and confirm that an encoding rule is defined for this element
+in the encoding specification.
+
+==== Implements the geometry property for
+TextSymbolizer class
+
+*Test ID:*
+http://www.opengis.net/spec/symbology/2.0/conf/TextSymbolizerClass/Geometry[_http://www.opengis.net/spec/symbology/2.0/conf/TextSymbolizerClass/Geometry_]
+
+**Test Purpose: **To test requirement
+http://www.opengis.net/spec/symbology/2.0/conf/req/TextSymbolizerClass/Geometry[_http://www.opengis.net/spec/symbology/2.0/conf/req/TextSymbolizerClass/Geometry_]
+
+**Test Method: +
+**If the TextSymbolizer class is implemented, review the geometry
+property and confirm that an encoding rule is defined for this element
+in the encoding specification.
+
+=== Symbolizer conformance classes
+
+==== Conformance Test Class: AreaSymbolizer
+
+*Test ID:*
+http://www.opengis.net/spec/symbology/2.0/conf/AreaSymbolizerClass[_http://www.opengis.net/spec/symbology/2.0/conf/AreaSymbolizerClass_]
+
+**Test purpose: +
+**To test requirement
+http://www.opengis.net/spec/symbology/2.0/conf/req/AreaSymbolizerClass[_http://www.opengis.net/spec/symbology/2.0/conf/req/AreaSymbolizerClass_]
+
+**Test method: +
+**Review all rows of the AreaSymbolizerClass and confirm that an
+encoding rule is defined for each element in the encoding specification.
+
+==== Conformance Test Class: PointSymbolizer
+
+==== Conformance Test Class: LineSymbolizer
+
+==== Conformance Test Class: TextSymbolizer
+
+=== Graphical conformance classes
+
+==== Conformance Test Class : SolidFill
+
+*Test ID:*
+http://www.opengis.net/spec/symbology/2.0/conf/SolidFillClass[_http://www.opengis.net/spec/symbology/2.0/conf/SolidFillClass_]
+
+**Test purpose: +
+**To test requirement
+http://www.opengis.net/spec/symbology/2.0/conf/req/SolidFillClass[_http://www.opengis.net/spec/symbology/2.0/conf/req/SolidFillClass_]
+
+**Test method: +
+**Review all rows of the SolidFill and confirm that an encoding rule is
+defined for each element in the encoding specification.
+
+==== Conformance Test Class : PenStroke
+
+*Test ID:*
+http://www.opengis.net/spec/symbology/2.0/conf/PenStrokeClass[_http://www.opengis.net/spec/symbology/2.0/conf/PenStrokeClass_]
+
+**Test purpose: +
+**To test requirement
+http://www.opengis.net/spec/symbology/2.0/conf/req/PenStrokelClass[_http://www.opengis.net/spec/symbology/2.0/conf/req/PenStrokelClass_]
+
+**Test method: +
+**Review all rows of the PenStroke and confirm that an encoding rule is
+defined for each element in the encoding specification.
+
+==== Conformance Test Class : RGBColor
+
+*Test ID:*
+http://www.opengis.net/spec/symbology/2.0/conf/RGBColorClass[_http://www.opengis.net/spec/symbology/2.0/conf/RGBColorClass_]
+
+**Test purpose: +
+**To test requirement
+http://www.opengis.net/spec/symbology/2.0/conf/req/RGBColorClass[_http://www.opengis.net/spec/symbology/2.0/conf/req/RGBColorClass_]
+
+**Test method: +
+**Review all rows of the RGBColor and confirm that an encoding rule is
+defined for each element in the encoding specification.
