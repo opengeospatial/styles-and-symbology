@@ -10,7 +10,7 @@ A minor revision of the Styles & Symbology standard will be enhanced with:
 - A clearer mechanism for extensibility, through the definition of abstract Selectors, Symbolizers,
 and Expressions. While boolean predicate Expressions can be used as Selectors to determine
 whether a styling Rule should be used or not, Expressions resolving to an arbitrary data type can be
-used as ParameterValues.
+used as ParameterValues for Symbolizer properties.
 - A logical model complementing the conceptual model.
 
 ## Extensions
