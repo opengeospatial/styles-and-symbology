@@ -20,7 +20,7 @@ vector features and gridded coverage features. 3D data and styling will be consi
 
 ## Encodings
 
-Multiple encodings of will be defined based on the conceptual model and extensions.
+Multiple encodings will be defined based on the conceptual model and extensions.
 One encoding will be a direct encoding of the logical model in JSON.
 
 ## Communication
