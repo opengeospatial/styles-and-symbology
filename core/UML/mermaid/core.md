@@ -4,8 +4,17 @@
 classDiagram
 
 %% Class definitions
-class Style
-class StylingRule
+class Style {
+   stylingRules: StylingRule[0..*]
+}
+
+class StylingRule {
+   symbolizer: Symbolizer[0..1]
+   selector: Selector[0..1]
+   nestedRules: StylingRule[0..*]
+}
+StylingRule --* StylingRule
+
 class Selector
 class Symbolizer {
    visibility: bool
@@ -16,8 +25,9 @@ class ParameterValue
 
 %% Relations
 ParameterValue --|> Expression
-StylingRule "*" *-- "1" Style : rule
-Selector "0..1" *-- "1" StylingRule : selector
-Symbolizer "0..1" *-- "1" StylingRule : symbolizer
-ParameterValue "1..*" *-- "1" Symbolizer : (all properties)
+Selector --|> Expression
+StylingRule *-- Style
+Selector *-- StylingRule
+Symbolizer *-- StylingRule
+ParameterValue <-- Symbolizer
 ```
