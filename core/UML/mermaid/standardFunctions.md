@@ -16,6 +16,7 @@ PointGeometry --* Point
 class LineString {
    points: Point[2..*]
 }
+LineString --* Point
 
 class LineStringGeometry {
    lineStrings: LineString[1..*]
