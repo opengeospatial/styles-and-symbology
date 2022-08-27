@@ -1,4 +1,4 @@
-# Gridded Coverage Extensdion
+# Gridded Coverage Extension
 
 This directory will contain conceptual and logical models
 extending the SymCore conceptual and logical models
