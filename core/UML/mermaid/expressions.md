@@ -153,24 +153,56 @@ class Function {
    returnType: any data type
 }
 
+class SystemVisualization {
+   scaleDenominator: double
+   dateTime: TimeInstant
+   Date: Date
+   timeOfDay: TimeOfDay
+}
+
+class SystemRecord {
+   identifier: string
+   geometry: Geometry
+   geometryDimensions: int
+}
+
+class DataLayerType {
+   <<enumeration>>
+   map
+   vector
+   coverage
+}
+
+class SystemDataLayer {
+   identifier: string
+   type: DataLayerType
+   records: SystemRecord[*]
+   recordsGeometry: Geometry[*]
+   recordsGeometryDimensions: int
+}
+
 class SystemIdentifierExpression {
    <<enumeration>>
 
    visualization
-   visualizationScaleDenominator
-   visualizationDateTime
-   visualizationDate
-   visualizationTimeOfDay
+   visualization.scaleDenominator
+   visualization.dateTime
+   visualization.date
+   visualization.timeOfDay
    record
-   recordIdentifier
-   recordGeometry
-   recordGeometryDimensions
+   record.identifier
+   record.geometry
+   record.geometryDimensions
    dataLayer
-   dataLayerIdentifier
-   dataLayerType
-   dataLayerRecords
-   dataLayerRecordsGeometry
-   dataLayerRecordsGeometryDimensions
+   dataLayer.identifier
+   dataLayer.type
+   dataLayer.records
+   dataLayer.recordsGeometry
+   dataLayer.recordsGeometryDimensions
 }
 SystemIdentifierExpression --|> IdentifierExpression
+SystemIdentifierExpression --> SystemVisualization
+SystemIdentifierExpression --> SystemRecord
+SystemIdentifierExpression --> SystemDataLayer
+SystemDataLayer --* DataLayerType
 ```
