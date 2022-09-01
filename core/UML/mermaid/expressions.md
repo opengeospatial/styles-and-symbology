@@ -114,6 +114,8 @@ class BitwiseOperator {
    bitOr
    bitNot -- unary
    bitXor
+   leftShift
+   rightShift
 }
 BitwiseOperator --|> Operator
 
