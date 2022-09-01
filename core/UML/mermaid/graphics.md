@@ -10,6 +10,8 @@
     }
     class Shape {
         stroke: Stroke [0..1]
+    }
+    class ClosedShape {
         fill: Fill [0..1]
     }
     class Dot {
@@ -32,11 +34,14 @@
         radiusX: float
         radiusY: float
     }
-    class ArcType {
+    class ClosedArcType {
        <<enumeration>>
-       open
        sector
        chord
+    }
+
+    class ClosedArc {
+        type: ClosedArcType
     }
 
     class Arc {
@@ -45,17 +50,16 @@
         innerRadius: float
         startAngle: Angle
         deltaAngle: Angle
-        isSector: bool
-        type: ArcType
     }
     class PathNodes {
        points: Pointf[*]
     }
+    class ClosedPath {
+        innerNodes: PathNodes[0..*]
+    }
+
     class Path {
         nodes: PathNodes
-        innerNodes: PathNodes[0..*]
-        closed: bool
-        needsTesselation: bool
     }
     class TextAlignment {
       horizontal: HAlignment
@@ -223,30 +227,35 @@
   %% Relations
   %% Inheritance
   Text --|> Graphic
-  Dot --|> Graphic
   Image --|> Graphic
   MultiGraphic --|> Graphic
   Dot --|> Shape
   Shape --|> Graphic
-  Rectangle --|> Shape
-  Circle --|> Shape
-  Ellipse --|> Shape
+  Rectangle --|> ClosedShape
+  Circle --|> ClosedShape
+  Ellipse --|>Closed Shape
   Arc --|> Shape
+  ClosedArc --|> Arc
+  ClosedArc --|> ClosedShape
   Path --|> Shape
   RoundedRectangle --|> Rectangle
   GraphicInstance --|> Graphic
   Stroke --|> StrokeStyling
   Model --|> Graphic
+  ClosedPath --|> Path
+  ClosedPath --|> ClosedShape
+  ClosedShape --|> Shape
 
   %% Composition
   PathNodes --* Pointf
+  ClosedPath --* PathNodes
   Path --* PathNodes
   Dot --* Pointf
   Circle --* Pointf
   Ellipse --* Pointf
   Rectangle --* Pointf
   Arc --* Pointf
-  Arc --* ArcType
+  ClosedArc --* ClosedArcType
   Graphic --* Transform2D
   Graphic --* Transform3D
   Transform3D --* Quaternion
@@ -265,7 +274,7 @@
   FontOutline --* Color
   TextAlignment --* HAlignment
   TextAlignment --* VAlignment
-  Shape --* Fill
+  ClosedShape --* Fill
   Shape --* Stroke
 
   Fill --* Graphic
