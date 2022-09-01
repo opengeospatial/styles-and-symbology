@@ -39,6 +39,7 @@
   %% Relations
   %% Association
     CoverageSymbolizer --> ParameterValue
+    Symbolizer --> ParameterValue
 
   %% Inheritance
     CoverageSymbolizer --|> Symbolizer
