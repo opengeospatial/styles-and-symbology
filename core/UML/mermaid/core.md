@@ -34,5 +34,5 @@ Selector --|> Expression
 StylingRule *-- Style
 Selector *-- StylingRule
 Symbolizer *-- StylingRule
-ParameterValue <-- Symbolizer
+Symbolizer --> ParameterValue
 ```
