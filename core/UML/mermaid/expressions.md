@@ -132,7 +132,7 @@ class RelationalOperator {
    between
    notBetween
    in -- right operand is array
-   notIn
+   notIn -- right operand is array
 }
 RelationalOperator --|> Operator
 
