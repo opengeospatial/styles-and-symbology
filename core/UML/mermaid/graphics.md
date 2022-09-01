@@ -1,4 +1,4 @@
-# 2D Graphics
+# Graphics
 
 ```mermaid
   classDiagram
@@ -109,6 +109,9 @@
         tint: Color
         blackTint: Color
         alphaThreshold: float
+    }
+    class Model {
+        model: ImageResource
     }
     class MultiGraphic {
         elements: Graphic [*]
@@ -233,6 +236,7 @@
   RoundedRectangle --|> Rectangle
   GraphicInstance --|> Graphic
   Stroke --|> StrokeStyling
+  Model --|> Graphic
 
   %% Composition
   PathNodes --* Pointf
@@ -252,6 +256,7 @@
   Image --* ImageResource
   Image --* Color
   Image --* Pointf
+  Model --* ImageResource
   MultiGraphic --* Graphic
   Text --* Font
   Text --* TextAlignment
