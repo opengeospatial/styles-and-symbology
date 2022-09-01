@@ -54,7 +54,7 @@
     }
     class Path {
         nodes: PathNodes
-        innerNodes: PathNodes
+        innerNodes: PathNodes[0..*]
         closed: bool
         needsTesselation: bool
     }
