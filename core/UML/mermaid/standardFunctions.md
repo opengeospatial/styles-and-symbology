@@ -168,10 +168,10 @@ TemporalRelationFunctions --> TimeInterval
 class ArrayRelationFunctions {
    <<interface>>
 
-   a_containedBy(array a, array b) array
-   a_contains(array a, array b) array
-   a_equals(array a, array b) array
-   a_overlaps(array a, array b) array
+   a_containedBy(array a, array b) bool
+   a_contains(array a, array b) bool
+   a_equals(array a, array b) bool
+   a_overlaps(array a, array b) bool
 }
 ArrayRelationFunctions --|> StandardFunctions
 ArrayRelationFunctions --> ArrayExpression
