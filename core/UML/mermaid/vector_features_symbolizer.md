@@ -99,6 +99,7 @@
     class Shape
   %% Relations
   %% Association
+    VectorSymbolizer --> ParameterValue
   %% Inheritance
     Stroke --|> StrokeStyling
     VectorSymbolizer --|> Symbolizer
