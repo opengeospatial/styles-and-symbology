@@ -14,7 +14,6 @@
     }
     class Dot {
         point: Pointf
-        size: float
     }
     class Rectangle {
        topLeft: Pointf
@@ -227,6 +226,7 @@
   Dot --|> Graphic
   Image --|> Graphic
   MultiGraphic --|> Graphic
+  Dot --|> Shape
   Shape --|> Graphic
   Rectangle --|> Shape
   Circle --|> Shape
