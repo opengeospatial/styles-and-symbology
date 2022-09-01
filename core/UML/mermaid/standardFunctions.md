@@ -1,3 +1,5 @@
+# Standard Functions
+
 ```mermaid
 classDiagram
 
