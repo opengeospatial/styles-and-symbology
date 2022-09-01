@@ -6,6 +6,7 @@
     %% Note: Symbolizer, StylingRule and Style are defined in core.md
     class Symbolizer
     class VectorSymbolizer {
+      <<interface>>
       fill: Fill [0..1]
       stroke: Stroke [0..1]
       marker: Marker [0..1]

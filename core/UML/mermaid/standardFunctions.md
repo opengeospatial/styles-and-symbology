@@ -13,6 +13,13 @@ class PointGeometry {
 PointGeometry --|> Geometry
 PointGeometry --* Point
 
+class BoundingBox {
+   lowerBound: Point
+   upperBound: Point
+}
+BoundingBox --|> Geometry
+BoundingBox --* Point
+
 class LineString {
    points: Point[2..*]
 }
@@ -83,89 +90,97 @@ class TimeInterval {
 }
 TimeInterval --* TimeInstant
 
-class StandardFunction {
-   uri: String
+class StandardFunctions {
+   <<interface>>
+   uri: string
 }
-StandardFunction --|> Function
+StandardFunctions --|> Function
 
-class TextManipulationFunction {
-   <<enumeration>>
-   caseInsensitize
-   accentInsensitize
-   concatenate
-   format
-   substitute
-   lowerCase
-   upperCase
+class TextManipulationFunctions {
+   <<interface>>
+   caseInsensitize()
+   accentInsensitize()
+   concatenate()
+   format()
+   substitute()
+   lowerCase()
+   upperCase()
 }
-TextManipulationFunction --|> StandardFunction
+TextManipulationFunctions --|> StandardFunctions
 
-class GeometryManipulationFunction {
-   s_intersection
-   s_union
-   s_subtraction
-   s_buffer
+class GeometryManipulationFunctions {
+   <<interface>>
+   s_intersection()
+   s_union()
+   s_subtraction()
+   s_buffer()
 }
-GeometryManipulationFunction --|> StandardFunction
-GeometryManipulationFunction --> Geometry
+GeometryManipulationFunctions --|> StandardFunctions
+GeometryManipulationFunctions --> Geometry
 
-class SpatialRelationFunction {
-   <<enumeration>>
-   s_contains
-   s_crosses
-   s_disjoint
-   s_equals
-   s_overlaps
-   s_touches
-   s_within
-   s_covers
-   s_coveredBy
+class BasicSpatialRelationFunctions {
+   <<interface>>
+   s_intersects()
 }
-SpatialRelationFunction --|> StandardFunction
-SpatialRelationFunction --> Geometry
+BasicSpatialRelationFunctions --|> StandardFunctions
+BasicSpatialRelationFunctions --> Geometry
 
-class TemporalRelationFunction
-TemporalRelationFunction --|> StandardFunction
+class SpatialRelationFunctions {
+   <<interface>>
+   s_contains()
+   s_crosses()
+   s_disjoint()
+   s_equals()
+   s_overlaps()
+   s_touches()
+   s_within()
+   s_covers()
+   s_coveredBy()
+}
+SpatialRelationFunctions --|> BasicSpatialRelationFunctions
+
+class TemporalRelationFunctions
+TemporalRelationFunctions --|> StandardFunctions
 
 %% Accepting either instant or intervals
-class TemporalInstantRelationFunction {
-   <<enumeration>>
+class TemporalInstantRelationFunctions {
+   <<interface>>
 
-   t_after
-   t_before
-   t_disjoint
-   t_equals
-   t_intersects
+   t_after()
+   t_before()
+   t_disjoint()
+   t_equals()
+   t_intersects()
 }
-TemporalInstantRelationFunction --|> TemporalRelationFunction
-TemporalInstantRelationFunction --> TimeInstant
+TemporalInstantRelationFunctions --|> TemporalRelationFunctions
+TemporalInstantRelationFunctions --> TimeInstant
 
 %% Accepting only intervals
-class TemporalIntervalRelationFunction {
-   <<enumeration>>
+class TemporalIntervalRelationFunctions {
+   <<interface>>
 
-   t_contains
-   t_during
-   t_finishedBy
-   t_finishes
-   t_meets
-   t_meetBy
-   t_overlappedBy
-   t_overlaps
-   t_startedBy
-   t_starts
+   t_contains()
+   t_during()
+   t_finishedBy()
+   t_finishes()
+   t_meets()
+   t_meetBy()
+   t_overlappedBy()
+   t_overlaps()
+   t_startedBy()
+   t_starts()
 }
-TemporalIntervalRelationFunction --|> TemporalRelationFunction
-TemporalIntervalRelationFunction --> TimeInterval
+TemporalIntervalRelationFunctions --|> TemporalRelationFunctions
+TemporalIntervalRelationFunctions --> TimeInterval
 
-class ArrayRelationFunction {
-   <<enumeration>>
+class ArrayRelationFunctions {
+   <<interface>>
 
-   a_containedBy
-   a_contains
-   a_equals
-   a_overlaps
+   a_containedBy()
+   a_contains()
+   a_equals()
+   a_overlaps()
 }
-ArrayRelationFunction --|> StandardFunction
-ArrayRelationFunction --> ArrayExpression
+ArrayRelationFunctions --|> StandardFunctions
+ArrayRelationFunctions --> ArrayExpression
 ```
