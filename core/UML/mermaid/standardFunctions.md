@@ -98,88 +98,78 @@ StandardFunctions --|> Function
 
 class TextManipulationFunctions {
    <<interface>>
-   caseInsensitize()
-   accentInsensitize()
-   concatenate()
-   format()
-   substitute()
-   lowerCase()
-   upperCase()
+   string caseInsensitize(string s)
+   string accentInsensitize(string s)
+   string lowerCase(string s)
+   string upperCase(string s)
+   string concatenate(string a, string b)
+   string substitute(string s, string a, string b)
+   string format(string f, ...)
 }
 TextManipulationFunctions --|> StandardFunctions
 
 class GeometryManipulationFunctions {
    <<interface>>
-   s_intersection()
-   s_union()
-   s_subtraction()
-   s_buffer()
+   Geometry s_intersection(Geometry a, Geometry b)
+   Geometry s_union(Geometry a, Geometry b)
+   Geometry s_subtraction(Geometry a, Geometry b)
+   Geometry s_buffer(Geometry a, double d)
 }
 GeometryManipulationFunctions --|> StandardFunctions
 GeometryManipulationFunctions --> Geometry
 
-class BasicSpatialRelationFunctions {
-   <<interface>>
-   s_intersects()
-}
-BasicSpatialRelationFunctions --|> StandardFunctions
-BasicSpatialRelationFunctions --> Geometry
-
 class SpatialRelationFunctions {
    <<interface>>
-   s_contains()
-   s_crosses()
-   s_disjoint()
-   s_equals()
-   s_overlaps()
-   s_touches()
-   s_within()
-   s_covers()
-   s_coveredBy()
+   bool s_intersects(Geometry a, Geometry b)
+   bool s_contains(Geometry a, Geometry b)
+   bool s_crosses(Geometry a, Geometry b)
+   bool s_disjoint(Geometry a, Geometry b)
+   bool s_equals(Geometry a, Geometry b)
+   bool s_overlaps(Geometry a, Geometry b)
+   bool s_touches(Geometry a, Geometry b)
+   bool s_within(Geometry a, Geometry b)
+   bool s_covers(Geometry a, Geometry b)
+   bool s_coveredBy(Geometry a, Geometry b)
 }
-SpatialRelationFunctions --|> BasicSpatialRelationFunctions
+SpatialRelationFunctions --|> StandardFunctions
+SpatialRelationFunctions --> Geometry
 
-class TemporalRelationFunctions
+class TemporalRelationFunctions {
+   <<interface>>
+   bool t_after(TimeInstant a, TimeInstant b)
+   bool t_before(TimeInstant a, TimeInstant b)
+   bool t_disjoint(TimeInstant a, TimeInstant b)
+   bool t_equals(TimeInstant a, TimeInstant b)
+   bool t_intersects(TimeInstant a, TimeInstant b)
+
+   bool t_after(TimeInterval a, TimeInterval b)
+   bool t_before(TimeInterval a, TimeInterval b)
+   bool t_disjoint(TimeInterval a, TimeInterval b)
+   bool t_equals(TimeInterval a, TimeInterval b)
+   bool t_intersects(TimeInterval a, TimeInterval b)
+   bool t_contains(TimeInterval a, TimeInterval b)
+   bool t_during(TimeInterval a, TimeInterval b)
+   bool t_finishedBy(TimeInterval a, TimeInterval b)
+   bool t_finishes(TimeInterval a, TimeInterval b)
+   bool t_meets(TimeInterval a, TimeInterval b)
+   bool t_meetBy(TimeInterval a, TimeInterval b)
+   bool t_overlappedBy(TimeInterval a, TimeInterval b)
+   bool t_overlaps(TimeInterval a, TimeInterval b)
+   bool t_startedBy(TimeInterval a, TimeInterval b)
+   bool t_starts(TimeInterval a, TimeInterval b)
+}
+
 TemporalRelationFunctions --|> StandardFunctions
-
-%% Accepting either instant or intervals
-class TemporalInstantRelationFunctions {
-   <<interface>>
-
-   t_after()
-   t_before()
-   t_disjoint()
-   t_equals()
-   t_intersects()
-}
-TemporalInstantRelationFunctions --|> TemporalRelationFunctions
-TemporalInstantRelationFunctions --> TimeInstant
-
-%% Accepting only intervals
-class TemporalIntervalRelationFunctions {
-   <<interface>>
-
-   t_contains()
-   t_during()
-   t_finishedBy()
-   t_finishes()
-   t_meets()
-   t_meetBy()
-   t_overlappedBy()
-   t_overlaps()
-   t_startedBy()
-   t_starts()
-}
-TemporalIntervalRelationFunctions --|> TemporalRelationFunctions
-TemporalIntervalRelationFunctions --> TimeInterval
+TemporalRelationFunctions --> TimeInstant
+TemporalRelationFunctions --> TimeInterval
 
 class ArrayRelationFunctions {
    <<interface>>
 
-   a_containedBy()
-   a_contains()
-   a_equals()
-   a_overlaps()
+   array a_containedBy(array a, array b)
+   array a_contains(array a, array b)
+   array a_equals(array a, array b)
+   array a_overlaps(array a, array b)
 }
 ArrayRelationFunctions --|> StandardFunctions
 ArrayRelationFunctions --> ArrayExpression
