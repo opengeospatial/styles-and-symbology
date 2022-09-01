@@ -101,7 +101,7 @@
     class Resource {
        path: string[0..1] -- local file resources
        url: string[0..1] -- online resources
-       id: string[0..1] -- resources in DB tables or within a srite
+       id: string[0..1] -- resources in DB tables or within a sprite
        type: string[0..1] -- identify the media type the resource is available in
        ext: string[0..1] -- build paths or URLs from id and extensions
        sprite: string[0..1] -- name of sprite file e.g., with Mapbox GL styles
