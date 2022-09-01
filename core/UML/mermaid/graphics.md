@@ -94,23 +94,23 @@
         font: Font
         alignment: TextAlignment
     }
-    class ImageResource {
-       path: string
-       id: string
-       url: string
-       ext: string
-       type: string
-       sprite: string
+    class Resource {
+       path: string[0..1] -- local file resources
+       url: string[0..1] -- online resources
+       id: string[0..1] -- resources in DB tables or within a srite
+       type: string[0..1] -- identify the media type the resource is available in
+       ext: string[0..1] -- build paths or URLs from id and extensions
+       sprite: string[0..1] -- name of sprite file e.g., with Mapbox GL styles
     }
     class Image {
-        image: ImageResource
+        image: Resource
         hotSpot: Pointf
         tint: Color
         blackTint: Color
         alphaThreshold: float
     }
     class Model {
-        model: ImageResource
+        model: Resource
     }
     class MultiGraphic {
         elements: Graphic [*]
@@ -253,10 +253,10 @@
   Transform3D --* Vector3D
   Transform3D --* Vector3Df
   Transform2D --* Pointf
-  Image --* ImageResource
+  Image --* Resource
   Image --* Color
   Image --* Pointf
-  Model --* ImageResource
+  Model --* Resource
   MultiGraphic --* Graphic
   Text --* Font
   Text --* TextAlignment
