@@ -98,65 +98,65 @@ StandardFunctions --|> Function
 
 class TextManipulationFunctions {
    <<interface>>
-   string caseInsensitize(string s)
-   string accentInsensitize(string s)
-   string lowerCase(string s)
-   string upperCase(string s)
-   string concatenate(string a, string b)
-   string substitute(string s, string a, string b)
-   string format(string f, ...)
+   caseInsensitize(string s) string
+   accentInsensitize(string s) string
+   lowerCase(string s) string
+   upperCase(string s) string
+   concatenate(string a, string b) string
+   substitute(string s, string a, string b) string
+   format(string f, ...) string
 }
 TextManipulationFunctions --|> StandardFunctions
 
 class GeometryManipulationFunctions {
    <<interface>>
-   Geometry s_intersection(Geometry a, Geometry b)
-   Geometry s_union(Geometry a, Geometry b)
-   Geometry s_subtraction(Geometry a, Geometry b)
-   Geometry s_buffer(Geometry a, double d)
+   s_intersection(Geometry a, Geometry b) Geometry
+   s_union(Geometry a, Geometry b) Geometry
+   s_subtraction(Geometry a, Geometry b) Geometry
+   s_buffer(Geometry a, double d) Geometry
 }
 GeometryManipulationFunctions --|> StandardFunctions
 GeometryManipulationFunctions --> Geometry
 
 class SpatialRelationFunctions {
    <<interface>>
-   bool s_intersects(Geometry a, Geometry b)
-   bool s_contains(Geometry a, Geometry b)
-   bool s_crosses(Geometry a, Geometry b)
-   bool s_disjoint(Geometry a, Geometry b)
-   bool s_equals(Geometry a, Geometry b)
-   bool s_overlaps(Geometry a, Geometry b)
-   bool s_touches(Geometry a, Geometry b)
-   bool s_within(Geometry a, Geometry b)
-   bool s_covers(Geometry a, Geometry b)
-   bool s_coveredBy(Geometry a, Geometry b)
+   s_intersects(Geometry a, Geometry b) bool
+   s_contains(Geometry a, Geometry b) bool
+   s_crosses(Geometry a, Geometry b) bool
+   s_disjoint(Geometry a, Geometry b) bool
+   s_equals(Geometry a, Geometry b) bool
+   s_overlaps(Geometry a, Geometry b) bool
+   s_touches(Geometry a, Geometry b) bool
+   s_within(Geometry a, Geometry b) bool
+   s_covers(Geometry a, Geometry b) bool
+   s_coveredBy(Geometry a, Geometry b) bool
 }
 SpatialRelationFunctions --|> StandardFunctions
 SpatialRelationFunctions --> Geometry
 
 class TemporalRelationFunctions {
    <<interface>>
-   bool t_after(TimeInstant a, TimeInstant b)
-   bool t_before(TimeInstant a, TimeInstant b)
-   bool t_disjoint(TimeInstant a, TimeInstant b)
-   bool t_equals(TimeInstant a, TimeInstant b)
-   bool t_intersects(TimeInstant a, TimeInstant b)
+   t_after(TimeInstant a, TimeInstant b) bool
+   t_before(TimeInstant a, TimeInstant b) bool
+   t_disjoint(TimeInstant a, TimeInstant b) bool
+   t_equals(TimeInstant a, TimeInstant b) bool
+   t_intersects(TimeInstant a, TimeInstant b) bool
 
-   bool t_after(TimeInterval a, TimeInterval b)
-   bool t_before(TimeInterval a, TimeInterval b)
-   bool t_disjoint(TimeInterval a, TimeInterval b)
-   bool t_equals(TimeInterval a, TimeInterval b)
-   bool t_intersects(TimeInterval a, TimeInterval b)
-   bool t_contains(TimeInterval a, TimeInterval b)
-   bool t_during(TimeInterval a, TimeInterval b)
-   bool t_finishedBy(TimeInterval a, TimeInterval b)
-   bool t_finishes(TimeInterval a, TimeInterval b)
-   bool t_meets(TimeInterval a, TimeInterval b)
-   bool t_meetBy(TimeInterval a, TimeInterval b)
-   bool t_overlappedBy(TimeInterval a, TimeInterval b)
-   bool t_overlaps(TimeInterval a, TimeInterval b)
-   bool t_startedBy(TimeInterval a, TimeInterval b)
-   bool t_starts(TimeInterval a, TimeInterval b)
+   t_after(TimeInterval a, TimeInterval b) bool
+   t_before(TimeInterval a, TimeInterval b) bool
+   t_disjoint(TimeInterval a, TimeInterval b) bool
+   t_equals(TimeInterval a, TimeInterval b) bool
+   t_intersects(TimeInterval a, TimeInterval b) bool
+   t_contains(TimeInterval a, TimeInterval b) bool
+   t_during(TimeInterval a, TimeInterval b) bool
+   t_finishedBy(TimeInterval a, TimeInterval b) bool
+   t_finishes(TimeInterval a, TimeInterval b) bool
+   t_meets(TimeInterval a, TimeInterval b) bool
+   t_meetBy(TimeInterval a, TimeInterval b) bool
+   t_overlappedBy(TimeInterval a, TimeInterval b) bool
+   t_overlaps(TimeInterval a, TimeInterval b) bool
+   t_startedBy(TimeInterval a, TimeInterval b) bool
+   t_starts(TimeInterval a, TimeInterval b) bool
 }
 
 TemporalRelationFunctions --|> StandardFunctions
@@ -166,10 +166,10 @@ TemporalRelationFunctions --> TimeInterval
 class ArrayRelationFunctions {
    <<interface>>
 
-   array a_containedBy(array a, array b)
-   array a_contains(array a, array b)
-   array a_equals(array a, array b)
-   array a_overlaps(array a, array b)
+   a_containedBy(array a, array b) array
+   a_contains(array a, array b) array
+   a_equals(array a, array b) array
+   a_overlaps(array a, array b) array
 }
 ArrayRelationFunctions --|> StandardFunctions
 ArrayRelationFunctions --> ArrayExpression
