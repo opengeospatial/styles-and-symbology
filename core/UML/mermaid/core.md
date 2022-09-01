@@ -16,9 +16,14 @@ class StylingRule {
 StylingRule --* StylingRule
 
 class Selector
+
+%% Note: zOrder needs discussion on whether it should be relative or float
+%%       and how to relate to encodings where the visual priority order
+%%       comes from the order of the rules.
 class Symbolizer {
    visibility: bool
    opacity: float
+   zOrder: integer
 }
 class Expression
 class ParameterValue

@@ -3,137 +3,126 @@
 ```mermaid
   classDiagram
   %% Class definition
-    class Style {
-      fill: Fill
-      stroke: Stroke
-      marker: Marker
-      label: Label
-      font: Font
-      alignment: Alignment2D
-      zOrder: integer
-      visibility: boolean
-      transform: Transform2D
-      opacity: float
-      transform3D: Transform
+    %% Note: Symbolizer, StylingRule and Style are defined in core.md
+    class Symbolizer
+    class VectorSymbolizer {
+      fill: Fill [0..1]
+      stroke: Stroke [0..1]
+      marker: Marker [0..1]
+      label: Label [0..1]
     }
-    class StylingRule {
-      filter: Expression
-      style: Style
-    }
-    class StyleSheet {
-      rules: StylingRule [*]
-    }
+
     class Color {
       r: float
       g: float
       b: float
     }
-    class Font {
-      face: string
-      size: float
-      bold: boolean
-      italic: boolean
-      underline: boolean
-      color: Color
-      outlineSize: float
-      outlineColor: Color
-      outlineOpacity: float
-      opacity: float
+    class Gradient {
+        colorKeys: ColorKey [*]
     }
-    class Color
     class ColorKey {
       color: Color
-      opacity: byte
+      opacity: float
       percent: float
     }
     class StippleStyle {
+      <<enumeration>>
       light
       medium
       heavy
     }
-    class Hatchstyle {
+    class HatchStyle {
+      <<enumeration>>
       forward
       backward
       xCross
       cross
     }
-    class LineJoin {
+    class StrokeJoin {
+      <<enumeration>>
       miter
       round
       bevel
     }
-    class LineCap {
+    class StrokeCap {
+      <<enumeration>>
       butt
       round
       square
     }
-    class Marker {
-      elements: GraphicalElement
-    }
-    class Symbolizer
-    class VectorSymbolizer
     class Fill {
-      pattenrn: GraphicalElement [0..1] 
+      pattern: Graphic [0..1]
       color: Color
       stippleStyle: StippleStyle
       hatchStyle: HatchStyle
-      gradient: ColorKey [*] 
+      gradient: Gradient
     }
-    class Alignment2D {
-      horzAlign: HAlignment
-      vertAlign: VHAlignment 
+    class GraphicalUnit {
+       <<enumeration>>
+       pixels
+       meters
+       feet
+       percent
+       points
+       em
+       screenInches
+       screenCM
+       screenMM
     }
-    class HAlignment {
-      left
-      center
-      right
-    }
-        class VAlignment {
-      top
-      middle
-      bottom
+    class StrokeStyling {
+       color: Color
+       opacity: float
+       width: float
+       widthUnit: GraphicalUnit
     }
     class Stroke {
-      pattern: GraphicalElement [0..1]
-      opacity: float
-      width: float
-      color: Color
-      centerWidth: float
-      centerColor: Color
-      casingWidth: float
-      casingColor: Color
-      join: LineJoin
-      cap: LineCap
-      dashPattern: integer [*]  
+      pattern: Graphic [0..1]
+      center: StrokeStyling [0..1]
+      casing: StrokeStyling [0..1]
+      join: StrokeJoin [0..1]
+      cap: StrokeCap [0..1]
+      dashPattern: integer [*]
     }
-    class Label {
-      graphic: GraphicalElement [*]
+    class Marker {
+      elements: Graphic[0..*]
+    }
+    class LabelPlacement {
       priority: float
       minSpacing: float
       maxSpacing: float
     }
+    class Label {
+      placement: LabelPlacement
+    }
     class Graphic
-    class Image
-    class Text
     class Shape
   %% Relations
   %% Association
-    VectorSymbolizer --> Fill
-    VectorSymbolizer --> Stroke
-    VectorSymbolizer --> Label
-    VectorSymbolizer --> Marker
-    Stroke --> Graphic : stroke
-    Marker --> Graphic
-    StyleSheet ..> StylingRule
-    StylingRule ..> Style
   %% Inheritance
+    Stroke --|> StrokeStyling
     VectorSymbolizer --|> Symbolizer
-    Image --|> Graphic
-    Text --|> Graphic
+    Label --|> Marker
     Shape --|> Graphic
   %% Composition
-    Fill "0..1" --* "1" VectorSymbolizer : fill
-    Stroke "0..1" --* "1" VectorSymbolizer : stroke
-    Graphic "0..1" --* "1" Marker : graphic
-    Stroke "0..1" --* "1" Shape : stroke
+    StrokeStyling --* Color
+    StrokeStyling --* GraphicalUnit
+    VectorSymbolizer --* Label
+    VectorSymbolizer --* Marker
+    VectorSymbolizer --* Fill
+    VectorSymbolizer --* Stroke
+    ColorKey --* Color
+    Gradient --* ColorKey
+    Marker --* Graphic
+    Stroke --* Graphic
+    Stroke --* StrokeStyling
+    Stroke --* StrokeJoin
+    Stroke --* StrokeCap
+    Fill --* Graphic
+    Fill --* Color
+    Fill --* Gradient
+    Fill --* HatchStyle
+    Fill --* StippleStyle
+    Label --* LabelPlacement
+    Shape --* Stroke
+    Shape --* Fill
 ```
