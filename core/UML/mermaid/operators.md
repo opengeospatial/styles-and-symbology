@@ -25,7 +25,6 @@ class LogicOperator {
    and
    or
    not -- unary
-   xor
 }
 LogicOperator --|> Operator
 
