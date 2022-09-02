@@ -56,4 +56,13 @@ SystemIdentifierExpression --> SystemVisualization
 SystemIdentifierExpression --> SystemRecord
 SystemIdentifierExpression --> SystemDataLayer
 SystemDataLayer --* DataLayerType
+SystemDataLayer --* Geometry
+SystemDataLayer --* SystemRecord
+SystemDataLayer --o Geometry
+SystemRecord --* Geometry
+SystemVisualization --* TimeInstant
+SystemVisualization --o Date
+SystemVisualization --o TimeOfDay
+TimeInstant --* Date
+TimeInstant --* TimeOfDay
 ```
