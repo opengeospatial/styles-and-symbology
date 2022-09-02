@@ -78,7 +78,6 @@ class ConditionalExpression {
 ConditionalExpression --|> Expression
 ConditionalExpression --* Expression
 
-%% Operators
 class FunctionCallExpression {
    function: Function
    arguments: Expression[0..*]
@@ -87,69 +86,6 @@ FunctionCallExpression --|> Expression
 FunctionCallExpression --* Function
 FunctionCallExpression --* Expression
 
-class Operator
-
-class ArithmeticOperator {
-   <<enumeration>>
-   add
-   sub
-   mul
-   div
-   intDiv
-   mod
-   pow
-}
-ArithmeticOperator --|> Operator
-
-class LogicOperator {
-   <<enumeration>>
-   and
-   or
-   not -- unary
-   xor
-}
-LogicOperator --|> Operator
-
-class BitwiseOperator {
-   <<enumeration>>
-   bitAnd
-   bitOr
-   bitNot -- unary
-   bitXor
-   leftShift
-   rightShift
-}
-BitwiseOperator --|> Operator
-
-class RelationalOperator {
-   <<enumeration>>
-   equal
-   notEqual
-   is
-   isNot
-   greater
-   lesser
-   greaterEqual
-   lesserEqual
-   between
-   notBetween
-   in -- right operand is array
-   notIn -- right operand is array
-}
-RelationalOperator --|> Operator
-
-class TextRelationOperator {
-   <<enumeration>>
-   like
-   notLike
-   contains
-   startsWith
-   endsWith
-   notContains
-   notStartsWith
-   notEndsWith
-}
-TextRelationOperator --|> Operator
 
 class Function {
    name: string
@@ -157,56 +93,6 @@ class Function {
    returnType: any data type
 }
 
-class SystemVisualization {
-   scaleDenominator: double
-   dateTime: TimeInstant
-   Date: Date
-   timeOfDay: TimeOfDay
-}
-
-class SystemRecord {
-   identifier: string
-   geometry: Geometry
-   geometryDimensions: int
-}
-
-class DataLayerType {
-   <<enumeration>>
-   map
-   vector
-   coverage
-}
-
-class SystemDataLayer {
-   identifier: string
-   type: DataLayerType
-   records: SystemRecord[*]
-   recordsGeometry: Geometry[*]
-   recordsGeometryDimensions: int
-}
-
-class SystemIdentifierExpression {
-   <<enumeration>>
-
-   visualization
-   visualization.scaleDenominator
-   visualization.dateTime
-   visualization.date
-   visualization.timeOfDay
-   record
-   record.identifier
-   record.geometry
-   record.geometryDimensions
-   dataLayer
-   dataLayer.identifier
-   dataLayer.type
-   dataLayer.records
-   dataLayer.recordsGeometry
-   dataLayer.recordsGeometryDimensions
-}
 SystemIdentifierExpression --|> IdentifierExpression
-SystemIdentifierExpression --> SystemVisualization
-SystemIdentifierExpression --> SystemRecord
-SystemIdentifierExpression --> SystemDataLayer
-SystemDataLayer --* DataLayerType
+
 ```
