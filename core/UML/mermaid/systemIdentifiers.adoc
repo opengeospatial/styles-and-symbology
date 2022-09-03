@@ -6,14 +6,14 @@
 
 classDiagram
 
-class SystemVisualization {
+class Visualization {
    scaleDenominator: double
    dateTime: TimeInstant
-   Date: Date
+   date: Date
    timeOfDay: TimeOfDay
 }
 
-class SystemRecord {
+class Feature {
    identifier: string
    geometry: Geometry
    geometryDimensions: int
@@ -26,12 +26,12 @@ class DataLayerType {
    coverage
 }
 
-class SystemDataLayer {
+class DataLayer {
    identifier: string
    type: DataLayerType
-   records: SystemRecord[*]
-   recordsGeometry: Geometry[*]
-   recordsGeometryDimensions: int
+   features: Feature[*]
+   featuresGeometry: Geometry[*]
+   featuresGeometryDimensions: int
 }
 
 class SystemIdentifierExpression {
@@ -42,29 +42,29 @@ class SystemIdentifierExpression {
    visualization.dateTime
    visualization.date
    visualization.timeOfDay
-   record
-   record.identifier
-   record.geometry
-   record.geometryDimensions
+   feature
+   feature.identifier
+   feature.geometry
+   feature.geometryDimensions
    dataLayer
    dataLayer.identifier
    dataLayer.type
-   dataLayer.records
-   dataLayer.recordsGeometry
-   dataLayer.recordsGeometryDimensions
+   dataLayer.features
+   dataLayer.featuresGeometry
+   dataLayer.featuresGeometryDimensions
 }
 SystemIdentifierExpression --|> IdentifierExpression
-SystemIdentifierExpression --> SystemVisualization
-SystemIdentifierExpression --> SystemRecord
-SystemIdentifierExpression --> SystemDataLayer
-SystemDataLayer --* DataLayerType
-SystemDataLayer --* Geometry
-SystemDataLayer --* SystemRecord
-SystemDataLayer --o Geometry
-SystemRecord --* Geometry
-SystemVisualization --* TimeInstant
-SystemVisualization --o Date
-SystemVisualization --o TimeOfDay
+SystemIdentifierExpression --> Visualization
+SystemIdentifierExpression --> Feature
+SystemIdentifierExpression --> DataLayer
+DataLayer --* DataLayerType
+DataLayer --* Geometry
+DataLayer --* Feature
+DataLayer --o Geometry
+Feature --* Geometry
+Visualization --* TimeInstant
+Visualization --o Date
+Visualization --o TimeOfDay
 TimeInstant --* Date
 TimeInstant --* TimeOfDay
 ----
