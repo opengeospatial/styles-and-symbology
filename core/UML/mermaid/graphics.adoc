@@ -62,7 +62,8 @@
         scaling: Vector3Df
     }
     class Transform2D {
-        rotationScaling: float [4]
+        orientation: Angle
+        scaling: Pointf
         translation: Pointf
     }
     class Pointf {
