@@ -4,7 +4,9 @@
 classDiagram
 
 %% Expression Classes
-class Expression
+class Expression {
+   <<abstract>>
+}
 
 class IdentifierExpression {
    name: string

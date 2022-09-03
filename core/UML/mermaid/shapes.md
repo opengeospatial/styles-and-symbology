@@ -4,9 +4,11 @@
   classDiagram
   %% Class definition
     class Shape {
+        <<abstract>>
         stroke: Stroke [0..1]
     }
     class ClosedShape {
+        <<abstract>>
         fill: Fill [0..1]
     }
     class Dot {

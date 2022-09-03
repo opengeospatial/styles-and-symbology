@@ -3,7 +3,9 @@
 ```mermaid
 classDiagram
 
-class Geometry
+class Geometry {
+   <<abstract>>
+}
 
 class Point {
    coordinates: double[2..*]

@@ -4,6 +4,7 @@
   classDiagram
   %% Class definition
     class Graphic {
+        <<abstract>>
         opacity: float
         transform: Transform2D
         transform3D: Transform3D
