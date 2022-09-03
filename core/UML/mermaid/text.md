@@ -1,0 +1,65 @@
+# Text
+
+```mermaid
+  classDiagram
+  %% Class definition
+    class TextAlignment {
+      horizontal: HAlignment
+      vertical: VAlignment
+    }
+    class HAlignment {
+      <<enumeration>>
+      left
+      center
+      right
+    }
+    class VAlignment {
+      <<enumeration>>
+      top
+      middle
+      bottom
+    }
+    class FontOutline {
+       size: float
+       opacity: float
+       color: Color
+    }
+    class Font {
+      face: string
+      size: float
+      bold: bool
+      italic: bool
+      underline: bool
+      color: Color
+      opacity: float
+      outline: FontOutline
+    }
+
+    class Color {
+      r: float
+      g: float
+      b: float
+    }
+
+    class Text {
+        text: string
+        font: Font
+        alignment: TextAlignment
+    }
+
+  %% Relations
+  %% Inheritance
+  Text --|> Graphic
+
+  %% Composition
+  Text --* Font
+  Text --* TextAlignment
+  Font --* FontOutline
+  Font --* Color
+  FontOutline --* Color
+  TextAlignment --* HAlignment
+  TextAlignment --* VAlignment
+
+  %% Aggregation
+
+```

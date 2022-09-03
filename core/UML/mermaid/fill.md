@@ -1,0 +1,59 @@
+# Fill
+
+```mermaid
+  classDiagram
+  %% Class definition
+    class Color {
+      r: float
+      g: float
+      b: float
+    }
+    class Gradient {
+        colorKeys: ColorKey [*]
+    }
+    class ColorKey {
+      color: Color
+      opacity: float
+      percent: float
+    }
+    class StippleStyle {
+      <<enumeration>>
+      light
+      medium
+      heavy
+    }
+    class HatchStyle {
+      <<enumeration>>
+      forward
+      backward
+      xCross
+      cross
+    }
+    class Fill {
+      pattern: Graphic [0..1]
+      color: Color
+      stippleStyle: StippleStyle
+      hatchStyle: HatchStyle
+      gradient: Gradient
+    }
+
+  %% Relations
+  %% Inheritance
+  ClosedShape --|> Shape
+  Shape --|> Graphic
+
+  %% Composition
+  ClosedShape --* Fill
+
+  Fill --* Graphic
+  Fill --* Color
+  Fill --* Gradient
+  Fill --* HatchStyle
+  Fill --* StippleStyle
+  ColorKey --* Color
+  Gradient --* ColorKey
+  VectorSymbolizer --* Fill
+
+  %% Aggregation
+
+```

@@ -1,0 +1,68 @@
+# Stroke
+
+```mermaid
+  classDiagram
+  %% Class definition
+    class Color {
+      r: float
+      g: float
+      b: float
+    }
+    class StrokeJoin {
+      <<enumeration>>
+      miter
+      round
+      bevel
+    }
+    class StrokeCap {
+      <<enumeration>>
+      butt
+      round
+      square
+    }
+    class GraphicalUnit {
+       <<enumeration>>
+       pixels
+       meters
+       feet
+       percent
+       points
+       em
+       screenInches
+       screenCM
+       screenMM
+    }
+    class StrokeStyling {
+       color: Color
+       opacity: float
+       width: float
+       widthUnit: GraphicalUnit
+    }
+    class Stroke {
+      pattern: Graphic [0..1]
+      center: StrokeStyling [0..1]
+      casing: StrokeStyling [0..1]
+      join: StrokeJoin [0..1]
+      cap: StrokeCap [0..1]
+      dashPattern: integer [*]
+    }
+
+  %% Relations
+  %% Inheritance
+  Stroke --|> StrokeStyling
+  Shape --|> Graphic
+
+  %% Composition
+  Shape --* Stroke
+
+  StrokeStyling --* Color
+  StrokeStyling --* GraphicalUnit
+  Stroke --* Graphic
+  Stroke --* StrokeStyling
+  Stroke --* StrokeJoin
+  Stroke --* StrokeCap
+  VectorSymbolizer --* Stroke
+
+  %% Aggregation
+
+```
