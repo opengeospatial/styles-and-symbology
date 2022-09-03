@@ -32,7 +32,7 @@
         model: Resource
     }
     class MultiGraphic {
-        elements: Graphic [*]
+        elements: Graphic [0..*]
     }
     class GraphicInstance {
        element: Graphic

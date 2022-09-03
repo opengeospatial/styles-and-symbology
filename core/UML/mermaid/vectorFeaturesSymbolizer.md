@@ -14,7 +14,6 @@
     }
 
     class Marker {
-      elements: Graphic[0..*]
     }
     class LabelPlacement {
       priority: float
@@ -31,13 +30,14 @@
     VectorSymbolizer --> ParameterValue
   %% Inheritance
     VectorSymbolizer --|> Symbolizer
-    Label --|> Marker
+    Marker --|> MultiGraphic
+    Label --|> MultiGraphic
   %% Composition
     VectorSymbolizer --* Label
     VectorSymbolizer --* Marker
     VectorSymbolizer --* Fill
     VectorSymbolizer --* Stroke
-    Marker --* Graphic
+    MultiGraphic --* Graphic
     Label --* LabelPlacement
     Fill --* Graphic
     Stroke --* Graphic
