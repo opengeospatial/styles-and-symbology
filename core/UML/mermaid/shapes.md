@@ -29,20 +29,17 @@
         radiusX: float
         radiusY: float
     }
-    class ClosedArcType {
-       <<enumeration>>
-       sector
-       chord
+
+    class SectorArc {
+        innerRadius: float
     }
 
-    class ClosedArc {
-        type: ClosedArcType
+    class ChordArc {
     }
 
     class Arc {
         center: Pointf
         radius: float
-        innerRadius: float
         startAngle: Angle
         deltaAngle: Angle
     }
@@ -69,8 +66,10 @@
   Circle --|> ClosedShape
   Ellipse --|>Closed Shape
   Arc --|> Shape
-  ClosedArc --|> Arc
-  ClosedArc --|> ClosedShape
+  SectorArc --|> Arc
+  SectorArc --|> ClosedShape
+  ChordArc --|> Arc
+  ChordArc --|> ClosedShape
   Path --|> Shape
   RoundedRectangle --|> Rectangle
   ClosedPath --|> Path
@@ -86,7 +85,6 @@
   Ellipse --* Pointf
   Rectangle --* Pointf
   Arc --* Pointf
-  ClosedArc --* ClosedArcType
   ClosedShape --* Fill
   Shape --* Stroke
 
