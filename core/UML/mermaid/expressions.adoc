@@ -9,6 +9,8 @@ class Expression {
    <<abstract>>
 }
 
+LiteralExpression --|> Expression
+
 class IdentifierExpression {
    name: string
 }
@@ -20,38 +22,54 @@ class VariableExpression {
 VariableExpression --|> Expression
 
 class InstanceExpression {
-   class: type
-   members: map of members to values
+   objectClass: type
+   members: map < string, Expression >
 }
 InstanceExpression --|> Expression
+InstanceExpression --* Expression
 
-class TextExpression {
+class InstanceLiteral {
+   <<concept: fixed members>>
+}
+
+InstanceLiteral --|> InstanceExpression
+InstanceLiteral --|> LiteralExpression
+
+class LiteralExpression {
+   <<abstract>>
+}
+
+class TextLiteral {
    text: string
 }
-TextExpression --|> Expression
+TextLiteral --|> LiteralExpression
 
-class EnumValueExpression {
+class EnumValueLiteral {
    enum: type
    value: string
    numericValue: int64
 }
-EnumValueExpression --|> Expression
+EnumValueLiteral --|> LiteralExpression
 
-class BoolExpression
-BoolExpression --|> EnumValueExpression
+class BoolLiteral {
+   <<enumeration>>
+   false
+   true
+}
+BoolLiteral --|> EnumValueLiteral
 
-class NullExpression
-NullExpression --|> Expression
+class NullLiteral
+NullLiteral --|> LiteralExpression
 
-class IntegerExpression {
+class IntegerLiteral {
    value: int64
 }
-IntegerExpression --|> Expression
+IntegerLiteral --|> LiteralExpression
 
-class RealExpression {
+class RealLiteral {
    value: double
 }
-RealExpression --|> Expression
+RealLiteral --|> LiteralExpression
 
 %% class SubExpression
 %% SubExpression --|> Expression -- Parentheses could be purely an encoding concept based on the need to maintain priority...
@@ -64,6 +82,12 @@ class ArrayExpression {
 ArrayExpression --|> Expression
 ArrayExpression --* Expression
 
+class ArrayLiteral {
+   <<concept: fixed elements>>
+}
+ArrayLiteral --|> ArrayExpression
+ArrayLiteral --|> LiteralExpression
+
 class OperationExpression {
    operand1: Expression[0..1]
    operator: Operator
@@ -75,8 +99,8 @@ OperationExpression --* Expression
 
 class ConditionalExpression {
    condition: Expression
-   then: Expression
-   else: Expression
+   thenExp: Expression
+   elseExp: Expression
 }
 ConditionalExpression --|> Expression
 ConditionalExpression --* Expression
@@ -92,8 +116,8 @@ FunctionCallExpression --* Expression
 
 class Function {
    name: string
-   parameters: map of parameters to types
-   returnType: any data type
+   parameters: map < string, type >
+   returnType: type
 }
 
 SystemIdentifierExpression --|> IdentifierExpression
