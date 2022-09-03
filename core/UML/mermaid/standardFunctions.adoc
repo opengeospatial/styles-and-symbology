@@ -1,6 +1,8 @@
 # Standard Functions
 
-```mermaid
+[source,mermaid]
+----
+
 classDiagram
 
 class Month {
@@ -128,4 +130,4 @@ class ArrayRelationFunctions {
 }
 ArrayRelationFunctions --|> StandardFunctions
 ArrayRelationFunctions --> ArrayExpression
-```
+----

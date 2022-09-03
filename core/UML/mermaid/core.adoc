@@ -1,6 +1,7 @@
 # Symbology Core Model
 
-```mermaid
+[source,mermaid]
+----
 classDiagram
 
 %% Class definitions
@@ -35,4 +36,4 @@ StylingRule *-- Style
 Selector *-- StylingRule
 Symbolizer *-- StylingRule
 Symbolizer --> ParameterValue
-```
+----

@@ -1,6 +1,7 @@
 # Fill
 
-```mermaid
+[source,mermaid]
+----
   classDiagram
   %% Class definition
     class Color {
@@ -56,4 +57,4 @@
 
   %% Aggregation
 
-```
+----

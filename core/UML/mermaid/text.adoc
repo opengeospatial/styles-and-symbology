@@ -1,6 +1,8 @@
 # Text
 
-```mermaid
+[source,mermaid]
+----
+
   classDiagram
   %% Class definition
     class TextAlignment {
@@ -62,4 +64,4 @@
 
   %% Aggregation
 
-```
+----

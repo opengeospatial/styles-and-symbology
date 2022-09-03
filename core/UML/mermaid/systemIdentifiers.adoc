@@ -1,6 +1,8 @@
 # System Identifiers
 
-```mermaid
+[source,mermaid]
+----
+
 
 classDiagram
 
@@ -65,4 +67,4 @@ SystemVisualization --o Date
 SystemVisualization --o TimeOfDay
 TimeInstant --* Date
 TimeInstant --* TimeOfDay
-```
+----

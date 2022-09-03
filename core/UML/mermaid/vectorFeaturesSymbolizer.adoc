@@ -1,6 +1,7 @@
 # Vector Features Symbolizer
 
-```mermaid
+[source,mermaid]
+----
   classDiagram
   %% Class definition
     %% Note: Symbolizer, StylingRule and Style are defined in core.md
@@ -41,4 +42,4 @@
     Label --* LabelPlacement
     Fill --* Graphic
     Stroke --* Graphic
-```
+----

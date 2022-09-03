@@ -1,6 +1,7 @@
 # Expressions
 
-```mermaid
+[source,mermaid]
+----
 classDiagram
 
 %% Expression Classes
@@ -97,4 +98,4 @@ class Function {
 
 SystemIdentifierExpression --|> IdentifierExpression
 
-```
+----

@@ -1,6 +1,7 @@
 # Geometry
 
-```mermaid
+[source,mermaid]
+----
 classDiagram
 
 class Geometry {
@@ -49,4 +50,4 @@ class Polygon {
 Polygon --* PolygonContour
 Polygon --|> Geometry
 
-```
+----

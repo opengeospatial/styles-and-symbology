@@ -1,6 +1,8 @@
 # Shapes
 
-```mermaid
+[source,mermaid]
+----
+
   classDiagram
   %% Class definition
     class Shape {
@@ -92,4 +94,4 @@
 
   %% Aggregation
 
-```
+----

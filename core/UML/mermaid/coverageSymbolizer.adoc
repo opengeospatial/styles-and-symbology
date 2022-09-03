@@ -1,6 +1,7 @@
 # Coverage Symbolizer
 
-```mermaid
+[source,mermaid]
+----
   classDiagram
   %% Class definition
     class ValueColor {
@@ -54,4 +55,4 @@
     HillShading --* ValueColor
     HillShading --* ValueOpacity
     AzimuthElevation --* Angle
-```
+----

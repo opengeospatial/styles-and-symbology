@@ -1,6 +1,8 @@
 # Operators
 
-```mermaid
+[source,mermaid]
+----
+
 classDiagram
 
 %% Operators
@@ -68,4 +70,4 @@ class TextRelationOperator {
    notEndsWith
 }
 TextRelationOperator --|> Operator
-```
+----

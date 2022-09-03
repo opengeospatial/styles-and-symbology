@@ -1,6 +1,8 @@
 # Graphics
 
-```mermaid
+[source,mermaid]
+----
+
   classDiagram
   %% Class definition
     class Graphic {
@@ -93,4 +95,4 @@
   %% Aggregation
   GraphicInstance --o Graphic
 
-```
+----
