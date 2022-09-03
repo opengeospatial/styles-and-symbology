@@ -25,6 +25,10 @@
       placement: LabelPlacement
     }
     class Graphic
+
+    class MultiGraphic {
+      elements: Graphic [0..*]
+    }
   %% Relations
   %% Association
     Symbolizer --> ParameterValue
