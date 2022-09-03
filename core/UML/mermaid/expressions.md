@@ -18,7 +18,7 @@ VariableExpression --|> Expression
 
 class InstanceExpression {
    class: type
-   members: map of member name to value of member type
+   members: map of members to values
 }
 InstanceExpression --|> Expression
 
@@ -89,7 +89,7 @@ FunctionCallExpression --* Expression
 
 class Function {
    name: string
-   parameters: map of parameter name to any data type
+   parameters: map of parameters to types
    returnType: any data type
 }
 
