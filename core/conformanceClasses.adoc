@@ -68,7 +68,7 @@ Initial take at organizing new Styling UML Model as conformance classes
 
 ==== Shape Graphics
 
-* Dots, Paths (Polylines / Polygons), Rectangles & Rounded Rectangles, Arcs (Open/Chord/Sector), Circles, Ellipses
+* Paths (Polylines / Polygons), Rectangles & Rounded Rectangles, Arcs (Open/Chord/Sector), Circles, Ellipses
 * Fills and Strokes on those graphics
 * Use of these graphics as Markers (Labels if supported)
 * Only translation transforms
