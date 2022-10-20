@@ -1,6 +1,6 @@
 == Conformance Classes
 
-Initial take at organizing new Styling UML Model as conformance classes
+Initial take at organizing https://github.com/opengeospatial/styles-and-symbology/tree/main/core/UML/mermaid[new Styling UML Model] as conformance classes
 
 === Conformance Classes for basic rendering
 
