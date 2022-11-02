@@ -8,7 +8,7 @@ The extensions are organized as packages (<<img_ft_style>>).
 
 [#img_ft_style]
 .FeatureType style packages in white, symbology core model dependency in yellow
-image::figure1.png[]
+image::FeatureType_Style_extensions.png[]
 
 === FeatureTypeStyle
 
