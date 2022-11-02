@@ -11,14 +11,14 @@ nested graphic is a simple 5mm wide light-orange circle. In a) the
 GraphicFill only defines the circle and, in b), a TileGap of 1mm in both
 directions is added.
 
-image::figureb1.png[]
+image::GraphicFill_1.png[]
 
 Notice, the tiling shall be consistent between neighboring features.
 Moreover, tiles shall be organized according to a system-dependent
 geographic anchor point, which implies each feature is filled by the
 pattern in a unique way at a given scale level, as shown in next figure.
 
-image::figureb2.png[]
+image::GraphicFill_2.png[]
 
 ​The features are always filled in the same way at a given scale,
 whatever the map bounding-box is.
@@ -28,7 +28,7 @@ whatever the map bounding-box is.
 The following figure illustrates the effect inducted by adding an offset
 (no offset in a), offset in b)).
 
-image::figureb3.png[]
+image::HatchedFill.png[]
 
 {empty}a) illustrates how hatches shall be generated according to an
 anchor-point. b) shows the same but with the addition of an offset
@@ -36,7 +36,7 @@ anchor-point. b) shows the same but with the addition of an offset
 === PerpendicularOffset
 
 .Positive and negative perpendicular offset against a 1-dimensional geometry
-image::figureb4.png[]
+image::PerpendicularOffset.png[]
 
 NOTE: Add a figure here. To be titled: Positive and negative perpendicular offset against a 2-dimensional geometry
 .Positive and negative perpendicular offset against a 2-dimensional geometry
@@ -55,21 +55,21 @@ additional 180 degrees if the graphic would otherwise end up pointing
 downward with respect to the parent portrayal environment.
 
 .{TITLE for figure b6}
-image::figureb6.png[]
+image::RelativeOrientation_1.png[]
 
 .{TITLE for figure b7}
-image::figureb7.png[]
+image::RelativeOrientation_2.png[]
 
 
 === LabelAlignment
 
 .PointLabel alignments
-image::figureb8.png[]
+image::LabelAlignment.png[]
 
 === ExclusionZone
 
 .PointLabel alignments with a radius exclusion zone
-image::figureb9.png[]
+image::ExclusionZone_1.png[]
 
 .PointLabel alignments with a rectangle exclusion zone
-image::figureb10.png[]
+image::ExclusionZone_2.png[]
