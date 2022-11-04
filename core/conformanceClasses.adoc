@@ -37,7 +37,7 @@ Initial take at organizing https://github.com/opengeospatial/styles-and-symbolog
 
 * Consider polygon vector + light direction hillshading
 
-=== Conformance classes for additional Labeling Capabilities
+=== Conformance classes for Labeling Capabilities
 
 ==== Font Outlines
 
