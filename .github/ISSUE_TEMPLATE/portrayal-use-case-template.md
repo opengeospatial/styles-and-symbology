@@ -2,7 +2,7 @@
 name: Portrayal Use Case template
 about: Use this template to describe a portrayal use case
 title: Use Case
-labels: ''
+labels: Use Case
 assignees: ''
 
 ---
