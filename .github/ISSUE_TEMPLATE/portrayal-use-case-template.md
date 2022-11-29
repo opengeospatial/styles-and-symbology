@@ -7,11 +7,12 @@ assignees: ''
 
 ---
 
-Existing conformance classes required for this use case:
+## Existing conformance classes required for this use case:
 
 Example stylesheet:
 
 
-Describe any capability not already addressed by existing conformance classes:
+## Describe any capability not already addressed by existing conf#ormance classes:
 
-Example image illustrating the portrayal use case:
+## Example image illustrating the portrayal use case:
+ 
