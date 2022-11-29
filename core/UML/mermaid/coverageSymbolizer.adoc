@@ -7,10 +7,12 @@
     class ValueColor {
        value: double
        color: Color
+       label: text
     }
     class ValueOpacity {
        value: double
        opacity: float
+       label: text
     }
     class AzimuthElevation {
        azimuth: Angle
