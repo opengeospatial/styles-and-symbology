@@ -319,28 +319,33 @@ FontClass properties are documented in the following table.
 * opacity: float
 * zOrder: integer
 
-=== Class Expression
 === Class ParameterValue
-=== Class IdentifierExpression
-=== Class InstanceExpression
-=== Class InstanceLiteral
-=== Class LiteralExpression
-=== Class TextLiteral
-=== Class EnumValueLiteral
-=== Class BoolLiteral
-=== Class NullLiteral
-=== Class IntegerLiteral
-=== Class RealLiteral
-=== Class ArrayExpression
-=== Class ArrayLiteral
-=== Class OperationExpression
-=== Class LogicOperator
-=== Class RelationalOperator
+=== Class Expression
 
-=== Class SystemIdentifierExpression
+==== Class IdentifierExpression
 
+==== Class LiteralExpression
+===== Class TextLiteral
+===== Class EnumValueLiteral
+===== Class BoolLiteral
+===== Class NullLiteral
+===== Class IntegerLiteral
+===== Class RealLiteral
 
-==== Class Visualization
+==== Class OperationExpression
+===== Class Operator
+====== Class LogicOperator
+====== Class RelationalOperator
+
+==== Class ArrayExpression
+===== Class ArrayLiteral
+
+==== Class InstanceExpression
+===== Class InstanceLiteral
+
+==== Class SystemIdentifierExpression
+
+===== Class Visualization
 
 * visualization
 * visualization.scaleDenominator
@@ -348,20 +353,20 @@ FontClass properties are documented in the following table.
 * visualization.date                    -- for temporal visualization
 * visualization.timeOfDay               -- for temporal visualization
 
-==== Class Feature
+===== Class Feature
 
 * feature
 * feature.identifier
 * feature.geometry                      -- for spatial operators
 * feature.geometryDimensions
 
-==== Class DataLayerType
+===== Class DataLayer
 
 * dataLayer
 * dataLayer.identifier
 * dataLayer.type
 * dataLayer.featuresGeometryDimensions
-* dataLayer.features                    -- for advanced comparison of feature against all other features  
+* dataLayer.features                    -- for advanced comparison of feature against all other features
 * dataLayer.featuresGeometry            -- for advanced comparison of feature against all other features
 
-==== Class DataLayer
+====== Class DataLayerType

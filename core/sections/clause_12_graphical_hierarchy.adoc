@@ -3,10 +3,10 @@
 
 ==== Class Graphic
 
-==== Class MultiGraphic
+===== Class MultiGraphic
 
-==== Class GraphicInstance
+===== Class GraphicInstance
 
-==== Class Pointf
+===== Class Pointf
 
-==== Class GraphicalUnit
+===== Class GraphicalUnit

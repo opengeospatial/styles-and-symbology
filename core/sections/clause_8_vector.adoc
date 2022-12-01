@@ -29,13 +29,14 @@
 ===== Class Image
 ====== Class Resource
 ===== Class Text
+The text property will exceptionnally support an identifier parameter value expression (without any additional conformance class required).
+
 ====== Class Font
 ====== Class TextAlignment
-======= Class HAlignment
-======= Class VAlignment
+
+* enum HAlignment
+* enum VAlignment
 
 ===== Class Shape
 ====== Class Dot
-======= Class Pointf
-
-The text property will exceptionnally support an identifier parameter value expression.
+* point: Pointf

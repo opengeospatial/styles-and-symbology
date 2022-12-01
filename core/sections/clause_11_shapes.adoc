@@ -5,34 +5,33 @@
 
 ===== Class Shape
 
-===== Class Fill
+Base Class: Graphic
 
-===== Class Graphic
-
-===== Class Pointf
+* stroke: Stroke
 
 ===== Class ClosedShape
 
+* fill: Fill
+
 ===== Class Rectangle
 
-
-===== Class RoundedRectangle
+====== Class RoundedRectangle
 
 ===== Class Circle
 
 ===== Class Ellipse
 
-===== Class SectorArc
-
-===== Class ChordArc
-
 ===== Class Arc
 
-===== Class PathNodes
+====== Class SectorArc
 
-===== Class ClosedPath
+====== Class ChordArc
 
 ===== Class Path
+
+====== Class PathNodes
+
+====== Class ClosedPath
 
 === Shapes Outlines
 ==== Overview
