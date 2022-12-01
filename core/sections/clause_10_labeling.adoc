@@ -1,20 +1,20 @@
-= Labeling
+== Labeling
 
-== Font Outlines
-=== Overview
+==== Font Outlines
+====== Overview
 
-==== Class FontOutline
-==== Class Font
-==== Class Color
+======== Class FontOutline
+======== Class Font
+======== Class Color
 
-== Basic Labeling
-=== Overview
+==== Basic Labeling
+====== Overview
 
-==== Class LabelPlacement
-==== Class Label
-==== Class Graphic
-==== Class MultiGraphic
+======== Class LabelPlacement
+======== Class Label
+======== Class Graphic
+======== Class MultiGraphic
 
-==== Class VectorSymbolizer
+======== Class VectorSymbolizer
 
 Add label property.

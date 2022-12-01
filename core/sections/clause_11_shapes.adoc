@@ -1,26 +1,26 @@
-= Shapes
+== Shapes
 
-== Shape Graphics
-=== Overview
+==== Shape Graphics
+====== Overview
 
-==== Class Shape
-==== Class Fill
-==== Class Graphic
-==== Class Pointf
-==== Class ClosedShape
-==== Class Rectangle
-==== Class RoundedRectangle
-==== Class Circle
-==== Class Ellipse
-==== Class SectorArc
-==== Class ChordArc
-==== Class Arc
-==== Class PathNodes
-==== Class ClosedPath
-==== Class Path
+======== Class Shape
+======== Class Fill
+======== Class Graphic
+======== Class Pointf
+======== Class ClosedShape
+======== Class Rectangle
+======== Class RoundedRectangle
+======== Class Circle
+======== Class Ellipse
+======== Class SectorArc
+======== Class ChordArc
+======== Class Arc
+======== Class PathNodes
+======== Class ClosedPath
+======== Class Path
 
-== Shapes Outlines
-=== Overview
+==== Shapes Outlines
+====== Overview
 
 To be added to the UML.
 
