@@ -1,0 +1,20 @@
+= Operations
+
+== Arithmetic Operations
+=== Overview
+
+==== Class Operator
+
+==== Class ArithmeticOperator
+
+== Bitwise Operators
+=== Overview
+
+==== Class BitwiseOperator
+==== Class Operator
+
+== Text Relation Operators (e.g., CQL2 'Like')
+=== Overview
+
+==== Class TextRelationOperator
+==== Class Operator
