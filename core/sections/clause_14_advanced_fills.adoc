@@ -1,23 +1,23 @@
-= Advanced fills
+== Advanced fills
 
-== Pattern Fills
-=== Overview
+==== Pattern Fills
+====== Overview
 
-==== Class Fill
+======== Class Fill
 pattern property
 
-==== Class Graphic
+======== Class Graphic
 
-== Hatches and Gradients, Stipples
-=== Overview
+==== Hatches and Gradients, Stipples
+====== Overview
 
-==== Class Fill
+======== Class Fill
 hatchstyle, stipplestyle, gradient properties
 
-==== Class Color
-==== Class Gradient
-==== Class ColorKey
-==== Class StippleStyle
-==== Class HatchStyle
-==== Class Resource
-==== Class Color
+======== Class Color
+======== Class Gradient
+======== Class ColorKey
+======== Class StippleStyle
+======== Class HatchStyle
+======== Class Resource
+======== Class Color

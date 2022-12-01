@@ -314,6 +314,11 @@ FontClass properties are documented in the following table.
 === Class StylingRule
 === Class Selector
 === Class Symbolizer
+
+* visibility: bool
+* opacity: float
+* zOrder: integer
+
 === Class Expression
 === Class ParameterValue
 === Class IdentifierExpression
@@ -331,8 +336,32 @@ FontClass properties are documented in the following table.
 === Class OperationExpression
 === Class LogicOperator
 === Class RelationalOperator
-=== Class Visualization
-=== Class Feature
-=== Class DataLayerType
-=== Class DataLayer
+
 === Class SystemIdentifierExpression
+
+
+==== Class Visualization
+
+* visualization
+* visualization.scaleDenominator
+* visualization.dateTime                -- for temporal visualization
+* visualization.date                    -- for temporal visualization
+* visualization.timeOfDay               -- for temporal visualization
+
+==== Class Feature
+
+* feature
+* feature.identifier
+* feature.geometry                      -- for spatial operators
+* feature.geometryDimensions
+
+==== Class DataLayerType
+
+* dataLayer
+* dataLayer.identifier
+* dataLayer.type
+* dataLayer.featuresGeometryDimensions
+* dataLayer.features                    -- for advanced comparison of feature against all other features  
+* dataLayer.featuresGeometry            -- for advanced comparison of feature against all other features
+
+==== Class DataLayer

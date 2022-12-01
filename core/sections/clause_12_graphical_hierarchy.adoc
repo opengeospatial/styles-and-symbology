@@ -1,8 +1,8 @@
-= Multi Graphics and Transforms
-== Overview
+== Multi Graphics and Transforms
+==== Overview
 
-=== Class Graphic
-=== Class MultiGraphic
-=== Class GraphicInstance
-=== Class Pointf
-=== Class GraphicalUnit 
+====== Class Graphic
+====== Class MultiGraphic
+====== Class GraphicInstance
+====== Class Pointf
+====== Class GraphicalUnit 

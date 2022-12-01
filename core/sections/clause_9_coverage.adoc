@@ -1,19 +1,19 @@
-= Coverage styling
+== Coverage styling
 
-== Basic Coverage Styling
-=== Overview
+==== Basic Coverage Styling
+====== Overview
 
-==== Class CoverageSymbolizer
-==== Class ValueColor
-==== Class ValueOpacity
-==== Class Color
+======== Class CoverageSymbolizer
+======== Class ValueColor
+======== Class ValueOpacity
+======== Class Color
 
-== Hill Shading
-=== Overview
+==== Hill Shading
+====== Overview
 
-==== Class CoverageSymbolizer
-==== Class ValueColor
-==== Class ValueOpacity
-==== Class AzimuthElevation
-==== Class HillShading
-==== Class Color 
+======== Class CoverageSymbolizer
+======== Class ValueColor
+======== Class ValueOpacity
+======== Class AzimuthElevation
+======== Class HillShading
+======== Class Color 
