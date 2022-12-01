@@ -1,0 +1,30 @@
+= Basic Vector Features Styling
+
+== Overview
+
+=== Class VectorSymbolizer
+=== Class Color
+=== Class Fill
+=== Class Graphic
+=== Class MultiGraphic
+=== Class Resource
+=== Class Color
+=== Class Image
+=== Class Pointf    
+=== Class Shape
+=== Class Dot
+=== Class Pointf
+=== Class GraphicalUnit
+=== Class StrokeStyling
+=== Class Stroke
+=== Class TextAlignment
+=== Class HAlignment
+=== Class VAlignment
+=== Class Font
+=== Class Text
+
+The text property will exceptionnally support an identifier parameter value expression.
+
+=== Class Marker
+
+

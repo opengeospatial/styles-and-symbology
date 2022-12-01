@@ -309,3 +309,30 @@ FontClass properties are documented in the following table.
 | extension	| Any encoding should allow to extend a Font with custom items	| Any type	| zero or more
 |===
 (a) Any number of FontFamily parameters may be given and they are assumed to be in preferred order. (b) The size unit is specified by the uom code if defined or by the innermost parent unit of measure definition otherwise.  
+
+=== Class Style
+=== Class StylingRule
+=== Class Selector
+=== Class Symbolizer
+=== Class Expression
+=== Class ParameterValue
+=== Class IdentifierExpression
+=== Class InstanceExpression
+=== Class InstanceLiteral
+=== Class LiteralExpression
+=== Class TextLiteral
+=== Class EnumValueLiteral
+=== Class BoolLiteral
+=== Class NullLiteral
+=== Class IntegerLiteral
+=== Class RealLiteral
+=== Class ArrayExpression
+=== Class ArrayLiteral
+=== Class OperationExpression
+=== Class LogicOperator
+=== Class RelationalOperator
+=== Class Visualization
+=== Class Feature
+=== Class DataLayerType
+=== Class DataLayer
+=== Class SystemIdentifierExpression
