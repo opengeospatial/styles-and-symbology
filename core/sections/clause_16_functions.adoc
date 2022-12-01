@@ -1,56 +1,79 @@
 == Functions
 
-==== Function Expressions
-====== Overview
+=== Function Expressions
+==== Overview
 
-======== Class Expression
-======== Class FunctionCallExpression
-======== Class Function
-======== Class StandardFunctions
+===== Class Expression
 
-==== Spatial Relation Functions
-====== Overview
+===== Class FunctionCallExpression
 
-======== Standard SpatialRelationFunctions
-======== Class Geometry
-======== Class Point
-======== Class MultiPoint
-======== Class BoundingBox
-======== Class LineString
-======== Class MultiLineString
-======== Class PolygonContour
-======== Class Polygon
+===== Class Function
 
-==== Temporal Relation Functions
-====== Overview
+===== Class StandardFunctions
 
-======== Class Month
-======== Class Date
-======== Class TimeOfDay
-======== Class TimeInstant
-======== Class TimeInterval
-======== Standard TemporalRelationFunctions
+=== Spatial Relation Functions
+==== Overview
 
-==== Array Relation Functions
-====== Overview
+===== Standard SpatialRelationFunctions
 
-======== Standard ArrayRelationFunctions
+===== Class Geometry
 
-==== Text Manipulation Functions
-====== Overview
+===== Class Point
 
-======== Class TextManipulationFunctions
+===== Class MultiPoint
 
-==== Geometry Manipulation Functions
-====== Overview
+===== Class BoundingBox
 
-====== Standard GeometryManipulationFunctions
+===== Class LineString
 
-======== Class Geometry
-======== Class Point
-======== Class MultiPoint
-======== Class BoundingBox
-======== Class LineString
-======== Class MultiLineString
-======== Class PolygonContour
-======== Class Polygon
+===== Class MultiLineString
+
+===== Class PolygonContour
+
+===== Class Polygon
+
+=== Temporal Relation Functions
+==== Overview
+
+===== Class Month
+
+===== Class Date
+
+===== Class TimeOfDay
+
+===== Class TimeInstant
+
+===== Class TimeInterval
+
+===== Standard TemporalRelationFunctions
+
+=== Array Relation Functions
+==== Overview
+
+===== Standard ArrayRelationFunctions
+
+=== Text Manipulation Functions
+==== Overview
+
+===== Class TextManipulationFunctions
+
+=== Geometry Manipulation Functions
+==== Overview
+
+===== Standard GeometryManipulationFunctions
+
+===== Class Geometry
+
+===== Class Point
+
+===== Class MultiPoint
+
+===== Class BoundingBox
+
+===== Class LineString
+
+===== Class MultiLineString
+
+===== Class PolygonContour
+
+===== Class Polygon

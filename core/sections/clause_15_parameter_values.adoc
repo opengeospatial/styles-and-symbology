@@ -1,6 +1,8 @@
 == Full ParameterValues Support
-==== Overview
+=== Overview
 
-====== Class Symbolizer
-====== Class ParameterValue
-====== Class Expression
+==== Class Symbolizer
+
+==== Class ParameterValue
+
+==== Class Expression

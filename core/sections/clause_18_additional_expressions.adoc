@@ -1,19 +1,22 @@
 == Additional expressions
 
-==== Variables (e.g., map to an app slider)
-====== Overview
+=== Variables (e.g., map to an app slider)
+==== Overview
 
-======== Class VariableExpression
-======== Class Expressions
+===== Class VariableExpression
 
-==== Right-hand identifiers (e.g., CQL2 Property-Property comparison)
-====== Overview
+===== Class Expressions
 
-======== Class OperationExpression
-======== Class Expressions
+=== Right-hand identifiers (e.g., CQL2 Property-Property comparison)
+==== Overview
 
-==== Conditional Expressions
-====== Overview
+===== Class OperationExpression
 
-======== Class ConditionalExpression
-======== Class Expressions
+===== Class Expressions
+
+=== Conditional Expressions
+==== Overview
+
+===== Class ConditionalExpression
+
+===== Class Expressions

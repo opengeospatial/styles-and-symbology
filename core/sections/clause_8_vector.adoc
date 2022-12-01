@@ -7,7 +7,6 @@
 * fill:     Fill [0..1]
 * stroke:   Stroke [0..1]
 * marker:   Marker [0..1]
-* label:    Label [0..1]
 
 ==== Class Color
 
@@ -19,27 +18,24 @@
 
 * color: Color
 
-==== Class Graphic
+==== Class Stroke
+===== Class GraphicalUnit
+===== Class StrokeStyling
 
+==== Class MultiGraphic
+===== Class Marker
+
+==== Class Graphic
 ===== Class Image
+====== Class Resource
 ===== Class Text
+====== Class Font
+====== Class TextAlignment
+======= Class HAlignment
+======= Class VAlignment
 
 ===== Class Shape
 ====== Class Dot
-
-===== Class MultiGraphic
-====== Class Marker
-
-==== Class Resource
-==== Class Color
-==== Class Pointf    
-==== Class Pointf
-==== Class GraphicalUnit
-==== Class StrokeStyling
-==== Class Stroke
-==== Class TextAlignment
-==== Class HAlignment
-==== Class VAlignment
-==== Class Font
+======= Class Pointf
 
 The text property will exceptionnally support an identifier parameter value expression.

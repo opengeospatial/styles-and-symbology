@@ -1,34 +1,39 @@
 == Advanced strokes
 
-==== Joins and Caps
-====== Overview
+=== Joins and Caps
+==== Overview
 
-======== Class StrokeJoin
-======== Class StrokeCap
-======== Class Stroke
+===== Class StrokeJoin
+
+===== Class StrokeCap
+
+===== Class Stroke
 
 join, cap properties
 
-==== Dashes
-====== Overview
+=== Dashes
+==== Overview
 
-======== Class Stroke
+===== Class Stroke
 
 dashPattern property
 
-==== Casing and Centerline
-====== Overview
+=== Casing and Centerline
+==== Overview
 
-======== Class Color
-======== Class GraphicalUnit
-======== Class StrokeStyling
-======== Class Stroke
+===== Class Color
+
+===== Class GraphicalUnit
+
+===== Class StrokeStyling
+
+===== Class Stroke
 
 casing and center properties.
 
-==== Pattern Strokes
-====== Overview
+=== Pattern Strokes
+==== Overview
 
-======== Class Stroke
+===== Class Stroke
+
 pattern property
-
