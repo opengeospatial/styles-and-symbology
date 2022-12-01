@@ -16,14 +16,37 @@ hatchstyle, stipplestyle, gradient properties
 
 ====== Class Color
 
+* r: float
+* g: float
+* b: float
+
 ====== Class Gradient
+
+* colorKeys: ColorKey [*]
 
 ====== Class ColorKey
 
+* color: Color
+* opacity: float
+* percent: float
+
 ====== Class StippleStyle
 
+* light
+* medium
+* heavy
+
 ====== Class HatchStyle
+
+* forward
+* backward
+* xCross
+* cross
 
 ====== Class Resource
 
 ====== Class Color
+
+* r: float
+* g: float
+* b: float

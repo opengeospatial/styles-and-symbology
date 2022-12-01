@@ -5,8 +5,15 @@
 
 ===== Class MultiGraphic
 
+* elements: Graphic [0..*]
+
 ===== Class GraphicInstance
 
+* element: Graphic
+
 ===== Class Pointf
+
+* x: float
+* y: float
 
 ===== Class GraphicalUnit

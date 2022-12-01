@@ -15,19 +15,36 @@ Base Class: Graphic
 
 ===== Class Rectangle
 
+* topLeft: Pointf
+* bottomRight: Pointf
+
 ====== Class RoundedRectangle
+
+* rx: float
+* ry: float
 
 ===== Class Circle
 
+* center: Pointf
+* radius: float
+
 ===== Class Ellipse
+
+* center: Pointf
+* radiusX: float
+* radiusY: float
 
 ===== Class Arc
 
 ====== Class SectorArc
 
+* innerRadius: float
+
 ====== Class ChordArc
 
 ===== Class Path
+
+* nodes: PathNodes
 
 ====== Class PathNodes
 

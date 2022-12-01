@@ -5,6 +5,10 @@
 
 ===== Class OperationExpression
 
+* operand1: Expression[0..1]
+* operator: Operator
+* operand2: Expression
+
 ===== Class Expressions
 
 === Conditional Expressions
@@ -12,11 +16,17 @@
 
 ===== Class ConditionalExpression
 
+* condition: Expression
+* thenExp: Expression
+* elseExp: Expression
+
 ===== Class Expressions
 
 === Variables (e.g., map to an app slider)
 ==== Overview
 
 ===== Class VariableExpression
+
+* name: string
 
 ===== Class Expressions

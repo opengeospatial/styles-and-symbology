@@ -7,6 +7,7 @@
 * fill:     Fill [0..1]
 * stroke:   Stroke [0..1]
 * marker:   Marker [0..1]
+* label:    Label [0..1]
 
 ==== Class Color
 
@@ -18,25 +19,44 @@
 
 * color: Color
 
-==== Class Stroke
-===== Class GraphicalUnit
-===== Class StrokeStyling
-
-==== Class MultiGraphic
-===== Class Marker
-
 ==== Class Graphic
+
+* opacity: float
+* transform: Transform2D
+
 ===== Class Image
-====== Class Resource
+
+* image: Resource
+* hotSpot: Pointf
+* tint: Color
+* blackTint: Color
+* alphaThreshold: float
+
 ===== Class Text
-The text property will exceptionnally support an identifier parameter value expression (without any additional conformance class required).
 
-====== Class Font
-====== Class TextAlignment
-
-* enum HAlignment
-* enum VAlignment
+* text: string
+* font: Font
+* alignment: TextAlignment
 
 ===== Class Shape
+
 ====== Class Dot
-* point: Pointf
+
+===== Class MultiGraphic
+
+* elements: Graphic [0..*]
+
+====== Class Marker
+
+==== Class Resource
+
+==== Class Pointf    
+==== Class GraphicalUnit
+==== Class StrokeStyling
+==== Class Stroke
+==== Class TextAlignment
+==== Class HAlignment
+==== Class VAlignment
+==== Class Font
+
+The text property will exceptionnally support an identifier parameter value expression.
