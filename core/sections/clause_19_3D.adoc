@@ -3,12 +3,35 @@
 
 ==== Class Model
 
+model: Resource
+
 ==== Class Vector3D
+
+* x: double
+* y: double
+* z: double
 
 ==== Class Vector3Df
 
+x: float
+y: float
+z: floa
+
 ==== Class Quaternion
+
+* x: double
+* y: double
+* z: double
+* w: double
 
 ==== Class Transform3D
 
+* orientation: Quaternion
+* position: Vector3D
+* scaling: Vector3Df
+
 ==== Class Transform2D
+
+* orientation: Angle
+* scaling: Pointf
+* translation: Pointf

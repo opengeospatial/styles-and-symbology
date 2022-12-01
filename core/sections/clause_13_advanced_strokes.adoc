@@ -5,7 +5,15 @@
 
 ===== Class StrokeJoin
 
+* miter
+* round
+* bevel
+
 ===== Class StrokeCap
+
+* butt
+* round
+* square
 
 ===== Class Stroke
 
@@ -22,6 +30,10 @@ dashPattern property
 ==== Overview
 
 ===== Class Color
+
+* r: float
+* g: float
+* b: float
 
 ===== Class GraphicalUnit
 

@@ -7,10 +7,25 @@
 
 ===== Class ArithmeticOperator
 
+* add
+* sub
+* mul
+* div
+* intDiv
+* mod
+* pow
+
 === Bitwise Operators
 ==== Overview
 
 ===== Class BitwiseOperator
+
+* bitAnd
+* bitOr
+* bitNot -- unary
+* bitXor
+* leftShift
+* rightShift
 
 ===== Class Operator
 
@@ -18,5 +33,14 @@
 ==== Overview
 
 ===== Class TextRelationOperator
+
+* like
+* notLike
+* contains
+* startsWith
+* endsWith
+* notContains
+* notStartsWith
+* notEndsWith
 
 ===== Class Operator

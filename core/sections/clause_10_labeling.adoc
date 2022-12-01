@@ -16,8 +16,23 @@ Base Classes: MultiGraphic: Graphic
 
 ===== Class FontOutline
 
+* size: float
+* opacity: float
+* color: Color
+
 ===== Class Font
-* outline property
+
+* face: string
+* size: float
+* bold: bool
+* italic: bool
+* underline: bool
+* color: Color
+* opacity: float
+* outline: FontOutline
 
 ===== Class Color
 
+* r: float
+* g: float
+* b: float

@@ -8,9 +8,21 @@
 
 ===== Class ValueColor
 
+*value: double
+*color: Color
+*label: text
+
 ===== Class ValueOpacity
 
+* value: double
+* opacity: float
+* label: text
+
 ===== Class Color
+
+* r: float
+* g: float
+* b: float
 
 === Hill Shading
 ==== Overview
@@ -20,10 +32,12 @@
 
 ===== Class HillShading
 
-===== Class ValueColor
-
-===== Class ValueOpacity
+* factor: double
+* sun: AzimuthElevation
+* colorMap: ValueColor[*]
+* opacityMap: ValueOpacity[*]
 
 ===== Class AzimuthElevation
 
-===== Class Color
+azimuth: Angle
+elevation: Angle
