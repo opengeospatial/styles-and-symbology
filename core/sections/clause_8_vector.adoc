@@ -7,7 +7,6 @@
 * fill:     Fill [0..1]
 * stroke:   Stroke [0..1]
 * marker:   Marker [0..1]
-* label:    Label [0..1]
 
 ==== Class Color
 
@@ -38,6 +37,12 @@
 * font: Font
 * alignment: TextAlignment
 
+The text property will exceptionnally support an identifier parameter value expression.
+
+==== Class TextAlignment
+==== Class HAlignment
+==== Class VAlignment
+
 ===== Class Shape
 
 ====== Class Dot
@@ -47,16 +52,9 @@
 * elements: Graphic [0..*]
 
 ====== Class Marker
-
+==== Class Stroke
 ==== Class Resource
-
 ==== Class Pointf    
 ==== Class GraphicalUnit
 ==== Class StrokeStyling
-==== Class Stroke
-==== Class TextAlignment
-==== Class HAlignment
-==== Class VAlignment
 ==== Class Font
-
-The text property will exceptionnally support an identifier parameter value expression.

@@ -15,7 +15,7 @@ model: Resource
 
 x: float
 y: float
-z: floa
+z: float
 
 ==== Class Quaternion
 

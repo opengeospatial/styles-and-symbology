@@ -22,13 +22,6 @@ Base Classes: MultiGraphic: Graphic
 
 ===== Class Font
 
-* face: string
-* size: float
-* bold: bool
-* italic: bool
-* underline: bool
-* color: Color
-* opacity: float
 * outline: FontOutline
 
 ===== Class Color

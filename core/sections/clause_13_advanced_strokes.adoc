@@ -31,10 +31,6 @@ dashPattern property
 
 ===== Class Color
 
-* r: float
-* g: float
-* b: float
-
 ===== Class GraphicalUnit
 
 ===== Class StrokeStyling

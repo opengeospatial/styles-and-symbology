@@ -59,7 +59,7 @@
 ===== Class Polygon
 
 * outer: PolygonContour
-inner: PolygonContour[0..*]
+* inner: PolygonContour[0..*]
 
 === Temporal Relation Functions
 ==== Overview
@@ -156,38 +156,6 @@ inner: PolygonContour[0..*]
 * s_union(Geometry a, Geometry b) : Geometry
 * s_subtraction(Geometry a, Geometry b) : Geometry
 * s_buffer(Geometry a, double d) : Geometry
-
-===== Class Geometry
-
-===== Class Point
-
-* coordinates: double[2..*]
-
-===== Class MultiPoint
-
-* points: Point[1..*]
-
-===== Class BoundingBox
-
-* lowerBound: Point
-* upperBound: Point
-
-===== Class LineString
-
-* points: Point[2..*]
-
-===== Class MultiLineString
-
-* lineStrings: LineString[1..*]
-
-===== Class PolygonContour
-
-* points: Point[3..*]
-
-===== Class Polygon
-
-* outer: PolygonContour
-inner: PolygonContour[0..*]
 
 
 
