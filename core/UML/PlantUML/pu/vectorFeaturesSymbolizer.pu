@@ -1,0 +1,43 @@
+@startuml
+'Class definition
+
+'Note: Symbolizer, StylingRule and Style are defined in core.md
+
+class VectorSymbolizer <<interface>>
+VectorSymbolizer : fill: Fill [0..1]
+VectorSymbolizer : stroke: Stroke [0..1]
+VectorSymbolizer : marker: Marker [0..1]
+VectorSymbolizer : label: Label [0..1]
+
+LabelPlacement : priority: float
+LabelPlacement : minSpacing: float
+LabelPlacement : maxSpacing: float
+
+Label : placement: LabelPlacement
+
+MultiGraphic : elements: Graphic [0..*]
+
+'Relations
+
+'Association
+
+Symbolizer --> ParameterValue
+VectorSymbolizer --> ParameterValue
+
+'Inheritance
+
+VectorSymbolizer --|> Symbolizer
+Marker --|> MultiGraphic
+Label --|> MultiGraphic
+
+'Composition
+
+VectorSymbolizer --* Label
+VectorSymbolizer --* Marker
+VectorSymbolizer --* Fill
+VectorSymbolizer --* Stroke
+MultiGraphic --* Graphic
+Label --* LabelPlacement
+Fill --* Graphic
+Stroke --* Graphic
+@enduml

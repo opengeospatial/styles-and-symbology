@@ -1,0 +1,27 @@
+@startuml
+Style : stylingRules: StylingRule[0..*]
+
+StylingRule : symbolizer: Symbolizer[0..1]
+StylingRule : selector: Selector[0..1]
+StylingRule : nestedRules: StylingRule[0..*]
+
+Style --* StylingRule
+StylingRule *-- Style
+Selector *-- StylingRule
+
+class Selector
+
+/'Note: zOrder needs discussion on whether it should be relative or float
+and how to relate to encodings where the visual priority order
+comes from the order of the rules.'/
+
+Symbolizer : visibility: bool
+Symbolizer : opacity: float
+Symbolizer : zOrder: integer
+
+Symbolizer *-- StylingRule
+Symbolizer --> ParameterValue
+
+ParameterValue --|> Expression
+Selector --|> Expression
+@enduml

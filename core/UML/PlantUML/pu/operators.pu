@@ -1,0 +1,59 @@
+@startuml
+OperationExpression --* Operator
+
+class ArithmeticOperator <<enumeration>>
+ArithmeticOperator : add
+ArithmeticOperator : sub
+ArithmeticOperator : mul
+ArithmeticOperator : div
+ArithmeticOperator : intDiv
+ArithmeticOperator : mod
+ArithmeticOperator : pow
+
+ArithmeticOperator --|> Operator
+
+class LogicOperator <<enumeration>>
+LogicOperator : and
+LogicOperator : or
+LogicOperator : not -- unary
+
+LogicOperator --|> Operator
+
+class BitwiseOperator <<enumeration>>
+BitwiseOperator : bitAnd
+BitwiseOperator : bitOr
+BitwiseOperator : bitNot -- unary
+BitwiseOperator : bitXor
+BitwiseOperator : leftShift
+BitwiseOperator : rightShift
+
+BitwiseOperator --|> Operator
+
+class RelationalOperator <<enumeration>>
+RelationalOperator : equal
+RelationalOperator : notEqual
+RelationalOperator : is
+RelationalOperator : isNot
+RelationalOperator : greater
+RelationalOperator : lesser
+RelationalOperator : greaterEqual
+RelationalOperator : lesserEqual
+RelationalOperator : between
+RelationalOperator : notBetween
+RelationalOperator : in -- right operand is array
+RelationalOperator : notIn -- right operand is array
+
+RelationalOperator --|> Operator
+
+class TextRelationOperator <<enumeration>>
+TextRelationOperator : like
+TextRelationOperator : notLike
+TextRelationOperator : contains
+TextRelationOperator : startsWith
+TextRelationOperator : endsWith
+TextRelationOperator : notContains
+TextRelationOperator : notStartsWith
+TextRelationOperator : notEndsWith
+
+TextRelationOperator --|> Operator
+@enduml

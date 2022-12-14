@@ -1,0 +1,50 @@
+@startuml
+'Class definition
+
+Color : r: float
+Color : g: float
+Color : b: float
+
+Gradient : colorKeys: ColorKey [*]
+
+ColorKey : color: Color
+ColorKey : opacity: float
+ColorKey : percent: float
+
+class StippleStyle <<enumeration>>
+StippleStyle : light
+StippleStyle : medium
+StippleStyle : heavy
+
+class HatchStyle <<enumeration>>
+HatchStyle : forward
+HatchStyle : backward
+HatchStyle : xCross
+HatchStyle : cross
+
+Fill : pattern: Graphic [0..1]
+Fill : color: Color
+Fill : stippleStyle: StippleStyle
+Fill : hatchStyle: HatchStyle
+Fill : gradient: Gradient
+
+'Relations
+
+'Inheritance
+
+ClosedShape --|> Shape
+Shape --|> Graphic
+
+'Composition
+
+ClosedShape --* Fill
+
+Fill --* Graphic
+Fill --* Color
+Fill --* Gradient
+Fill --* HatchStyle
+Fill --* StippleStyle
+ColorKey --* Color
+Gradient --* ColorKey
+VectorSymbolizer --* Fill
+@enduml
