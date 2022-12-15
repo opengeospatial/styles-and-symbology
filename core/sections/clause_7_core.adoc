@@ -3,6 +3,8 @@
 === Overview
 The requirements described in this section define the symbology core requirement class. The UML diagram (<<img-uml-class>>) shows the fundamental concepts of the Symbology Conceptual Core Model.
 
+include::../UML/PlantUML/adoc/core.adoc[]
+
 [#img-uml-class]
 .UML Class Diagram of the Symbology core
 image::figures/figure3.png[]
