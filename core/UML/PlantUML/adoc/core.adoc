@@ -3,16 +3,14 @@
 [plantuml, target=diagram-classes, format=png]
 ....
 Style : stylingRules: StylingRule[0..*]
+Style --* StylingRule
 
 StylingRule : symbolizer: Symbolizer[0..1]
-StylingRule : selector: Selector[0..1]
+StylingRule : selector: Expression[0..1]
 StylingRule : nestedRules: StylingRule[0..*]
 
-Style --* StylingRule
-StylingRule *-- Style
-Selector *-- StylingRule
-
-class Selector
+StylingRule --* StylingRule
+StylingRule --* Expression : selector
 
 /'Note: zOrder needs discussion on whether it should be relative or float
 and how to relate to encodings where the visual priority order
@@ -23,8 +21,5 @@ Symbolizer : opacity: float
 Symbolizer : zOrder: integer
 
 Symbolizer *-- StylingRule
-Symbolizer --> ParameterValue
-
-ParameterValue --|> Expression
-Selector --|> Expression
+Symbolizer --> Expression : parameter values
 ....
