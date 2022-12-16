@@ -10,7 +10,7 @@ inherit:: http://www.opengis.net/spec/symbology-1/2.0/req/coverage
 subject:: Style encodings and Renderers
 ====
 
-==== Requirement for Symbolizer `hillShading` property
+===== Symbolizer `hillShading` property
 
 [[req-hillshading-hillshading]]
 
@@ -22,7 +22,7 @@ part:: An Encoding SHALL support defining a `hillshading` Symbolizer property as
 part:: A Renderer SHALL support ...
 ====
 
-==== Requirement for HillShading `factor` property
+===== HillShading `factor` property
 
 [requirement]
 ====
@@ -32,7 +32,7 @@ part:: An Encoding SHALL support defining a `factor` HillShading property as a f
 part:: A Renderer SHALL support ...
 ====
 
-==== Requirement for HillShading `sun` property
+===== HillShading `sun` property
 
 [requirement]
 ====
@@ -42,7 +42,7 @@ part:: An Encoding SHALL support defining a `sun` HillShading property as an obj
 part:: A Renderer SHALL support ...
 ====
 
-==== Requirement for HillShading `colorMap` property
+===== HillShading `colorMap` property
 
 [requirement]
 ====
@@ -52,7 +52,7 @@ part:: An Encoding SHALL support defining a `colorMap` HillShading property as a
 part:: A Renderer SHALL support ...
 ====
 
-==== Requirement for HillShading `opacityMap` property
+===== HillShading `opacityMap` property
 
 [requirement]
 ====

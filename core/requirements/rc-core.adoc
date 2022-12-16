@@ -1,3 +1,5 @@
+// NOTE: Including an extra heading level for conformance class alone in their section
+==== Core
 
 [[rc_table-core]]
 
@@ -10,7 +12,7 @@ subject:: Style encodings and Renderers
 ====
 
 [[req-core-rules]]
-==== Requirement for Style `stylingRules` property
+===== Style `stylingRules` property
 
 [requirement]
 ====
@@ -23,7 +25,7 @@ evaluates to true SHALL be interpreted as overriding all Symbolizer properties s
 ====
 
 [[req-core-nested]]
-==== Requirement for StylingRule `nestedRules` property
+===== StylingRule `nestedRules` property
 
 [requirement]
 ====
@@ -34,7 +36,7 @@ part:: A Renderer SHALL support ...
 ====
 
 [[req-core-expressions]]
-==== Requirement for identifier expressions
+===== Identifier Expressions
 
 [requirement]
 ====
@@ -45,7 +47,7 @@ part:: A Renderer SHALL support ...
 ====
 
 [[req-core-selector]]
-==== Requirement for StylingRule `selector` property
+===== StylingRule `selector` property
 
 [requirement]
 ====
@@ -57,7 +59,7 @@ part:: A Renderer SHALL support ...
 
 
 [[req-core-symbolizer]]
-==== Requirement for StylingRule `symbolizer` property
+===== StylingRule `symbolizer` property
 
 [requirement]
 ====
@@ -68,7 +70,7 @@ part:: A Renderer SHALL support ...
 ====
 
 [[req-core-parameters]]
-==== Requirement for setting Symbolizer properties parameter values
+===== Symbolizer properties Parameter Values
 
 [requirement]
 ====
@@ -80,7 +82,7 @@ part:: A Renderer SHALL support ...
 
 
 [[req-core-visibility]]
-==== Requirement for Symbolizer `visibility` property
+===== Symbolizer `visibility` property
 
 [requirement]
 ====
@@ -91,7 +93,7 @@ part:: A Renderer SHALL support ...
 ====
 
 [[req-core-opacity]]
-==== Requirement for Symbolizer `opacity` property
+===== Symbolizer `opacity` property
 
 [requirement]
 ====
@@ -103,7 +105,7 @@ part:: A Renderer SHALL support ...
 
 
 [[req-core-zorder]]
-==== Requirement for Symbolizer `zOrder` property
+===== Symbolizer `zOrder` property
 
 [requirement]
 ====
@@ -115,7 +117,7 @@ part:: A Renderer SHALL support ...
 
 
 [[req-core-literals]]
-==== Requirement for literal expressions
+===== Literal Expressions
 
 [requirement]
 ====
@@ -127,7 +129,7 @@ part:: A Renderer SHALL support ...
 
 
 [[req-core-identifiers]]
-==== Requirement for identifier expressions
+===== Identifier Expressions
 
 [requirement]
 ====
@@ -139,7 +141,7 @@ part:: A Renderer SHALL support ...
 
 
 [[req-core-scale]]
-==== Requirement for a visualization scale denominator system identifiers
+===== Visualization Scale Denominator System Identifiers
 
 [requirement]
 ====
@@ -151,7 +153,7 @@ part:: A Renderer SHALL support ...
 
 
 [[req-core-time]]
-==== Requirement for visualization time system identifiers
+===== Visualization Time System Identifiers
 
 [requirement]
 ====
@@ -163,7 +165,7 @@ part:: A Renderer SHALL support ...
 
 
 [[req-core-layers]]
-==== Requirement for data layer system identifiers
+===== Data Layer System Identifiers
 
 [requirement]
 ====
@@ -175,7 +177,7 @@ part:: A Renderer SHALL support ...
 
 
 [[req-core-logical]]
-==== Requirement for logical operation expressions
+===== Logical Operation Expressions
 
 [requirement]
 ====
@@ -187,7 +189,7 @@ part:: A Renderer SHALL support ...
 
 
 [[req-core-relational]]
-==== Requirement for relational operation expressions
+===== Relational Operation Expressions
 
 [requirement]
 ====
@@ -199,7 +201,7 @@ part:: A Renderer SHALL support ...
 
 
 [[req-core-arrays]]
-==== Requirement for array expressions
+===== Array Expressions
 
 [requirement]
 ====
@@ -211,7 +213,7 @@ part:: A Renderer SHALL support ...
 
 
 [[req-core-instances]]
-==== Requirement for instance expressions
+===== Instance Expressions
 
 [requirement]
 ====

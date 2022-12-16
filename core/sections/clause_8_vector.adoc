@@ -162,11 +162,11 @@ or by a three-dimensional cube. The GraphicSize properties are documented in the
 | y         | Vertical position    | float (uom-qualified) | 1
 |===
 
-===== Dots
+===== Dot Graphics
 
-A Dot is one type of Graphic defined by this requirements class that can be used as part of a Marker.
+A round Dot is one type of Graphic defined by this requirements class that can be used as part of a Marker.
 
-A Dot inherits from a Shape class allowing to define a stroke which controls the color and size of the dot (with the width property).
+A Dot inherits from a Shape class allowing to define a `stroke` which controls the color and size of the dot (with the stroke's `width` property).
 
 .Shape
 [width="90%",options="header"]
@@ -175,7 +175,7 @@ A Dot inherits from a Shape class allowing to define a stroke which controls the
 | stroke     | Stroke with which to render the shape outline | Stroke               | 0..1
 |===
 
-===== Images
+===== Image Graphics
 
 An Image is one type of graphic defined by this requirements class that can be used as part of a Marker.
 
@@ -200,7 +200,7 @@ The actual image content is defined by a Resource, which can be specified by one
 | ...            |                                 |                         |
 |===
 
-===== Text
+===== Text Graphics
 
 A Text is one type of Graphic defined by this requirements class that can be used as part of a Marker.
 

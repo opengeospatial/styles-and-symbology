@@ -28,7 +28,7 @@ An encoding must support an escaping mechanism in cases where the name of a feat
 | opacityMap                     | Opacity map to be applied based on singleCannel | ValueOpacity          | 0..n
 |===
 
-This requirements class requires support for identifier parameter value expression for the red (r), green (g) and blue (b) components of
+This requirements class requires support for identifier parameter value expression for the red (`r`), green (`g`) and blue (`b`) components of
 the `colorChannels`, `alphaChannel` and `singleChannel` properties without any additional requirements class.
 
 This allows to map the range values of a coverage to the output color channels.

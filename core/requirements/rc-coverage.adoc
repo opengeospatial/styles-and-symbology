@@ -12,7 +12,7 @@ subject:: Style encodings and Renderers
 
 [[req-coverage-color-channels]]
 
-==== Requirement for Symbolizer `colorChannels` property
+===== Symbolizer `colorChannels` property
 
 [requirement]
 ====
@@ -22,7 +22,7 @@ part:: An Encoding SHALL support defining a `colorChannels` Symbolizer property 
 part:: A Renderer SHALL support ...
 ====
 
-==== Requirement for Symbolizer `alphaChannel` property
+===== Symbolizer `alphaChannel` property
 
 [requirement]
 ====
@@ -32,7 +32,7 @@ part:: An Encoding SHALL support defining a `alphaChannel` Symbolizer property a
 part:: A Renderer SHALL support ...
 ====
 
-==== Requirement for Symbolizer `singleChannel` property
+===== Symbolizer `singleChannel` property
 
 [requirement]
 ====
@@ -43,7 +43,7 @@ part:: A Renderer SHALL support ...
 ====
 
 
-==== Requirement for Symbolizer `colorMap` property
+===== Symbolizer `colorMap` property
 
 [requirement]
 ====
@@ -53,7 +53,7 @@ part:: An Encoding SHALL support defining a `colorMap` Symbolizer property as an
 part:: A Renderer SHALL support ...
 ====
 
-==== Requirement for Symbolizer `opacityMap` property
+===== Symbolizer `opacityMap` property
 
 [requirement]
 ====

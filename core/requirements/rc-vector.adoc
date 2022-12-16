@@ -1,3 +1,5 @@
+// NOTE: Including an extra heading level for conformance class alone in their section
+==== Basic Vector Features Styling
 
 [[rc_table-vector]]
 
@@ -11,7 +13,7 @@ subject:: Style encodings and Renderers
 ====
 
 [[req-vector-fill]]
-==== Requirement for Symbolizer `fill` property
+===== Symbolizer `fill` property
 
 [requirement]
 ====
@@ -22,7 +24,7 @@ part:: A Renderer SHALL support filling vector geometry based on a `fill` proper
 ====
 
 [[req-vector-stroke]]
-==== Requirement for Symbolizer `stroke` property
+===== Symbolizer `stroke` property
 
 [requirement]
 ====
@@ -33,7 +35,7 @@ part:: A Renderer SHALL support drawing the stroke of vector geometry based on a
 ====
 
 [[req-vector-units]]
-==== Requirement for Graphical Units of easure
+===== Graphical Units of Measure
 
 [requirement]
 ====
@@ -44,7 +46,7 @@ part:: A Renderer SHALL support applying the appropriate unit transformation whe
 ====
 
 [[req-vector-marker]]
-==== Requirement for Symbolizer `marker` property
+===== Symbolizer `marker` property
 
 [requirement]
 ====
@@ -55,7 +57,7 @@ part:: A Renderer SHALL support drawing the grahical elements of a marker at the
 ====
 
 [[req-vector-graphics]]
-==== Requirement for Graphics
+===== Graphics
 
 [requirement]
 ====
@@ -66,7 +68,7 @@ part:: A Renderer SHALL support drawing the Graphics at the specified uom-qualif
 ====
 
 [[req-vector-dot]]
-==== Requirement for Dot Graphic
+===== Dot Graphics
 
 [requirement]
 ====
@@ -77,7 +79,7 @@ part:: A Renderer SHALL support drawing the Graphics as a round dot using the wi
 ====
 
 [[req-vector-image]]
-==== Requirement for Image Graphic
+===== Image Graphics
 
 [requirement]
 ====
@@ -88,7 +90,7 @@ part:: A Renderer SHALL support drawing the Graphics as a round dot using the wi
 ====
 
 [[req-vector-text]]
-==== Requirement for Text Graphic
+===== Text Graphics
 
 [requirement]
 ====
@@ -99,7 +101,7 @@ part:: A Renderer SHALL support draw the `text` of a Text Graphic using the `fon
 ====
 
 [[req-vector-fonts]]
-==== Requirement for Fonts
+===== Fonts
 
 [requirement]
 ====
