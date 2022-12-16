@@ -1,5 +1,6 @@
 == Requirements Classes for Operations
 
+[[rc-arithmetic]]
 === Requirements Class "Arithmetic Operations"
 ==== Overview
 
@@ -15,6 +16,7 @@
 * mod
 * pow
 
+[[rc-bitwise]]
 === Requirements Class "Bitwise Operators"
 ==== Overview
 
@@ -29,6 +31,7 @@
 
 ===== Class Operator
 
+[[rc-textrelation]]
 === Requirements Class "Text Relation Operators" (e.g., CQL2 'Like')
 ==== Overview
 

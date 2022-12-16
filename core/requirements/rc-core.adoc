@@ -175,6 +175,18 @@ part:: An Encoding SHALL support ...
 part:: A Renderer SHALL support ...
 ====
 
+[[req-core-operations]]
+===== Operation Expressions
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/core/operations
+part:: An Encoding SHALL support defining operation expressions consisting of operands and an operator for unary, binary and ternary operators.
+part:: An Encoding SHALL support defining the priority of expressions using multiple operators (e.g., using parentheses: `(` `)`).
+part:: A Renderer SHALL support evaluating operation expressions while respecting the priority of operations.
+====
+
 
 [[req-core-logical]]
 ===== Logical Operation Expressions

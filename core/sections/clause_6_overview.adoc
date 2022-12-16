@@ -13,9 +13,9 @@ This Standard defines conformance classes for:
    ** advanced strokes capabilities, including specific joins and caps, dashed lines, casing and centerlines, and graphic patterns (<<rc-joinscaps,Section 13>>),
    ** advanced fill capabilities, including graphic patterns, hatches, gradients and stipples (<<rc-hatchesgradientsstipples,Section 14>>),
    ** using expressions as parameter values for any symbolizer properties (<<rc-parametervalues,Section 15>>),
-   ** function call expressions and standardized functions for spatial, temporal and array relations, as well as text and geometry manipulation (<<rc-functions,Section 16>>),
+   ** using identifiers in the right side of operation expressions, conditional expressions and variables (<<rc-righthand,Section 16>>),
    ** arithmetic, bitwise and text relation operators (<<rc-arithmetic,Section 17>>),
-   ** using identifiers in the right side of operation expressions, conditional expressions and variables (<<rc-righthand,Section 18>>), and
+   ** function call expressions and standardized functions for spatial, temporal and array relations, as well as text and geometry manipulation (<<rc-functions,Section 18>>), and
    ** using 3D model graphics and 3D transforms (<<rc-righthand,Section 19>>),
 * two encodings for the logical and conceptual model covering all of these conformance classes:
    ** an encoding based on JSON that can be readily parsed by JSON parser (<<rc-json,Section 20>>), and

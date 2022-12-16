@@ -79,6 +79,30 @@ TODO: Clarify how this differs to using a Stroke with a casing on the Shape, and
 
 The Parameter Values Requirements Class specifies requirements for using an Expression to define any property of a Symbolizer.
 
+*<<rc-righthand,Requirements Class "Right-hand Identifiers">>* (http://www.opengis.net/spec/symbology-1/2.0/req/righthand)
+
+The Right-hand Identifiers Requirements Class specifies requirements for defining operation expressions with identifiers on the right-hand side.
+
+*<<rc-conditional,Requirements Class "Conditional Expressions">>* (http://www.opengis.net/spec/symbology-1/2.0/req/conditional)
+
+The Conditional Expressions Requirements Class specifies requirements for defining conditional operation using a ternary `[if] ? [then] : [else]` structure.
+
+*<<rc-variables,Requirements Class "Variables">>* (http://www.opengis.net/spec/symbology-1/2.0/req/variables)
+
+The Variables Requirements Class specifies requirements for defining variables which can be mapped to a dynamic value controlled by an application, or used to facilitate customizing a style.
+
+*<<rc-arithmetic,Requirements Class "Arithmetic Operators">>* (http://www.opengis.net/spec/symbology-1/2.0/req/arithmetic)
+
+The Arithmetic Operators Requirements Class specifies requirements for defining arithmetic operation expressions.
+
+*<<rc-bitwise,Requirements Class "Bitwise Operators">>* (http://www.opengis.net/spec/symbology-1/2.0/req/bitwise)
+
+The Bitwise Operators Requirements Class specifies requirements for defining bitwise operation expressions.
+
+*<<rc-textrelation,Requirements Class "Text Relation Operators">>* (http://www.opengis.net/spec/symbology-1/2.0/req/textrelation)
+
+The Text Relation Operators Requirements Class specifies requirements for defining text relation operation expressions.
+
 *<<rc-functions,Requirements Class "Function Expressions">>* (http://www.opengis.net/spec/symbology-1/2.0/req/functions)
 
 The Functions Requirements Class specifies requirements for defining function call expressions.
@@ -102,30 +126,6 @@ The Text Manipulation Requirements Class specifies requirements for standardized
 *<<rc-geometrymanipulation,Requirements Class "Geometry Manipulation Functions">>* (http://www.opengis.net/spec/symbology-1/2.0/req/geometrymanipulation)
 
 The Geometry Manipulation Requirements Class specifies requirements for standardized geometry manipulation functions to be used with feature geometry.
-
-*<<rc-arithmetic,Requirements Class "Arithmetic Operators">>* (http://www.opengis.net/spec/symbology-1/2.0/req/arithmetic)
-
-The Arithmetic Operators Requirements Class specifies requirements for defining arithmetic operation expressions.
-
-*<<rc-bitwise,Requirements Class "Bitwise Operators">>* (http://www.opengis.net/spec/symbology-1/2.0/req/bitwise)
-
-The Bitwise Operators Requirements Class specifies requirements for defining bitwise operation expressions.
-
-*<<rc-textrelation,Requirements Class "Text Relation Operators">>* (http://www.opengis.net/spec/symbology-1/2.0/req/textrelation)
-
-The Text Relation Operators Requirements Class specifies requirements for defining text relation operation expressions.
-
-*<<rc-righthand,Requirements Class "Right-hand Identifiers">>* (http://www.opengis.net/spec/symbology-1/2.0/req/righthand)
-
-The Right-hand Identifiers Requirements Class specifies requirements for defining operation expressions with identifiers on the right-hand side.
-
-*<<rc-conditional,Requirements Class "Conditional Expressions">>* (http://www.opengis.net/spec/symbology-1/2.0/req/conditional)
-
-The Conditional Expressions Requirements Class specifies requirements for defining conditional operation using a ternary `[if] ? [then] : [else]` structure.
-
-*<<rc-variables,Requirements Class "Variables">>* (http://www.opengis.net/spec/symbology-1/2.0/req/variables)
-
-The Variables Requirements Class specifies requirements for defining variables which can be mapped to a dynamic value controlled by an application, or used to facilitate customizing a style.
 
 === Requirements classes for advanced stroke and fills
 

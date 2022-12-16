@@ -63,11 +63,11 @@ include::sections/clause_14_advanced_fills.adoc[]
 
 include::sections/clause_15_parameter_values.adoc[]
 
-include::sections/clause_16_functions.adoc[]
+include::sections/clause_16_additional_expressions.adoc[]
 
 include::sections/clause_17_operations.adoc[]
 
-include::sections/clause_18_additional_expressions.adoc[]
+include::sections/clause_18_functions.adoc[]
 
 include::sections/clause_19_3D.adoc[]
 
