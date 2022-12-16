@@ -3,7 +3,6 @@
 
 The following normative documents contain provisions that, through reference in this text, constitute provisions of this document. For dated references, subsequent amendments to, or revisions of, any of these publications do not apply. For undated references, the latest edition of the normative document referred to applies.
 
-
 * [[[OGC_0-042,OGC 06-042]]], _OpenGIS Web Map Service (WMS) Implementation Specification_. Open Geospatial Consortium (2006). https://portal.opengeospatial.org/files/14416
 
 * [[[OGC_05-078r4,OGC 05-078r4]]], _OpenGIS Styled Layer Descriptor Profile of the Web Map Service Implementation Specification_. Open Geospatial Consortium (2007). https://portal.opengeospatial.org/files/22364
@@ -21,3 +20,5 @@ The following normative documents contain provisions that, through reference in 
 * [[[UCUM,UCUM]]] _The Unified Code for Units of Measure (UCUM)_, 2017 http://unitsofmeasure.org/ucum.html
 
 * [[[W3C_CSS_Fonts, W3C CSS Fonts]]], _W3C CSS Fonts chapter_, 2016 https://www.w3.org/TR/CSS2/fonts.html#font-styling
+
+* [[[OGC20-065,OGC 21-065]]] Panagiotis (Peter) A. Vretanos: OGC Common Query Language (CQL2) (Draft). OGC 21-065, Open Geospatial Consortium, http://docs.ogc.org/DRAFTS/21-065.html[http://docs.ogc.org/DRAFTS/21-065.html]

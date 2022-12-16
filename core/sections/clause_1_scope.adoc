@@ -7,19 +7,7 @@ Several scenarios of varying complexity and the associated requirements classes 
 Two encodings are defined by this Standard: one based on JSON which can be readily parsed with JSON parser, and another more expressive encoding inspired from Web Cascading Style Sheets (CSS)
 better suited for hand-editing style sheets. Future parts to this Standard may further extend the portrayal capabilities by defining additional requirements classes.
 
-The _Styles and Symbology Model_ is a new approach (Bocher E., Ertz O., 2018, see Annex B):
+The _Styles and Symbology Model_ is a new approach (Bocher E., Ertz O., 2018, see <<annex-bibliography,bibliography>>):
 
 - to provide the flexibility required to achieve adequate cartographic styling and fill the needs of a variety of information communities; e.g., aviation symbols, weather symbols, thematic maps, etc.; and
 - to achieve high level styling interoperability without encoding dependencies.
-
-////
-We need to diagrams to illustrate the conformance classes and encoding and the fact that this is all included in this standard.
-
-.The core model and its potential extensions
-image::figures/figure1.png[]
-
-Figure 2 explains the relation between the core, the potential extensions, and their encodings. A community style extension must be based on a core element and will be encoding-independent. An extension should have a concrete encoding. As the figure shows encoding could be implemented in various formats.
-
-.From core and extensions to encodings: principles of implementation
-image::figures/figure2.png[]
-////

@@ -9,34 +9,214 @@ identifier:: http://www.opengis.net/spec/symbology-1/2.0/req/core
 subject:: Style encodings and Renderers
 ====
 
-[[req-core-styling_rules]]
+[[req-core-rules]]
+==== Requirement for Style `stylingRules` property
 
 [requirement]
 ====
 [%metadata]
-identifier:: /req/core/styling-rules
+identifier:: /req/core/rules
 part:: An Encoding SHALL support individually storing and preserving the order of each StylingRule constituting a Style.
 part:: A Renderer SHALL support considering in order each individual StylingRule constituting a style.
 part:: The Symbolizer properties specified in a StylingRule appearing later in a Style's list of rules and whose Selector
 evaluates to true SHALL be interpreted as overriding all Symbolizer properties set by earlier rules.
 ====
 
-////
-Below are the old requirements from SymCore 1.0 for the Core conformance class.
-They will be likely replaced by being more specific and less generic, and not necessarily map one-to-one to the UML classes,
-and discuss both Encoding as well as Renderer target implementations.
+[[req-core-nested]]
+==== Requirement for StylingRule `nestedRules` property
 
-| Req 1	| http://www.opengis.net/spec/symbology-1/2.0/req/core/StyleClass Implementations shall support the encoding of all properties of the StyleClass and meet all of the tabulated constraints and notes.
-| Req 2	| http://www.opengis.net/spec/symbology-1/2.0/req/core/RuleClass Implementations shall support the encoding of all RuleClass properties and meet all of the tabulated constraints and notes.
-| Req 3	| http://www.opengis.net/spec/symbology-1/2.0/req/core/SymbolizerClass Implementations shall support the encoding of all SymbolizerClass properties and meet all of the tabulated constraints and notes.
-| Req 4	| http://www.opengis.net/spec/symbology-1/2.0/req/core/ParameterValueClass Implementations shall support the encoding of all ParameterValue parameters class and meet all of the tabulated constraints and notes.
-| Req 5	| http://www.opengis.net/spec/symbology-1/2.0/req/core/LiteralClass Implementations shall support the encoding of all parameters of the LiteralClass and meet all of the tabulated constraints and notes.
-| Req 6	| http://www.opengis.net/spec/symbology-1/2.0/req/core/UOMClass Implementations shall support the encoding of all properties of the UOMClass and meet all of the tabulated constraints and notes.
-| Req 7	| http://www.opengis.net/spec/symbology-1/2.0/req/core/ColorClass Implementations shall support the encoding of all properties of the ColorClass and meet all of the tabulated constraints and notes.
-| Req 8	| http://www.opengis.net/spec/symbology-1/2.0/req/core/FillClass Implementations shall support the encoding of all properties of the FillClass and meet all of the tabulated constraints and notes.
-| Req 9	| http://www.opengis.net/spec/symbology-1/2.0/req/core/StrokeClass Implementations shall support the encoding of all properties of the StrokeClass and meet all of the tabulated constraints and notes.
-| Req 10	| http://www.opengis.net/spec/symbology-1/2.0/req/core/GraphicClass Implementations shall support the encoding of all properties of the GraphicClass and meet all of the tabulated constraints and note.
-| Req 11 | http://www.opengis.net/spec/symbology-1/2.0/req/core/GraphicSizeClass Implementations shall support the encoding of all properties of the GraphicSizeClass and meet all of the tabulated constraints and notes.
-| Req 12	| http://www.opengis.net/spec/symbology-1/2.0/req/core/LabelClass Implementations shall support the encoding of all properties of the LabelClass and meet all of the tabulated constraints and notes.
-| Req 13	| http://www.opengis.net/spec/symbology-1/2.0/req/core/FontClass Implementations shall support the encoding of all properties of the FontClass and meet all of the tabulated constraints and notes.
-////
+[requirement]
+====
+[%metadata]
+identifier:: /req/core/nested
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-core-expressions]]
+==== Requirement for identifier expressions
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/core/expressions
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-core-selector]]
+==== Requirement for StylingRule `selector` property
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/core/selector
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+
+[[req-core-symbolizer]]
+==== Requirement for StylingRule `symbolizer` property
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/core/symbolizer
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-core-parameters]]
+==== Requirement for setting Symbolizer properties parameter values
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/core/parameters
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+
+[[req-core-visibility]]
+==== Requirement for Symbolizer `visibility` property
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/core/visibility
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-core-opacity]]
+==== Requirement for Symbolizer `opacity` property
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/core/opacity
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+
+[[req-core-zorder]]
+==== Requirement for Symbolizer `zOrder` property
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/core/zorder
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+
+[[req-core-literals]]
+==== Requirement for literal expressions
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/core/literals
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+
+[[req-core-identifiers]]
+==== Requirement for identifier expressions
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/core/identifiers
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+
+[[req-core-scale]]
+==== Requirement for a visualization scale denominator system identifiers
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/core/scale
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+
+[[req-core-time]]
+==== Requirement for visualization time system identifiers
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/core/time
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+
+[[req-core-layers]]
+==== Requirement for data layer system identifiers
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/core/layers
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+
+[[req-core-logical]]
+==== Requirement for logical operation expressions
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/core/logical
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+
+[[req-core-relational]]
+==== Requirement for relational operation expressions
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/core/relational
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+
+[[req-core-arrays]]
+==== Requirement for array expressions
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/core/arrays
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+
+[[req-core-instances]]
+==== Requirement for instance expressions
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/core/instances
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====

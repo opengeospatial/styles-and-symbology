@@ -11,6 +11,7 @@ subject:: Style encodings and Renderers
 ====
 
 [[req-vector-fill]]
+==== Requirement for Symbolizer `fill` property
 
 [requirement]
 ====
@@ -19,6 +20,95 @@ identifier:: /req/vector/fill
 part:: An Encoding SHALL support defining a `fill` Symbolizer property as an object including a `color` and an `opacity`.
 part:: A Renderer SHALL support filling vector geometry based on a `fill` property specifying a `color` and an `opacity`.
 ====
+
+[[req-vector-stroke]]
+==== Requirement for Symbolizer `stroke` property
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/vector/stroke
+part:: An Encoding SHALL support defining a `stroke` Symbolizer property as an object including a `color` and a units of measure-qualified ("uom-qualified") `width`.
+part:: A Renderer SHALL support drawing the stroke of vector geometry based on a `stroke` property specifying a `color` and a uom-qualified `width`.
+====
+
+[[req-vector-units]]
+==== Requirement for Graphical Units of easure
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/vector/units
+part:: An Encoding SHALL support qualifying distance properties identified as "uom-qualified" with a unit of measure (pixel, millimeter, inch, percentage, meter, foot).
+part:: A Renderer SHALL support applying the appropriate unit transformation when rendering elements specifying a uom-qualified distances.
+====
+
+[[req-vector-marker]]
+==== Requirement for Symbolizer `marker` property
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/vector/marker
+part:: An Encoding SHALL support defining a `marker` Symbolizer property as an array of graphical elements (Graphics).
+part:: A Renderer SHALL support drawing the grahical elements of a marker at the points of vector geometry (for points and line strings) and at the centroid of polygons.
+====
+
+[[req-vector-graphics]]
+==== Requirement for Graphics
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/vector/graphics
+part:: An Encoding SHALL support defining graphical elements (graphics) specifying a uom-qualified 2D real position offsetting the graphic from its original position.
+part:: A Renderer SHALL support drawing the Graphics at the specified uom-qualified 2D position offset relative to its original position.
+====
+
+[[req-vector-dot]]
+==== Requirement for Dot Graphic
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/vector/dot
+part:: An Encoding SHALL support defining a Dot Graphic inheriting from a base Shape class specifying a stroke, from which the color and the size of the point is inferred.
+part:: A Renderer SHALL support drawing the Graphics as a round dot using the width of its Stroke as the point size and in the color of the Stroke.
+====
+
+[[req-vector-image]]
+==== Requirement for Image Graphic
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/vector/image
+part:: An Encoding SHALL support defining an Image Graphic inheriting from a base Shape class specifying a stroke, from which the color and the size of the point is inferred.
+part:: A Renderer SHALL support drawing the Graphics as a round dot using the width of its Stroke as the point size and in the color of the Stroke.
+====
+
+[[req-vector-text]]
+==== Requirement for Text Graphic
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/vector/text
+part:: An Encoding SHALL support defining a Text Graphic with a `text` unicode string content, a `font`, and an `alignment` with a horizontal (`horzAlignment`: `left`, `right` or `center`) and vertical component (`vertAlignment`: `top`, `middle`, `bottom`).
+part:: A Renderer SHALL support draw the `text` of a Text Graphic using the `font` and the `alignment` specified.
+====
+
+[[req-vector-fonts]]
+==== Requirement for Fonts
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/vector/fonts
+part:: An Encoding SHALL support defining Fonts with a `face` property indicating the face name (also known as the font _family_), a `size` specified in _points_, a `bold` flag indicating to use a bold weight if true, and an `italic` flag indicating to use an italic style if true.
+part:: A Renderer SHALL support drawing text using the fonts specified.
+====
+
 
 ////
 Below are the old requirements from SymCore 1.0 for the Core conformance class.

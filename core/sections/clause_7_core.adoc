@@ -121,9 +121,10 @@ as to define the values of Symbolizer properties.
 
 The use of an expression as a Symbolizer property is called a _Parameter Value_, where an Expression can be substituted
 where a particular data type is expected, in which case the Expression will be resolved to that expected data type.
-Conceptually, all Symbolizer properties can be specified using a _ParameterValue_, but this is not required by
+Conceptually, all Symbolizer properties can be specified using any type of expression _Parameter Value_, but this is not required by
 this core conformance class, and specific requirements classes such as the "Symbolizer Parameter Value Expresssions"
-requirements class enable this behavior.
+requirements class enable this behavior. Without a requirements class specifying otherwise, only <<literal-expressions,Literal Expressions>>
+compatible with the expected data type are allowed as _Parameter Values_.
 
 ===== Identifier Expressions
 
@@ -166,6 +167,7 @@ TODO: In other req classes:
 * feature.geometry                      -- for spatial operators
 ////
 
+[[literal-expressions]]
 ===== Literal Expressions
 
 A literal expression is an expression that has a fixed value in the encoding of the style.
@@ -176,15 +178,17 @@ The following types of literals are defined:
 * An integer literal represents a whole numeric value
 * A real literal represents a real number (integer, fractional or irrational number)
 * Text literals are Unicode character strings
-* A `null` literal represents represents an unset value
+* A `null` literal represents an unset value
 * Enumeration value literals allow to refer by name to a set of pre-defined values associated with the context where they are used
 * Boolean literals are a specialized type of enumeration literals which are either `true` or `false`
+* Array literals (see <<array-expressions,Array Expressions>>)
+* Instance literals (see <<instance-expressions,Instance Expressions>>)
 
 ===== Operation Expressions
 
 An Operation Expression performs an operation specified by an Operator on one, two or three operand expressions, depending on whether they unary, binary or ternary operators.
 This core requirements class defines only Logical and Relational operators.
-Implementations are also required to support prioritizing operations (typically parentheses `(` `)`).
+Implementations are also required to support prioritizing operations (typically encoded using parentheses: `(` `)`).
 Other requirements classes introduce support for additional operators for arithmetic, text and bitwise operations.
 
 This requirements class defines the following Logical Operators :
@@ -218,12 +222,14 @@ This requirements class defines the following Relational Operators:
 | notBetween               | `not between ... and` |ternary  | The first operand is not between the second and third operands (inclusively)
 |===
 
+[[array-expressions]]
 ===== Array Expressions
 
-An array expressions defines zero, or more element expressions forming an ordered set.
+An array expressions defines zero, one, or more element expressions forming an ordered set.
 
 An _array literal_ is a special type of array expression whose elements are all literals.
 
+[[instance-expressions]]
 ===== Instance Expressions
 
 An instance expressions instantiates an object of a class while optionally specifying values for member components.

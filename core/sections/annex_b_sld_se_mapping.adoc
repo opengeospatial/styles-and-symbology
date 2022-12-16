@@ -1,0 +1,9 @@
+[appendix,obligation="informative"]
+[[annex-sldse]]
+== Mapping of SLD/SE and notable vendor extensions to the Conceptual Model
+
+This annex maps constructs of the OGC Styled Layer Descriptor (SLD) and Symbology Encoding (SE) 1.1
+to the conceptual model and requirements classes defined in this Standard, with the goal of facilitating
+conformance to this Standard for Rendering engines based on SLD/SE and writing conversion tools
+that can convert in either or both direction between SLD/SE and the two encodings defined in this
+Standard.

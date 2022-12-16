@@ -71,19 +71,31 @@ include::sections/clause_18_additional_expressions.adoc[]
 
 include::sections/clause_19_3D.adoc[]
 
+include::sections/clause_20_json.adoc[]
+
+include::sections/clause_21_ccsss.adoc[]
+
 ////
 add or remove annexes after "A" as necessary
 ////
-include::sections/annex_a.adoc[]
+include::sections/annex_a_ats.adoc[]
 
-include::sections/annex_b.adoc[]
+include::sections/annex_b_sld_se_mapping.adoc[]
 
-include::sections/annex_c.adoc[]
+include::sections/annex_c_portrayal_use_cases_gallery.adoc[]
+
+// Do we still want to include this SymCore redesign abstract
+// in version 2.0, given that there are significant changes to the design?
+// include::sections/annex_f_symcore1_redesign.adoc[]
+
+// This Example Implementation annex is probably no longer relevant,
+// since we have concrete styling of vector and coverage in conformance classes.
+// include::sections/annex_g_symcore1_example_implementation.adoc[]
 
 ////
 Revision History should be the last annex before the Bibliography
 Bibliography should be the last annex
 ////
-include::sections/annex_history.adoc[]
+include::sections/annex_d_history.adoc[]
 
-// include::sections/annex-bibliography.adoc[]
+include::sections/annex_bibliography.adoc[]

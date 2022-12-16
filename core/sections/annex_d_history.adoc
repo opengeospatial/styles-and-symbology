@@ -1,0 +1,15 @@
+[appendix,obligation=informative]
+[[annex-revisions]]
+== Revision history
+
+[width="90%",options="header"]
+|===
+| Date           | Release | Author                                                                 | Paragraph modified   | Description
+| 2020-08-27     |         | E. Bocher (CNRS) O. Ertz (HEIG-VD)                                     |                      | Edits considering received and answered comments from TC vote
+| 2019-09-18     |         | E. Bocher (CNRS) O. Ertz (HEIG-VD)                                     |                      | Edits considering received and answered comments (18-067r2)
+| 2019-08-21     |         | E. Bocher (CNRS) O. Ertz (HEIG-VD)                                     |                      | Update abstract to be more comprehensive
+| 2019-03-29     |         | E. Bocher (CNRS) O. Ertz (HEIG-VD)                                     |                      | Edits considering received and answered comments
+| 2018-09-07     |         | E. Bocher (CNRS) O. Ertz (HEIG-VD)                                     |                      | Release for early public comment (18-067)
+| 2018-06-05     |         | E. Bocher (CNRS) O. Ertz (HEIG-VD)                                     |                      | Initial document
+| 2022-12-01     |         | E. Bocher (CNRS) O. Ertz & M. Collombin (HEIG-VD), J. St-Louis (Ecere) |                      | Initial work towards version 2.0
+|===

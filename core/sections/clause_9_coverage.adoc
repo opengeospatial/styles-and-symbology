@@ -102,6 +102,7 @@ It depends on the _Basic Coverage Styling_ requirements class.
 
 The `sun` property is specified using this AzimuthElevation class:
 
+.AzimuthElevation properties
 [width="90%",options="header"]
 |===
 | Name                          	| Definition	                                       | Data type and value   |Multiplicity

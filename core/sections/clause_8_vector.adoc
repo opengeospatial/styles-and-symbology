@@ -74,7 +74,7 @@ A Stroke object inherits from a base _StrokeStyling_ class, which is re-used in 
 [width="90%",options="header"]
 |===
 | Name	   | Definition	                        | Data type and value	| Multiplicity
-| color 	   | Color of the stroke                  | float	               | 0..1
+| color 	   | Color of the stroke                  | Color	               | 0..1
 | width	   | Width of the stroke                  | float (uom-qualified) | 0..1
 |===
 
@@ -160,6 +160,19 @@ or by a three-dimensional cube. The GraphicSize properties are documented in the
 | Name	   | Definition           | Data type and value	  | Multiplicity
 | x         | Horizontal position  | float (uom-qualified) | 1
 | y         | Vertical position    | float (uom-qualified) | 1
+|===
+
+===== Dots
+
+A Dot is one type of Graphic defined by this requirements class that can be used as part of a Marker.
+
+A Dot inherits from a Shape class allowing to define a stroke which controls the color and size of the dot (with the width property).
+
+.Shape
+[width="90%",options="header"]
+|===
+| Name	    | Definition                                    | Data type and value	| Multiplicity
+| stroke     | Stroke with which to render the shape outline | Stroke               | 0..1
 |===
 
 ===== Images
@@ -256,19 +269,6 @@ The FontClass describes the font properties to apply for the rendering of a text
 |===
 (a) Any number of FontFamily parameters may be given and they are assumed to be in preferred order. (b) The size unit is specified by the uom code if defined or by the innermost parent unit of measure definition otherwise.  
 ////
-
-===== Dots
-
-A Dot is one type of Graphic defined by this requirements class that can be used as part of a Marker.
-
-A Dot inherits from a Shape class allowing to define a stroke which controls the color and size of the dot (with the width property).
-
-.Shape
-[width="90%",options="header"]
-|===
-| Name	    | Definition                                    | Data type and value	| Multiplicity
-| stroke     | Stroke with which to render the shape outline | Stroke               | 0..1
-|===
 
 === Requirements
 

@@ -1,5 +1,6 @@
-[appendix]
-== Conformance Class Abstract Test Suite (Normative)
+[appendix,obligation="normative"]
+[[annex-ats]]
+== Conformance Class Abstract Test Suite
 
 A Symbology Encoding implementation shall satisfy the following characteristics to be conformant with this specification.
 

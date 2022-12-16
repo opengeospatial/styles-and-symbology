@@ -7,7 +7,8 @@ The standardization target for encodings are Rendering Engines and other applica
 
 The conformance of all Rendering engines with all conformance classes except the conformance classes defining encodings is with the conceptual model that will result in the expected visual output.
 The conformance of all Encodings with the conformance classes targeting them can be either at a conceptual level or at a logical level.
-An Encoding conforms to the logical model if a Style can be encoded using the classes and property names defined in this Standard with only a simple well defined set of rules mapping them to the encoding.
+Conformance at the logical level implies conformance at the conceptual level as well.
+An Encoding conforms to the logical model if a Style can be encoded using the classes and property names defined in this Standard with only a simple consistent set of rules mapping them to the encoding.
 An Encoding can conform to the conceptual model of any conformance class either partially (if it can only preserve some of the information) or fully (if it losslessly preserves all information).
 
 The goal is to allow different encodings to have equivalent content and semantics so that they can be interoperable, by establishing a clear mapping from an encoding
@@ -102,7 +103,7 @@ The Text Manipulation Requirements Class specifies requirements for standardized
 
 The Geometry Manipulation Requirements Class specifies requirements for standardized geometry manipulation functions to be used with feature geometry.
 
-*<<rc-arithmetic,Requirements Class "Aritmetic Operators">>* (http://www.opengis.net/spec/symbology-1/2.0/req/arithmetic)
+*<<rc-arithmetic,Requirements Class "Arithmetic Operators">>* (http://www.opengis.net/spec/symbology-1/2.0/req/arithmetic)
 
 The Arithmetic Operators Requirements Class specifies requirements for defining arithmetic operation expressions.
 
@@ -158,7 +159,7 @@ The 3D Models and Transforms Requirements Class specifies requirements for defin
 
 *<<rc-json,Requirements Class "JSON Styles and Symbology">>* (http://www.opengis.net/spec/symbology-1/2.0/req/json)
 
-*<<rc-cssss,Requirements Class "Cascading Styles and Symbology Style Sheets">>* (http://www.opengis.net/spec/symbology-1/2.0/req/csss)
+*<<rc-ccsss,Requirements Class "Cascading Cartographic Symbology Style Sheets">>* (http://www.opengis.net/spec/symbology-1/2.0/req/ccsss)
 
 === Declaration of conformance
 
@@ -169,6 +170,12 @@ The framework, concepts, and methodology for testing, and the criteria to be ach
 OGC Compliance Testing Policies and Procedures (https://docs.ogc.org/pol/08-134r11.html[OGC 08-134r11]) and the https://www.ogc.org/compliance[OGC Compliance Testing website].
 
 All requirements-classes and conformance-classes described in this document are owned by the standard(s) identified.
+
+Full conformance at the conceptual level but not at the logical level, which can losslessly preserve all information of the conceptual model defined in a particular requirements class
+but necessitates defining a custom mapping and cannot be automated from a simple consistent set of encoding rules, is declared by appending `-concept` to the conformance URI.
+
+Partial conformance at the conceptual level which can preserve some but not all information of the conceptual model defined in a particular requirements class
+is declared by appending `-partial-concept` to the conformance URI.
 
 [#table_conformance_urls,reftext='{table-caption} {counter:table-num}']
 .Conformance class URIs
@@ -192,7 +199,7 @@ All requirements-classes and conformance-classes described in this document are 
 |<<rc-arrayrelations,Array Relation Functions>>                   |http://www.opengis.net/spec/symbology-1/2.0/conf/arrayrelations
 |<<rc-textmanipulation,Text Manipulation Functions>>              |http://www.opengis.net/spec/symbology-1/2.0/conf/textmanipulation
 |<<rc-geometrymanipulation,Geometry Manipulation Functions>>      |http://www.opengis.net/spec/symbology-1/2.0/conf/geometrymanipulation
-|<<rc-arithmetic,Aritmetic Operators>>                            |http://www.opengis.net/spec/symbology-1/2.0/conf/arithmetic
+|<<rc-arithmetic,Arithmetic Operators>>                           |http://www.opengis.net/spec/symbology-1/2.0/conf/arithmetic
 |<<rc-bitwise,Bitwise Operators>>                                 |http://www.opengis.net/spec/symbology-1/2.0/conf/bitwise
 |<<rc-textrelation,Text Relation Operators>>                      |http://www.opengis.net/spec/symbology-1/2.0/conf/textrelation
 |<<rc-righthand,Right-hand Identifiers>>                          |http://www.opengis.net/spec/symbology-1/2.0/conf/righthand
@@ -205,5 +212,5 @@ All requirements-classes and conformance-classes described in this document are 
 |<<rc-transforms,MultiGraphics and Transforms>>                   |http://www.opengis.net/spec/symbology-1/2.0/conf/transforms
 |<<rc-threedim,3D Models and Transforms>>                         |http://www.opengis.net/spec/symbology-1/2.0/conf/threedim
 |<<rc-json,JSON Styles and Symbology>>                            |http://www.opengis.net/spec/symbology-1/2.0/conf/json
-|<<rc-cssss,Cascading Styles and Symbology Style Sheets>>         |http://www.opengis.net/spec/symbology-1/2.0/conf/csss
+|<<rc-ccsss,Cascading Cartographic Symbology Style Sheets>>       |http://www.opengis.net/spec/symbology-1/2.0/conf/ccsss
 |===

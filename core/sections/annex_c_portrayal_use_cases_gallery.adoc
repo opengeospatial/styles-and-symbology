@@ -1,0 +1,7 @@
+[appendix,obligation="informative"]
+[[annex-mapgallery]]
+== Portrayal Use Cases Gallery
+
+This annex illustrates the capabilities of the different requirements classes defined in this standard
+with a map gallery of practical use cases alongside the styles used to generate the maps
+encoded in the _Cascading Styles and Symbology Stylesheets_ encoding defined in this Standard.
