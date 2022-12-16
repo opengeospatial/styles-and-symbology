@@ -1,0 +1,28 @@
+
+[[rc_table-vector]]
+
+[requirements_class]
+.Basic Vector Features Styling
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/symbology-1/2.0/req/vector
+inherit:: http://www.opengis.net/spec/symbology-1/2.0/req/core
+subject:: Style encodings and Renderers
+====
+
+[[req-vector-fill]]
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/vector/fill
+part:: An Encoding SHALL support defining a `fill` Symbolizer property as an object including a `color` and an `opacity`.
+part:: A Renderer SHALL support filling vector geometry based on a `fill` property specifying a `color` and an `opacity`.
+====
+
+////
+Below are the old requirements from SymCore 1.0 for the Core conformance class.
+They will be likely replaced by being more specific and less generic, and not necessarily map one-to-one to the UML classes,
+and discuss both Encoding as well as Renderer target implementations.
+
+////

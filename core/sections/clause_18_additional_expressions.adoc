@@ -1,6 +1,6 @@
-== Additional expressions
+== Requirements Classes for Additional expressions
 
-=== Right-hand identifiers (e.g., CQL2 Property-Property comparison)
+=== Requirements Class "Right-hand identifiers" (e.g., CQL2 Property-Property comparison)
 ==== Overview
 
 ===== Class OperationExpression
@@ -11,7 +11,7 @@
 
 ===== Class Expressions
 
-=== Conditional Expressions
+=== Requirements Class "Conditional Expressions"
 ==== Overview
 
 ===== Class ConditionalExpression
@@ -22,7 +22,7 @@
 
 ===== Class Expressions
 
-=== Variables (e.g., map to an app slider)
+=== Requirements Class "Variables" (e.g., map to an app slider)
 ==== Overview
 
 ===== Class VariableExpression

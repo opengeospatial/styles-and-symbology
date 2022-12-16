@@ -1,0 +1,21 @@
+
+[[rc_table-hillshading]]
+
+[requirements_class]
+.Hill Shading
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/symbology-1/2.0/req/hillshading
+inherit:: http://www.opengis.net/spec/symbology-1/2.0/req/coverage
+subject:: Style encodings and Renderers
+====
+
+[[req-hillshading-hillshading]]
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/hillshading/hillshading
+part:: An Encoding SHALL support defining a `hillshading` Symbolizer property as an object including `factor`, `sun`, `colorMap` and `opacityMap` properties.
+part:: A Renderer SHALL support ...
+====

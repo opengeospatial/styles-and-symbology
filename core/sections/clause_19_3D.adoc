@@ -1,4 +1,4 @@
-== 3D
+== Requirements Class "3D Models and Transforms"
 === Overview
 
 ==== Class Model

@@ -1,6 +1,6 @@
-== Labeling
+== Requirements Classes for Labeling
 
-=== Basic Labeling
+=== Requirements Class "Basic Labeling"
 ==== Overview
 
 ===== Class Symbolizer
@@ -9,9 +9,28 @@
 ===== Class Label
 Base Classes: MultiGraphic: Graphic
 
+////
+LabelClass defines the graphical symbolizing properties for drawing a text label.
+As an abstract class and part of the base of the core graphical concepts,
+LabelClass is a point of extension to specify concrete ways to draw text label according to placement behaviors (e.g., a PointLabel or LineLabel).
+
+LabelClass properties are documented in the following table.
+
+.LabelClass
+[width="90%",options="header"]
+|===
+| Name	| Definition	| Data type and value	| Multiplicity
+| uom	| Unit of measure to apply to the affected graphical properties within a Label	| uom code	| zero or one
+| labelText	| Text-label content to draw	| ParameterValue data type String	| one
+| font	| Font definition to draw the text-label content	| Font data type Default value: system-dependent	| zero or one
+| fill	| Filling style to draw the glyphs	| Fill data type	| zero or one
+| extension	| Any encoding should allow to extend a Label with custom items	| Any type	| zero or more
+|===
+////
+
 ====== Class LabelPlacement
 
-=== Font Outlines
+=== Requirements Class "Font Outlines"
 ==== Overview
 
 ===== Class FontOutline

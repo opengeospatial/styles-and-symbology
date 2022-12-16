@@ -1,60 +1,275 @@
-== Basic Vector Features Styling
+[[rc-vector]]
+== Requirements Class "Basic Vector Features Styling"
 
 === Overview
 
-==== Class Symbolizer
+This requirements class adds support for defining how to Fill and render the Stroke of vector geometry.
+In addition, it defines the ability to specify a Marker consisting of one or more Graphic, to be
+rendered at the exact location of point geometry, at the centroid of polygon geometry, or at each point of line geometry.
 
-* fill:     Fill [0..1]
-* stroke:   Stroke [0..1]
-* marker:   Marker [0..1]
+==== Symbolizer extension for vector features
 
-==== Class Color
+The following three new Symbolizer properties are defined by this requirements class:
 
-* r: float
-* g: float
-* b: float
+.Symbolizer (vector features extension)
+[width="90%",options="header"]
+|===
+| Name	| Definition	                                                    | Data type and value	| Multiplicity
+| fill   | Fill to fill inside of geometries                                | Fill                 | 0..1
+| stroke | Stroke to render geometry outlines                               | Stroke               | 0..1
+| marker | Marker to render at geometries points or centroid (for polygons) | float                | 0..1
+|===
 
-==== Class Fill
+==== Extended Identifiers for vector features
 
-* color: Color
+This requirements class defines as valid identifiers all of the accessible properties for a feature being portrayed with the name of those properties being the text of the identifier.
+Those identifiers are to be resolved with the value of that property.
+An encoding must support an escaping mechanism in cases where the name of a feature property might clash with a syntactic element.
 
-==== Class Graphic
+In addition, the following new System Identifiers are defined by this requirements class:
 
-* opacity: float
-* transform: Transform2D
+[width="90%",options="header"]
+|===
+| Name                          	       | Definition	                                             | Data type and value
+| feature.identifier          	       | Identifier of a particular feature                       | string or number
+| feature.geometryDimensions            | Dimension of geometry for a particular feature           | 0 (points), 1 (lines), 2 (polygons), 3 (polyhedrons)
+| dataLayer.featuresGeometryDimension   | Dimension of feature geometry (if same for all features) | 0 (points), 1 (lines), 2 (polygons), 3 (polyhedrons), undefined (mixed)
+|===
 
-===== Class Image
+==== Colors
 
-* image: Resource
-* hotSpot: Pointf
-* tint: Color
-* blackTint: Color
-* alphaThreshold: float
+Both the Fill and Stroke allow to define a Color, specified using red, green and blue components.
+The ability to define Colors in other spaces (e.g., Lab, CMYK) is defined in separate requirements classes
+and applies wherever this basic RGB Color class is used.
 
-===== Class Text
+.Color
+[width="90%",options="header"]
+|===
+| Name	| Definition	| Data type and value	| Multiplicity
+| r	   | Red          | float                 | 1
+| g	   | Green        | float                 | 1
+| b	   | Blue         | float                 | 1
+|===
 
-* text: string
-* font: Font
-* alignment: TextAlignment
+==== Fills
 
-The text property will exceptionnally support an identifier parameter value expression.
+A Fill defines the graphical symbolizing parameters required to draw the filling of a two-dimensional shape such as a polygon.
+Separate conformance classes can extend this Fill class with additional properties.
 
-==== Class TextAlignment
-==== Class HAlignment
-==== Class VAlignment
+.Fill
+[width="90%",options="header"]
+|===
+| Name	 | Definition	        | Data type and value	| Multiplicity
+| color   | Color of the fill   | Color               | 0..1
+| opacity | Opacity of the fill | float               | 0..1
+|===
 
-===== Class Shape
+==== Strokes
 
-====== Class Dot
+A Stroke defines the graphical symbolizing parameters for drawing an outline (e.g., for linear geometries or the exterior of a polygon geometry). As an abstract class and part of the base of the core graphical concepts, StrokeClass is a global point of extension to specify concrete ways to draw outlines (e.g., the PenStroke and GraphicStroke extensions). The StrokeClass properties are documented in the following table.
 
-===== Class MultiGraphic
+A Stroke object inherits from a base _StrokeStyling_ class, which is re-used in a separate requirements class for defining more complex strokes:
 
-* elements: Graphic [0..*]
+.StrokeStyling
+[width="90%",options="header"]
+|===
+| Name	   | Definition	                        | Data type and value	| Multiplicity
+| color 	   | Color of the stroke                  | float	               | 0..1
+| width	   | Width of the stroke                  | float (uom-qualified) | 0..1
+|===
 
-====== Class Marker
-==== Class Stroke
-==== Class Resource
-==== Class Pointf    
-==== Class GraphicalUnit
-==== Class StrokeStyling
-==== Class Font
+===== Graphical Units of Measure
+
+For styling parameters that define sizing and positioning of graphical objects (width, displacement, etc.), a specific the unit of measure needs to be provided for the rendering engine.
+Therefore, properties where a unit of measure is relevant can be qualified with a particular uom codes.
+
+Below is the list of allowed units of measure as per UCUM (except for pixel):
+
+* portrayal units: pixel, millimeter, inch, percentage; and
+* ground units: meter, foot.
+
+The portrayal unit “pixel” is the default unit of measure.
+If available, the pixel size depends on the viewer client resolution, otherwise it is equal to 0.28mm x 0.28mm (~ 90 DPI).
+
+// TODO: Review the list of supported units.
+//       Should we support 'pt' as well to scale with font sizes ? (e.g., large font accessibiity mode)
+//       Is percentage relevant?
+
+////
+TOCHECK: Do we need the ability to inherit a uom from a parent object?
+
+Consequently, either the unit of measure is determined through the uom code directly associated to each element or it is determined by the innermost parent uom code
+(e.g., an uom code defined at the Symbolizer level implies that this unit is applied for all sizing and positioning values inside the Symbolizer).
+////
+
+==== Markers
+
+A Marker inherits from a MultiGraphic which can contain multiple graphical elements:
+
+.MultiGraphic
+[width="90%",options="header"]
+|===
+| Name	   | Definition	     | Data type and value	| Multiplicity
+| elements  | Children elements | Graphic             | 1..n
+|===
+
+Without support for additional conformance classes, an MultiGraphic cannot contain another MultiGraphic.
+
+A MultiGraphic itself inherits from a Graphic allowing to specify an opacity and a 2D position:
+
+.Graphic
+[width="90%",options="header"]
+|===
+| Name	   | Definition  | Data type and value	| Multiplicity
+| opacity   | Opacity     | float               | 0..1
+| position  | Opacity     | FloatPoint          | 0..1
+|===
+
+////
+The Graphic class defines the parameters for drawing a graphic symbol such as shape, color(s), and size.
+A graphic can be informally defined as “a little picture” and can be either a bitmap or scaled vector (the term “graphic” is used instead of the term “symbol” to avoid confusion with Symbolizer,
+which is used in a different context in this model). As an abstract class and part of the base of the core graphical concepts, GraphicClass is a global point of extension to specify concrete ways
+to draw “graphic symbol” (e.g., ExternalGraphic and MarkGraphic extensions).
+The GraphicClass properties are documented in the following table.
+
+.GraphicClass
+[width="90%",options="header"]
+|===
+| Name	| Definition	| Data type and value	| Multiplicity
+| uom	| Unit of measure to apply to all graphical properties within a Graphic	| uom code	| zero or one
+| graphicSize	| Rendering size of the graphic	| GraphicSize data type	| zero or one
+| extension	| Any encoding should allow to extend a Graphic with custom items	| Any type	| zero or more
+|===
+
+The GraphicSize class determines the size of the graphic when it is rendered.
+As an abstract class, it is designed to be extended to support the various ways the size could be specified such as by a single value, a rectangular box,
+or by a three-dimensional cube. The GraphicSize properties are documented in the following table.
+
+.GraphicSize
+[width="90%",options="header"]
+|===
+| Name	| Definition	| Data type and value	| Multiplicity
+| extension	| Any encoding should allow to extend a GraphicSize with custom items	| Any type	| zero or more
+|===
+
+////
+
+.FloatPoint
+[width="90%",options="header"]
+|===
+| Name	   | Definition           | Data type and value	  | Multiplicity
+| x         | Horizontal position  | float (uom-qualified) | 1
+| y         | Vertical position    | float (uom-qualified) | 1
+|===
+
+===== Images
+
+An Image is one type of graphic defined by this requirements class that can be used as part of a Marker.
+
+.Image
+[width="90%",options="header"]
+|===
+| Name	        | Definition                      | Data type and value	  | Multiplicity
+| image          | The image to use                | Resource                | 1
+| hotSpot        | 0,0 position in the image       | Pointf (uom-qualified)  | 1
+| tint           | Tint (multiplying white)        | Color                   | 1
+| blackTint      | Black tint (used for black      | Color                   | 1
+| alphaThreshold | Alpha value considered pickable |float (uom-qualified)    | 1
+|===
+
+The actual image content is defined by a Resource, which can be specified by one or multiple properties:
+
+.Resource
+[width="90%",options="header"]
+|===
+| Name	        | Definition                      | Data type and value	  | Multiplicity
+| uri            | URI of image                    | string                  | 0..1
+| ...            |                                 |                         |
+|===
+
+===== Text
+
+A Text is one type of Graphic defined by this requirements class that can be used as part of a Marker.
+
+.Text
+[width="90%",options="header"]
+|===
+| Name	        | Definition                        | Data type and value	  | Multiplicity
+| text           | The character string for the text | string (unicode)*     | 1
+| font           | The font to use for the text      | Font                  | 0..1
+| alignment      | The alignment to use for the text | TextAlignment         | 0..1
+|===
+
+This requirements class requires support for identifier parameter value expression for the `text` property without any additional requirements class.
+This allows to display the value of feature properties with a Text Marker.
+
+.TextAlignment
+[width="90%",options="header"]
+|===
+| Name	        | Definition            | Data type and value	  | Multiplicity
+| horzAlignment  | Horizontal alignment  | HAlignment            | 0..1
+| vertAlignment  | Vertical alignment    | VAlignment            | 0..1
+|===
+
+.HAlignment enumeration
+[width="90%",options="header"]
+|===
+| Name	  | Definition
+| left     | Left alignment
+| center   | Center alignment
+| right    | Right alignment
+|===
+
+.VAlignment enumeration
+[width="90%",options="header"]
+|===
+| Name	  | Definition
+| top      | Top alignment
+| middle   | Middle alignment
+| bottom   | Bottom alignment
+|===
+
+The font property of a Text Graphic is defined uses the following _Font_ class:
+
+.Font
+[width="90%",options="header"]
+|===
+| Name	        | Definition            | Data type and value	  | Multiplicity
+| face           | Face name             | string                | 0..1
+| size           | Size of the font (pt) | float                 | 0..1
+| bold           | Use bold style        | bool                  | 0..1
+| italic         | Use italic style      | bool                  | 0..1
+|===
+
+////
+The FontClass describes the font properties to apply for the rendering of a text string. It refers to the W3C CSS Fonts chapter.
+
+.FontClass
+[width="90%",options="header"]
+|===
+| Name	| Definition	| Data type and value	| Multiplicity
+| uom	| Unit of measure to apply to the affected graphical properties within a Font	| uom code	| zero or one
+| fontFamily	| Font family name (a)	| ParameterValue data type CharacterString	| zero or more
+| fontSize	| Font size when applying the font to a text string (b)	| ParameterValue data type Float	| zero or one
+| fontWeight	| Amount of weight or boldness to use for a font	| ParameterValue data type CharacterString	| zero or one
+| fontStyle	| Style to use for a font	| ParameterValue data type CharacterString	| zero or one
+|===
+(a) Any number of FontFamily parameters may be given and they are assumed to be in preferred order. (b) The size unit is specified by the uom code if defined or by the innermost parent unit of measure definition otherwise.  
+////
+
+===== Dots
+
+A Dot is one type of Graphic defined by this requirements class that can be used as part of a Marker.
+
+A Dot inherits from a Shape class allowing to define a stroke which controls the color and size of the dot (with the width property).
+
+.Shape
+[width="90%",options="header"]
+|===
+| Name	    | Definition                                    | Data type and value	| Multiplicity
+| stroke     | Stroke with which to render the shape outline | Stroke               | 0..1
+|===
+
+=== Requirements
+
+include::../requirements/rc-vector.adoc[]

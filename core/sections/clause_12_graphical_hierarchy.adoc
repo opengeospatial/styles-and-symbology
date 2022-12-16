@@ -1,4 +1,4 @@
-== Multi Graphics and Transforms
+== Requirements Class "Multi Graphics and Transforms"
 === Overview
 
 ==== Class Graphic

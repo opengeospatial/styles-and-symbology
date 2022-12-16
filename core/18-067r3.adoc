@@ -1,22 +1,24 @@
-= OGC Symbology Conceptual Model: Core Part
+= OGC Styles and Symbology Model and Encodings - Part 1: Core
 :doctype: standard
-:docsubtype: conceptual-model
-:status: draft
+:docsubtype: implementation
+:status: swg-draft
 :encoding: utf-8
 :lang: en
 :committee: technical
-:draft: 1.1
-:abbrev: SymCore
-:edition: 1.1
-:external-id: http://www.opengis.net/doc/IS/{abbrev}/{edition}
+:draft: 2.0
+:abbrev: symbology
+:edition: 2.0
+:external-id: http://www.opengis.net/doc/IS/{abbrev}-1/{edition}
 :docnumber: 18-067r4
 :received-date: 2029-01-01
 :issued-date: 2029-01-01
 :published-date: 2029-01-01
 :fullname: Erwan Bocher
 :fullname_2: Olivier Ertz
+:fullname_3: Jerome Jacovella-St-Louis
+:fullname_4: Maxime Collombin
 :keywords: ogcdoc, OGC document, style, symbology, conceptual, core, modular, neutral, portrayal
-:submitting-organizations: HEIG-VD (School of Management and Engineering Vaud); CNRS (National Center for Scientific Research); Strategic ACI; IGN
+:submitting-organizations: HEIG-VD (School of Management and Engineering Vaud); CNRS (National Center for Scientific Research); Strategic ACI; IGN; Ecere
 :docfile: document.adoc
 :mn-document-class: ogc
 :mn-output-extensions: html,doc,xml,pdf
@@ -65,7 +67,7 @@ include::sections/clause_16_functions.adoc[]
 
 include::sections/clause_17_operations.adoc[]
 
-include::sections/clause_18_additional_expressions.adoc[]  
+include::sections/clause_18_additional_expressions.adoc[]
 
 include::sections/clause_19_3D.adoc[]
 

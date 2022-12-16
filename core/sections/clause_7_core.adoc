@@ -1,374 +1,239 @@
-== CORE CONCEPTUAL MODEL
+[[rc-core]]
+== Requirements Class "Core"
 
 === Overview
-The requirements described in this section define the symbology core requirement class. The UML diagram (<<img-uml-class>>) shows the fundamental concepts of the Symbology Conceptual Core Model.
-
-include::../UML/PlantUML/adoc/core.adoc[]
+The requirements described in this section define the symbology core requirement class. The UML diagram (<<img-uml-class>>) shows the fundamental concepts of the Symbology Conceptual and Logical Model.
 
 [#img-uml-class]
+include::../UML/PlantUML/adoc/core.adoc[]
+
+////
 .UML Class Diagram of the Symbology core
 image::figures/figure3.png[]
+////
 
+==== Styles
 
-.Requirements Class
-[width="90%",options="header"]
-|===
-2+| Requirements Class Core
-2+| http://www.opengis.net/spec/symbology/2.0/req/core
-| Target type	| Token
-| Dependencies | 	none
-| Req 1	| http://www.opengis.net/spec/symbology/2.0/req/core/StyleClass Implementations shall support the encoding of all properties of the StyleClass and meet all of the tabulated constraints and notes.
-| Req 2	| http://www.opengis.net/spec/symbology/2.0/req/core/RuleClass Implementations shall support the encoding of all RuleClass properties and meet all of the tabulated constraints and notes.
-| Req 3	| http://www.opengis.net/spec/symbology/2.0/req/core/SymbolizerClass Implementations shall support the encoding of all SymbolizerClass properties and meet all of the tabulated constraints and notes.
-| Req 4	| http://www.opengis.net/spec/symbology/2.0/req/core/ParameterValueClass Implementations shall support the encoding of all ParameterValue parameters class and meet all of the tabulated constraints and notes.
-| Req 5	| http://www.opengis.net/spec/symbology/2.0/req/core/LiteralClass Implementations shall support the encoding of all parameters of the LiteralClass and meet all of the tabulated constraints and notes.
-| Req 6	| http://www.opengis.net/spec/symbology/2.0/req/core/UOMClass Implementations shall support the encoding of all properties of the UOMClass and meet all of the tabulated constraints and notes.
-| Req 7	| http://www.opengis.net/spec/symbology/2.0/req/core/ColorClass Implementations shall support the encoding of all properties of the ColorClass and meet all of the tabulated constraints and notes.
-| Req 8	| http://www.opengis.net/spec/symbology/2.0/req/core/FillClass Implementations shall support the encoding of all properties of the FillClass and meet all of the tabulated constraints and notes.
-| Req 9	| http://www.opengis.net/spec/symbology/2.0/req/core/StrokeClass Implementations shall support the encoding of all properties of the StrokeClass and meet all of the tabulated constraints and notes.
-| Req 10	| http://www.opengis.net/spec/symbology/2.0/req/core/GraphicClass Implementations shall support the encoding of all properties of the GraphicClass and meet all of the tabulated constraints and note.
-| Req 11 | http://www.opengis.net/spec/symbology/2.0/req/core/GraphicSizeClass Implementations shall support the encoding of all properties of the GraphicSizeClass and meet all of the tabulated constraints and notes.
-| Req 12	| http://www.opengis.net/spec/symbology/2.0/req/core/LabelClass Implementations shall support the encoding of all properties of the LabelClass and meet all of the tabulated constraints and notes.
-| Req 13	| http://www.opengis.net/spec/symbology/2.0/req/core/FontClass Implementations shall support the encoding of all properties of the FontClass and meet all of the tabulated constraints and notes.
-|===
+A Style is the root concept of the Styles and Symbology Conceptual Model and consists of an ordered list of StylingRules.
+The StylingRules are to be applied in order so that rules selected later override earlier ones.
+This allows to compose styles in a cascading manner by inheriting from a base style then overriding some specific portrayal behaviors.
 
-Each concept in the model can be extended according to two main extension principles:
-
-- either globally related to an abstract class (in yellow); and
-- or locally related to the extension property defined within each class of the model.
-
-The role of each class and property in the model above is described in the tables below.
-
-=== Class Style
-
-[quote,%unnumbered]
-----
- Req 1 Implementations shall support the encoding of all properties of the StyleClass and meet all of the tabulated constraints and notes.
-http://www.opengis.net/spec/symbology/2.0/req/core/StyleClass
-----
-
-This class is the root concept of the Symbology Conceptual Core Model. This class organizes the rules of symbolizing instructions to be applied by a rendering engine on a layer of geographic features (e.g., vector based spatial data or raster data). As an abstract class, it is designed to be extended (e.g., the FeatureTypeStyle extension for vector data).
+////
+This class organizes the rules of symbolizing instructions to be applied by a rendering engine on a layer of geographic features
+(e.g., vector based spatial data or raster data).
 
 Please note that the graphic pipeline of the rendering engine must be expressed unambiguously for each concrete implementation of a Style in order to enable cartographic portrayal interoperability.
+////
 
-The StyleClass properties are documented in the following table.
+////
+Can we omit this metadata? This might belon instead to the encoding or styles metadata.
 
-.StyleClass
+| name	   | A string value to reference the Style	| ParameterValue data type	| Zero or one
+| title	   | Human readable title	| ParameterValue data type	| 0..1
+| abstract	| Human readable description	| ParameterValue data type	| 0..1
+////
+
+.Style
 [width="90%",options="header"]
 |===
-| Name	| Definition	| Data type and value	| Multiplicity
-| name	| A string value to reference the Style	| ParameterValue data type	| Zero or one
+| Name	      | Definition	                     | Data type and value | Multiplicity
+| stylingRules | Styling rules defining the style	| StylingRule         | 0..n
+|===
+
+==== Styling Rules
+
+A StylingRule specifies that a particular Symbolizer (defining how to portray data) should be applied if the rule is selected based on a Selector expression (e.g., feature-property conditions or map scales).
+A StylingRule can contain nested rules, which will only be applied if the the parent rule's Selector is evaluated to true, and whose Symbolizers will inherit from and override the parent StylingRule's Symbolizer.
+
+////
+Do we need these?
+
 | title	| Human readable title	| ParameterValue data type	| One
 | abstract	| Human readable description	| ParameterValue data type	| Zero or one
-| rule	| Rule(s) that drive(s) the rendering engine	| Rule	| One or more
-| extension	| Any encoding should allow the user to extend the class to include custom items	| Any	| Zero or more
-|===
+////
 
-=== Class Rule
+////
 
-[quote,%unnumbered]
-----
- Req 2 Implementations shall support the encoding of all RuleClass properties and meet all of the tabulated constraints and notes.
-http://www.opengis.net/spec/symbology/2.0/req/core/RuleClass
-----
+Internationalization support would be great.
+Where exactly do we need this?
+The following was in ParameterValue, but most parameter values will be numbers/colors, or feature/covergge properties.
+What actually needs i18n? Rule labels for legends? The choice between feature properties available in different languages?
 
-This core class describes the concept of a rule in the Symbology model. Rules are used to organize symbolizing instructions and potentially to define conditions of application of these associated symbolizers (e.g., feature-property conditions or map scales).
+| language	| Language identifier for the ParameterValue element. (a)	| Character String. This language identifier shall be as specified in IETF RFC 4646.	| zero or more
+(a) The language identifier should offer a way to adapt the ParameterValue to a specified language, e.g., display the title of a Rule element both in English and French.
+////
 
-The RuleClass properties are documented in the following table.
-
-.RuleClass
+.StylingRule
 [width="90%",options="header"]
 |===
-| Name	| Definition	| Data type and value	| Multiplicity
-| name	| A string value to reference the Rule	| ParameterValue data type	| Zero or one
-| title	| Human readable title	| ParameterValue data type	| One
-| abstract	| Human readable description	| ParameterValue data type	| Zero or one
-| symbolizer	| Symbolize(s) to apply by the rendering engine	| Symbolizer	| One or more
-| extension	| Any encoding should allow the user to extend the class to include custom properties	| Any	| Zero or more
+| Name	      | Definition	                                                   | Data type and value	   | Multiplicity
+| name      	| A name for the rule (useful for generating legends)             | string                   | 0..1
+| selector  	| Selector defining the condition to apply the rule's symbolizer	| Expression	            | 0..1
+| symbolizer	| Symbolize(s) to apply by the rendering engine	                  | Symbolizer	            | 1
+| nestedRules  | Symbolize(s) to apply by the rendering engine	                  | StylingRule              | 0..n
 |===
 
-=== Class Symbolizer
+The selector (also sometimes called a _filter_), for the rule is defined as a predicate expression evaluating to either true or false.
 
-[%unnumbered]
-----
- Req 3 Implementations shall support the encoding of all SymbolizerClass properties and meet all of the tabulated constraints and notes.
-http://www.opengis.net/spec/symbology/2.0/req/core/SymbolizerClass
-----
+==== Symbolizers
 
-This class describes how to portray geographic data given a shape (e.g., area fill, line stroke, point marker, etc.) and graphical properties (e.g., color, opacity, font-family, etc.). As an abstract class, it is designed to be extended.
+A Symbolizer describes how to portray geographic data (e.g., vector features or gridded coverage data) based on a set of properties.
+This core requirements class only defines three basic properties relevant to most portrayal use cases.
+Separate requirements classes and later parts will extend this Symbolizer class with additional properties to provide more advanced portrayal capabilities.
 
-The SymbolizerClass properties are documented in the following table.
-
-.SymbolizerClass
-[width="90%",options="header"]
-|===
-| Name	| Definition	| Data type and value	| Multiplicity
+////
 | name	| A string value to reference the Symbolizer	| ParameterValue data type	| Zero or one
 | title	| Human readable title	| ParameterValue data type	| One
 | abstract	| Human readable description	| ParameterValue data type	| Zero or one
 | uom	| Unit of measure to apply to all graphical properties of a Symbolizer	| uom code	| Zero or one
-| extension	| Any encoding should allow the user to extend the class to include custom items	| Any	| Zero or more
-|===
+////
 
-To understand what the symbolizer concept is, consider a “Lake” feature type represented by a Polygon that is to be symbolized as a “blue” filled polygon with its boundary drawn as a “black” line. As symbolizer is an abstract class: a concrete extension called here, for example, AreaSymbolizer, which must be provided to render an interior “fill” and an outlining “stroke.” Consequently, the AreaSymbolizer extension will implement concrete extensions of the abstract Stroke and Fill classes of the conceptual model.
-
-Depending on the type of geographical object, a set of symbolizer extensions can be conceived. For example a LineSymbolizer to draw a river, a PointSymbolizer to represent the “Hospitals,” or a LabelSymbolizer to render the road name along a line.
-
-=== Class ParameterValue
-
-[%unnumbered]
-----
- Req 4 Implementations shall support the encoding of all ParameterValue parameters class and meet all of the tabulated constraints and notes.
-http://www.opengis.net/spec/symbology/2.0/req/core/ParameterValueClass
-----
-
-The ParameterValue class represents a gateway that provides the value to be used by a parameter in a styling context of use (almost all styling parameters such as width, opacity, displacement, etc. are “parameter-values”). This class has a similar meaning to Expression as defined in the OGC Filter Encoding 2.0 standard. As an abstract class, it is designed to be extended (e.g., Literal).
-
-The ParameterValue properties are documented in the following table.
-
-.ParameterValue
+.Symbolizer
 [width="90%",options="header"]
 |===
-| Name	| Definition	| Data type and value	| Multiplicity
-| language	| Language identifier for the ParameterValue element. (a)	| Character String. This language identifier shall be as specified in IETF RFC 4646.	| zero or more
-| extension	| Any encoding should allow the ability to extend the class to include custom items	| Any	| zero or more
+| Name	    | Definition	                 | Data type and value	 | Multiplicity
+| visibility | Whether to display the data  | bool                 | 0..1
+| opacity    | Degree of opacity            | float                | 0..1
+| zOrder     | Specify a rendering order    | int                  | 0..1
 |===
 
-(a) The language identifier should offer a way to adapt the ParameterValue to a specified language, e.g., display the title of a Rule element both in English and French.
+////
+-- I don't think we need the following explanation anymore:
 
-=== Class Literal
+To understand what the symbolizer concept is, consider a “Lake” feature type represented by a Polygon that is to be symbolized as a “blue” filled polygon with its boundary drawn with a “black” stroke.
+As symbolizer is an abstract class: a concrete extension called here, for example, AreaSymbolizer, which must be provided to render an interior “fill” and an outlining “stroke.”
+Consequently, the AreaSymbolizer extension will implement concrete extensions of the abstract Stroke and Fill classes of the conceptual model.
 
-[%unnumbered]
-----
- Req 5 Implementations shall support the encoding of all parameters of the LiteralClass and meet all of the tabulated constraints and notes.
-http://www.opengis.net/spec/symbology/2.0/req/core/LiteralClass
-----
+Depending on the type of geographical object, a set of symbolizer extensions can be conceived. For example a LineSymbolizer to draw a river, a PointSymbolizer to represent the “Hospitals,” or a
+LabelSymbolizer to render the road name along a line.
+////
 
-The Literal class is a concrete implementation of the ParameterValue class. LiteralClass represents a typed atomic literal value as a constant explicitly specified. It was originally defined in the OGC Filter Encoding 2.0 standard section 7.5.1.
+==== Expressions
 
-LiteralClass properties are documented in the following table.
+Expressions are a syntactic entity that may be evaluated to determine its value (from https://en.wikipedia.org/wiki/Expression_(computer_science)[Wikipedia]).
+The concept has similar meaning to Expressions as defined in the OGC Filter Encoding 2.0 standard, and can also be implemented with the OGC Common Query Language (CQL2),
+with the caveat that the Expressions defined here are not restricted to evaluate to a boolean value as is the case for the first version of CQL2.
 
-.LiteralClass
+Expressions can be used in two places according to this Styles & Symbology conceptual model: as a Selector defining the condition whether to apply a StylingRule or not, as well
+as to define the values of Symbolizer properties.
+
+===== Parameter Values
+
+The use of an expression as a Symbolizer property is called a _Parameter Value_, where an Expression can be substituted
+where a particular data type is expected, in which case the Expression will be resolved to that expected data type.
+Conceptually, all Symbolizer properties can be specified using a _ParameterValue_, but this is not required by
+this core conformance class, and specific requirements classes such as the "Symbolizer Parameter Value Expresssions"
+requirements class enable this behavior.
+
+===== Identifier Expressions
+
+An Identifier Expression is represented by a textual property that gets resolved at runtime.
+
+Typical example of identifier expresions include feature properties (e.g., `population`) and coverage range values (e.g., a particular imagery band `B8`).
+
+One specific type of identifier expressions use System Identifiers.
+A System Identifier refers to an internal state of the system, or a particular aspect of the data being portrayed.
+
+The following System Identifiers are defined by this conformance class:
+
+////
+TOCHECK: How to handle parent objects ? e.g.,  visualization, dataLayer, feature
+////
+
+.Visualization System Identifiers
 [width="90%",options="header"]
 |===
-| Name	| Definition	| Data type and value	| Multiplicity
-| value	| A value for the literal data	| Any	| one
+| Name                          	| Definition	                           | Data type and value
+| visualization.scaleDenominator	| Current visualization scale denominator | float
+| visualization.dateTime         | Current visualization date and time     | DateTime
+| visualization.date             | Current visualization date              | Date
+| visualization.timeOfDay        | Current visualization time of day       | Time
 |===
 
-=== Class UOM Codelist
-
-[%unnumbered]
-----
- Req 6 Implementations shall support the encoding of all properties of the UOMClass and meet all of the tabulated constraints and notes.
-http://www.opengis.net/spec/symbology/2.0/req/core/UOMClass
-----
-
-For styling parameters that define sizing and positioning of graphical objects (width, displacement, etc.) the unit of measure needs to be provided for the rendering engine. Therefore, for different levels of elements (e.g., Symbolizer, Stroke, Fill, GraphicSize, etc.) the model allows using different uom codes. Consequently, either the unit of measure is determined through the uom code directly associated to each element or it is determined by the innermost parent uom code (e.g., an uom code defined at the Symbolizer level implies that this unit is applied for all sizing and positioning values inside the Symbolizer).
-
-Below is the list of allowed units of measure as per UCUM (except for pixel): * portrayal units: pixel, millimeter, inch, percentage; and * ground units: meter, foot.
-
-The portrayal unit “pixel” is the default unit of measure. If available, the pixel size depends on the viewer client resolution, otherwise it is equal to 0.28mm * 0.28mm (~ 90 DPI).
-
-=== Class Color
-
-[%unnumbered]
-----
- Req 7 Implementations shall support the encoding of all properties of the ColorClass and meet all of the tabulated constraints and notes.
-http://www.opengis.net/spec/symbology/2.0/req/core/ColorClass
-----
-
-The ColorClass allows the definition of color. As an abstract class and part of the base of the core graphical concepts, this class is a global point of extension for specifying concrete definitions of colors (e.g., RGBColor extension).
-
-The ColorClass properties are documented in the following table.
-
-.ColorClass
+.Layer System Identifiers
 [width="90%",options="header"]
 |===
-| Name	| Definition	| Data type and value	| Multiplicity
-| extension	| Any encoding should allow the extension of ColorClass with custom items	| Any type	| zero or more
+| Name                          	       | Definition	                                             | Data type and value
+| dataLayer.identifier          	       | Identifier of data layers                                | string
+| dataLayer.type                        | Data type of data layers                                 | enumeration: vector, coverage, ...
 |===
 
-=== Class Fill
+////
+TODO: In other req classes:
 
-[%unnumbered]
-----
- Req 8 Implementations shall support the encoding of all properties of the FillClass and meet all of the tabulated constraints and notes.
-http://www.opengis.net/spec/symbology/2.0/req/core/FillClass
-----
-
-FillClass defines the graphical symbolizing parameters required to draw the filling of a two-dimensional shape such as a polygon. As an abstract class and part of the base of the core graphical concepts, FillClass is a global point of extension for specifying concrete definitions for shape fill operations (e.g., the SolidFill and GraphicFill extensions).
-
-The FillClass properties are documented in the following table.
-
-.FillClass
-[width="90%",options="header"]
-|===
-| Name	| Definition	| Data type and value	| Multiplicity
-| uom	| Unit of measure to apply to all graphical properties within a Fill	| uom code	| zero or one
-| extension	| Any encoding should allow the extension of a Fill operation with custom items	| Any type	| zero or more
-|===
-
-=== Class Stroke
-
-[%unnumbered]
-----
- Req 9 Implementations shall support the encoding of all properties of the StrokeClass and meet all of the tabulated constraints and notes.
-http://www.opengis.net/spec/symbology/2.0/req/core/StrokeClass
-----
-
-StrokeClass defines the graphical symbolizing parameters for drawing an outline (e.g., for linear geometries or the exterior of a polygon geometry). As an abstract class and part of the base of the core graphical concepts, StrokeClass is a global point of extension to specify concrete ways to draw outlines (e.g., the PenStroke and GraphicStroke extensions). The StrokeClass properties are documented in the following table.
-
-.StrokeClass
-[width="90%",options="header"]
-|===
-| Name	| Definition	| Data type and value	| Multiplicity
-| uom	| Unit of measure to apply to all graphical properties inside a Stroke	| uom code	| zero or one
-| extension	Any encoding should allow to extend a Stroke with custom items	| Any type	| zero or more
-|===
-
-=== Class Graphic
-
-[%unnumbered]
-----
- Req 10 Implementations shall support the encoding of all properties of the GraphicClass and meet all of the tabulated constraints and notes.
-http://www.opengis.net/spec/symbology/2.0/req/core/GraphicClass
-----
-
-The Graphic class defines the parameters for drawing a graphic symbol such as shape, color(s), and size. A graphic can be informally defined as “a little picture” and can be either a bitmap or scaled vector (the term “graphic” is used instead of the term “symbol” to avoid confusion with Symbolizer, which is used in a different context in this model). As an abstract class and part of the base of the core graphical concepts, GraphicClass is a global point of extension to specify concrete ways to draw “graphic symbol” (e.g., ExternalGraphic and MarkGraphic extensions).
-
-The GraphicClass properties are documented in the following table.
-
-.GraphicClass
-[width="90%",options="header"]
-|===
-| Name	| Definition	| Data type and value	| Multiplicity
-| uom	| Unit of measure to apply to all graphical properties within a Graphic	| uom code	| zero or one
-| graphicSize	| Rendering size of the graphic	| GraphicSize data type	| zero or one
-| extension	| Any encoding should allow to extend a Graphic with custom items	| Any type	| zero or more
-|===
-
-=== Class GraphicSize
-
-[%unnumbered]
-----
- Req 11 Implementations shall support the encoding of all properties of the GraphicSizeClass and meet all of the tabulated constraints and notes.
-http://www.opengis.net/spec/symbology/2.0/req/core/GraphicSizeClass
-----
-
-The GraphicSize class determines the size of the graphic when it is rendered. As an abstract class, it is designed to be extended to support the various ways the size could be specified such as by a single value, a rectangular box, or by a three-dimensional cube. The GraphicSize properties are documented in the following table.
-
-.GraphicSize
-[width="90%",options="header"]
-|===
-| Name	| Definition	| Data type and value	| Multiplicity
-| extension	| Any encoding should allow to extend a GraphicSize with custom items	| Any type	| zero or more
-|===
-
-=== Class Label
-
-[%unnumbered]
-----
- Req 12 Implementations shall support the encoding of all properties of the LabelClass and meet all of the tabulated constraints and notes.
-http://www.opengis.net/spec/symbology/2.0/req/core/LabelClass
-----
-
-LabelClass defines the graphical symbolizing properties for drawing a text label. As an abstract class and part of the base of the core graphical concepts, LabelClass is a point of extension to specify concrete ways to draw text label according to placement behaviors (e.g., a PointLabel or LineLabel).
-
-LabelClass properties are documented in the following table.
-
-.LabelClass
-[width="90%",options="header"]
-|===
-| Name	| Definition	| Data type and value	| Multiplicity
-| uom	| Unit of measure to apply to the affected graphical properties within a Label	| uom code	| zero or one
-| labelText	| Text-label content to draw	| ParameterValue data type String	| one
-| font	| Font definition to draw the text-label content	| Font data type Default value: system-dependent	| zero or one
-| fill	| Filling style to draw the glyphs	| Fill data type	| zero or one
-| extension	| Any encoding should allow to extend a Label with custom items	| Any type	| zero or more
-|===
-
-=== Class Font
-
-[%unnumbered]
-----
- Req 13 Implementations shall support the encoding of all properties of the FontClass and meet all of the tabulated constraints and notes.
-http://www.opengis.net/spec/symbology/2.0/req/core/FontClass
-----
-
-The FontClass describes the font properties to apply for the rendering of a text string. It refers to the W3C CSS Fonts chapter.
-
-FontClass properties are documented in the following table.
-
-.FontClass
-[width="90%",options="header"]
-|===
-| Name	| Definition	| Data type and value	| Multiplicity
-| uom	| Unit of measure to apply to the affected graphical properties within a Font	| uom code	| zero or one
-| fontFamily	| Font family name (a)	| ParameterValue data type CharacterString	| zero or more
-| fontSize	| Font size when applying the font to a text string (b)	| ParameterValue data type Float	| zero or one
-| fontWeight	| Amount of weight or boldness to use for a font	| ParameterValue data type CharacterString	| zero or one
-| fontStyle	| Style to use for a font	| ParameterValue data type CharacterString	| zero or one
-| extension	| Any encoding should allow to extend a Font with custom items	| Any type	| zero or more
-|===
-(a) Any number of FontFamily parameters may be given and they are assumed to be in preferred order. (b) The size unit is specified by the uom code if defined or by the innermost parent unit of measure definition otherwise.  
-
-=== Class Style
-=== Class StylingRule
-=== Class Selector
-=== Class Symbolizer
-
-* visibility: bool
-* opacity: float
-* zOrder: integer
-
-=== Class ParameterValue
-=== Class Expression
-
-==== Class IdentifierExpression
-
-==== Class LiteralExpression
-===== Class TextLiteral
-===== Class EnumValueLiteral
-===== Class BoolLiteral
-===== Class NullLiteral
-===== Class IntegerLiteral
-===== Class RealLiteral
-
-==== Class OperationExpression
-===== Class Operator
-====== Class LogicOperator
-====== Class RelationalOperator
-
-==== Class ArrayExpression
-===== Class ArrayLiteral
-
-==== Class InstanceExpression
-===== Class InstanceLiteral
-
-==== Class SystemIdentifierExpression
-
-===== Class Visualization
-
-* visualization
-* visualization.scaleDenominator
-* visualization.dateTime                -- for temporal visualization
-* visualization.date                    -- for temporal visualization
-* visualization.timeOfDay               -- for temporal visualization
-
-===== Class Feature
-
-* feature
-* feature.identifier
-* feature.geometry                      -- for spatial operators
-* feature.geometryDimensions
-
-===== Class DataLayer
-
-* dataLayer
-* dataLayer.identifier
-* dataLayer.type
-* dataLayer.featuresGeometryDimensions
 * dataLayer.features                    -- for advanced comparison of feature against all other features
 * dataLayer.featuresGeometry            -- for advanced comparison of feature against all other features
+* feature.geometry                      -- for spatial operators
+////
 
-====== Class DataLayerType
+===== Literal Expressions
+
+A literal expression is an expression that has a fixed value in the encoding of the style.
+A similar literal class concept was originally defined in the OGC Filter Encoding 2.0 standard section 7.5.1.
+
+The following types of literals are defined:
+
+* An integer literal represents a whole numeric value
+* A real literal represents a real number (integer, fractional or irrational number)
+* Text literals are Unicode character strings
+* A `null` literal represents represents an unset value
+* Enumeration value literals allow to refer by name to a set of pre-defined values associated with the context where they are used
+* Boolean literals are a specialized type of enumeration literals which are either `true` or `false`
+
+===== Operation Expressions
+
+An Operation Expression performs an operation specified by an Operator on one, two or three operand expressions, depending on whether they unary, binary or ternary operators.
+This core requirements class defines only Logical and Relational operators.
+Implementations are also required to support prioritizing operations (typically parentheses `(` `)`).
+Other requirements classes introduce support for additional operators for arithmetic, text and bitwise operations.
+
+This requirements class defines the following Logical Operators :
+
+.Logical Operators
+[width="90%",options="header"]
+|===
+| Name                     | Symbol    | Type   | Definition
+| not                      | `not`     | unary  | True if and only if the operand is false
+| and                      | `and`     | binary | True if and only if both operands are true
+| or                       | `or`      | binary | True if and only if either or both of the operands is true
+|===
+
+This requirements class defines the following Relational Operators:
+
+.Relational Operators
+[width="90%",options="header"]
+|===
+| Name                     | Symbol                |Type     | Definition
+| equalTo                  | `=`                   |binary   | The first operand is equal to the second one
+| notEqualTo               | `<>`                  |binary   | The first operand is not equal to the second one
+| is (null)                | `is`                  |binary   | Only used with `null` literal for second operand (the first operand is null)
+| isNot (null)             | `is not`              |binary   | Only used with `null` literal for second operand (the first operand is not null)
+| smallerThan              | `<`                   |binary   | The first operand is smaller than the second one
+| greaterThan              | `>`                   |binary   | The first operand is greater than the second one
+| smallerOrEqual           | `\<=`                 |binary   | The first operand is smaller than or equal to the second one
+| greaterOrEqual           | `>=`                  |binary   | The first operand is greater than or equal to the second one
+| in (array)               | `in`                  |binary   | Only used with an array for second operand (the first operand is one of the elements of the array)
+| notIn (array)            | `not in`              |binary   | Only used with an array for second operand (the first operand is not one of the elements of the array)
+| between                  | `between ... and`     |ternary  | The first operand is between the second and third operands (inclusively)
+| notBetween               | `not between ... and` |ternary  | The first operand is not between the second and third operands (inclusively)
+|===
+
+===== Array Expressions
+
+An array expressions defines zero, or more element expressions forming an ordered set.
+
+An _array literal_ is a special type of array expression whose elements are all literals.
+
+===== Instance Expressions
+
+An instance expressions instantiates an object of a class while optionally specifying values for member components.
+The default values for any member if not explicitly overridden can is specified by the class member definitions.
+
+An _instance literal_ is a special type of instance expression assigning only literal expressoins to its member components.
+
+A Symbolizer may either set an object property with a complete new instance, or specifically override a particular member of that object property.
+This capability is particularly useful when using nested StylingRules, where a nested rule can inherit the Symbolizer from the parent StylingRule.
+
+=== Requirements
+
+include::../requirements/rc-core.adoc[]

@@ -1,6 +1,6 @@
-== Shapes
+== Requirements Classes for Shapes
 
-=== Shape Graphics
+=== Requirements Class "Shape Graphics"
 ==== Overview
 
 ===== Class Shape
@@ -50,7 +50,7 @@ Base Class: Graphic
 
 ====== Class ClosedPath
 
-=== Shapes Outlines
+=== Requirements Class "Shapes Outlines"
 ==== Overview
 
 To be added to the UML.

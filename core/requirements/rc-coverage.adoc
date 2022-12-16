@@ -1,0 +1,21 @@
+
+[[rc_table-coverage]]
+
+[requirements_class]
+.Basic Coverage Styling
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/symbology-1/2.0/req/coverage
+inherit:: http://www.opengis.net/spec/symbology-1/2.0/req/core
+subject:: Style encodings and Renderers
+====
+
+[[req-coverage-color-channels]]
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/coverage/color-channels
+part:: An Encoding SHALL support defining a `colorChannels` Symbolizer property as a Color object.
+part:: A Renderer SHALL support ...
+====

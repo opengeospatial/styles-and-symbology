@@ -1,6 +1,6 @@
-== Advanced strokes
+== Requirements Classes for Advanced strokes
 
-=== Joins and Caps
+=== Requirements Class "Joins and Caps"
 ==== Overview
 
 ===== Class StrokeJoin
@@ -19,14 +19,14 @@
 
 join, cap properties
 
-=== Dashes
+=== Requirements Class "Dashes"
 ==== Overview
 
 ===== Class Stroke
 
 dashPattern property
 
-=== Casing and Centerline
+=== Requirements Class "Casing and Centerline"
 ==== Overview
 
 ===== Class Color
@@ -39,7 +39,7 @@ dashPattern property
 
 casing and center properties.
 
-=== Pattern Strokes
+=== Requirements Class "Pattern Strokes"
 ==== Overview
 
 ===== Class Stroke

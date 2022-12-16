@@ -1,43 +1,114 @@
-== Coverage styling
+[[rc-coverage]]
+== Requirements Classes for Coverage styling
 
-=== Basic Coverage Styling
+=== Requirements Class "Basic Coverage Styling"
 ==== Overview
 
-===== Class Symbolizer
-* Add properties
+This requirements class adds support for defining how to portray coverage data by mapping
+values from the range (e.g., individual imagery bands) to color channels or to a single channel, as well
+as providing an option to apply a color and/or opacity map based on the values.
 
-===== Class ValueColor
+===== Extended Identifiers
 
-*value: double
-*color: Color
-*label: text
+This requirements class defines as valid identifiers all of the accessible properties (the values of its range, as defined by the range type)
+for a coverage being portrayed with the name of those properties being the text of the identifier.
+Those identifiers are to be resolved with the value of that property.
+An encoding must support an escaping mechanism in cases where the name of a feature property might clash with a syntactic element.
 
-===== Class ValueOpacity
+===== Extended Symbolizer
 
-* value: double
-* opacity: float
-* label: text
+.Extended Symbolizer properties
+[width="90%",options="header"]
+|===
+| Name                          	| Definition	                                   | Data type and value   | Multiplicity
+| colorChannels                  | Value of the Red, Green and Blue color channels | Color                 | 0..1
+| alphaChannel                   | Value of the alpha (opacity) channel            | float                 | 0..1
+| singleChannel                  | Value of a single (gray-scale) output channel   | float                 | 0..1
+| colorMap                       | Color map to be applied based on singleCannel   | ValueColor            | 0..n
+| opacityMap                     | Opacity map to be applied based on singleCannel | ValueOpacity          | 0..n
+|===
 
-===== Class Color
+This requirements class requires support for identifier parameter value expression for the red (r), green (g) and blue (b) components of
+the `colorChannels`, `alphaChannel` and `singleChannel` properties without any additional requirements class.
 
-* r: float
-* g: float
-* b: float
+This allows to map the range values of a coverage to the output color channels.
 
-=== Hill Shading
+The color map is defined with a Value/Color pair object:
+
+.ValueColor properties
+[width="90%",options="header"]
+|===
+| Name                          	| Definition	                                        | Data type and value | Multiplicity
+| value                          | Key value for selecting this color                   | float               | 1
+| color                          | Color associated with this value                     | Color               | 1
+| name                           | Label to use for this value when generating a legend | string              | 0..1
+|===
+
+Similarly, the opacity map is defined with a Value/Opacity pair object:
+
+.ValueOpacity properties
+[width="90%",options="header"]
+|===
+| Name                          	| Definition	                                        | Data type and value | Multiplicity
+| value                          | Key value for selecting this color                   | float               | 1
+| color                          | Color associated with this value                     | Color               | 1
+| name                           | Label to use for this value when generating a legend | string              | 0..1
+|===
+
+===== Colors
+
+Both the `colorChannels` and the `colorMap` properties use a Color class, specified using red, green and blue components.
+The ability to define Colors in other spaces (e.g., Lab, CMYK) is defined in separate requirements classes
+and applies wherever this basic RGB Color class is used.
+
+.Color
+[width="90%",options="header"]
+|===
+| Name	| Definition	| Data type and value	| Multiplicity
+| r	   | Red          | float                 | 1
+| g	   | Green        | float                 | 1
+| b	   | Blue         | float                 | 1
+|===
+
+==== Requirements
+
+include::../requirements/rc-coverage.adoc[]
+
+[[rc-hillshading]]
+=== Requirements Class "Hill Shading"
 ==== Overview
 
-===== Class Symbolizer
-* hillShading
+This requirements classand adds the capability to portray elevation coverages with a hill shading style.
+It depends on the _Basic Coverage Styling_ requirements class.
 
-===== Class HillShading
+===== Extended Symbolizer
 
-* factor: double
-* sun: AzimuthElevation
-* colorMap: ValueColor[*]
-* opacityMap: ValueOpacity[*]
+.Extended Symbolizer properties
+[width="90%",options="header"]
+|===
+| Name                          	| Definition	                                   | Data type and value   | Multiplicity
+| hillShading                    | Hill shading parameters                         | HillShading           | 0..1
+|===
 
-===== Class AzimuthElevation
+.HillShading properties
+[width="90%",options="header"]
+|===
+| Name                          	| Definition	                                       | Data type and value   |Multiplicity
+| factor                         | Factor controlling the intensity of the shading     | float                 | 0..1
+| sun                            | Orientation of the sun                              | AzimuthElevation      | 0..1
+| colorMap                       | Color map to be applied based on calculated shade   | ValueColor            | 0..n
+| opacityMap                     | Opacity map to be applied based on calculated shade | ValueOpacity          | 0..n
+|===
 
-azimuth: Angle
-elevation: Angle
+The `sun` property is specified using this AzimuthElevation class:
+
+[width="90%",options="header"]
+|===
+| Name                          	| Definition	                                       | Data type and value   |Multiplicity
+| azimuth                        | Azimuth angle relative to North                     | Angle                 | 0..1
+| elevation                      | Elevation angle relative to the ground              | Angle                 | 0..1
+|===
+
+==== Requirements
+
+include::../requirements/rc-hillshading.adoc[]

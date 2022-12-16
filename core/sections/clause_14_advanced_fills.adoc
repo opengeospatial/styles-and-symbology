@@ -1,6 +1,6 @@
-== Advanced fills
+== Requirements Classes for Advanced fills
 
-=== Pattern Fills
+=== Requirements Class "Pattern Fills"
 ==== Overview
 
 ===== Class Fill
@@ -8,7 +8,7 @@ pattern property
 
 ===== Class Graphic
 
-=== Hatches and Gradients, Stipples
+=== Requirements Class "Hatches and Gradients, Stipples"
 ==== Overview
 
 ===== Class Fill

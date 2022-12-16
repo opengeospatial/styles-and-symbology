@@ -1,6 +1,6 @@
-== Functions
+== Requirements Classes for Functions
 
-=== Function Expressions
+=== Requirements Class "Function Expressions"
 ==== Overview
 
 ===== Class Expression
@@ -13,7 +13,7 @@
 
 * uri: string
 
-=== Spatial Relation Functions
+=== Requirements Class "Spatial Relation Functions"
 ==== Overview
 
 ===== Standard SpatialRelationFunctions
@@ -61,7 +61,7 @@
 * outer: PolygonContour
 * inner: PolygonContour[0..*]
 
-=== Temporal Relation Functions
+=== Requirements Class "Temporal Relation Functions"
 ==== Overview
 
 ===== Class Month
@@ -124,7 +124,7 @@
 * t_startedBy(TimeInterval a, TimeInterval b) bool
 * t_starts(TimeInterval a, TimeInterval b) bool
 
-=== Array Relation Functions
+=== Requirements Class "Array Relation Functions"
 ==== Overview
 
 ===== Standard ArrayRelationFunctions
@@ -134,7 +134,7 @@
 * a_equals(array a, array b) bool
 * a_overlaps(array a, array b) bool
 
-=== Text Manipulation Functions
+=== Requirements Class "Text Manipulation Functions"
 ==== Overview
 
 ===== Class TextManipulationFunctions
@@ -147,7 +147,7 @@
 * substitute(string s, string a, string b) : string
 * format(string f, ...) : string
 
-=== Geometry Manipulation Functions
+=== Requirements Class "Geometry Manipulation Functions"
 ==== Overview
 
 ===== Standard GeometryManipulationFunctions
@@ -156,7 +156,3 @@
 * s_union(Geometry a, Geometry b) : Geometry
 * s_subtraction(Geometry a, Geometry b) : Geometry
 * s_buffer(Geometry a, double d) : Geometry
-
-
-
-

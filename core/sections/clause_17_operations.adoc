@@ -1,6 +1,6 @@
-== Operations
+== Requirements Classes for Operations
 
-=== Arithmetic Operations
+=== Requirements Class "Arithmetic Operations"
 ==== Overview
 
 ===== Class Operator
@@ -15,7 +15,7 @@
 * mod
 * pow
 
-=== Bitwise Operators
+=== Requirements Class "Bitwise Operators"
 ==== Overview
 
 ===== Class BitwiseOperator
@@ -29,7 +29,7 @@
 
 ===== Class Operator
 
-=== Text Relation Operators (e.g., CQL2 'Like')
+=== Requirements Class "Text Relation Operators" (e.g., CQL2 'Like')
 ==== Overview
 
 ===== Class TextRelationOperator

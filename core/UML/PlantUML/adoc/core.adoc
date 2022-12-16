@@ -1,4 +1,4 @@
-# Symbology Core Model
+// Symbology Core Model
 
 [plantuml, target=diagram-classes, format=png]
 ....
