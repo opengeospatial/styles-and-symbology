@@ -28,12 +28,13 @@ An encoding must support an escaping mechanism in cases where the name of a feat
 
 In addition, the following new System Identifiers are defined by this requirements class:
 
+.System identifiers for vector features
 [width="90%",options="header"]
 |===
 | Name                          	       | Definition	                                             | Data type and value
 | feature.identifier          	       | Identifier of a particular feature                       | string or number
 | feature.geometryDimensions            | Dimension of geometry for a particular feature           | 0 (points), 1 (lines), 2 (polygons), 3 (polyhedrons)
-| dataLayer.featuresGeometryDimension   | Dimension of feature geometry (if same for all features) | 0 (points), 1 (lines), 2 (polygons), 3 (polyhedrons), undefined (mixed)
+| dataLayer.featuresGeometryDimension   | Dimension of feature geometry (if same for all features) | 0 (points), 1 (lines), 2 (polygons), 3 (polyhedrons), `null` (mixed)
 |===
 
 ==== Colors
