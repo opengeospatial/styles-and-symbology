@@ -5,12 +5,8 @@
 The requirements described in this section define the symbology core requirement class. The UML diagram (<<img-uml-class>>) shows the fundamental concepts of the Symbology Conceptual and Logical Model.
 
 [#img-uml-class]
-include::../UML/PlantUML/adoc/core.adoc[]
-
-////
 .UML Class Diagram of the Symbology core
-image::figures/figure3.png[]
-////
+include::../UML/PlantUML/adoc/core.adoc[]
 
 ==== Styles
 

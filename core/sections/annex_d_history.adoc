@@ -2,6 +2,7 @@
 [[annex-revisions]]
 == Revision history
 
+.Revision history
 [width="90%",options="header"]
 |===
 | Date           | Release | Author                                                                 | Paragraph modified   | Description
