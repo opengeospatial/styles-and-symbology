@@ -24,7 +24,7 @@ a Selector Expression or a ParameterValue Expression.
 In contrast to the OGC Symbology Core Conceptual Model version 1.0, this version is clarified to not only be defining
 a conceptual model, but also a specific logical model. This newer version also defines a conceptual and logical model
 for expressions, which provides one specific mechanism for extension. This Standard clarifies that requirements classes
-extending this Standard can define additional properties properties for the Symbolizer class, providing the second extension mechanism.
+extending this Standard can define additional properties for the Symbolizer class, providing the second extension mechanism.
 This Standard also includes symbology requirements classes covering the most common use cases for portraying both vector feature data as well as coverage data.
 Finally, this Standard defines two encodings conforming to the logical model.
 The more concrete nature of this standard better reflects the fact that it is an OGC Implementation Standard,
