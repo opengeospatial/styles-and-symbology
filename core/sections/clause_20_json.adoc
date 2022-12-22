@@ -3,5 +3,7 @@
 
 === Overview
 
+This requirements class adds support for defining how to render a feature in a JSON format.
+
 === Requirements
 

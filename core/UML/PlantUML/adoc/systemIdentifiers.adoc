@@ -1,5 +1,57 @@
-# System Identifiers
+// System Identifiers
 
 [plantuml, target=diagram-classes, format=png]
 ....
+Visualization : scaleDenominator: double
+Visualization : dateTime: TimeInstant
+Visualization : date: Date
+Visualization : timeOfDay: TimeOfDay
+
+Feature : identifier: string
+Feature : geometry: Geometry
+Feature : geometryDimensions: int
+
+class DataLayerType <<enumeration>>
+DataLayerType : map
+DataLayerType : vector
+DataLayerType : coverage
+
+DataLayer : identifier: string
+DataLayer : type: DataLayerType
+DataLayer : features: Feature[*]
+DataLayer : featuresGeometry: Geometry[*]
+DataLayer : featuresGeometryDimensions: int
+
+class SystemIdentifierExpression <<enumeration>>
+
+SystemIdentifierExpression : visualization
+SystemIdentifierExpression : visualization.scaleDenominator
+SystemIdentifierExpression : visualization.dateTime
+SystemIdentifierExpression : visualization.date
+SystemIdentifierExpression : visualization.timeOfDay
+SystemIdentifierExpression : feature
+SystemIdentifierExpression : feature.identifier
+SystemIdentifierExpression : feature.geometry
+SystemIdentifierExpression : feature.geometryDimensions
+SystemIdentifierExpression : dataLayer
+SystemIdentifierExpression : dataLayer.identifier
+SystemIdentifierExpression : dataLayer.type
+SystemIdentifierExpression : dataLayer.features
+SystemIdentifierExpression : dataLayer.featuresGeometry
+SystemIdentifierExpression : dataLayer.featuresGeometryDimensions
+
+SystemIdentifierExpression --|> IdentifierExpression
+SystemIdentifierExpression --> Visualization
+SystemIdentifierExpression --> Feature
+SystemIdentifierExpression --> DataLayer
+DataLayer --* DataLayerType
+DataLayer --* Geometry
+DataLayer --* Feature
+DataLayer --o Geometry
+Feature --* Geometry
+Visualization --* TimeInstant
+Visualization --o Date
+Visualization --o TimeOfDay
+TimeInstant --* Date
+TimeInstant --* TimeOfDay
 ....

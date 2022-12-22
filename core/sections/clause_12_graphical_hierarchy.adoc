@@ -1,6 +1,8 @@
 == Requirements Class "Multi Graphics and Transforms"
 === Overview
 
+This requirements class adds support for defining how to render a (multi-)graphical object, and how to transform it. 
+
 ==== Class Graphic
 
 ===== Class MultiGraphic

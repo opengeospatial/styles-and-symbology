@@ -4,6 +4,12 @@
 === Requirements Class "Arithmetic Operations"
 ==== Overview
 
+This requirements class adds support for defining how to perform arithmetic operations on values.
+
+[#img-uml-class-operations]
+.UML Class Diagram of the Symbology Requirements Class Operations
+include::../UML/PlantUML/adoc/operators.adoc[]
+
 ===== Class Operator
 
 ===== Class ArithmeticOperator

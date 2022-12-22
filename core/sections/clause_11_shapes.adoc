@@ -3,6 +3,12 @@
 === Requirements Class "Shape Graphics"
 ==== Overview
 
+This requirements class adds support for defining how to draw shapes.
+
+[#img-uml-class-shapes]
+.UML Class Diagram of the Symbology Requirements Class Shapes
+include::../UML/PlantUML/adoc/shapes.adoc[]
+
 ===== Class Shape
 
 Base Class: Graphic

@@ -3,6 +3,10 @@
 === Requirements Class "Pattern Fills"
 ==== Overview
 
+This requirements class adds support for defining how to fill a shape with a pattern.
+
+// Do we need to define a new uml diagram for this?
+
 ===== Class Fill
 pattern property
 

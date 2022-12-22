@@ -3,6 +3,12 @@
 === Requirements Class "Basic Labeling"
 ==== Overview
 
+This requirements class adds support for defining how to draw text labels on a map. 
+
+[#img-uml-class-labeling]
+.UML Class Diagram of the Symbology Requirements Class "Basic Labeling"
+include::../UML/PlantUML/adoc/text.adoc[]
+
 ===== Class Symbolizer
 * label:    Label [0..1]
 

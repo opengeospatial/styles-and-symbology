@@ -20,6 +20,10 @@ The following three new Symbolizer properties are defined by this requirements c
 | marker | Marker to render at geometries points or centroid (for polygons) | float                | 0..1
 |===
 
+[#img-uml-class-vectorFeaturesSymbolizer]
+.UML Class Diagram of the Symbology Vector Features Symbolizer
+include::../UML/PlantUML/adoc/vectorFeaturesSymbolizer.adoc[]
+
 ==== Extended Identifiers for vector features
 
 This requirements class defines as valid identifiers all of the accessible properties for a feature being portrayed with the name of those properties being the text of the identifier.
@@ -57,6 +61,10 @@ and applies wherever this basic RGB Color class is used.
 A Fill defines the graphical symbolizing parameters required to draw the filling of a two-dimensional shape such as a polygon.
 Separate conformance classes can extend this Fill class with additional properties.
 
+[#img-uml-class-fill]
+.UML Class Diagram of the Symbology Fill
+include::../UML/PlantUML/adoc/fill.adoc[]
+
 .Fill
 [width="90%",options="header"]
 |===
@@ -68,6 +76,10 @@ Separate conformance classes can extend this Fill class with additional properti
 ==== Strokes
 
 A Stroke defines the graphical symbolizing parameters for drawing an outline (e.g., for linear geometries or the exterior of a polygon geometry). As an abstract class and part of the base of the core graphical concepts, StrokeClass is a global point of extension to specify concrete ways to draw outlines (e.g., the PenStroke and GraphicStroke extensions). The StrokeClass properties are documented in the following table.
+
+[#img-uml-class-stroke]
+.UML Class Diagram of the Symbology Stroke
+include::../UML/PlantUML/adoc/stroke.adoc[]
 
 A Stroke object inherits from a base _StrokeStyling_ class, which is re-used in a separate requirements class for defining more complex strokes:
 
@@ -106,6 +118,10 @@ Consequently, either the unit of measure is determined through the uom code dire
 ==== Markers
 
 A Marker inherits from a MultiGraphic which can contain multiple graphical elements:
+
+[#img-uml-class-graphics]
+.UML Class Diagram of the Symbology Graphics
+include::../UML/PlantUML/adoc/graphics.adoc[]
 
 .MultiGraphic
 [width="90%",options="header"]

@@ -3,6 +3,10 @@
 === Requirements Class "Joins and Caps"
 ==== Overview
 
+This requirements class adds support for defining how to join and cap lines and curves.
+
+// De we need to design a new uml diagram for this class ?
+
 ===== Class StrokeJoin
 
 * miter

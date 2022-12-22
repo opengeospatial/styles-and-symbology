@@ -3,6 +3,10 @@
 === Requirements Class "Right-hand identifiers" (e.g., CQL2 Property-Property comparison)
 ==== Overview
 
+This requirements class adds support for defining how to map a right-hand identifier to a specific property of a specific object.
+
+// Do we need to define a new uml diagram for this?
+
 ===== Class OperationExpression
 
 * operand1: Expression[0..1]

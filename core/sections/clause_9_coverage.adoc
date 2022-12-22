@@ -8,6 +8,10 @@ This requirements class adds support for defining how to portray coverage data b
 values from the range (e.g., individual imagery bands) to color channels or to a single channel, as well
 as providing an option to apply a color and/or opacity map based on the values.
 
+[#img-uml-class-coverageSymbolizer]
+.UML Class Diagram of the Symbology Coverage Symbolizer
+include::../UML/PlantUML/adoc/coverageSymbolizer.adoc[]
+
 ===== Extended Identifiers
 
 This requirements class defines as valid identifiers all of the accessible properties (the values of its range, as defined by the range type)
@@ -20,12 +24,12 @@ An encoding must support an escaping mechanism in cases where the name of a feat
 .Extended Symbolizer properties
 [width="90%",options="header"]
 |===
-| Name                          	| Definition	                                   | Data type and value   | Multiplicity
-| colorChannels                  | Value of the Red, Green and Blue color channels | Color                 | 0..1
-| alphaChannel                   | Value of the alpha (opacity) channel            | float                 | 0..1
-| singleChannel                  | Value of a single (gray-scale) output channel   | float                 | 0..1
-| colorMap                       | Color map to be applied based on singleCannel   | ValueColor            | 0..n
-| opacityMap                     | Opacity map to be applied based on singleCannel | ValueOpacity          | 0..n
+| Name              | Definition	                                  | Data type and value   | Multiplicity
+| colorChannels     | Value of the Red, Green and Blue color channels | Color                 | 0..1
+| alphaChannel      | Value of the alpha (opacity) channel            | float                 | 0..1
+| singleChannel     | Value of a single (gray-scale) output channel   | float                 | 0..1
+| colorMap          | Color map to be applied based on singleCannel   | ValueColor            | 0..n
+| opacityMap        | Opacity map to be applied based on singleCannel | ValueOpacity          | 0..n
 |===
 
 This requirements class requires support for identifier parameter value expression for the red (`r`), green (`g`) and blue (`b`) components of
@@ -38,10 +42,10 @@ The color map is defined with a Value/Color pair object:
 .ValueColor properties
 [width="90%",options="header"]
 |===
-| Name                          	| Definition	                                        | Data type and value | Multiplicity
-| value                          | Key value for selecting this color                   | float               | 1
-| color                          | Color associated with this value                     | Color               | 1
-| name                           | Label to use for this value when generating a legend | string              | 0..1
+| Name                | Definition	                                         | Data type and value | Multiplicity
+| value               | Key value for selecting this color                   | float               | 1
+| color               | Color associated with this value                     | Color               | 1
+| name                | Label to use for this value when generating a legend | string              | 0..1
 |===
 
 Similarly, the opacity map is defined with a Value/Opacity pair object:
@@ -49,10 +53,10 @@ Similarly, the opacity map is defined with a Value/Opacity pair object:
 .ValueOpacity properties
 [width="90%",options="header"]
 |===
-| Name                          	| Definition	                                        | Data type and value | Multiplicity
-| value                          | Key value for selecting this color                   | float               | 1
-| color                          | Color associated with this value                     | Color               | 1
-| name                           | Label to use for this value when generating a legend | string              | 0..1
+| Name                | Definition	                                         | Data type and value | Multiplicity
+| value               | Key value for selecting this color                   | float               | 1
+| color               | Color associated with this value                     | Color               | 1
+| name                | Label to use for this value when generating a legend | string              | 0..1
 |===
 
 ===== Colors

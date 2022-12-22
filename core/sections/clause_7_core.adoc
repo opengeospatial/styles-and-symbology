@@ -4,7 +4,7 @@
 === Overview
 The requirements described in this section define the symbology core requirement class. The UML diagram (<<img-uml-class>>) shows the fundamental concepts of the Symbology Conceptual and Logical Model.
 
-[#img-uml-class]
+[#img-uml-class-core]
 .UML Class Diagram of the Symbology core
 include::../UML/PlantUML/adoc/core.adoc[]
 
@@ -87,7 +87,7 @@ Separate requirements classes and later parts will extend this Symbolizer class 
 .Symbolizer
 [width="90%",options="header"]
 |===
-| Name	    | Definition	                 | Data type and value	 | Multiplicity
+| Name	     | Definition	                | Data type and value  | Multiplicity
 | visibility | Whether to display the data  | bool                 | 0..1
 | opacity    | Degree of opacity            | float                | 0..1
 | zOrder     | Specify a rendering order    | int                  | 0..1
@@ -112,6 +112,10 @@ with the caveat that the Expressions defined here are not restricted to evaluate
 
 Expressions can be used in two places according to this Styles & Symbology conceptual model: as a Selector defining the condition whether to apply a StylingRule or not, as well
 as to define the values of Symbolizer properties.
+
+[#img-uml-class-expressions]
+.UML Class Diagram of the Symbology Expressions
+include::../UML/PlantUML/adoc/expressions.adoc[]
 
 ===== Parameter Values
 
@@ -140,11 +144,11 @@ TOCHECK: How to handle parent objects ? e.g.,  visualization, dataLayer, feature
 .Visualization System Identifiers
 [width="90%",options="header"]
 |===
-| Name                          	| Definition	                           | Data type and value
+| Name                          	| Definition	                          | Data type and value
 | visualization.scaleDenominator	| Current visualization scale denominator | float
-| visualization.dateTime         | Current visualization date and time     | DateTime
-| visualization.date             | Current visualization date              | Date
-| visualization.timeOfDay        | Current visualization time of day       | Time
+| visualization.dateTime            | Current visualization date and time     | DateTime
+| visualization.date                | Current visualization date              | Date
+| visualization.timeOfDay           | Current visualization time of day       | Time
 |===
 
 .Layer System Identifiers

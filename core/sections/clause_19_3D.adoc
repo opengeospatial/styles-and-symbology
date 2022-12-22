@@ -1,6 +1,10 @@
 == Requirements Class "3D Models and Transforms"
 === Overview
 
+This requirements class adds support for defining how to use and transform 3D models. This includes the ability to define the position, orientation, and scaling of a model. This class also includes the ability to define the position, orientation, and scaling of a model's individual parts.
+
+// Do we need to define a new uml diagram for this ?
+
 ==== Class Model
 
 model: Resource

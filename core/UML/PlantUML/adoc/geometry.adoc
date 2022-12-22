@@ -1,5 +1,41 @@
-# Geometry
+// Geometry
 
 [plantuml, target=diagram-classes, format=png]
 ....
+class Geometry <<abstract>>
+
+Point : coordinates: double[2..*]
+
+Point --|> Geometry
+
+MultiPoint : points: Point[1..*]
+
+MultiPoint --|> Geometry
+MultiPoint --* Point
+
+BoundingBox : lowerBound: Point
+BoundingBox : upperBound: Point
+
+BoundingBox --|> Geometry
+BoundingBox --* Point
+
+LineString : points: Point[2..*]
+
+LineString --* Point
+LineString --|> Geometry
+
+MultiLineString : lineStrings: LineString[1..*]
+
+MultiLineString --|> Geometry
+MultiLineString --* LineString
+
+PolygonContour : points: Point[3..*]
+
+PolygonContour --* Point
+
+Polygon : outer: PolygonContour
+Polygon : inner: PolygonContour[0..*]
+
+Polygon --* PolygonContour
+Polygon --|> Geometry
 ....
