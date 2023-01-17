@@ -69,6 +69,10 @@ include::../UML/PlantUML/adoc/standardFunctions.adoc[]
 * outer: PolygonContour
 * inner: PolygonContour[0..*]
 
+===== Class MultiPolygon
+
+* multiPolygons: Polygon[1..*]
+
 [[rc-temporal]]
 === Requirements Class "Temporal Relation Functions"
 ==== Overview
