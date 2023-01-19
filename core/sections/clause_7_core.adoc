@@ -115,7 +115,7 @@ as to define the values of Symbolizer properties.
 
 [#img-uml-class-expressions]
 .UML Class Diagram of the Symbology Expressions
-include::../UML/PlantUML/adoc/expressions.adoc[]
+include::../UML/PlantUML/adoc/core/expressions.adoc[]
 
 ===== Parameter Values
 
@@ -191,6 +191,19 @@ This core requirements class defines only Logical and Relational operators.
 Implementations are also required to support prioritizing operations (typically encoded using parentheses: `(` `)`).
 Other requirements classes introduce support for additional operators for arithmetic, text and bitwise operations.
 
+.Operation Expression
+[width="90%",options="header"]
+|===
+| Name	   | Definition	                     | Data type and value | Multiplicity
+| operand1  | First operand                   	| Expression          | 0..1
+| operator  | Operator                        	| Operator            | 1
+| operand2  | Second operand                  	| Expression          | 1
+|===
+
+[#img-uml-relational-logic-operators]
+.UML Class Diagram for Logic and Relational Operators
+include::../UML/PlantUML/adoc/core/operators.adoc[]
+
 This requirements class defines the following Logical Operators :
 
 .Logical Operators
@@ -235,7 +248,7 @@ An _array literal_ is a special type of array expression whose elements are all 
 An instance expressions instantiates an object of a class while optionally specifying values for member components.
 The default values for any member if not explicitly overridden can is specified by the class member definitions.
 
-An _instance literal_ is a special type of instance expression assigning only literal expressoins to its member components.
+An _instance literal_ is a special type of instance expression assigning only literal expressions to its member components.
 
 A Symbolizer may either set an object property with a complete new instance, or specifically override a particular member of that object property.
 This capability is particularly useful when using nested StylingRules, where a nested rule can inherit the Symbolizer from the parent StylingRule.

@@ -1,0 +1,13 @@
+// Conditional Expressions
+
+[plantuml, target=diagram-classes, format=png]
+....
+class Expression <<abstract>>
+
+ConditionalExpression : condition: Expression
+ConditionalExpression : thenExp: Expression
+ConditionalExpression : elseExp: Expression
+
+ConditionalExpression --|> Expression
+ConditionalExpression --* Expression
+....

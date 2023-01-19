@@ -6,17 +6,17 @@
 
 This requirements class adds support for defining how to call functions in the expression language.
 
+===== Functions
+
 [#img-uml-class-functions]
-.UML Class Diagram of the Symbology Requirements Class Functions
+.Functions UML Class Diagram
+include::../UML/PlantUML/adoc/functions/functions.adoc[]
+
+===== Standard Functions
+
+[#img-uml-class-standard-functions]
+.Standard Functions UML Class Diagram
 include::../UML/PlantUML/adoc/standardFunctions.adoc[]
-
-===== Class Expression
-
-===== Class FunctionCallExpression
-
-===== Class Function
-
-===== Class StandardFunctions
 
 * uri: string
 

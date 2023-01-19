@@ -1,0 +1,17 @@
+// Arithmetic Operators
+
+[plantuml, target=diagram-classes, format=png]
+....
+OperationExpression --* Operator
+
+class ArithmeticOperator <<enumeration>>
+ArithmeticOperator : add
+ArithmeticOperator : sub
+ArithmeticOperator : mul
+ArithmeticOperator : div
+ArithmeticOperator : intDiv
+ArithmeticOperator : mod
+ArithmeticOperator : pow
+
+ArithmeticOperator --|> Operator
+....

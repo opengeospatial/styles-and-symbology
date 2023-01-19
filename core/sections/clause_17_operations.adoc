@@ -4,15 +4,13 @@
 === Requirements Class "Arithmetic Operations"
 ==== Overview
 
-This requirements class adds support for defining how to perform arithmetic operations on values.
+This requirements class adds support for arithmetic operations.
 
-[#img-uml-class-operations]
-.UML Class Diagram of the Symbology Requirements Class Operations
-include::../UML/PlantUML/adoc/operators.adoc[]
+[#img-uml-class-arithmetic]
+.Arithmetic Operators UML Diagram
+include::../UML/PlantUML/adoc/arithmetic/arithmetic.adoc[]
 
-===== Class Operator
-
-===== Class ArithmeticOperator
+// TODO: Make all these bullet lists tables
 
 * add
 * sub
@@ -22,11 +20,23 @@ include::../UML/PlantUML/adoc/operators.adoc[]
 * mod
 * pow
 
+==== Requirements
+
+// TODO:
+
+// include::../requirements/rc-arithmetic.adoc[]
+
 [[rc-bitwise]]
 === Requirements Class "Bitwise Operators"
 ==== Overview
 
-===== Class BitwiseOperator
+This requirements class adds support for operations on individual bits.
+
+[#img-uml-class-bitwise]
+.Bitwise Operators UML Diagram
+include::../UML/PlantUML/adoc/bitwise/bitwise.adoc[]
+
+// TODO: Make this a table
 
 * bitAnd
 * bitOr
@@ -35,13 +45,24 @@ include::../UML/PlantUML/adoc/operators.adoc[]
 * leftShift
 * rightShift
 
-===== Class Operator
+==== Requirements
+
+// TODO:
+
+// include::../requirements/rc-bitwise.adoc[]
+
 
 [[rc-textrelation]]
 === Requirements Class "Text Relation Operators" (e.g., CQL2 'Like')
 ==== Overview
 
-===== Class TextRelationOperator
+This requirements class adds more advanced support for evaluating the relation between text values.
+
+[#img-uml-class-text-relation]
+.Bitwise Operators UML Diagram
+include::../UML/PlantUML/adoc/textOperators/textOperators.adoc[]
+
+// TODO: Make this a table
 
 * like
 * notLike
@@ -52,4 +73,8 @@ include::../UML/PlantUML/adoc/operators.adoc[]
 * notStartsWith
 * notEndsWith
 
-===== Class Operator
+==== Requirements
+
+// TODO:
+
+// include::../requirements/rc-text-relation.adoc[]

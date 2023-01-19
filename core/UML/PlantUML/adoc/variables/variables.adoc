@@ -1,0 +1,10 @@
+// Variable Expressions
+
+[plantuml, target=diagram-classes, format=png]
+....
+class Expression <<abstract>>
+
+VariableExpression : name: string
+
+VariableExpression --|> Expression
+....

@@ -1,0 +1,14 @@
+// Functions
+
+[plantuml, target=diagram-classes, format=png]
+....
+class Expression <<abstract>>
+
+FunctionCallExpression --|> Expression
+FunctionCallExpression --* Function
+FunctionCallExpression --* Expression
+
+Function : name: string
+Function : parameters: map < string, type >
+Function : returnType: type
+....

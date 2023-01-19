@@ -5,20 +5,15 @@
 
 This requirements class adds support for defining how to map a right-hand identifier to a specific property of a specific object.
 
-// Do we need to define a new uml diagram for this?
-
-===== Class OperationExpression
-
-* operand1: Expression[0..1]
-* operator: Operator
-* operand2: Expression
-
-===== Class Expressions
 
 === Requirements Class "Conditional Expressions"
 ==== Overview
 
-===== Class ConditionalExpression
+===== Conditional Expressions
+
+[#img-uml-class-conditional-expression]
+.Conditional Expressions UML Class Diagram
+include::../UML/PlantUML/adoc/conditionals/conditionals.adoc[]
 
 * condition: Expression
 * thenExp: Expression
@@ -30,6 +25,10 @@ This requirements class adds support for defining how to map a right-hand identi
 ==== Overview
 
 ===== Class VariableExpression
+
+[#img-uml-class-variable-expression]
+.Variable Expressions UML Class Diagram
+include::../UML/PlantUML/adoc/variables/variables.adoc[]
 
 * name: string
 
