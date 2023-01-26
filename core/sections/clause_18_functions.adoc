@@ -60,18 +60,22 @@ include::../UML/PlantUML/adoc/standardFunctions.adoc[]
 
 * lineStrings: LineString[1..*]
 
-===== Class PolygonContour
-
-* points: Point[3..*]
-
 ===== Class Polygon
 
-* outer: PolygonContour
-* inner: PolygonContour[0..*]
+* outer: LineString
+* inner: LineString[0..*]
 
 ===== Class MultiPolygon
 
 * multiPolygons: Polygon[1..*]
+
+===== Class Geometry
+
+* geometry: Geometry[1]
+
+===== Class GeometryCollection
+
+* geometries: Geometry[1..*]
 
 [[rc-temporal]]
 === Requirements Class "Temporal Relation Functions"
