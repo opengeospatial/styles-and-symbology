@@ -1,0 +1,18 @@
+// Vector Features Symbolizer
+
+[plantuml, target=diagram-classes, format=png]
+....
+'Class definition
+
+LabelPlacement : priority: float
+LabelPlacement : minSpacing: float
+LabelPlacement : maxSpacing: float
+
+Label : placement: LabelPlacement
+
+Label --|> MultiGraphic
+Label --* LabelPlacement
+
+VectorSymbolizer : label: Label [0..1]
+VectorSymbolizer --* Label
+....

@@ -15,7 +15,12 @@ This requirements class adds support for defining how to render a (multi-)graphi
 
 ===== Class Pointf
 
-* x: float
-* y: float
+.Pointf
+[width="90%",options="header"]
+|===
+| Name	    | Definition	        | Data type and value	| Multiplicity
+| x	        | x coordinate	        | float			        | 1
+| y	        | y coordinate	        | float			        | 1
+|===
 
 ===== Class GraphicalUnit

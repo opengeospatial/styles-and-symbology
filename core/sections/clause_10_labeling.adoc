@@ -41,9 +41,13 @@ LabelClass properties are documented in the following table.
 
 ===== Class FontOutline
 
-* size: float
-* opacity: float
-* color: Color
+.FontOutline
+[width="90%",options="header"]
+|===
+| Name	    | Definition	            | Data type and value	| Multiplicity
+| size      | Size of the outline	    | float	                | zero or one
+| opacity   | Opacity of the outline	| float	                | zero or one
+| color     | Color of the outline	    | Color	                | zero or one
 
 ===== Class Font
 
@@ -51,6 +55,12 @@ LabelClass properties are documented in the following table.
 
 ===== Class Color
 
-* r: float
-* g: float
-* b: float
+.Color
+[width="90%",options="header"]
+|===
+| Name	| Definition	    | Data type and value	| Multiplicity
+| r	    | Red component	    | float	                | one
+| g	    | Green component	| float	                | one
+| b	    | Blue component	| float	                | one
+| a	    | Alpha component	| float	                | zero or one
+|===

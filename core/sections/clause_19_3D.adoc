@@ -11,31 +11,56 @@ model: Resource
 
 ==== Class Vector3D
 
-* x: double
-* y: double
-* z: double
+.Vector3D
+[width="90%",options="header"]
+|===
+| Name	    | Definition	    | Data type and value	| Multiplicity
+| x	        | x coordinate	    | double		        | 1
+| y	        | y coordinate	    | double		        | 1
+| z	        | z coordinate	    | double		        | 1
+|===
 
 ==== Class Vector3Df
 
-x: float
-y: float
-z: float
+.Vector3Df
+[width="90%",options="header"]
+|===
+| Name	    | Definition	    | Data type and value	| Multiplicity
+| x	        | x coordinate	    | float		        | 1
+| y	        | y coordinate	    | float		        | 1
+| z	        | z coordinate	    | float		        | 1
+|===
 
 ==== Class Quaternion
 
-* x: double
-* y: double
-* z: double
-* w: double
+.Quaternion
+[width="90%",options="header"]
+|===
+| Name	    | Definition	    | Data type and value	| Multiplicity
+| x	        | x coordinate	    | double		        | 1
+| y	        | y coordinate	    | double		        | 1
+| z	        | z coordinate	    | double		        | 1
+| w	        | w coordinate	    | double		        | 1
+|===
 
 ==== Class Transform3D
 
-* orientation: Quaternion
-* position: Vector3D
-* scaling: Vector3Df
+.Transform3D
+[width="90%",options="header"]
+|===
+| Name	        | Definition	        | Data type and value	| Multiplicity
+| orientation	| orientation	        | Quaternion	        | 1
+| position	    | position	            | Vector3D	            | 1
+| scaling	    | scaling	            | Vector3Df	            | 1
+|===
 
 ==== Class Transform2D
 
-* orientation: Angle
-* scaling: Pointf
-* translation: Pointf
+.Transform2D
+[width="90%",options="header"]
+|===
+| Name	        | Definition	        | Data type and value	| Multiplicity
+| orientation	| orientation	        | Angle	                | 1
+| scaling	    | scaling	            | Pointf	            | 1
+| translation	| translation	        | Pointf	            | 1
+|===

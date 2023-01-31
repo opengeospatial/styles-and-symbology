@@ -9,15 +9,25 @@ This requirements class adds support for defining how to join and cap lines and 
 
 ===== Class StrokeJoin
 
-* miter
-* round
-* bevel
+.StrokeJoin
+[width="90%",options="header"]
+|===
+| Name	    | Definition	        | Data type and value	| Multiplicity
+| miter	    | Miter join	        | Enumeration	        | 0..1
+| round	    | Round join	        | Enumeration	        | 0..1
+| bevel	    | Bevel join	        | Enumeration	        | 0..1
+|===
 
 ===== Class StrokeCap
 
-* butt
-* round
-* square
+.StrokeCap
+[width="90%",options="header"]
+|===
+| Name	    | Definition	        | Data type and value	| Multiplicity
+| butt	    | Butt cap	            | Enumeration	        | 0..1
+| round	    | Round cap	            | Enumeration	        | 0..1
+| square    | Square cap	        | Enumeration	        | 0..1
+|===
 
 ===== Class Stroke
 

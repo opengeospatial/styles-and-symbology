@@ -20,9 +20,16 @@ hatchstyle, stipplestyle, gradient properties
 
 ====== Class Color
 
-* r: float
-* g: float
-* b: float
+// already defined in the requirements clause_10_labeling.adoc
+.Color
+[width="90%",options="header"]
+|===
+| Name	| Definition	    | Data type and value	| Multiplicity
+| r	    | Red component	    | float	                | one
+| g	    | Green component	| float	                | one
+| b	    | Blue component	| float	                | one
+| a	    | Alpha component	| float	                | zero or one
+|===
 
 ====== Class Gradient
 
@@ -30,26 +37,43 @@ hatchstyle, stipplestyle, gradient properties
 
 ====== Class ColorKey
 
-* color: Color
-* opacity: float
-* percent: float
+.Color
+[width="90%",options="header"]
+|===
+| Name	    | Definition	    | Data type and value	| Multiplicity
+| color	    | Color	            | Color	                | one
+| opacity	| Opacity	        | float	                | zero or one
+| percent	| Percent	        | float	                | zero or one
+|===
 
 ====== Class StippleStyle
 
-* light
-* medium
-* heavy
+.StippleStyle
+[width="90%",options="header"]
+|===
+| Name	    | Definition	    | Data type and value	| Multiplicity
+| light	    | Light	            | float	                | one
+| medium	| Medium	        | float	                | one
+| heavy	    | Heavy	            | float	                | one
+|===
 
 ====== Class HatchStyle
 
-* forward
-* backward
-* xCross
-* cross
+.HatchStyle
+[width="90%",options="header"]
+|===
+| Name	    | Definition	    | Data type and value	| Multiplicity
+| forward	| Forward	        | float	                | one
+| backward	| Backward	        | float	                | one
+| xCross	| X-Cross	        | float	                | one
+| cross	    | Cross	            | float	                | one
+|===
 
 ====== Class Resource
 
 ====== Class Color
+
+// already defined
 
 * r: float
 * g: float

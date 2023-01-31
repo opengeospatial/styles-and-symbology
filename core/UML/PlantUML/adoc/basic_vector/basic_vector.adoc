@@ -1,0 +1,32 @@
+// Vector Features Symbolizer
+
+[plantuml, target=diagram-classes, format=png]
+....
+'Class definition
+
+'Note: Symbolizer, StylingRule and Style are defined in core.md
+
+'We are adding properties here 
+
+class Symbolizer <<extended>>
+Symbolizer : fill: Fill [0..1]
+Symbolizer : stroke: Stroke [0..1]
+Symbolizer : marker: Marker [0..1]
+
+MultiGraphic : elements: Graphic [0..*]
+
+'Relations
+
+'Inheritance
+
+Marker --|> MultiGraphic
+
+'Composition
+
+Symbolizer --* Marker
+Symbolizer --* Fill
+Symbolizer --* Stroke
+MultiGraphic --* Graphic
+Fill --* Graphic
+Stroke --* Graphic
+....

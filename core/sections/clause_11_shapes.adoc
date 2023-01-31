@@ -21,24 +21,44 @@ Base Class: Graphic
 
 ===== Class Rectangle
 
-* topLeft: Pointf
-* bottomRight: Pointf
+.Rectangle
+[width="90%",options="header"]
+|===
+| Name	        | Definition	                        | Data type and value	| Multiplicity
+| topLeft	    | Top left corner of the rectangle	    | Pointf	            | 1
+| bottomRight	| Bottom right corner of the rectangle	| Pointf	            | 1
+|===
 
 ====== Class RoundedRectangle
 
-* rx: float
-* ry: float
+.RoundRectangle
+[width="90%",options="header"]
+|===
+| Name	        | Definition	                            | Data type and value	| Multiplicity
+| rx            | Horizontal radius of the rounded corners	| float	                | 1
+| ry            | Vertical radius of the rounded corners	| float	                | 1
+|===
 
 ===== Class Circle
 
-* center: Pointf
-* radius: float
+.Circle
+[width="90%",options="header"]
+|===
+| Name	    | Definition	        | Data type and value	| Multiplicity
+| center	| Center of the circle	| Pointf	            | 1
+| radius	| Radius of the circle	| float	                | 1
+|===
 
 ===== Class Ellipse
 
-* center: Pointf
-* radiusX: float
-* radiusY: float
+.Ellipse
+[width="90%",options="header"]
+|===
+| Name	    | Definition	        | Data type and value	| Multiplicity
+| center	| Center of the ellipse	| Pointf	            | 1
+| radiusX	| Horizontal radius	    | float	                | 1
+| radiusY	| Vertical radius	    | float	                | 1
+|===
 
 ===== Class Arc
 

@@ -10,15 +10,18 @@ This requirements class adds support for arithmetic operations.
 .Arithmetic Operators UML Diagram
 include::../UML/PlantUML/adoc/arithmetic/arithmetic.adoc[]
 
-// TODO: Make all these bullet lists tables
-
-* add
-* sub
-* mul
-* div
-* intDiv
-* mod
-* pow
+.arithmetic
+[width="90%",options="header"]
+|===
+| Name	    | Definition	    | Data type and value	| Multiplicity
+| add	    | Addition	        | Numeric	            | 1..1
+| sub	    | Subtraction	    | Numeric	            | 1..1
+| mul	    | Multiplication	| Numeric	            | 1..1
+| div	    | Division	        | Numeric	            | 1..1
+| intDiv    | Integer Division  | Numeric	            | 1..1
+| mod	    | Modulus	        | Numeric	            | 1..1
+| pow	    | Power	            | Numeric	            | 1..1
+|===
 
 ==== Requirements
 
@@ -36,14 +39,17 @@ This requirements class adds support for operations on individual bits.
 .Bitwise Operators UML Diagram
 include::../UML/PlantUML/adoc/bitwise/bitwise.adoc[]
 
-// TODO: Make this a table
-
-* bitAnd
-* bitOr
-* bitNot -- unary
-* bitXor
-* leftShift
-* rightShift
+.bitwise
+[width="90%",options="header"]
+|===
+| Name	    | Definition	    | Data type and value	| Multiplicity
+| bitAnd	| Bitwise AND	    | Integer	            | 1..1
+| bitOr	    | Bitwise OR	    | Integer	            | 1..1
+| bitNot	| Bitwise NOT	    | Integer	            | 1..1
+| bitXor	| Bitwise XOR	    | Integer	            | 1..1
+| leftShift	| Left Shift	    | Integer	            | 1..1
+| rightShift| Right Shift	    | Integer	            | 1..1
+|===
 
 ==== Requirements
 
@@ -64,14 +70,19 @@ include::../UML/PlantUML/adoc/textOperators/textOperators.adoc[]
 
 // TODO: Make this a table
 
-* like
-* notLike
-* contains
-* startsWith
-* endsWith
-* notContains
-* notStartsWith
-* notEndsWith
+.comparison
+[width="90%",options="header"]
+|===
+| Name	        | Definition	        | Data type and value	| Multiplicity
+| like	        | Like	                | Text	                | 1..1
+| notLike	    | Not Like	            | Text	                | 1..1
+| contains	    | Contains	            | Text	                | 1..1
+| startsWith	| Starts With	        | Text	                | 1..1
+| endsWith	    | Ends With	            | Text	                | 1..1
+| notContains	| Does Not Contain	    | Text	                | 1..1
+| notStartsWith| Does Not Start With	| Text	                | 1..1
+| notEndsWith	| Does Not End With	    | Text	                | 1..1
+|===
 
 ==== Requirements
 
