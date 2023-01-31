@@ -26,56 +26,360 @@ include::../UML/PlantUML/adoc/standardFunctions.adoc[]
 
 ===== Standard SpatialRelationFunctions
 
-* s_intersects(Geometry a, Geometry b) bool
-* s_contains(Geometry a, Geometry b) bool
-* s_crosses(Geometry a, Geometry b) bool
-* s_disjoint(Geometry a, Geometry b) bool
-* s_equals(Geometry a, Geometry b) bool
-* s_overlaps(Geometry a, Geometry b) bool
-* s_touches(Geometry a, Geometry b) bool
-* s_within(Geometry a, Geometry b) bool
-* s_covers(Geometry a, Geometry b) bool
-* s_coveredBy(Geometry a, Geometry b) bool
+SpatialRelationFunctions are defined in the https://portal.ogc.org/files/?artifact_id=25355[OGC Simple Feature Access - Part 1: Common Architecture] specification and listed in the following table. They involve operations on geometries.
+
+// Do we need to name the functions with the prefix "s_"?
+// If it is not the case, don't forget to update the following files:
+// - core\UML\PlantUML\adoc\standardFunctions.adoc
+// - core\UML\PlantUML\pu\standardFunctions.pu
+
+.SpatialRelationFunctions
+[width="90%",options="header"]
+|===
+| Name	       | Definition	                         | Data type and value | Multiplicity
+| s_intersects | s_intersects(Geometry a, Geometry b)| bool                | 1
+| s_contains   | s_contains(Geometry a, Geometry b)  | bool                | 1
+| s_crosses    | s_crosses(Geometry a, Geometry b)   | bool                | 1
+| s_disjoint   | s_disjoint(Geometry a, Geometry b)  | bool                | 1
+| s_equals     | s_equals(Geometry a, Geometry b)    | bool                | 1
+| s_overlaps   | s_overlaps(Geometry a, Geometry b)  | bool                | 1
+| s_touches    | s_touches(Geometry a, Geometry b)   | bool                | 1
+| s_within     | s_within(Geometry a, Geometry b)    | bool                | 1
+| s_covers     | s_covers(Geometry a, Geometry b)    | bool                | 1
+| s_coveredBy  | s_coveredBy(Geometry a, Geometry b) | bool                | 1
+|===
 
 ===== Class Geometry
+
+// The bounding box parameter shouldn't be included in the geometry class.
+
+[#img-uml-class-geometry]
+.UML Class Diagram of geometry
+include::../UML/PlantUML/adoc/geometry.adoc[]
 
 ===== Class Point
 
-* coordinates: double[2..*]
+// Reference: https://portal.ogc.org/files/?artifact_id=25355[OGC Simple Feature Access - Part 1: Common Architecture]section 6.1.4 Point
 
-===== Class MultiPoint
+A Point is a 0-dimensional geometric object and represents a single location in coordinate space. A Point has an x-coordinate value, a y-coordinate value. If called for by the associated Spatial Reference System, it may also have coordinate values for z and m.
+The boundary of a Point is the empty set.
 
-* points: Point[1..*]
+.Point
+[width="90%",options="header"]
+|===
+| Name	       | Definition	    | Data type and value | Multiplicity
+| x            | x coordinate	| double              | 2..*
+| y            | y coordinate	| double              | 2..*
+| z            | z coordinate	| double              | 2..*  
+| m            | m coordinate	| double              | 2..*
+|===
 
-===== Class BoundingBox
+===== Class Curve
 
-* lowerBound: Point
-* upperBound: Point
+// Reference: https://portal.ogc.org/files/?artifact_id=25355[OGC Simple Feature Access - Part 1: Common Architecture]section 6.1.6 Curve
 
-===== Class LineString
+A Curve is a 1-dimensional geometric object usually stored as a sequence of Points, with the subtype of Curve specifying the form of the interpolation between Points. This standard defines only one subclass of Curve, LineString, which uses linear interpolation between Points.
 
-* points: Point[2..*]
+A Curve is a 1-dimensional geometric object that is the homeomorphic image of a real, closed, interval:
 
-===== Class MultiLineString
+```
+D = [a, b] = {t∈ℜ⏐ a ≤ t ≤ b}
+```
 
-* lineStrings: LineString[1..*]
+under a mapping
 
-===== Class Polygon
+```
+f :[a, b] → ℜn
+```
 
-* outer: LineString
-* inner: LineString[0..*]
+where n is the coordinate dimension of the underlying Spatial Reference System.
 
-===== Class MultiPolygon
+A Curve is simple if it does not pass through the same Point twice with the possible exception of the two end points
 
-* multiPolygons: Polygon[1..*]
+```
+∀ c ∈ Curve, [a, b] = c.Domain, c =: f :[a, b] → ℜ n
+c.IsSimple ⇔ ∀ x1 , x2 ∈ [a, b]: [ f(x1 )=f(x2 ) ∧ x1 <x2 ] ⇒ [x1 =a ∧ x2 =b]
+```
 
-===== Class Geometry
+A Curve is closed if its start Point is equal to its end Point.
 
-* geometry: Geometry[1]
+```
+c.IsClosed ⇔ [f(a) = f(b)]
+```
+
+The boundary of a closed Curve is empty.
+
+```
+c.IsClosed ⇔ [c.boundary = ∅]
+```
+A Curve that is simple and closed is a Ring.
+The boundary of a non-closed Curve consists of its two end Points.
+A Curve is defined as topologically closed, that is, it contains its endpoints f(a) and f(b).
+
+.Curve
+[width="90%",options="header"]
+|===
+| Name	         | Definition	                | Data type and value | Multiplicity
+|length()        | length of the curve	        | double              | 1
+|startPoint()    | start point of the curve	    | Point               | 1
+|endPoint()      | end point of the curve	    | Point               | 1
+|isClosed()      | true if the curve is closed	| bool                | 1
+|isRing()        | true if the curve is a ring	| bool                | 1
+|===
+
+//Should we add an uml diagram for the relation between Curve and LineString?
+
+===== Class Surface
+
+// Reference: https://portal.ogc.org/files/?artifact_id=25355[OGC Simple Feature Access - Part 1: Common Architecture]section 6.1.10 Surface
+
+A Surface is a 2-dimensional geometric object.
+A simple Surface may consists of a single “patch” that is associated with one “exterior boundary” and 0 or more “interior” boundaries. A single such Surface patch in 3-dimensional space is isometric to planar Surfaces, by a simple affine rotation matrix that rotates the patch onto the plane z = 0. If the patch is not vertical, the projection onto the same plane is an isomorphism, and can be represented as a linear transformation, i.e. an affine.
+
+Polyhedral Surfaces are formed by “stitching” together such simple Surfaces patches along their common boundaries. Such polyhedral Surfaces in a 3-dimensional space may not be planar as a whole, depending on the orientation of their planar normals. If all the patches are in alignment (their normals are parallel), then the whole stitched polyhedral surface is co-planar and can be represented as a single patch if it is connected.
+
+The boundary of a simple Surface is the set of closed Curves corresponding to its “exterior” and “interior” boundaries.
+
+The only instantiable subclasses of Surface defined in this standard are Polygon and PolyhedralSurface. A Polygon is a simple Surface that is planar. A PolyhedralSurface is a simple surface, consisting of some number of Polygon patches or facets. If a PolyhedralSurface is closed, then it bounds a solid. A MultiSurface containing a set of closed PolyhedralSurfaces can be used to represent a Solid object with holes.
+
+.Surface
+[width="90%",options="header"]
+|===
+| Name	         | Definition	            | Data type and value | Multiplicity
+|area()          | area of the surface	    | double              | 1
+|centroid()      | centroid of the surface	| Point               | 1
+|pointOnSurface()| point on the surface	    | Point               | 1
+|boundary()      | boundary of the surface	| Curve               | 1..*
+|===
+
+// Should we add an uml diagram for the relation between Surface and Polygon and PolyhedralSurface?
 
 ===== Class GeometryCollection
 
-* geometries: Geometry[1..*]
+// Reference: https://portal.ogc.org/files/?artifact_id=25355[OGC Simple Feature Access - Part 1: Common Architecture]section 6.1.3 GeometryCollection
+
+A GeometryCollection is a geometric object that is a collection of some number of geometric objects.
+All the elements in a GeometryCollection shall be in the same Spatial Reference System. This is also the Spatial Reference System for the GeometryCollection.
+GeometryCollection places no other constraints on its elements. Subclasses of GeometryCollection may restrict membership based on dimension and may also place other constraints on the degree of spatial overlap between elements.
+
+.GeometryCollection
+[width="90%",options="header"]
+|===
+| Name	         | Definition	                                | Data type and value | Multiplicity
+|numGeometries() | number of geometries in the collection	    | int                 | 1
+|geometryN()     | returns the n-th geometry in the collection	| Geometry            | 1
+|===
+
+===== Class LineString, Line, LinearRing
+
+// Reference: https://portal.ogc.org/files/?artifact_id=25355[OGC Simple Feature Access - Part 1: Common Architecture]section 6.1.7 LineString, Line, LinearRing
+
+A LineString is a Curve with linear interpolation between Points. Each consecutive pair of Points defines a Line segment.
+A Line is a LineString with exactly 2 Points.
+A LinearRing is a LineString that is both closed and simple.
+
+// Should we include a figure with the associated description as figure the figure 6 in the section 6.1.7 of the OGC Simple Feature Access - Part 1: Common Architecture document?
+
+.LineString
+[width="90%",options="header"]
+|===
+| Name	     | Definition	                                    | Data type and value | Multiplicity
+|numPoints() | number of points in the line string	            | int                 | 1
+|pointN()    | returns the specified Point N in this LineString.| int                 | 1
+|===
+
+===== Class Polygon, Triangle
+
+// Reference: https://portal.ogc.org/files/?artifact_id=25355[OGC Simple Feature Access - Part 1: Common Architecture] 6.1.11 Polygon, Triangle
+
+A Polygon is a planar Surface defined by 1 exterior boundary and 0 or more interior boundaries. Each interior boundary defines a hole in the Polygon. A Triangle is a polygon with 3 distinct, non-collinear vertices and no interior boundary.
+
+The exterior boundary LinearRing defines the “top” of the surface which is the side of the surface from which the exterior boundary appears to traverse the boundary in a counter clockwise direction. The interior LinearRings will have the opposite orientation, and appear as clockwise when viewed from the “top”,
+
+The assertions for Polygons (the rules that define valid Polygons) are as follows:
+
+a. Polygons are topologically closed;
+b. The boundary of a Polygon consists of a set of LinearRings that make up its exterior and interior boundaries;
+c. No two Rings in the boundary cross and the Rings in the boundary of a Polygon may intersect at a Point but only as a tangent, e.g.
+
+```
+∀ P ∈ Polygon, ∀ c1,c2∈P.Boundary(), c1≠c2,
+∀ p, q ∈Point, p, q ∈ c1, p ≠ q ,
+[p ∈ c2] ⇒ [∃ δ > 0 ∋ [|p-q|<δ] ⇒ [q ∉ c2] ];
+```
+
+__Note:__ This last condition says that at a point common to the two curves, nearby points cannot be common. This forces each common point to be a point of tangency.
+
+[start=4]
+d. A Polygon may not have cut lines, spikes or punctures e.g.:
+
+```
+∀ P ∈ Polygon, P = P.Interior.Closure;
+```
+[start=5]
+e. The interior of every Polygon is a connected point set;
+f. The exterior of a Polygon with 1 or more holes is not connected. Each hole defines a connected component of the exterior.
+
+In the above assertions, interior, closure and exterior have the standard topological definitions. The combination of (a) and (c) makes a Polygon a regular closed Point set. Polygons are simple geometric objects.
+
+// Should we include figure 11 & 12 of the section 6.1.11 of the OGC Simple Feature Access - Part 1: Common Architecture document and the associated description?
+
+.Polygon
+[width="90%",options="header"]
+|===
+| Name	         | Definition	                                    | Data type and value | Multiplicity
+|exteriorRing()   | returns the exterior ring of the polygon	    | LinearRing          | 1
+|numInteriorRing()| number of interior rings in the polygon	        | int                 | 1
+|interiorRingN()  | returns the n-th interior ring in the polygon	| LinearRing          | 1
+|===
+
+===== Class PolyhedralSurface
+
+// Reference: https://portal.ogc.org/files/?artifact_id=25355[OGC Simple Feature Access - Part 1: Common Architecture]section 6.1.12 PolyhedralSurface
+
+A PolyhedralSurface is a contiguous collection of polygons, which share common boundary segments. For each
+pair of polygons that “touch”, the common boundary shall be expressible as a finite collection of LineStrings. Each such LineString shall be part of the boundary of at most 2 Polygon patches. A TIN (triangulated irregular network) is a PolyhedralSurface consisting only of Triangle patches.
+
+For any two polygons that share a common boundary, the “top” of the polygon shall be consistent. This means
+that when two LinearRings from these two Polygons traverse the common boundary segment, they do so in
+opposite directions. Since the Polyhedral surface is contiguous, all polygons will be thus consistently oriented. This means that a non-oriented surface (such as Möbius band) shall not have single surface representations. They may be represented by a MultiSurface.
+
+// Shall we include the figure 14 of the section 6.1.12 of the OGC Simple Feature Access - Part 1: Common Architecture document and the associated description?
+
+If each such LineString is the boundary of exactly 2 Polygon patches, then the PolyhedralSurface is a simple,
+closed polyhedron and is topologically isomorphic to the surface of a sphere. By the Jordan Surface Theorem
+(Jordan’s Theorem for 2-spheres), such polyhedrons enclose a solid topologically isomorphic to the interior of a
+sphere; the ball. In this case, the “top” of the surface will either point inward or outward of the enclosed finite solid. If outward, the surface is the exterior boundary of the enclosed surface. If inward, the surface is the interior of the infinite complement of the enclosed solid. A Ball with some number of voids (holes) inside can thus be presented as one exterior boundary shell, and some number in interior boundary shells.
+
+.PolyhedralSurface
+[width="90%",options="header"]
+|===
+| Name	           | Definition	                                            | Data type and value | Multiplicity
+|numPatches()      | number of patches in the polyhedral surface	        | int                 | 1
+|patchN()          | returns the n-th patch in the polyhedral surface       | Polygon             | 1
+|boundingPolygons()| returns the bounding polygon of the polyhedral surface | Polygon             | 1
+|isClosed()        | returns true if the polyhedral surface is closed       | boolean             | 1
+|===
+
+// Should we add the uml diagram for the relation between Polygon & PolyhedralSurface classes?
+
+===== Class MultiSurface
+
+// Reference: https://portal.ogc.org/files/?artifact_id=25355[OGC Simple Feature Access - Part 1: Common Architecture]section 6.1.13 MultiSurface
+
+A MultiSurface is a 2-dimensional GeometryCollection whose elements are Surfaces, all using coordinates from
+the same coordinate reference system. The geometric interiors of any two Surfaces in a MultiSurface may not
+intersect in the full coordinate system. The boundaries of any two coplanar elements in a MultiSurface may
+intersect, at most, at a finite number of Points. If they were to meet along a curve, they could be merged into a single surface.
+
+MultiSurface is an instantiable class in this Standard, and may be used to represent heterogeneous surfaces
+collections of polygons and polyhedral surfaces. It defines a set of methods for its subclasses. The subclass of
+MultiSurface is MultiPolygon corresponding to a collection of Polygons only. Other collections shall use
+MultiSurface.
+
+__Note:__ The geometric relationships and sets are the common geometric ones in the full coordinate systems. The
+use of the 2D map operations may classify the elements of a valid 3D MultiSurface
+as having overlapping interiors in their 2D projections.
+
+.MultiSurface
+[width="90%",options="header"]
+|===
+| Name	           | Definition	                                            | Data type and value | Multiplicity
+| area             | returns the area of the surface	                    | double              | 1
+| centroid         | returns the centroid of the surface	                | Point               | 1
+|pointOnSurface()  | returns a point guaranteed to be on the surface	    | Point               | 1
+|===
+
+===== Class MultiCurve
+
+// Reference: https://portal.ogc.org/files/?artifact_id=25355[OGC Simple Feature Access - Part 1: Common Architecture]section 6.1.8 MultiCurve
+
+A MultiCurve is a 1-dimensional GeometryCollection whose elements are Curves. The curves in a MultiCurve
+
+MultiCurve is a non-instantiable class in this standard; it defines a set of methods for its subclasses and is
+included for reasons of extensibility.
+
+// Shall we include a figure?
+
+MultiCurve is a non-instantiable class in this standard; it defines a set of methods for its subclasses and is
+included for reasons of extensibility. A MultiCurve is simple if and only if all of its elements are simple and the only intersections between any two elements occur at Points that are on the boundaries of both elements.
+
+The boundary of a MultiCurve is obtained by applying the “mod 2” union rule: A Point is in the boundary of a
+MultiCurve if it is in the boundaries of an odd number of elements of the MultiCurve .
+
+A MultiCurve is closed if all of its elements are closed. The boundary of a closed MultiCurve is always empty.
+
+.MultiCurve
+[width="90%",options="header"]
+|===
+| Name	    | Definition	                      | Data type and value | Multiplicity
+|isClosed() | returns true if the curve is closed | boolean             | 1
+| length    | returns the length of the curve	  | double              | 1
+|===
+
+===== Class MultiPoint
+
+// Reference: https://portal.ogc.org/files/?artifact_id=25355[OGC Simple Feature Access - Part 1: Common Architecture]section 6.1.5 MultiPoint
+
+A MultiPoint is a 0-dimensional GeometryCollection. The elements of a MultiPoint are restricted to Points. The Points are not connected or ordered in any semantically important way (see the discussion at GeometryCollection).
+A MultiPoint is simple if no two Points in the MultiPoint are equal (have identical coordinate values in X and Y).
+Every MultiPoint is spatially equal to a simple Multipoint.
+The boundary of a MultiPoint is the empty set.
+
+===== Classe MultiPolygon
+
+// Reference: https://portal.ogc.org/files/?artifact_id=25355[OGC Simple Feature Access - Part 1: Common Architecture]section 6.1.14 MultiPolygon
+
+A MultiPolygon is a MultiSurface whose elements are Polygons.
+The assertions for MultiPolygons are as follows.
+
+a. The interiors of 2 Polygons that are elements of a MultiPolygon may not intersect.
+
+```
+∀M∈MultiPolygon, ∀Pi ,Pj∈M.Geometries(),i≠j,
+Interior(P i )∩Interior(Pj ) = ∅;
+```
+[start=2]
+b. The boundaries of any 2 Polygons that are elements of a MultiPolygon may not “cross” and may touch at only
+a finite number of Points.
+
+```
+∀M∈MultiPolygon, ∀Pi ,Pj∈M.Geometries(),
+∀ci, cj∈Curve ci∈Pi .Boundaries(), c j∈Pj .Boundaries()
+∃k∈Integer ∋ ci∩cj = {p1 ,...,pk | pm∈Point, 0<m<k};
+```
+
+__Note:__ Crossing is prevented by assertion (a) above.
+
+[start=3]
+c. A MultiPolygon is defined as topologically closed.
+d. A MultiPolygon may not have cut lines, spikes or punctures, a MultiPolygon is a regular closed Point set:
+
+```
+∀ M ∈ MultiPolygon, M = Closure(Interior(M))
+```
+[start=5]
+e. The interior of a MultiPolygon with more than 1 Polygon is not connected; the number of connected
+components of the interior of a MultiPolygon is equal to the number of Polygons in the MultiPolygon.
+
+The boundary of a MultiPolygon is a set of closed Curves (LineStrings) corresponding to the boundaries of its
+element Polygons. Each Curve in the boundary of the MultiPolygon is in the boundary of exactly 1 element
+Polygon, and every Curve in the boundary of an element Polygon is in the boundary of the MultiPolygon.
+
+// Should we add the reference to Worboys & Clementini et al. as in the OGC Simple Feature Access - Part 1: Common Architecture document?
+
+// Should we add the figure 17 & 18 of the OGC Simple Feature Access - Part 1: Common Architecture document?
+
+// Table to be discussed & added
+
+===== Class MultiLineString
+
+// Reference: https://portal.ogc.org/files/?artifact_id=25355[OGC Simple Feature Access - Part 1: Common Architecture]section 6.1.9 MultiLineString
+
+A MultiLineString is a MultiCurve whose elements are LineStrings.
+
+// Should we include a figure?
+// Table to be discussed & added
 
 [[rc-temporal]]
 === Requirements Class "Temporal Relation Functions"

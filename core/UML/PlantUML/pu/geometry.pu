@@ -1,38 +1,41 @@
 @startuml
+' Add muliplicity to the diagram
 class Geometry <<abstract>>
 
-Point : coordinates: double[2..*]
+class ReferenceSystems
+ReferenceSystems : SpatialReferenceSystem
+ReferenceSystems : MeasurementReferenceSystem
 
-Point --|> Geometry
+ReferenceSystems <|-- Geometry
 
-MultiPoint : points: Point[1..*]
+Geometry <|-- Point
+Geometry <|-- Curve
+Geometry <|-- Surface
+Geometry <|-- GeometryCollection
 
-MultiPoint --|> Geometry
-MultiPoint --* Point
+Curve <|-- LineString
+Point --* LineString
+MultiPoint *-- Point
 
-BoundingBox : lowerBound: Point
-BoundingBox : upperBound: Point
+Surface <|-- Polygon
+Surface <|-- Polyhedralsurface
 
-BoundingBox --|> Geometry
-BoundingBox --* Point
+GeometryCollection <|-- MultiSurface
+GeometryCollection <|-- MultiCurve
+GeometryCollection <|-- MultiPoint
 
-LineString : points: Point[2..*]
+LineString <|-- Line
+LineString <|-- LinearRing
+ 
+Polygon *-- LinearRing
+Polygon <|-- Triangle
+TIN *-- Triangle
 
-LineString --* Point
-LineString --|> Geometry
+Polyhedralsurface *-- Polygon
+Polyhedralsurface <|-- TIN
 
-MultiLineString : lineStrings: LineString[1..*]
+MultiSurface <|-- MultiPolygon
 
-MultiLineString --|> Geometry
-MultiLineString --* LineString
-
-PolygonContour : points: Point[3..*]
-
-PolygonContour --* Point
-
-Polygon : outer: PolygonContour
-Polygon : inner: PolygonContour[0..*]
-
-Polygon --* PolygonContour
-Polygon --|> Geometry
+MultiPolygon *-- Polygon
+MultiLineString *-- Polygon
 @enduml
