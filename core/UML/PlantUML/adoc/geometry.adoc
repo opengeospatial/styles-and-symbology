@@ -4,26 +4,12 @@
 ....
 class Geometry <<abstract>>
 
-class ReferenceSystems
-ReferenceSystems : SpatialReferenceSystem
-ReferenceSystems : MeasurementReferenceSystem
-
-ReferenceSystems <|-- Geometry
-
 Geometry <|-- Point
-Geometry <|-- Curve
-Geometry <|-- Surface
 Geometry <|-- GeometryCollection
 
-Curve <|-- LineString
 Point --* LineString
 MultiPoint *-- Point
 
-Surface <|-- Polygon
-Surface <|-- Polyhedralsurface
-
-GeometryCollection <|-- MultiSurface
-GeometryCollection <|-- MultiCurve
 GeometryCollection <|-- MultiPoint
 
 LineString <|-- Line
@@ -31,12 +17,6 @@ LineString <|-- LinearRing
  
 Polygon *-- LinearRing
 Polygon <|-- Triangle
-TIN *-- Triangle
-
-Polyhedralsurface *-- Polygon
-Polyhedralsurface <|-- TIN
-
-MultiSurface <|-- MultiPolygon
 
 MultiPolygon *-- Polygon
 MultiLineString *-- Polygon
