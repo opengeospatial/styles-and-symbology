@@ -48,6 +48,7 @@ LabelClass properties are documented in the following table.
 | size      | Size of the outline	    | float	                | zero or one
 | opacity   | Opacity of the outline	| float	                | zero or one
 | color     | Color of the outline	    | Color	                | zero or one
+|===
 
 ===== Class Font
 
