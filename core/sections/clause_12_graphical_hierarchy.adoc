@@ -22,7 +22,7 @@ GraphicInstance --o Graphic
 
 ==== Graphic and MultiGraphic Extensions
 
-This requirements class removes the restriction on MultiGrahics containing other MultiGraphics.
+This requirements class removes the restriction on MultiGraphics containing other MultiGraphics.
 
 .Extended Graphic class
 [width="90%",options="header"]
