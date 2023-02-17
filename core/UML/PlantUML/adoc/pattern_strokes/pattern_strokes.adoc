@@ -1,9 +1,0 @@
-// Pattern strokes
-
-[plantuml, target=diagram-classes, format=png]
-....
-
-Stroke : pattern: Graphic [0..1]
-
-Stroke --* Graphic
-....

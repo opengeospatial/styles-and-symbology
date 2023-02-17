@@ -9,20 +9,29 @@ rendered at the exact location of point geometry, at the centroid of polygon geo
 
 ==== Symbolizer extension for vector features
 
+[#img-uml-class-vectorFeaturesSymbolizer]
+.Basic Vector Features Extended Symbolizer Class UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+class Symbolizer <<extended>>
+Symbolizer : fill: Fill [0..1]
+Symbolizer : stroke: Stroke [0..1]
+Symbolizer : marker: Marker [0..1]
+Symbolizer --* Fill
+Symbolizer --* Stroke
+Symbolizer --* Marker
+....
+
 The following three new Symbolizer properties are defined by this requirements class:
 
-.Symbolizer (vector features extension)
+.Symbolizer class (vector features extension)
 [width="90%",options="header"]
 |===
-| Name	| Definition	                                                    | Data type and value	| Multiplicity
+| Name   | Definition                                                       | Data type and value  | Multiplicity
 | fill   | Fill to fill inside of geometries                                | Fill                 | 0..1
 | stroke | Stroke to render geometry outlines                               | Stroke               | 0..1
 | marker | Marker to render at geometries points or centroid (for polygons) | float                | 0..1
 |===
-
-[#img-uml-class-vectorFeaturesSymbolizer]
-.UML Class Diagram of the Symbology Vector Features Symbolizer
-include::../UML/PlantUML/adoc/basic_vector/basic_vector.adoc[]
 
 ==== Extended Identifiers for vector features
 
@@ -30,13 +39,36 @@ This requirements class defines as valid identifiers all of the accessible prope
 Those identifiers are to be resolved with the value of that property.
 An encoding must support an escaping mechanism in cases where the name of a feature property might clash with a syntactic element.
 
+===== Extended System Identifiers
+
+[#img-uml-class-vector-systemIDs]
+.Vector Features System Identifiers UML Class Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+class SystemIdentifierExpression <<extended>>
+SystemIdentifierExpression : feature
+SystemIdentifierExpression : feature.identifier
+SystemIdentifierExpression : feature.geometryDimensions
+SystemIdentifierExpression : dataLayer.features
+SystemIdentifierExpression : dataLayer.featuresGeometryDimensions
+SystemIdentifierExpression --> Feature
+SystemIdentifierExpression --> DataLayer
+
+Feature : identifier: string
+Feature : geometryDimensions: int
+
+DataLayer : features: Feature[*]
+DataLayer : featuresGeometryDimensions: int
+DataLayer --* Feature
+....
+
 In addition, the following new System Identifiers are defined by this requirements class:
 
 .System identifiers for vector features
 [width="90%",options="header"]
 |===
-| Name                          	       | Definition	                                             | Data type and value
-| feature.identifier          	       | Identifier of a particular feature                       | string or number
+| Name                                  | Definition                                               | Data type and value
+| feature.identifier                    | Identifier of a particular feature                       | string or number
 | feature.geometryDimensions            | Dimension of geometry for a particular feature           | 0 (points), 1 (lines), 2 (polygons), 3 (polyhedrons)
 | dataLayer.featuresGeometryDimension   | Dimension of feature geometry (if same for all features) | 0 (points), 1 (lines), 2 (polygons), 3 (polyhedrons), `null` (mixed)
 |===
@@ -45,61 +77,93 @@ In addition, the following new System Identifiers are defined by this requiremen
 
 [#img-uml-class-color]
 .Color class UML Diagram
-include::../UML/PlantUML/adoc/basic_vector/color.adoc[]
+[plantuml, target=diagram-classes, format=png]
+....
+Color : r: float
+Color : g: float
+Color : b: float
+....
 
 Both the Fill and Stroke allow to define a Color, specified using red, green and blue components.
 The ability to define Colors in other spaces (e.g., Lab, CMYK) is defined in separate requirements classes
 and applies wherever this basic RGB Color class is used.
 
-.Class Color
+.Color class
 [width="90%",options="header"]
 |===
-| Name	| Definition	    | Data type and value	| Multiplicity
-| r	    | Red component	    | float	                | 1
-| g	    | Green component	| float	                | 1
-| b	    | Blue component	| float	                | 1
+| Name   | Definition       | Type   | Multiplicity
+| r       | Red component   | float  | 1
+| g       | Green component | float  | 1
+| b       | Blue component  | float  | 1
 |===
 
 ==== Fills
 
 [#img-uml-class-fill]
 .UML Class Diagram of the Symbology Fill
-include::../UML/PlantUML/adoc/basic_vector/basic_fill.adoc[]
+[plantuml, target=diagram-classes, format=png]
+....
+Fill : color: Color
+Fill --* Color
+....
 
 A Fill defines the graphical symbolizing parameters required to draw the filling of a two-dimensional shape such as a polygon.
 Separate conformance classes can extend this Fill class with additional properties.
 
-.Fill
+.Fill class
 [width="90%",options="header"]
 |===
-| Name	 | Definition	        | Data type and value	| Multiplicity
-| color   | Color of the fill   | Color               | 0..1
-| opacity | Opacity of the fill | float               | 0..1
+| Name    | Definition          | Type    | Multiplicity
+| color   | Color of the fill   | Color   | 0..1
+| opacity | Opacity of the fill | float   | 0..1
 |===
 
 ==== Strokes
 
 [#img-uml-class-stroke]
 .Stroke Class UML Diagram
-include::../UML/PlantUML/adoc/basic_vector/basic_stroke.adoc[]
+[plantuml, target=diagram-classes, format=png]
+....
+Stroke --|> StrokeStyling
+Stroke --* StrokeStyling
+
+StrokeStyling : color: Color
+StrokeStyling : opacity: float
+StrokeStyling : width: float
+StrokeStyling : widthUnit: GraphicalUnit
+StrokeStyling --* Color
+StrokeStyling --* GraphicalUnit
+....
 
 A Stroke defines the graphical symbolizing parameters for drawing an outline (e.g., for linear geometries or the exterior of a polygon geometry). As an abstract class and part of the base of the core graphical concepts, StrokeClass is a global point of extension to specify concrete ways to draw outlines (e.g., the PenStroke and GraphicStroke extensions). The StrokeClass properties are documented in the following table.
 
 A Stroke object inherits from a base _StrokeStyling_ class, which is re-used in a separate requirements class for defining more complex strokes:
 
-.StrokeStyling
+.StrokeStyling class
 [width="90%",options="header"]
 |===
-| Name	   | Definition	                        | Data type and value	| Multiplicity
-| color 	   | Color of the stroke                  | Color	               | 0..1
-| width	   | Width of the stroke                  | float (uom-qualified) | 0..1
+| Name      | Definition                           | Data type and value   | Multiplicity
+| color     | Color of the stroke                  | Color                 | 0..1
+| width     | Width of the stroke                  | float (uom-qualified) | 0..1
 |===
 
 ===== Graphical Units of Measure
 
 [#img-uml-class-graphicalunits]
-.Graphical Units Enumeration UML Diagram 
-include::../UML/PlantUML/adoc/basic_vector/graphicalunit.adoc[]
+.Graphical Units Enumeration UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+class GraphicalUnit <<enumeration>>
+GraphicalUnit : pixels
+GraphicalUnit : meters
+GraphicalUnit : feet
+GraphicalUnit : percent
+GraphicalUnit : points
+GraphicalUnit : em
+GraphicalUnit : screenInches
+GraphicalUnit : screenCM
+GraphicalUnit : screenMM
+....
 
 For styling parameters that define sizing and positioning of graphical objects (width, displacement, etc.), a specific the unit of measure needs to be provided for the rendering engine.
 Therefore, properties where a unit of measure is relevant can be qualified with a particular uom codes.
@@ -125,27 +189,38 @@ Consequently, either the unit of measure is determined through the uom code dire
 
 ==== Markers
 
-// Note: no diagram since already defined at the top of the section
+[#img-uml-class-marker]
+.Marker Class UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+Marker --|> MultiGraphic
+
+MultiGraphic : elements: Graphic [0..*]
+MultiGraphic --* Graphic
+
+Graphic : position: FloatPoint
+Graphic : opacity: float
+....
 
 A Marker inherits from a MultiGraphic which can contain multiple graphical elements:
 
-.MultiGraphic
+.MultiGraphic class
 [width="90%",options="header"]
 |===
-| Name	   | Definition	     | Data type and value	| Multiplicity
-| elements  | Children elements | Graphic             | 1..n
+| Name      | Definition        | Data type and value   | Multiplicity
+| elements  | Children elements | Graphic               | 1..*
 |===
 
-Without support for additional conformance classes, an MultiGraphic cannot contain another MultiGraphic.
+Without support for the _Multi Graphics and Transforms_ requirements class, a MultiGraphic cannot contain another MultiGraphic.
 
 A MultiGraphic itself inherits from a Graphic allowing to specify an opacity and a 2D position:
 
-.Graphic
+.Graphic class
 [width="90%",options="header"]
 |===
-| Name	   | Definition  | Data type and value	| Multiplicity
+| Name      | Definition  | Data type and value   | Multiplicity
 | opacity   | Opacity     | float               | 0..1
-| position  | Opacity     | FloatPoint          | 0..1
+| position  | Position    | FloatPoint          | 0..1
 |===
 
 ////
@@ -155,32 +230,32 @@ which is used in a different context in this model). As an abstract class and pa
 to draw “graphic symbol” (e.g., ExternalGraphic and MarkGraphic extensions).
 The GraphicClass properties are documented in the following table.
 
-.GraphicClass
+.Graphic class
 [width="90%",options="header"]
 |===
-| Name	| Definition	| Data type and value	| Multiplicity
-| uom	| Unit of measure to apply to all graphical properties within a Graphic	| uom code	| zero or one
-| graphicSize	| Rendering size of the graphic	| GraphicSize data type	| zero or one
-| extension	| Any encoding should allow to extend a Graphic with custom items	| Any type	| zero or more
+| Name         | Definition                                                              | Data type and value     | Multiplicity
+| uom          | Unit of measure to apply to all graphical properties within a Graphic   | uom code                | zero or one
+| graphicSize  | Rendering size of the graphic                                           | GraphicSize data type   | zero or one
+| extension    | Any encoding should allow to extend a Graphic with custom items         | Any type                | zero or more
 |===
 
 The GraphicSize class determines the size of the graphic when it is rendered.
 As an abstract class, it is designed to be extended to support the various ways the size could be specified such as by a single value, a rectangular box,
 or by a three-dimensional cube. The GraphicSize properties are documented in the following table.
 
-.GraphicSize
+.GraphicSize class
 [width="90%",options="header"]
 |===
-| Name	| Definition	| Data type and value	| Multiplicity
-| extension	| Any encoding should allow to extend a GraphicSize with custom items	| Any type	| zero or more
+| Name   | Definition   | Data type and value   | Multiplicity
+| extension   | Any encoding should allow to extend a GraphicSize with custom items   | Any type   | zero or more
 |===
 
 ////
 
-.FloatPoint
+.FloatPoint class
 [width="90%",options="header"]
 |===
-| Name	   | Definition           | Data type and value	  | Multiplicity
+| Name      | Definition           | Data type and value   | Multiplicity
 | x         | Horizontal position  | float (uom-qualified) | 1
 | y         | Vertical position    | float (uom-qualified) | 1
 |===
@@ -188,8 +263,18 @@ or by a three-dimensional cube. The GraphicSize properties are documented in the
 ===== Dot Graphics
 
 [#img-uml-class-dot]
-.Dot Class UML Diagram 
-include::../UML/PlantUML/adoc/basic_vector/dot.adoc[]
+.Dot Class UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+Dot --|> Shape
+Dot : point: FloatPoint
+Dot --* FloatPoint
+
+class Shape <<abstract>>
+Shape --|> Graphic
+Shape : stroke: Stroke [0..1]
+Shape --* Stroke
+....
 
 A round Dot is one type of Graphic defined by this requirements class that can be used as part of a Marker.
 
@@ -198,51 +283,107 @@ A Dot inherits from a Shape class allowing to define a `stroke` which controls t
 .Shape
 [width="90%",options="header"]
 |===
-| Name	    | Definition                                    | Data type and value	| Multiplicity
-| stroke     | Stroke with which to render the shape outline | Stroke               | 0..1
+| Name       | Definition                                    | Type     | Multiplicity
+| stroke     | Stroke with which to render the shape outline | Stroke | 0..1
 |===
 
 ===== Image Graphics
 
 [#img-uml-class-image]
-.Image Class UML Diagram 
-include::../UML/PlantUML/adoc/basic_vector/image.adoc[]
+.Image Class UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+Image --|> Graphic
+Image  : image: Resource
+Image  : hotSpot: FloatPoint
+Image  : tint: Color
+Image  : blackTint: Color
+Image  : alphaThreshold: float
+Image --* Resource
+Image --* Color
+Image --* FloatPoint
+
+Resource : path: string[0..1]
+Resource : url: string[0..1]
+Resource : id: string[0..1]
+Resource : type: string[0..1]
+Resource : ext: string[0..1]
+Resource : sprite: string[0..1]
+....
 
 An Image is one type of graphic defined by this requirements class that can be used as part of a Marker.
 
 .Image
 [width="90%",options="header"]
 |===
-| Name	        | Definition                      | Data type and value	  | Multiplicity
-| image          | The image to use                | Resource                | 1
-| hotSpot        | 0,0 position in the image       | Pointf (uom-qualified)  | 1
-| tint           | Tint (multiplying white)        | Color                   | 1
-| blackTint      | Black tint (used for black      | Color                   | 1
-| alphaThreshold | Alpha value considered pickable |float (uom-qualified)    | 1
+| Name           | Definition                      | Type                       | Multiplicity
+| image          | The image to use                | Resource                   | 1
+| hotSpot        | 0,0 position in the image       | FloatPoint (uom-qualified) | 1
+| tint           | Tint (multiplying white)        | Color                      | 1
+| blackTint      | Black tint (used for black      | Color                      | 1
+| alphaThreshold | Alpha value considered pickable |float (uom-qualified)       | 1
 |===
 
 The actual image content is defined by a Resource, which can be specified by one or multiple properties:
 
-.Resource
+.Resource class
 [width="90%",options="header"]
 |===
-| Name	        | Definition                      | Data type and value	  | Multiplicity
-| uri            | URI of image                    | string                  | 0..1
-| ...            |                                 |                         |
+| Name           | Definition                                  | Type     | Multiplicity
+| url            | URL for online resource                     | string   | 0..1
+| path           | (preferably relative) path to local file    | string   | 0..1
+| id             | ID within a database table or  a sprite     | string   | 0..1
+| type           | Selected media type for the resource        | string   | 0..1
+| ext            | File extension to build paths/URL with id   | string   | 0..1
+| sprite         | Name of source sprite file                  | string   | 0..1
 |===
 
 ===== Text Graphics
 
 [#img-uml-class-text]
-.Text Class UML Diagram 
-include::../UML/PlantUML/adoc/basic_vector/text.adoc[]
+.Text Class UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+Text --|> Graphic
+Text : text: string -- IdentifierExpression
+Text : font: Font
+Text : alignment: TextAlignment
+Text --* Font
+Text --* TextAlignment
+Text --> IdentifierExpressions
+
+Font : face: string
+Font : size: float
+Font : bold: bool
+Font : italic: bool
+Font : underline: bool
+Font : color: Color
+Font : opacity: float
+Font --* Color
+
+TextAlignment : horizontal: HAlignment
+TextAlignment : vertical: VAlignment
+TextAlignment --* HAlignment
+TextAlignment --* VAlignment
+
+class HAlignment <<enumeration>>
+HAlignment : left
+HAlignment : center
+HAlignment : right
+
+class VAlignment <<enumeration>>
+VAlignment : top
+VAlignment : middle
+VAlignment : bottom
+....
+
 
 A Text is one type of Graphic defined by this requirements class that can be used as part of a Marker.
 
 .Text
 [width="90%",options="header"]
 |===
-| Name	        | Definition                        | Data type and value	  | Multiplicity
+| Name           | Definition                        | Data type and value   | Multiplicity
 | text           | The character string for the text | string (unicode)*     | 1
 | font           | The font to use for the text      | Font                  | 0..1
 | alignment      | The alignment to use for the text | TextAlignment         | 0..1
@@ -254,7 +395,7 @@ This allows to display the value of feature properties with a Text Marker.
 .TextAlignment
 [width="90%",options="header"]
 |===
-| Name	        | Definition            | Data type and value	  | Multiplicity
+| Name           | Definition            | Data type and value   | Multiplicity
 | horzAlignment  | Horizontal alignment  | HAlignment            | 0..1
 | vertAlignment  | Vertical alignment    | VAlignment            | 0..1
 |===
@@ -262,7 +403,7 @@ This allows to display the value of feature properties with a Text Marker.
 .HAlignment enumeration
 [width="90%",options="header"]
 |===
-| Name	  | Definition
+| Name     | Definition
 | left     | Left alignment
 | center   | Center alignment
 | right    | Right alignment
@@ -271,7 +412,7 @@ This allows to display the value of feature properties with a Text Marker.
 .VAlignment enumeration
 [width="90%",options="header"]
 |===
-| Name	  | Definition
+| Name     | Definition
 | top      | Top alignment
 | middle   | Middle alignment
 | bottom   | Bottom alignment
@@ -279,10 +420,10 @@ This allows to display the value of feature properties with a Text Marker.
 
 The font property of a Text Graphic is defined uses the following _Font_ class:
 
-.Font
+.Font class
 [width="90%",options="header"]
 |===
-| Name	        | Definition            | Data type and value	  | Multiplicity
+| Name           | Definition            | Data type and value   | Multiplicity
 | face           | Face name             | string                | 0..1
 | size           | Size of the font (pt) | float                 | 0..1
 | bold           | Use bold style        | bool                  | 0..1
@@ -291,16 +432,16 @@ The font property of a Text Graphic is defined uses the following _Font_ class:
 
 ////
 The FontClass describes the font properties to apply for the rendering of a text string. It refers to the W3C CSS Fonts chapter.
-
-.FontClass
+                                s
+.Font class
 [width="90%",options="header"]
 |===
-| Name	| Definition	| Data type and value	| Multiplicity
-| uom	| Unit of measure to apply to the affected graphical properties within a Font	| uom code	| zero or one
-| fontFamily	| Font family name (a)	| ParameterValue data type CharacterString	| zero or more
-| fontSize	| Font size when applying the font to a text string (b)	| ParameterValue data type Float	| zero or one
-| fontWeight	| Amount of weight or boldness to use for a font	| ParameterValue data type CharacterString	| zero or one
-| fontStyle	| Style to use for a font	| ParameterValue data type CharacterString	| zero or one
+| Name         | Definition   | Data type and value   | Multiplicity
+| uom          | Unit of measure to apply to the affected graphical properties within a Font   | uom code   | zero or one
+| fontFamily   | Font family name (a)   | ParameterValue data type CharacterString   | zero or more
+| fontSize     | Font size when applying the font to a text string (b)   | ParameterValue data type Float   | zero or one
+| fontWeight   | Amount of weight or boldness to use for a font   | ParameterValue data type CharacterString   | zero or one
+| fontStyle    | Style to use for a font   | ParameterValue data type CharacterString   | zero or one
 |===
 (a) Any number of FontFamily parameters may be given and they are assumed to be in preferred order. (b) The size unit is specified by the uom code if defined or by the innermost parent unit of measure definition otherwise.  
 ////

@@ -3,78 +3,105 @@
 === Requirements Class "Pattern Fills"
 ==== Overview
 
+[#img-uml-pattern-fill]
+.Pattern Fill UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+class Fill <<extended>>
+Fill : pattern: Graphic [0..1]
+Fill --* Graphic
+....
+
 This requirements class adds support for defining how to fill a shape with a pattern.
 
-// Do we need to define a new uml diagram for this?
+.Extended Fill class
+[width="90%",options="header"]
+|===
+| Name           | Definition                    | Type         | Multiplicity
+| pattern        | Graphic to repeat in pattern  | Graphic      | 0..1
+|===
 
-===== Class Fill
-pattern property
+==== Requirements
 
-===== Class Graphic
+include::../requirements/rc-pattern-fills.adoc[]
 
 === Requirements Class "Hatches and Gradients, Stipples"
 ==== Overview
 
-===== Class Fill
-hatchstyle, stipplestyle, gradient properties
+[#img-uml-hatches-gradients-stipples]
+.Hatches, Gradients and Stipple Fills UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+class Fill <<extended>>
+Fill : gradient: ColorKey [*]
+Fill : stippleStyle: StippleStyle
+Fill : hatchStyle: HatchStyle
+Fill --* ColorKey
+Fill --* StippleStyle
+Fill --* HatchStyle
 
-====== Class Color
+ColorKey : color: Color
+ColorKey : opacity: float
+ColorKey : percent: float
+ColorKey --* Color
 
-// already defined in the requirements clause_10_labeling.adoc
-.Color
+class StippleStyle <<enumeration>>
+StippleStyle : light
+StippleStyle : medium
+StippleStyle : heavy
+
+class HatchStyle <<enumeration>>
+HatchStyle : forward
+HatchStyle : backward
+HatchStyle : xCross
+HatchStyle : cross
+....
+
+This requirements class adds support for hatch, stipple and gradient fills.
+
+.Extended Fill class
 [width="90%",options="header"]
 |===
-| Name	| Definition	    | Data type and value	| Multiplicity
-| r	    | Red component	    | float	                | one
-| g	    | Green component	| float	                | one
-| b	    | Blue component	| float	                | one
-| a	    | Alpha component	| float	                | zero or one
+| Name           | Definition       | Type         | Multiplicity
+| hatchStyle     | Hatch styl       | HatchStyle   | 0..1
+| stippleStyle   | Opacity          | StippleStyle | 0..1
+| gradient       | Percent          | ColorKey     | 0..*
 |===
 
-====== Class Gradient
+====== Gradients
 
-* colorKeys: ColorKey [*]
-
-====== Class ColorKey
-
-.Color
+.ColorKey class
 [width="90%",options="header"]
 |===
-| Name	    | Definition	    | Data type and value	| Multiplicity
-| color	    | Color	            | Color	                | one
-| opacity	| Opacity	        | float	                | zero or one
-| percent	| Percent	        | float	                | zero or one
+| Name      | Definition       | Data type and value   | Multiplicity
+| color     | Color            | Color                 | 1
+| opacity   | Opacity          | float                 | 0..1
+| percent   | Percent          | float                 | 0..1
 |===
 
-====== Class StippleStyle
+====== Stipples
 
-.StippleStyle
+.StippleStyle class
 [width="90%",options="header"]
 |===
-| Name	    | Definition	    | Data type and value	| Multiplicity
-| light	    | Light	            | float	                | one
-| medium	| Medium	        | float	                | one
-| heavy	    | Heavy	            | float	                | one
+| Name       | Definition      | Data type and value   | Multiplicity
+| light      | Light           | float                 | 1
+| medium     | Medium          | float                 | 1
+| heavy      | Heavy           | float                 | 1
 |===
 
-====== Class HatchStyle
+====== Hatches
 
-.HatchStyle
+.HatchStyle class
 [width="90%",options="header"]
 |===
-| Name	    | Definition	    | Data type and value	| Multiplicity
-| forward	| Forward	        | float	                | one
-| backward	| Backward	        | float	                | one
-| xCross	| X-Cross	        | float	                | one
-| cross	    | Cross	            | float	                | one
+| Name      | Definition       | Data type and value   | Multiplicity
+| forward   | Forward          | float                 | 1
+| backward  | Backward         | float                 | 1
+| xCross    | X-Cross          | float                 | 1
+| cross     | Cross            | float                 | 1
 |===
 
-====== Class Resource
+==== Requirements
 
-====== Class Color
-
-// already defined
-
-* r: float
-* g: float
-* b: float
+include::../requirements/rc-hatches-gradients-stipples.adoc[]

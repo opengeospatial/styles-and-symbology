@@ -3,6 +3,10 @@
 
 === Overview
 
-This requirements class adds support for defining how to render a feature in a CSS format.
+This requirements class defines an encoding for the Styles and Symbology Logical Model inspired from Web Cascading Style Sheets (CSS) and other CSS-like cartographic symbology encodings.
+The primary objective of this encoding is to be easy to be expressive and facilitate hand-edition by cartographers.
+Parsing this encoding requires a custom parser.
 
 === Requirements
+
+include::../requirements/rc-ccsss-encoding.adoc[]

@@ -1,26 +1,58 @@
 == Requirements Class "Multi Graphics and Transforms"
 === Overview
 
-This requirements class adds support for defining how to render a (multi-)graphical object, and how to transform it. 
+This requirements class adds support for vector graphic hierarchies and transformations.
 
-==== Class Graphic
+[#img-uml-class-multigraphic-transforms]
+.MultiGraphic and Transforms UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+Transform2D --* FloatPoint
+Transform2D : orientation: Angle
+Transform2D : scaling: FloatPoint
+Transform2D : translation: FloatPoint
 
-===== Class MultiGraphic
+Graphic : transform: Transform2D
+Graphic --* Transform2D
 
-* elements: Graphic [0..*]
+GraphicInstance --|> Graphic
+GraphicInstance : element: Graphic
+GraphicInstance --o Graphic
+....
 
-===== Class GraphicInstance
+==== Graphic and MultiGraphic Extensions
 
-* element: Graphic
+This requirements class removes the restriction on MultiGrahics containing other MultiGraphics.
 
-===== Class Pointf
-
-.Pointf
+.Extended Graphic class
 [width="90%",options="header"]
 |===
-| Name	    | Definition	        | Data type and value	| Multiplicity
-| x	        | x coordinate	        | float			        | 1
-| y	        | y coordinate	        | float			        | 1
+| Name      | Definition           | Type          | Multiplicity
+| transform | 2D transformation    | Transform2D   | 1
 |===
 
-===== Class GraphicalUnit
+The `transform.translation` is equivalent to the Graphic's `position` property.
+
+.Transform2D class
+[width="90%",options="header"]
+|===
+| Name         | Definition           | Type          | Multiplicity
+| orientation  | Orientation          | Angle         | 1
+| scaling      | Scaling              | FloatPoint    | 1
+| translation  | Translation          | FloatPoint    | 1
+|===
+
+==== Graphic Instances
+
+The GraphicInstance class allows instantiating multiple instances of a single Graphic definition object, with each instance having a different tranformation applied.
+
+.GraphicInstance class
+[width="90%",options="header"]
+|===
+| Name    | Definition           | Type     | Multiplicity
+| element | Instantiated graphic | Graphic  | 1
+|===
+
+=== Requirements
+
+include::../requirements/rc-graphical-hierarchy.adoc[]

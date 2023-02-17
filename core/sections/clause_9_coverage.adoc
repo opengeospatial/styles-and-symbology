@@ -9,8 +9,33 @@ values from the range (e.g., individual imagery bands) to color channels or to a
 as providing an option to apply a color and/or opacity map based on the values.
 
 [#img-uml-class-coverageSymbolizer]
-.UML Class Diagram of the Symbology Coverage Symbolizer
-include::../UML/PlantUML/adoc/coverageSymbolizer.adoc[]
+.Extended Symbolizer Class UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+class Symbolizer <<extended>>
+Symbolizer : colorChannels: Color -- IdentifierExpressions
+Symbolizer : alphaChannel: double -- IdentifierExpression
+Symbolizer : singleChannel: double -- IdentifierExpression
+Symbolizer : colorMap: ValueColor[*]
+Symbolizer : opacityMap: ValueOpacity[*]
+Symbolizer --* ValueOpacity
+Symbolizer --* ValueColor
+Symbolizer --* Color
+Symbolizer --> IdentifierExpression
+
+ValueColor : value: double
+ValueColor : color: Color
+ValueColor : label: text
+ValueColor --* Color
+
+ValueOpacity : value: double
+ValueOpacity : opacity: float
+ValueOpacity : label: text
+
+Color : r: float
+Color : g: float
+Color : b: float
+....
 
 ===== Extended Identifiers
 
@@ -28,8 +53,8 @@ An encoding must support an escaping mechanism in cases where the name of a feat
 | colorChannels     | Value of the Red, Green and Blue color channels | Color                 | 0..1
 | alphaChannel      | Value of the alpha (opacity) channel            | float                 | 0..1
 | singleChannel     | Value of a single (gray-scale) output channel   | float                 | 0..1
-| colorMap          | Color map to be applied based on singleCannel   | ValueColor            | 0..n
-| opacityMap        | Opacity map to be applied based on singleCannel | ValueOpacity          | 0..n
+| colorMap          | Color map to be applied based on singleCannel   | ValueColor            | 0..*
+| opacityMap        | Opacity map to be applied based on singleCannel | ValueOpacity          | 0..*
 |===
 
 This requirements class requires support for identifier parameter value expression for the red (`r`), green (`g`) and blue (`b`) components of
@@ -82,6 +107,27 @@ include::../requirements/rc-coverage.adoc[]
 === Requirements Class "Hill Shading"
 ==== Overview
 
+[#img-uml-class-hilldhading]
+.Extended Symbolizer Class UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+AzimuthElevation : azimuth: Angle
+AzimuthElevation : elevation: Angle
+AzimuthElevation --* Angle
+
+HillShading : factor: double
+HillShading : sun: AzimuthElevation
+HillShading : colorMap: ValueColor[*]
+HillShading : opacityMap: ValueOpacity[*]
+HillShading --* AzimuthElevation
+HillShading --* ValueColor
+HillShading --* ValueOpacity
+
+class Symbolizer <<extended>>
+Symbolizer : hillShading: HillShading
+Symbolizer --* HillShading
+....
+
 This requirements classand adds the capability to portray elevation coverages with a hill shading style.
 It depends on the _Basic Coverage Styling_ requirements class.
 
@@ -100,8 +146,8 @@ It depends on the _Basic Coverage Styling_ requirements class.
 | Name                          	| Definition	                                       | Data type and value   |Multiplicity
 | factor                         | Factor controlling the intensity of the shading     | float                 | 0..1
 | sun                            | Orientation of the sun                              | AzimuthElevation      | 0..1
-| colorMap                       | Color map to be applied based on calculated shade   | ValueColor            | 0..n
-| opacityMap                     | Opacity map to be applied based on calculated shade | ValueOpacity          | 0..n
+| colorMap                       | Color map to be applied based on calculated shade   | ValueColor            | 0..*
+| opacityMap                     | Opacity map to be applied based on calculated shade | ValueOpacity          | 0..*
 |===
 
 The `sun` property is specified using this AzimuthElevation class:

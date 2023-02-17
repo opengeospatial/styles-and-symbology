@@ -5,29 +5,53 @@
 
 This requirements class adds support for vector shape graphics.
 
-[#img-uml-class-shapes]
-.UML Class Diagram of the Symbology Requirements Class Shapes
-include::../UML/PlantUML/adoc/shapes_graphics/shapes_graphics.adoc[]
+===== Rectangles, Circles, and Ellipses
 
-// Repeat shape from dot graphic
+[#img-uml-rectangles-circles-ellipses]
+.Rectangles, Circles and Ellipses Classes UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+class ClosedShape <<abstract>>
+ClosedShape --|> Shape
+ClosedShape : fill: Fill [0..1]
+ClosedShape --* Fill
 
-===== Closed Shapes
+Rectangle --|> ClosedShape
+Rectangle : topLeft: FloatPoint
+Rectangle : bottomRight: FloatPoint
+Rectangle --* FloatPoint
+
+RoundedRectangle --|> Rectangle
+RoundedRectangle : rx: float
+RoundedRectangle : ry: float
+
+Circle --|> ClosedShape
+Circle : center: FloatPoint
+Circle : radius: float
+Circle --* FloatPoint
+
+Ellipse --|> ClosedShape
+Ellipse : center: FloatPoint
+Ellipse : radiusX: float
+Ellipse : radiusY: float
+Ellipse --* FloatPoint
+....
 
 .Class ClosedShape
 [width="90%",options="header"]
 |===
-| Name	        | Definition	                            | Data type and value	| Multiplicity
-| fill	        | Fill of the shape	                        | Fill	                | 1
+| Name           | Definition                            | Data type and value   | Multiplicity
+| fill           | Fill of the shape                     | Fill                  | 1
 |===
 
-===== Rectangles
+====== Rectangles
 
 .Rectangle
 [width="90%",options="header"]
 |===
-| Name	        | Definition	                        | Data type and value	| Multiplicity
-| topLeft	    | Top left corner of the rectangle	    | Pointf	            | 1
-| bottomRight	| Bottom right corner of the rectangle	| Pointf	            | 1
+| Name          | Definition                             | Data type and value  | Multiplicity
+| topLeft       | Top left corner of the rectangle       | FloatPoint           | 1
+| bottomRight   | Bottom right corner of the rectangle   | FloatPoint           | 1
 |===
 
 ====== Rounded Rectangles
@@ -35,51 +59,140 @@ include::../UML/PlantUML/adoc/shapes_graphics/shapes_graphics.adoc[]
 .Class RoundRectangle
 [width="90%",options="header"]
 |===
-| Name	        | Definition	                            | Data type and value	| Multiplicity
-| rx            | Horizontal radius of the rounded corners	| float	                | 1
-| ry            | Vertical radius of the rounded corners	| float	                | 1
+| Name          | Definition                               | Data type and value   | Multiplicity
+| rx            | Horizontal radius of the rounded corners | float                 | 1
+| ry            | Vertical radius of the rounded corners   | float                 | 1
 |===
 
-===== Circles
+====== Circles
 
 .Class Circle
 [width="90%",options="header"]
 |===
-| Name	    | Definition	        | Data type and value	| Multiplicity
-| center	| Center of the circle	| Pointf	            | 1
-| radius	| Radius of the circle	| float	                | 1
+| Name     | Definition             | Data type and value  | Multiplicity
+| center   | Center of the circle   | FloatPoint           | 1
+| radius   | Radius of the circle   | float                | 1
 |===
 
-===== Ellipses
+====== Ellipses
 
 .Class Ellipse
 [width="90%",options="header"]
 |===
-| Name	    | Definition	        | Data type and value	| Multiplicity
-| center	| Center of the ellipse	| Pointf	            | 1
-| radiusX	| Horizontal radius	    | float	                | 1
-| radiusY	| Vertical radius	    | float	                | 1
+| Name      | Definition            | Data type and value  | Multiplicity
+| center    | Center of the ellipse | FloatPoint           | 1
+| radiusX   | Horizontal radius     | float                | 1
+| radiusY   | Vertical radius       | float                | 1
 |===
 
 ===== Arcs
 
-====== Sector Arcs
+[#img-uml-arcs]
+.Arc Classes UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+Arc --|> Shape
+Arc : center: FloatPoint
+Arc : radius: float
+Arc : startAngle: Angle
+Arc : deltaAngle: Angle
+Arc --* FloatPoint
 
-* innerRadius: float
+SectorArc --|> Arc
+SectorArc --|> ClosedShape
+SectorArc : innerRadius: float
 
-====== Chord Arcs
+ChordArc --|> Arc
+ChordArc --|> ClosedShape
+....
+
+.Arc class
+[width="90%",options="header"]
+|===
+| Name        | Definition          | Type         | Multiplicity
+| center      | Center              | FloatPoint   | 1
+| radius      | Radius              | float        | 1
+| startAngle  | Start angle         | Angle        | 1
+| deltaAngle  | Delta angle         | Angle        | 1
+|===
+
+.SectorArc class
+[width="90%",options="header"]
+|===
+| Name        | Definition          | Type  | Multiplicity
+| innerRadius | Inner radius        | float | 1
+|===
+
+.ChordArc class
+[width="90%",options="header"]
+|===
+| Name                   | Definition          | Type  | Multiplicity
+| (no additonal members) |                     |       |
+|===
 
 ===== Paths
 
-* nodes: PathNodes
+[#img-uml-path-shapes]
+.Path Classe UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+PathNodes : points: FloatPoint[1..*]
+PathNodes --* FloatPoint
 
-====== Path Nodes
+Path --|> Shape
+Path : nodes: PathNodes
+Path --* PathNodes
 
-// Add a table and remove the section 
+ClosedPath --|> Path
+ClosedPath --|> ClosedShape
+ClosedShape --|> Shape
+ClosedPath : innerNodes: PathNodes[0..*]
+ClosedPath --* PathNodes
+....
+
+.Path class
+[width="90%",options="header"]
+|===
+| Name        | Definition          | Type      | Multiplicity
+| nodes       | Nodes of the path   | PathNodes | 1
+|===
 
 ====== Closed Paths
+
+A closed path is a ClosedShape that can be filled, and can optionally contain inner nodes to create holes, like polygon interior rings.
+
+.ClosedPath class
+[width="90%",options="header"]
+|===
+| Name        | Definition                | Type      | Multiplicity
+| innerNodes  | Inner nodes of the path   | PathNodes | 0..*
+|===
+
+==== Requirements
+
+include::../requirements/rc-shapes.adoc[]
 
 === Requirements Class "Shapes Outlines"
 ==== Overview
 
-//To be added to the UML.
+// Review members of ShapeOutline
+
+.ShapeOutline class
+[width="90%",options="header"]
+|===
+| Name     | Definition                   | Type  | Multiplicity
+| color    | Color of the outline         | Color | 0..1
+| opacity  | Opacity of the outline       | float | 0..1
+| thickness| Thickness of the outline     | float | 0..1
+|===
+
+.Extended Shape class
+[width="90%",options="header"]
+|===
+| Name     | Definition    | Type         | Multiplicity
+| outline  | Shape outline | ShapeOutline | 0..1
+|===
+
+==== Requirements
+
+include::../requirements/rc-shapes-outline.adoc[]

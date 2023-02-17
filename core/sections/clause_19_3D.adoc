@@ -1,66 +1,94 @@
 == Requirements Class "3D Models and Transforms"
 === Overview
 
-This requirements class adds support for defining how to use and transform 3D models. This includes the ability to define the position, orientation, and scaling of a model. This class also includes the ability to define the position, orientation, and scaling of a model's individual parts.
+[plantuml, target=diagram-classes, format=png]
+....
+class Graphic <<extended>>
+Graphic : transform3D: Transform3D
+Graphic --* Transform3D
 
-// Do we need to define a new uml diagram for this ?
+Transform3D : orientation: Quaternion
+Transform3D : position: Vector3D
+Transform3D : scaling: FloatVector3D
+Transform3D --* Quaternion
+Transform3D --* Vector3D
+Transform3D --* FloatVector3D
 
-==== Class Model
+Quaternion : x: double
+Quaternion : y: double
+Quaternion : z: double
+Quaternion : w: double
 
-model: Resource
+Vector3D : x: double
+Vector3D : y: double
+Vector3D : z: double
 
-==== Class Vector3D
+FloatVector3D : x: float
+FloatVector3D : y: float
+FloatVector3D : z: float
 
-.Vector3D
+Model --|> Graphic
+Model : model: Resource
+Model --* Resource
+....
+
+This requirements class adds support for 3D model Graphics as well as 3D transformations (position, orientation, and scaling) for Graphics.
+
+// Probably not... This class also includes the ability to define the position, orientation, and scaling of a model's individual parts.
+
+.Extended Graphic class
 [width="90%",options="header"]
 |===
-| Name	    | Definition	    | Data type and value	| Multiplicity
-| x	        | x coordinate	    | double		        | 1
-| y	        | y coordinate	    | double		        | 1
-| z	        | z coordinate	    | double		        | 1
+| Name       | Definition          | Type        | Multiplicity
+| transform3D| 3D Transformation   | Transform3D | 0..1
 |===
 
-==== Class Vector3Df
+NOTE: The 2D position, orientation and scaling properties defined in the _MultiGraphics and Transform_ requirements class correspond to their equivalent components in the 3D tranformation.
 
-.Vector3Df
+.Model class
 [width="90%",options="header"]
 |===
-| Name	    | Definition	    | Data type and value	| Multiplicity
-| x	        | x coordinate	    | float		        | 1
-| y	        | y coordinate	    | float		        | 1
-| z	        | z coordinate	    | float		        | 1
+| Name       | Definition              | Type     | Multiplicity
+| model      | Resource for 3D model   | Resource | 1
 |===
 
-==== Class Quaternion
-
-.Quaternion
+.Transform3D class
 [width="90%",options="header"]
 |===
-| Name	    | Definition	    | Data type and value	| Multiplicity
-| x	        | x coordinate	    | double		        | 1
-| y	        | y coordinate	    | double		        | 1
-| z	        | z coordinate	    | double		        | 1
-| w	        | w coordinate	    | double		        | 1
+| Name          | Definition           | Data type and value  | Multiplicity
+| orientation   | orientation          | Quaternion           | 1
+| position      | position             | Vector3D             | 1
+| scaling       | scaling              | FloatVector3D        | 1
 |===
 
-==== Class Transform3D
-
-.Transform3D
+.Vector3D class
 [width="90%",options="header"]
 |===
-| Name	        | Definition	        | Data type and value	| Multiplicity
-| orientation	| orientation	        | Quaternion	        | 1
-| position	    | position	            | Vector3D	            | 1
-| scaling	    | scaling	            | Vector3Df	            | 1
+| Name       | Definition       | Data type and value | Multiplicity
+| x          | x coordinate     | double              | 1
+| y          | y coordinate     | double              | 1
+| z          | z coordinate     | double              | 1
 |===
 
-==== Class Transform2D
-
-.Transform2D
+.FloatVector3D class
 [width="90%",options="header"]
 |===
-| Name	        | Definition	        | Data type and value	| Multiplicity
-| orientation	| orientation	        | Angle	                | 1
-| scaling	    | scaling	            | Pointf	            | 1
-| translation	| translation	        | Pointf	            | 1
+| Name       | Definition         | Data type and value | Multiplicity
+| x          | x coordinate       | float               | 1
+| y          | y coordinate       | float               | 1
+| z          | z coordinate       | float               | 1
 |===
+
+.Quaternion class
+[width="90%",options="header"]
+|===
+| Name       | Definition         | Data type and value | Multiplicity
+| x          | x coordinate       | double              | 1
+| y          | y coordinate       | double              | 1
+| z          | z coordinate       | double              | 1
+| w          | w coordinate       | double              | 1
+|===
+
+=== Requirements
+
+include::../requirements/rc-3d-models-transforms.adoc[]

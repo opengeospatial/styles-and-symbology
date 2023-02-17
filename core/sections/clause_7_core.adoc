@@ -5,8 +5,28 @@
 The requirements described in this section define the symbology core requirement class. The UML diagram (<<img-uml-class>>) shows the fundamental concepts of the Symbology Conceptual and Logical Model.
 
 [#img-uml-class-core]
-.UML Class Diagram of the Symbology core
-include::../UML/PlantUML/adoc/core.adoc[]
+.Symbology Core Classes UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+Style : stylingRules: StylingRule[0..*]
+Style --* StylingRule
+
+StylingRule : symbolizer: Symbolizer[0..1]
+StylingRule : selector: Expression[0..1]
+StylingRule : nestedRules: StylingRule[0..*]
+StylingRule --* StylingRule
+StylingRule --* Expression : selector
+
+Symbolizer : visibility: bool
+Symbolizer : opacity: float
+Symbolizer : zOrder: integer
+Symbolizer *-- StylingRule
+Symbolizer --> Expression : parameter values
+
+/'Note: zOrder needs discussion on whether it should be relative or float
+and how to relate to encodings where the visual priority order
+comes from the order of the rules.'/
+....
 
 ==== Styles
 
@@ -29,11 +49,11 @@ Can we omit this metadata? This might belon instead to the encoding or styles me
 | abstract	| Human readable description	| ParameterValue data type	| 0..1
 ////
 
-.Style
+.Style class
 [width="90%",options="header"]
 |===
 | Name	      | Definition	                     | Data type and value | Multiplicity
-| stylingRules | Styling rules defining the style	| StylingRule         | 0..n
+| stylingRules | Styling rules defining the style	| StylingRule         | 0..*
 |===
 
 ==== Styling Rules
@@ -66,7 +86,7 @@ What actually needs i18n? Rule labels for legends? The choice between feature pr
 | name      	| A name for the rule (useful for generating legends)             | string                   | 0..1
 | selector  	| Selector defining the condition to apply the rule's symbolizer	| Expression	            | 0..1
 | symbolizer	| Symbolize(s) to apply by the rendering engine	                  | Symbolizer	            | 1
-| nestedRules  | Symbolize(s) to apply by the rendering engine	                  | StylingRule              | 0..n
+| nestedRules  | Symbolize(s) to apply by the rendering engine	                  | StylingRule              | 0..*
 |===
 
 The selector (also sometimes called a _filter_), for the rule is defined as a predicate expression evaluating to either true or false.
@@ -84,7 +104,7 @@ Separate requirements classes and later parts will extend this Symbolizer class 
 | uom	| Unit of measure to apply to all graphical properties of a Symbolizer	| uom code	| Zero or one
 ////
 
-.Symbolizer
+.Symbolizer class
 [width="90%",options="header"]
 |===
 | Name	     | Definition	                | Data type and value  | Multiplicity
@@ -114,8 +134,39 @@ Expressions can be used in two places according to this Styles & Symbology conce
 as to define the values of Symbolizer properties.
 
 [#img-uml-class-expressions]
-.UML Class Diagram of the Symbology Expressions
-include::../UML/PlantUML/adoc/core/expressions.adoc[]
+.Expression Classes UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+class Expression <<abstract>>
+
+class LiteralExpression <<abstract>>
+LiteralExpression --|> Expression
+
+IdentifierExpression --|> Expression
+IdentifierExpression : name: string
+
+SystemIdentifierExpression --|> IdentifierExpression
+
+InstanceExpression --|> Expression
+InstanceExpression : objectClass: type
+InstanceExpression : members: map < string, Expression >
+InstanceExpression --* Expression
+
+ArrayExpression --|> Expression
+ArrayExpression : elements: Expression[0..*]
+ArrayExpression --* Expression
+
+OperationExpression --|> Expression
+OperationExpression : operand1: Expression[0..1]
+OperationExpression : operator: Operator
+OperationExpression : operand2: Expression
+OperationExpression --* Operator
+OperationExpression --* Expression
+
+'class SubExpression
+'SubExpression --|> Expression -- Parentheses could be purely an encoding concept based on the need to maintain priority...
+'class ExpressionList -- Expression with multiplicity?
+....
 
 ===== Parameter Values
 
@@ -130,7 +181,76 @@ compatible with the expected data type are allowed as _Parameter Values_.
 
 An Identifier Expression is represented by a textual property that gets resolved at runtime.
 
-Typical example of identifier expresions include feature properties (e.g., `population`) and coverage range values (e.g., a particular imagery band `B8`).
+Typical example of identifier expressions include feature properties (e.g., `population`) and coverage range values (e.g., a particular imagery band `B8`).
+
+====== System Identifiers
+
+[#img-uml-class-systemIDs]
+.System Identifiers UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+class SystemIdentifierExpression <<enumeration>>
+SystemIdentifierExpression --|> IdentifierExpression
+SystemIdentifierExpression : visualization
+SystemIdentifierExpression : visualization.scaleDenominator
+SystemIdentifierExpression : visualization.dateTime
+SystemIdentifierExpression : visualization.date
+SystemIdentifierExpression : visualization.timeOfDay
+SystemIdentifierExpression : dataLayer
+SystemIdentifierExpression : dataLayer.identifier
+SystemIdentifierExpression : dataLayer.type
+SystemIdentifierExpression --> Visualization
+SystemIdentifierExpression --> DataLayer
+
+Visualization : scaleDenominator: double
+Visualization : dateTime: TimeInstant
+Visualization : date: Date
+Visualization : timeOfDay: TimeOfDay
+Visualization --* TimeInstant
+Visualization --o Date
+Visualization --o TimeOfDay
+
+class DataLayer
+DataLayer : identifier: string
+DataLayer : type: DataLayerType
+DataLayer --* DataLayerType
+
+class DataLayerType <<enumeration>>
+DataLayerType : map
+DataLayerType : vector
+DataLayerType : coverage
+
+class TimeInstant
+TimeInstant : date: Date
+TimeInstant : time: TimeOfDay
+TimeInstant --* Date
+TimeInstant --* TimeOfDay
+
+class Date
+Date : year: int
+Date : month: Month
+Date : day: int
+Date --* Month
+
+class TimeOfDay
+TimeOfDay : hour: int
+TimeOfDay : minutes: int
+TimeOfDay : seconds: double
+
+class Month <<enumeration>>
+Month : january
+Month : february
+Month : march
+Month : april
+Month : may
+Month : june
+Month : july
+Month : august
+Month : september
+Month : october
+Month : november
+Month : december
+....
 
 One specific type of identifier expressions use System Identifiers.
 A System Identifier refers to an internal state of the system, or a particular aspect of the data being portrayed.
@@ -159,6 +279,51 @@ TOCHECK: How to handle parent objects ? e.g.,  visualization, dataLayer, feature
 | dataLayer.type                        | Data type of data layers                                 | enumeration: vector, coverage, ...
 |===
 
+.Month enumeration
+[width="90%",options="header"]
+|===
+| Name
+| january
+| february
+| march
+| april
+| may
+| june
+| july
+| august
+| september
+| october
+| november
+| december
+|===
+
+.Date class
+[width="90%",options="header"]
+|===
+| Name	         | Definition	                                | Data type and value | Multiplicity
+| year            |                                              | int                 | 1
+| month           |                                              | Month               | 1
+| day             |                                              | int                 | 1
+|===
+
+.TimeOfDay class
+[width="90%",options="header"]
+|===
+| Name	         | Definition	                                | Data type and value | Multiplicity
+| hour            |                                       	     | int                 | 1
+| minutes         |                                              | Month               | 1
+| seconds         |                                              | int                 | 1
+|===
+
+.Class TimeInstant
+[width="90%",options="header"]
+|===
+| Name	         | Definition	                                | Data type and value | Multiplicity
+| date            |                                       	     | Date                | 1
+| time            |                                              | TimeOfDay           | 1
+|===
+
+
 ////
 TODO: In other req classes:
 
@@ -169,6 +334,40 @@ TODO: In other req classes:
 
 [[literal-expressions]]
 ===== Literal Expressions
+
+[#img-uml-class-literas]
+.Literal Classes UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+class LiteralExpression <<abstract>>
+
+TextLiteral --|> LiteralExpression
+TextLiteral : text: string
+
+EnumValueLiteral --|> LiteralExpression
+EnumValueLiteral : enum: type
+EnumValueLiteral : value: string
+EnumValueLiteral : numericValue: int64
+
+class BoolLiteral <<enumeration>>
+BoolLiteral --|> EnumValueLiteral
+BoolLiteral : false
+BoolLiteral : true
+
+NullLiteral --|> LiteralExpression
+
+IntegerLiteral --|> LiteralExpression
+IntegerLiteral : value: int64
+
+RealLiteral --|> LiteralExpression
+RealLiteral : value: double
+
+ArrayLiteral --|> ArrayExpression
+ArrayLiteral --|> LiteralExpression
+
+InstanceLiteral --|> InstanceExpression
+InstanceLiteral --|> LiteralExpression
+....
 
 A literal expression is an expression that has a fixed value in the encoding of the style.
 A similar literal class concept was originally defined in the OGC Filter Encoding 2.0 standard section 7.5.1.
@@ -190,8 +389,9 @@ An Operation Expression performs an operation specified by an Operator on one, t
 This core requirements class defines only Logical and Relational operators.
 Implementations are also required to support prioritizing operations (typically encoded using parentheses: `(` `)`).
 Other requirements classes introduce support for additional operators for arithmetic, text and bitwise operations.
+Without support for the _Any right-hand operand_ requirements class, the right-hand operands of RelationExpressions are limited to LiteralExpressions.
 
-.Operation Expression
+.OperationExpression class
 [width="90%",options="header"]
 |===
 | Name	   | Definition	                     | Data type and value | Multiplicity
@@ -201,8 +401,30 @@ Other requirements classes introduce support for additional operators for arithm
 |===
 
 [#img-uml-relational-logic-operators]
-.UML Class Diagram for Logic and Relational Operators
-include::../UML/PlantUML/adoc/core/operators.adoc[]
+.Core Logic and Relational Operators UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+class LogicOperator <<enumeration>>
+LogicOperator --|> Operator
+LogicOperator : and
+LogicOperator : or
+LogicOperator : not -- unary
+
+class RelationalOperator <<enumeration>>
+RelationalOperator --|> Operator
+RelationalOperator : equal
+RelationalOperator : notEqual
+RelationalOperator : is
+RelationalOperator : isNot
+RelationalOperator : greater
+RelationalOperator : lesser
+RelationalOperator : greaterEqual
+RelationalOperator : lesserEqual
+RelationalOperator : between
+RelationalOperator : notBetween
+RelationalOperator : in -- right operand is array
+RelationalOperator : notIn -- right operand is array
+....
 
 This requirements class defines the following Logical Operators :
 

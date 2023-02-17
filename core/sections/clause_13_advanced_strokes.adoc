@@ -3,59 +3,130 @@
 === Requirements Class "Joins and Caps"
 ==== Overview
 
-This requirements class adds support for defining how to join and cap lines and curves.
+[#img-uml-class-joins-caps]
+.Joins and Caps classes UML diagram
+[plantuml, target=diagram-classes, format=png]
+....
+class Stroke <<extended>>
+Stroke : join: StrokeJoin [0..1]
+Stroke : cap: StrokeCap [0..1]
+Stroke --* StrokeJoin
+Stroke --* StrokeCap
 
-// De we need to design a new uml diagram for this class ?
+class StrokeJoin <<enumeration>>
+StrokeJoin : miter
+StrokeJoin : round
+StrokeJoin : bevel
 
-===== Class StrokeJoin
+class StrokeCap <<enumeration>>
+StrokeCap : butt
+StrokeCap : round
+StrokeCap : square
+....
 
-.StrokeJoin
+This requirements class adds support for Strokes rendered with additional join and cap types.
+
+.Extended Stroke class
 [width="90%",options="header"]
 |===
-| Name	    | Definition	        | Data type and value	| Multiplicity
-| miter	    | Miter join	        | Enumeration	        | 0..1
-| round	    | Round join	        | Enumeration	        | 0..1
-| bevel	    | Bevel join	        | Enumeration	        | 0..1
+| Name      | Definition         | Type         | Multiplicity
+| join      | Join               | StrokeJoin   | 0..1
+| cap       | Cap                | StrokeCap    | 0..1
 |===
 
-===== Class StrokeCap
-
-.StrokeCap
+.StrokeJoin enumeration
 [width="90%",options="header"]
 |===
-| Name	    | Definition	        | Data type and value	| Multiplicity
-| butt	    | Butt cap	            | Enumeration	        | 0..1
-| round	    | Round cap	            | Enumeration	        | 0..1
-| square    | Square cap	        | Enumeration	        | 0..1
+| Name       | Definition
+| miter      | Miter join
+| round      | Round join
+| bevel      | Bevel join
 |===
 
-===== Class Stroke
+.StrokeCap enumeration
+[width="90%",options="header"]
+|===
+| Name       | Definition
+| butt       | Butt cap
+| round      | Round cap
+| square     | Square cap
+|===
 
-join, cap properties
+==== Requirements
+
+include::../requirements/rc-joins-caps.adoc[]
 
 === Requirements Class "Dashes"
 ==== Overview
 
-===== Class Stroke
+[#img-uml-class-dashes]
+.Dashed strokes class UML diagram
+[plantuml, target=diagram-classes, format=png]
+....
+class Stroke <<extended>>
+Stroke : dashPattern: integer [*]
+....
 
-dashPattern property
+This requirements class adds support for dashed Strokes.
+
+.Extended Stroke class
+[width="90%",options="header"]
+|===
+| Name          | Definition         | Type         | Multiplicity
+| dashPattern   | Dash pattern       | int          | 0..*
+|===
+
+==== Requirements
+
+include::../requirements/rc-dashes.adoc[]
 
 === Requirements Class "Casing and Centerline"
 ==== Overview
 
-===== Class Color
+[#img-uml-class-casing-centerline]
+.Casing and centerline strokes class UML diagram
+[plantuml, target=diagram-classes, format=png]
+....
+class Stroke <<extended>>
+Stroke : center: StrokeStyling [0..1]
+Stroke : casing: StrokeStyling [0..1]
+....
 
-===== Class GraphicalUnit
+This requirements class adds support for Strokes with a casing and centerline.
 
-===== Class StrokeStyling
+.Extended Stroke class
+[width="90%",options="header"]
+|===
+| Name      | Definition                  | Type            | Multiplicity
+| casing    | Style of stroke casing      | StrokeStyling   | 0..1
+| center    | Style of stroke center line | StrokeStyling   | 0..1
+|===
 
-===== Class Stroke
+==== Requirements
 
-casing and center properties.
+include::../requirements/rc-casing-centerline.adoc[]
 
 === Requirements Class "Pattern Strokes"
 ==== Overview
 
-===== Class Stroke
+[#img-uml-class-pattern]
+.Pattern strokes class UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+class Stroke <<extended>>
+Stroke : pattern: Graphic [0..1]
+Stroke --* Graphic
+....
 
-pattern property
+This requirements class adds support for Strokes with a pattern defined by a Graphic.
+
+.Extended Stroke class
+[width="90%",options="header"]
+|===
+| Name      | Definition         | Type         | Multiplicity
+| pattern   | Pattern graphic    | Graphic      | 0..1
+|===
+
+==== Requirements
+
+include::../requirements/rc-pattern-strokes.adoc[]
