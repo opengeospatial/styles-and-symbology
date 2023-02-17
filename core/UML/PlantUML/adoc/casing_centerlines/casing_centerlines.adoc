@@ -1,4 +1,7 @@
 // 
 [plantuml, target=diagram-classes, format=png]
 ....
+Stroke : center: StrokeStyling [0..1]
+Stroke : casing: StrokeStyling [0..1]
 ....
+

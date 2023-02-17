@@ -8,3 +8,4 @@ core/18-067r3.xml
 core/iev/
 core/relaton/
 .DS_Store
+core/plantuml/*.png

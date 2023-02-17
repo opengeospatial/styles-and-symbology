@@ -1,0 +1,14 @@
+[plantuml, target=diagram-classes, format=png]
+....
+
+class GraphicalUnit <<enumeration>>
+GraphicalUnit : pixels
+GraphicalUnit : meters
+GraphicalUnit : feet
+GraphicalUnit : percent
+GraphicalUnit : points
+GraphicalUnit : em
+GraphicalUnit : screenInches
+GraphicalUnit : screenCM
+GraphicalUnit : screenMM
+....

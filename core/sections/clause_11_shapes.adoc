@@ -3,23 +3,24 @@
 === Requirements Class "Shape Graphics"
 ==== Overview
 
-This requirements class adds support for defining how to draw shapes.
+This requirements class adds support for vector shape graphics.
 
 [#img-uml-class-shapes]
 .UML Class Diagram of the Symbology Requirements Class Shapes
-include::../UML/PlantUML/adoc/shapes.adoc[]
+include::../UML/PlantUML/adoc/shapes_graphics/shapes_graphics.adoc[]
 
-===== Class Shape
+// Repeat shape from dot graphic
 
-Base Class: Graphic
+===== Closed Shapes
 
-* stroke: Stroke
+.Class ClosedShape
+[width="90%",options="header"]
+|===
+| Name	        | Definition	                            | Data type and value	| Multiplicity
+| fill	        | Fill of the shape	                        | Fill	                | 1
+|===
 
-===== Class ClosedShape
-
-* fill: Fill
-
-===== Class Rectangle
+===== Rectangles
 
 .Rectangle
 [width="90%",options="header"]
@@ -29,9 +30,9 @@ Base Class: Graphic
 | bottomRight	| Bottom right corner of the rectangle	| Pointf	            | 1
 |===
 
-====== Class RoundedRectangle
+====== Rounded Rectangles
 
-.RoundRectangle
+.Class RoundRectangle
 [width="90%",options="header"]
 |===
 | Name	        | Definition	                            | Data type and value	| Multiplicity
@@ -39,9 +40,9 @@ Base Class: Graphic
 | ry            | Vertical radius of the rounded corners	| float	                | 1
 |===
 
-===== Class Circle
+===== Circles
 
-.Circle
+.Class Circle
 [width="90%",options="header"]
 |===
 | Name	    | Definition	        | Data type and value	| Multiplicity
@@ -49,9 +50,9 @@ Base Class: Graphic
 | radius	| Radius of the circle	| float	                | 1
 |===
 
-===== Class Ellipse
+===== Ellipses
 
-.Ellipse
+.Class Ellipse
 [width="90%",options="header"]
 |===
 | Name	    | Definition	        | Data type and value	| Multiplicity
@@ -60,21 +61,23 @@ Base Class: Graphic
 | radiusY	| Vertical radius	    | float	                | 1
 |===
 
-===== Class Arc
+===== Arcs
 
-====== Class SectorArc
+====== Sector Arcs
 
 * innerRadius: float
 
-====== Class ChordArc
+====== Chord Arcs
 
-===== Class Path
+===== Paths
 
 * nodes: PathNodes
 
-====== Class PathNodes
+====== Path Nodes
 
-====== Class ClosedPath
+// Add a table and remove the section 
+
+====== Closed Paths
 
 === Requirements Class "Shapes Outlines"
 ==== Overview

@@ -1,0 +1,23 @@
+// Basic stroke 
+
+[plantuml, target=diagram-classes, format=png]
+....
+
+StrokeStyling : color: Color
+StrokeStyling : opacity: float
+StrokeStyling : width: float
+StrokeStyling : widthUnit: GraphicalUnit
+
+'Inheritance
+
+Stroke --|> StrokeStyling
+
+'Composition
+
+Shape --* Stroke
+
+StrokeStyling --* Color
+StrokeStyling --* GraphicalUnit
+Stroke --* StrokeStyling
+VectorSymbolizer --* Stroke
+....
