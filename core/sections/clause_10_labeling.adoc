@@ -6,8 +6,8 @@
 This requirements class adds support for defining how to draw text labels on a map. 
 
 [#img-uml-class-labeling]
-.UML Class Diagram of the Symbology Requirements Class "Basic Labeling"
-include::../UML/PlantUML/adoc/text.adoc[]
+.Label Class UML Diagram
+include::../UML/PlantUML/adoc/basic_labeling/basic_labeling.adoc[]
 
 ===== Class Symbolizer
 * label:    Label [0..1]
@@ -39,9 +39,13 @@ LabelClass properties are documented in the following table.
 === Requirements Class "Font Outlines"
 ==== Overview
 
-===== Class FontOutline
+[#img-uml-class-fontoutlines]
+.Font outlines UML Diagram
+include::../UML/PlantUML/adoc/font_outlines/font_outlines.adoc[]
 
-.FontOutline
+===== Font Outlines
+
+.Class FontOutline
 [width="90%",options="header"]
 |===
 | Name	    | Definition	            | Data type and value	| Multiplicity
@@ -54,14 +58,3 @@ LabelClass properties are documented in the following table.
 
 * outline: FontOutline
 
-===== Class Color
-
-.Color
-[width="90%",options="header"]
-|===
-| Name	| Definition	    | Data type and value	| Multiplicity
-| r	    | Red component	    | float	                | one
-| g	    | Green component	| float	                | one
-| b	    | Blue component	| float	                | one
-| a	    | Alpha component	| float	                | zero or one
-|===

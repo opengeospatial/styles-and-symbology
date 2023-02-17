@@ -22,7 +22,7 @@ The following three new Symbolizer properties are defined by this requirements c
 
 [#img-uml-class-vectorFeaturesSymbolizer]
 .UML Class Diagram of the Symbology Vector Features Symbolizer
-include::../UML/PlantUML/adoc/vectorFeaturesSymbolizer.adoc[]
+include::../UML/PlantUML/adoc/basic_vector/basic_vector.adoc[]
 
 ==== Extended Identifiers for vector features
 
@@ -43,27 +43,31 @@ In addition, the following new System Identifiers are defined by this requiremen
 
 ==== Colors
 
+[#img-uml-class-color]
+.Color class UML Diagram
+include::../UML/PlantUML/adoc/basic_vector/color.adoc[]
+
 Both the Fill and Stroke allow to define a Color, specified using red, green and blue components.
 The ability to define Colors in other spaces (e.g., Lab, CMYK) is defined in separate requirements classes
 and applies wherever this basic RGB Color class is used.
 
-.Color
+.Class Color
 [width="90%",options="header"]
 |===
-| Name	| Definition	| Data type and value	| Multiplicity
-| r	   | Red          | float                 | 1
-| g	   | Green        | float                 | 1
-| b	   | Blue         | float                 | 1
+| Name	| Definition	    | Data type and value	| Multiplicity
+| r	    | Red component	    | float	                | 1
+| g	    | Green component	| float	                | 1
+| b	    | Blue component	| float	                | 1
 |===
 
 ==== Fills
 
-A Fill defines the graphical symbolizing parameters required to draw the filling of a two-dimensional shape such as a polygon.
-Separate conformance classes can extend this Fill class with additional properties.
-
 [#img-uml-class-fill]
 .UML Class Diagram of the Symbology Fill
-include::../UML/PlantUML/adoc/fill.adoc[]
+include::../UML/PlantUML/adoc/basic_vector/basic_fill.adoc[]
+
+A Fill defines the graphical symbolizing parameters required to draw the filling of a two-dimensional shape such as a polygon.
+Separate conformance classes can extend this Fill class with additional properties.
 
 .Fill
 [width="90%",options="header"]
@@ -75,11 +79,11 @@ include::../UML/PlantUML/adoc/fill.adoc[]
 
 ==== Strokes
 
-A Stroke defines the graphical symbolizing parameters for drawing an outline (e.g., for linear geometries or the exterior of a polygon geometry). As an abstract class and part of the base of the core graphical concepts, StrokeClass is a global point of extension to specify concrete ways to draw outlines (e.g., the PenStroke and GraphicStroke extensions). The StrokeClass properties are documented in the following table.
-
 [#img-uml-class-stroke]
-.UML Class Diagram of the Symbology Stroke
-include::../UML/PlantUML/adoc/stroke.adoc[]
+.Stroke Class UML Diagram
+include::../UML/PlantUML/adoc/basic_vector/basic_stroke.adoc[]
+
+A Stroke defines the graphical symbolizing parameters for drawing an outline (e.g., for linear geometries or the exterior of a polygon geometry). As an abstract class and part of the base of the core graphical concepts, StrokeClass is a global point of extension to specify concrete ways to draw outlines (e.g., the PenStroke and GraphicStroke extensions). The StrokeClass properties are documented in the following table.
 
 A Stroke object inherits from a base _StrokeStyling_ class, which is re-used in a separate requirements class for defining more complex strokes:
 
@@ -92,6 +96,10 @@ A Stroke object inherits from a base _StrokeStyling_ class, which is re-used in 
 |===
 
 ===== Graphical Units of Measure
+
+[#img-uml-class-graphicalunits]
+.Graphical Units Enumeration UML Diagram 
+include::../UML/PlantUML/adoc/basic_vector/graphicalunit.adoc[]
 
 For styling parameters that define sizing and positioning of graphical objects (width, displacement, etc.), a specific the unit of measure needs to be provided for the rendering engine.
 Therefore, properties where a unit of measure is relevant can be qualified with a particular uom codes.
@@ -117,11 +125,9 @@ Consequently, either the unit of measure is determined through the uom code dire
 
 ==== Markers
 
-A Marker inherits from a MultiGraphic which can contain multiple graphical elements:
+// Note: no diagram since already defined at the top of the section
 
-[#img-uml-class-graphics]
-.UML Class Diagram of the Symbology Graphics
-include::../UML/PlantUML/adoc/graphics.adoc[]
+A Marker inherits from a MultiGraphic which can contain multiple graphical elements:
 
 .MultiGraphic
 [width="90%",options="header"]
@@ -181,6 +187,10 @@ or by a three-dimensional cube. The GraphicSize properties are documented in the
 
 ===== Dot Graphics
 
+[#img-uml-class-dot]
+.Dot Class UML Diagram 
+include::../UML/PlantUML/adoc/basic_vector/dot.adoc[]
+
 A round Dot is one type of Graphic defined by this requirements class that can be used as part of a Marker.
 
 A Dot inherits from a Shape class allowing to define a `stroke` which controls the color and size of the dot (with the stroke's `width` property).
@@ -193,6 +203,10 @@ A Dot inherits from a Shape class allowing to define a `stroke` which controls t
 |===
 
 ===== Image Graphics
+
+[#img-uml-class-image]
+.Image Class UML Diagram 
+include::../UML/PlantUML/adoc/basic_vector/image.adoc[]
 
 An Image is one type of graphic defined by this requirements class that can be used as part of a Marker.
 
@@ -218,6 +232,10 @@ The actual image content is defined by a Resource, which can be specified by one
 |===
 
 ===== Text Graphics
+
+[#img-uml-class-text]
+.Text Class UML Diagram 
+include::../UML/PlantUML/adoc/basic_vector/text.adoc[]
 
 A Text is one type of Graphic defined by this requirements class that can be used as part of a Marker.
 

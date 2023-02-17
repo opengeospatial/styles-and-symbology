@@ -1,0 +1,16 @@
+// Marker
+
+[plantuml, target=diagram-classes, format=png]
+....
+'Class definition
+
+MultiGraphic : elements: Graphic [0..*]
+
+'Inheritance
+
+Marker --|> MultiGraphic
+
+'Composition
+
+MultiGraphic --* Graphic
+....

@@ -1,0 +1,14 @@
+// Basic fill
+
+[plantuml, target=diagram-classes, format=png]
+....
+
+Color : r: float
+Color : g: float
+Color : b: float
+
+Fill : color: Color
+
+Fill --* Color
+VectorSymbolizer --* Fill
+....

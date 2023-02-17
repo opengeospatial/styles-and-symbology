@@ -15,8 +15,6 @@ Symbolizer : marker: Marker [0..1]
 
 MultiGraphic : elements: Graphic [0..*]
 
-'Relations
-
 'Inheritance
 
 Marker --|> MultiGraphic
@@ -27,6 +25,4 @@ Symbolizer --* Marker
 Symbolizer --* Fill
 Symbolizer --* Stroke
 MultiGraphic --* Graphic
-Fill --* Graphic
-Stroke --* Graphic
 ....

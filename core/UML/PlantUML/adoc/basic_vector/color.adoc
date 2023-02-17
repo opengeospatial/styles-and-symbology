@@ -1,0 +1,8 @@
+[plantuml, target=diagram-classes, format=png]
+....
+'Class definition
+
+Color : r: float
+Color : g: float
+Color : b: float
+....

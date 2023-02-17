@@ -1,0 +1,72 @@
+// Shapes graphics
+
+[plantuml, target=diagram-classes, format=png]
+....
+'Class definition
+
+class Shape <<abstract>>
+Shape --|> Graphic
+Shape : stroke: Stroke [0..1]
+
+class ClosedShape <<abstract>>
+ClosedShape : fill: Fill [0..1]
+
+Rectangle : topLeft: Pointf
+Rectangle : bottomRight: Pointf
+
+RoundedRectangle : rx: float
+RoundedRectangle : ry: float
+
+Circle : center: Pointf
+Circle : radius: float
+
+Ellipse : center: Pointf
+Ellipse : radiusX: float
+Ellipse : radiusY: float
+
+SectorArc : innerRadius: float
+
+Arc : center: Pointf
+Arc : radius: float
+Arc : startAngle: Angle
+Arc : deltaAngle: Angle
+
+PathNodes : points: Pointf[*]
+
+ClosedPath : innerNodes: PathNodes[0..*]
+
+Path : nodes: PathNodes
+
+'Relations
+
+'Inheritance
+
+Shape --|> Graphic
+Rectangle --|> ClosedShape
+Circle --|> ClosedShape
+Ellipse --|> ClosedShape
+Arc --|> Shape
+SectorArc --|> Arc
+SectorArc --|> ClosedShape
+ChordArc --|> Arc
+ChordArc --|> ClosedShape
+Path --|> Shape
+RoundedRectangle --|> Rectangle
+ClosedPath --|> Path
+ClosedPath --|> ClosedShape
+ClosedShape --|> Shape
+
+'Composition
+
+PathNodes --* Pointf
+ClosedPath --* PathNodes
+Path --* PathNodes
+Circle --* Pointf
+Ellipse --* Pointf
+Rectangle --* Pointf
+Arc --* Pointf
+ClosedShape --* Fill
+
+ClosedShape --|> Shape
+ClosedShape --* Fill
+....

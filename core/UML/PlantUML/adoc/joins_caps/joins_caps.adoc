@@ -1,4 +1,19 @@
 // 
 [plantuml, target=diagram-classes, format=png]
 ....
+class StrokeJoin <<enumeration>>
+StrokeJoin : miter
+StrokeJoin : round
+StrokeJoin : bevel
+
+class StrokeCap <<enumeration>>
+StrokeCap : butt
+StrokeCap : round
+StrokeCap : square
+
+Stroke : join: StrokeJoin [0..1]
+Stroke : cap: StrokeCap [0..1]
+
+Stroke --* StrokeJoin
+Stroke --* StrokeCap
 ....

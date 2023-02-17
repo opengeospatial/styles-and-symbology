@@ -1,4 +1,8 @@
 // 
 [plantuml, target=diagram-classes, format=png]
 ....
+
+Fill : pattern: Graphic [0..1]
+
+Fill --* Graphic
 ....
