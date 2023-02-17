@@ -1,4 +1,4 @@
-// Marker
+// Basic Marker
 
 [plantuml, target=diagram-classes, format=png]
 ....

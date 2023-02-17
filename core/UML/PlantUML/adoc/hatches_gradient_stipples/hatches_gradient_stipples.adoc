@@ -1,4 +1,5 @@
-// Ha
+// Hatches, gradients and stipples
+
 [plantuml, target=diagram-classes, format=png]
 ....
 'Class definition

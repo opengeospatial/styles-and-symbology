@@ -1,4 +1,4 @@
-// Text
+// Basic Text
 
 [plantuml, target=diagram-classes, format=png]
 ....

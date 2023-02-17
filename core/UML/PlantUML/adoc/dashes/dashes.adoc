@@ -1,4 +1,5 @@
-// 
+// Dashes
+
 [plantuml, target=diagram-classes, format=png]
 ....
 Stroke : dashPattern: integer [*]
