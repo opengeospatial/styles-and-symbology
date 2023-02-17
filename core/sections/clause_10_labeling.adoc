@@ -57,4 +57,3 @@ include::../UML/PlantUML/adoc/font_outlines/font_outlines.adoc[]
 ===== Class Font
 
 * outline: FontOutline
-

@@ -1,4 +1,5 @@
 // Font outline
+
 [plantuml, target=diagram-classes, format=png]
 ....
 FontOutline : size: float

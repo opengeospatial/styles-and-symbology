@@ -1,4 +1,5 @@
-// 
+// Joins and caps
+
 [plantuml, target=diagram-classes, format=png]
 ....
 class StrokeJoin <<enumeration>>

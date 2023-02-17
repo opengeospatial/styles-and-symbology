@@ -82,4 +82,4 @@ include::../UML/PlantUML/adoc/shapes_graphics/shapes_graphics.adoc[]
 === Requirements Class "Shapes Outlines"
 ==== Overview
 
-To be added to the UML.
+//To be added to the UML.

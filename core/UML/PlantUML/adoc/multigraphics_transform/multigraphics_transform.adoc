@@ -1,4 +1,5 @@
-// 
+// Mutligraphics transform
+
 [plantuml, target=diagram-classes, format=png]
 ....
 ....
