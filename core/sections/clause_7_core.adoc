@@ -2,7 +2,7 @@
 == Requirements Class "Core"
 
 === Overview
-The requirements described in this section define the symbology core requirement class. The UML diagram (<<img-uml-class>>) shows the fundamental concepts of the Symbology Conceptual and Logical Model.
+The requirements described in this section define the symbology core requirement class. The following UML diagram (<<img-uml-class-core>>) shows the fundamental concepts of the Symbology Conceptual and Logical Model:
 
 [#img-uml-class-core]
 .Symbology Core Classes UML Diagram
