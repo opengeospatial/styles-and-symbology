@@ -7,6 +7,292 @@ This requirements class defines an encoding for the Styles and Symbology Logical
 The primary objective of this encoding is to be easy to be expressive and facilitate hand-edition by cartographers.
 Parsing this encoding requires a custom parser.
 
+==== Encoding a style
+
+===== Styling Rules
+
+===== Expressions
+
+===== Selectors
+
+===== Symbolizers
+
+==== Examples
+
+.CCSSS Example encoding style using "Core" requirements class
+====
+[source,ccsss]
+----
+.title "Styling a land use layer"
+.abstract "Styling land use data with Style & Symbology Core"
+
+#Landuse[dataLayer.type = vector]
+{
+   visibility: false;
+
+   [viz.sd < 200000 and viz.date > DATE('2020-01-01')]
+   {
+      visibility: true;
+      opacity: 0.5;
+      zOrder: 1;
+   }
+}
+----
+====
+
+===== Basic Vector Styling
+
+.CCSSS Example encoding style using "Basic Vector Styling" requirements class
+====
+[source,ccsss]
+----
+.title "Styling vector features"
+.abstract "Basic vector features styling"
+
+#Landuse[dataLayer.type = vector and dataLayer.featuresGeometryDimensions = 2]
+{
+   // Do not show Landuse layer by default
+   visibility: false;
+
+   // Show land use if zoomed in more than 1:200,000 for data valid within visualization's selected time range
+   [viz.sd < 200000 and validDate >= viz.startDate and validDate <= viz.endDate]
+   {
+      visibility: true;
+      opacity: 0.8;
+      zOrder: 1;
+      fill: (color: gray; opacity: 0.5);
+      stroke: (color: gray; width: 2.0 px; opacity: 1.0);
+
+      // Select different fill and stroke color based on FunctionCode property
+      [FunctionCode = 'parking']
+      {
+         fill.color: darkGray;
+         stroke.color = #202020;
+      }
+      [FunctionCode = 'park']
+      {
+         fill.color: darkGreen;
+         stroke.color = green;
+      }
+      [FunctionCode = 'commercial']
+      {
+         fill.color: lightGray;
+         stroke.color = lightGray;
+      }
+
+      // If zoomed in more than 1:10,000
+      [viz.sd < 10000]
+      {
+         // Change stroke width to 4 pixels
+         stroke.width = 4.0 px;
+         // Add a text marker (positioned at centroid + horizontal offset) showing FunctionTitle property
+         marker: (elements: (
+            Text(
+               position: (20 0); // Offset 20 pixels to the right
+               text: FunctionTitle;
+               alignment: (left top);
+               font: (
+                  face: 'Arial';
+                  size = 14;
+                  bold: true;
+                  italic: true;
+                  opacity: 1.0;
+                  color: black;
+               )
+            )
+         ));
+         // Add icons at centroid based on land use function code property
+         [FunctionCode = 'parking']
+         {
+            +marker.elements: (
+               Image(
+                  image: (uri: http://example.com/parkingIcon; path: 'parkingIcon.png'; id: 'parking'; type: 'image/png'; ext: 'png');
+                  hotSpot: (50 perc 50 perc); tint: white; blackTint: blue; alphaThreshold: 0.1;
+               )
+         }
+         [FunctionCode = 'park']
+         {
+            +marker.elements: (
+               Image(
+                  image: (uri: http://example.com/park; path: 'park.png'; id: 'park'; type: 'image/png'; ext: 'png');
+                  hotSpot: (50 perc 50 perc); tint: white; blackTint: blue; alphaThreshold: 0.1;
+               )
+         }
+         [FunctionCode = 'commercial']
+         {
+            +marker.elements: (
+               Image(
+                  image: (uri: http://example.com/commercial; path: 'commercial.png'; id: 'commercial'; type: 'image/png'; ext: 'png');
+                  hotSpot: (50 perc 50 perc); tint: white; blackTint: blue; alphaThreshold: 0.1;
+               )
+         }
+      }
+   }
+}
+
+#Roads[dataLayer.type = vector and dataLayer.featuresGeometryDimensions = 1]
+{
+   visibility: false
+
+   [viz.sd < 200000 and validDate >= viz.startDate and validDate <= viz.endDate]
+   {
+      visibility: true
+      opacity: 0.8;
+      zOrder: 2;
+      stroke: (color: gray; width: 5.0 px; opacity: 1.0);
+
+      // If zoomed in more than 1:10,000
+      [viz.sd < 10000]
+      {
+         // Change stroke width to 8 meters
+         stroke.width = 8.0 m;
+         // Add Dot at each segment end-point
+         marker: (elements: (
+            Dot(
+               size: 10 m; // Alias for base Shape class stroke width
+               color: white;
+            )
+         ));
+      }
+   }
+}
+
+#Amenities[dataLayer.type = 'vector' and dataLayer.featuresGeometryDimensions = 0]
+{
+   visibility: false
+
+   [viz.sd < 200000 and validDate >= viz.startDate and validDate <= viz.endDate]
+   {
+      visibility: true
+      opacity: 0.5
+      zOrder: 3
+
+      // If zoomed in more than 1:10,000
+      [viz.sd < 10000]
+      {
+         // Add a double-Dot marker (positioned at centroid)
+         marker: (elements: (
+            Dot(  // larger white dot underneath
+               size: 10 px; // Alias for base Shape class stroke width
+               alignment: (center middle);
+               color: white;
+            ),
+            Dot(  // smaller orange dot in center
+               size: 8 px; // Alias for base Shape class stroke width
+               alignment: (center middle);
+               color: orange;
+            )
+         ));
+         [viz.sd < 5000]
+         {
+            // Add a Text graphic to Marker at 1:5000
+            +marker.elements: (
+               Text(
+                  position: (20 0); // Offset 20 pixels to the right
+                  text: Name; // Name of Amenity
+                  alignment: (left middle);
+                  font: (
+                     face: 'Arial';
+                     size = 12;
+                     bold: false;
+                     italic: false;
+                     opacity: 1.0;
+                     color: darkGray;
+                  )
+               )
+         }
+      }
+   }
+}
+----
+====
+
+===== Basic Coverage Styling
+
+.CCSSS Example encoding style rendering DEM with a color map using "Basic Coverage Styling" requirements class
+====
+[source,ccsss]
+----
+.title "DEM with color map"
+.abstract "Applying a color map to a Digital Elevation Model with Style & Symbology Basic Coverage Styling"
+
+#Elevation[dataLayer.type = coverage]
+{
+   visibility: false;
+
+   [viz.sd < 200000]
+   {
+      visibility: true;
+      opacity: 0.8;
+      zOrder: 1;
+
+      singleChannel: elevation; // Use elevation coverage field
+      colorMap: (0 (96 136 73)), (900 (226 219 167)), (1300 (252 197 117)), (1900 (254 168 134)), (2500, (250 250 250));
+   }
+}
+----
+====
+
+.CCSSS Example encoding style rendering sentinel-2 in natural color from 3 bands using "Basic Coverage Styling" requirements class
+====
+[source,ccsss]
+----
+.title "sentinel-2 natural color"
+.abstract "Styling a Sentinel-2A coverage with Style & Symbology Basic Coverage Styling"
+
+#Sentinel2L2A[dataLayer.type = coverage]
+{
+   visibility: false;
+
+   [viz.sd < 200000]
+   {
+      visibility: true;
+      opacity: 0.8;
+      zOrder: 1;
+
+      colorChannels: (r: B04; g: B03; b: B02);
+      alphaChannel: 1.0;
+      [SCL=8] { alphaChannel: 0.5; }   // Reduce alpha channel value for medium cloud proability
+      [SCL=9] { alphaChannel: 0.0; }   // Zero alpha channel value for high cloud proability
+   }
+}
+----
+====
+
+===== Arithmetic Operations (with Basic Coverage Styling)
+
+.CCSSS Example encoding style rendering NDVI with color map using "Basic Coverage Styling" requirements class
+====
+[source,ccsss]
+----
+.title "sentinel-2 natural color"
+.abstract "Styling a Sentinel-2A coverage with Style & Symbology Basic Coverage Styling"
+
+#Sentinel2L2A[dataLayer.type = coverage]
+{
+   visibility: false;
+
+   [viz.sd < 200000]
+   {
+      visibility: true;
+      opacity: 0.8;
+      zOrder: 1;
+
+      singleChannel: (B08 - B04)/(B08 + B04);
+      alphaChannel: 1.0;
+      [SCL=8] { alphaChannel: 0.5; }   // Reduce alpha channel value for medium cloud proability
+      [SCL=9] { alphaChannel: 0.0; }   // Zero alpha channel value for high cloud proability
+      colorMap: ((-1.0 saddleBrown),(0.0 peru),(0.2 goldenrod),(0.5 olive),(0.6 yellowGreen),(0.8 greenYellow),(1.0 lime));
+   }
+}
+----
+====
+
+===== Hill Shading
+
+// colorMap : ((0 black), (0.15 gray), (0.35 silver), (0.55 white));
+// opacityMap: ((0 0.75), (0.15 0.50), (0.35 0.25), (0.55 0.00));
+
 === Requirements
 
 include::../requirements/rc-ccsss-encoding.adoc[]

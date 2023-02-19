@@ -104,6 +104,7 @@ and applies wherever this basic RGB Color class is used.
 [plantuml, target=diagram-classes, format=png]
 ....
 Fill : color: Color
+Fill : opacity: float
 Fill --* Color
 ....
 
