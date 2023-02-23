@@ -25,7 +25,7 @@ This draft candidate Standard defines conformance classes for:
 - a [core symbology conceptual and logical model](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc20) based on Styles as a list of Styling Rules consisting of a Symbolizer and optional Selector Expression,
 - basic [vector styling](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc23),
 - basic [coverage styling](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc26),
-- [basic labeling](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc30),
+- basic [labeling](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc30),
 
 ### Common portrayal capabilities
 
