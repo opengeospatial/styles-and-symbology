@@ -67,24 +67,24 @@ Parsing this encoding requires a custom parser.
       [FunctionCode = 'parking']
       {
          fill.color: darkGray;
-         stroke.color = #202020;
+         stroke.color: #202020;
       }
       [FunctionCode = 'park']
       {
          fill.color: darkGreen;
-         stroke.color = green;
+         stroke.color: green;
       }
       [FunctionCode = 'commercial']
       {
          fill.color: lightGray;
-         stroke.color = lightGray;
+         stroke.color: lightGray;
       }
 
       // If zoomed in more than 1:10,000
       [viz.sd < 10000]
       {
          // Change stroke width to 4 pixels
-         stroke.width = 4.0 px;
+         stroke.width: 4.0 px;
          // Add a text marker (positioned at centroid + horizontal offset) showing FunctionTitle property
          marker: (elements: (
             Text(
@@ -93,7 +93,7 @@ Parsing this encoding requires a custom parser.
                alignment: (left top);
                font: (
                   face: 'Arial';
-                  size = 14;
+                  size: 14;
                   bold: true;
                   italic: true;
                   opacity: 1.0;
@@ -145,7 +145,7 @@ Parsing this encoding requires a custom parser.
       [viz.sd < 10000]
       {
          // Change stroke width to 8 meters
-         stroke.width = 8.0 m;
+         stroke.width: 8.0 m;
          // Add Dot at each segment end-point
          marker: (elements: (
             Dot(
@@ -193,7 +193,7 @@ Parsing this encoding requires a custom parser.
                   alignment: (left middle);
                   font: (
                      face: 'Arial';
-                     size = 12;
+                     size: 12;
                      bold: false;
                      italic: false;
                      opacity: 1.0;
