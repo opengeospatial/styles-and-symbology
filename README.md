@@ -4,32 +4,63 @@ This repository hosts the working draft documents for the _Core Models and Encod
 
 The latest version of this draft is available in [HTML](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html) or [PDF](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.pdf).
 
-In comparison to the current version, _OGC Symbology Conceptual Model: Core Part ("SymCore")_, the new draft candidate Standard aims to better reflect its classification as an OGC Implementation Standard by including the requirements classes needed to enable the implementation of interoperable encodings, renderers and applications writing and reading styles.
+In comparison to the current version 1.0, _OGC Symbology Conceptual Model: Core Part ("SymCore")_, the new draft candidate Standard aims to better reflect its classification as an OGC Implementation Standard by including the requirements classes needed to enable the implementation of interoperable ***encodings***, ***renderers*** and applications ***reading*** and ***writing*** styles.
 
-It does so by feauring:
-- A clearer mechanism for extensibility, through the definition of abstract Selectors, Symbolizers,
-and Expressions. While boolean predicate Expressions can be used as Selectors to determine
-whether a Styling Rule should be used or not, Expressions resolving to an arbitrary data type can be
-used as parameter values for Symbolizer properties.
-- A logical model complementing the conceptual model.
-- Defining two encodings conforming to the logical model
-
+It does so by featuring:
+- A **modular logical and conceptual model** for styling capabilities,  
+- A [**minimal Core**](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc20) requirements class including clear extension mechanisms, through the definition of abstract Selectors, Symbolizers, and Expressions,
+- a basic [**Vector Styling**](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc23) requirements class,
+- a basic [**Coverage Styling**](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc26) requirements class,
+- requirements classes providing [**additional functionality**,
+- a [**JSON**](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc67) encoding of the conceptual and logical model facilitating machine readability,
+- a [**CSS**](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc70)-inspired encoding of the conceptual and logical model facilating hand-editing.
 
 The current published version of OGC Symbology Conceptual Model: Core Part (SymCore) **1.0** is available in [HTML](https://docs.ogc.org/is/18-067r3/18-067r3.html) or [PDF](https://docs.ogc.org/is/18-067r3/18-067r3.pdf).
 
-## Core: Working draft revision
+## Requirements classes
 
-A minor revision of the Styles & Symbology standard will be enhanced with:
+This draft candidate Standard defines conformance classes for:
 
-## Extensions
+### Basic portrayal capabilities
+- a [core symbology conceptual and logical model](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc20 based on Styles as a list of Styling Rules consisting of a Symbolizer and optional Selector Expression,
+- basic [vector styling](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc23),
+- basic [coverage styling](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc26),
+- [basic labeling](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc30),
 
-Extensions of the conceptual and logical models will be defined specifically targeting styling
-vector features and gridded coverage features. 3D data and styling will be considered as well.
+### Common portrayal capabilities
 
-## Encodings
+- [Hill shading](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc28),
+- [font outlines](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc29),
+- [shape graphics](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc33) capabilities including circles, ellipses, arcs, rectangles (including rounded rectangles) and paths (polylines and polygons)
+- [dashed strokes](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc38)),
+- [casing and center lines](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc38),
+- [hatches, gradients and stipples](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc43)
 
-Multiple encodings will be defined based on the conceptual model and extensions.
-One encoding will be a direct encoding of the logical model in JSON.
+### Additional Expression capabilities
+
+- [expressions as parameter values](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc46) for any symbolizer properties,
+- using [identifiers in the right side](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc49)) of operation expressions,
+- conditional expressions,
+- variables,
+- [arithmetic, bitwise and text relation operators](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc53),
+- [function call expressions and standardized functions](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc57) for spatial, temporal and array relations, as well as text and geometry manipulation 
+
+### Advanced Stroke and Fills
+
+- specific joins and caps for Strokes
+- Graphic pattern Strokes,
+- Graphic pattern Fills,
+
+### Additional portrayal
+
+- [shape outlines](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc34),
+- [vector graphic hierarchy](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc35), including full 2D transforms,
+- [3D model graphics and 3D transforms](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc64),
+
+### Encodings
+
+- [JSON encoding](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc67) that can be readily parsed by a generic JSON parser,
+- [Cascading Cartographic Symbology Style Sheets](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc70), a more expressive encoding based on Web CSS which is better suited to hand-edit styles
 
 ## Communication
 
