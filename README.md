@@ -4,7 +4,7 @@ This repository hosts the working draft documents for the _Core Models and Encod
 
 The latest version of this draft is available in [HTML](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html) or [PDF](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.pdf).
 
-In comparison to the current _OGC Symbology Conceptual Model: Core Part ("SymCore")_ version 1.0, the new draft candidate Standard aims to better reflect its classification as an OGC Implementation Standard by including the requirements classes needed to enable the implementation of interoperable ***encodings***, ***renderers*** and applications ***reading*** and ***writing*** styles.
+In comparison to the current _OGC Symbology Conceptual Model: Core Part ("SymCore")_ version 1.0, the new draft candidate Standard aims to better reflect its classification as an OGC Implementation Standard by including the requirements classes needed to enable the implementation of interoperable ***encodings***, ***renderers*** (e.g., [_OGC API - Maps_](https://github.com/opengeospatial/ogcapi-maps/) / [_OGC API - Tiles_](https://github.com/opengeospatial/ogcapi-tiles)) and systems ***parsing*** and/or ***generating*** style definitions (e.g., [_OGC API - Styles_](https://github.com/opengeospatial/ogcapi-styles/), visual style editors, style transcoders).
 
 It does so by featuring:
 - A **modular logical and conceptual model** for styling capabilities,  
