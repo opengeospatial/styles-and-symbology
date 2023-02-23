@@ -1,17 +1,25 @@
 # OGC Styles & Symbology
 
-This repository hosts the working draft documents for the Core conceptual model for styling and symbology, as well as [extensions](extensions) and [encodings](encodings) for it.
+This repository hosts the working draft documents for the _Core Models and Encodings for Styling and Symbology - Part 1: Core_ ("SymCore") **2.0**.
 
-The current published version of the standard is available in [HTML](https://docs.ogc.org/is/18-067r3/18-067r3.html) or [PDF](https://docs.ogc.org/is/18-067r3/18-067r3.pdf).
+The latest version of this draft is available in [HTML](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html) or [PDF](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.pdf).
+
+In comparison to the current version, _OGC Symbology Conceptual Model: Core Part ("SymCore")_, the new draft candidate Standard aims to better reflect its classification as an OGC Implementation Standard by including the requirements classes needed to enable the implementation of interoperable encodings, renderers and applications writing and reading styles.
+
+It does so by feauring:
+- A clearer mechanism for extensibility, through the definition of abstract Selectors, Symbolizers,
+and Expressions. While boolean predicate Expressions can be used as Selectors to determine
+whether a Styling Rule should be used or not, Expressions resolving to an arbitrary data type can be
+used as parameter values for Symbolizer properties.
+- A logical model complementing the conceptual model.
+- Defining two encodings conforming to the logical model
+
+
+The current published version of OGC Symbology Conceptual Model: Core Part (SymCore) **1.0** is available in [HTML](https://docs.ogc.org/is/18-067r3/18-067r3.html) or [PDF](https://docs.ogc.org/is/18-067r3/18-067r3.pdf).
 
 ## Core: Working draft revision
 
 A minor revision of the Styles & Symbology standard will be enhanced with:
-- A clearer mechanism for extensibility, through the definition of abstract Selectors, Symbolizers,
-and Expressions. While boolean predicate Expressions can be used as Selectors to determine
-whether a styling Rule should be used or not, Expressions resolving to an arbitrary data type can be
-used as ParameterValues for Symbolizer properties.
-- A logical model complementing the conceptual model.
 
 ## Extensions
 
