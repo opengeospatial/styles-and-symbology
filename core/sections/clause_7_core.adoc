@@ -44,16 +44,16 @@ Please note that the graphic pipeline of the rendering engine must be expressed 
 ////
 Can we omit this metadata? This might belon instead to the encoding or styles metadata.
 
-| name	   | A string value to reference the Style	| ParameterValue data type	| Zero or one
-| title	   | Human readable title	| ParameterValue data type	| 0..1
-| abstract	| Human readable description	| ParameterValue data type	| 0..1
+| name      | A string value to reference the Style   | ParameterValue data type   | Zero or one
+| title      | Human readable title   | ParameterValue data type   | 0..1
+| abstract   | Human readable description   | ParameterValue data type   | 0..1
 ////
 
 .Style class
 [width="90%",options="header"]
 |===
-| Name	      | Definition	                     | Data type and value | Multiplicity
-| stylingRules | Styling rules defining the style	| StylingRule         | 0..*
+| Name         | Definition                        | Data type and value | Multiplicity
+| stylingRules | Styling rules defining the style   | StylingRule         | 0..*
 |===
 
 ==== Styling Rules
@@ -64,8 +64,8 @@ A StylingRule can contain nested rules, which will only be applied if the the pa
 ////
 Do we need these?
 
-| title	| Human readable title	| ParameterValue data type	| One
-| abstract	| Human readable description	| ParameterValue data type	| Zero or one
+| title   | Human readable title   | ParameterValue data type   | One
+| abstract   | Human readable description   | ParameterValue data type   | Zero or one
 ////
 
 ////
@@ -75,18 +75,18 @@ Where exactly do we need this?
 The following was in ParameterValue, but most parameter values will be numbers/colors, or feature/covergge properties.
 What actually needs i18n? Rule labels for legends? The choice between feature properties available in different languages?
 
-| language	| Language identifier for the ParameterValue element. (a)	| Character String. This language identifier shall be as specified in IETF RFC 4646.	| zero or more
+| language   | Language identifier for the ParameterValue element. (a)   | Character String. This language identifier shall be as specified in IETF RFC 4646.   | zero or more
 (a) The language identifier should offer a way to adapt the ParameterValue to a specified language, e.g., display the title of a Rule element both in English and French.
 ////
 
 .StylingRule
 [width="90%",options="header"]
 |===
-| Name	      | Definition	                                                   | Data type and value	   | Multiplicity
-| name      	| A name for the rule (useful for generating legends)             | string                   | 0..1
-| selector  	| Selector defining the condition to apply the rule's symbolizer	| Expression	            | 0..1
-| symbolizer	| Symbolize(s) to apply by the rendering engine	                  | Symbolizer	            | 1
-| nestedRules  | Symbolize(s) to apply by the rendering engine	                  | StylingRule              | 0..*
+| Name         | Definition                                                      | Data type and value      | Multiplicity
+| name         | A name for the rule (useful for generating legends)             | string                   | 0..1
+| selector     | Selector defining the condition to apply the rule's symbolizer  | Expression               | 0..1
+| symbolizer   | Symbolizer to apply by the rendering engine                     | Symbolizer               | 0..1
+| nestedRules  | Additional styling rules to consider if this rule is selected partially overriding this rule's symbolizer | StylingRule              | 0..*
 |===
 
 The selector (also sometimes called a _filter_), for the rule is defined as a predicate expression evaluating to either true or false.
@@ -98,16 +98,16 @@ This core requirements class only defines three basic properties relevant to mos
 Separate requirements classes and later parts will extend this Symbolizer class with additional properties to provide more advanced portrayal capabilities.
 
 ////
-| name	| A string value to reference the Symbolizer	| ParameterValue data type	| Zero or one
-| title	| Human readable title	| ParameterValue data type	| One
-| abstract	| Human readable description	| ParameterValue data type	| Zero or one
-| uom	| Unit of measure to apply to all graphical properties of a Symbolizer	| uom code	| Zero or one
+| name   | A string value to reference the Symbolizer   | ParameterValue data type   | Zero or one
+| title   | Human readable title   | ParameterValue data type   | One
+| abstract   | Human readable description   | ParameterValue data type   | Zero or one
+| uom   | Unit of measure to apply to all graphical properties of a Symbolizer   | uom code   | Zero or one
 ////
 
 .Symbolizer class
 [width="90%",options="header"]
 |===
-| Name	     | Definition	                | Data type and value  | Multiplicity
+| Name        | Definition                   | Data type and value  | Multiplicity
 | visibility | Whether to display the data  | bool                 | 0..1
 | opacity    | Degree of opacity            | float                | 0..1
 | zOrder     | Specify a rendering order    | int                  | 0..1
@@ -264,8 +264,8 @@ TOCHECK: How to handle parent objects ? e.g.,  visualization, dataLayer, feature
 .Visualization System Identifiers
 [width="90%",options="header"]
 |===
-| Name                          	| Definition	                          | Data type and value
-| visualization.scaleDenominator	| Current visualization scale denominator | float
+| Name                             | Definition                             | Data type and value
+| visualization.scaleDenominator   | Current visualization scale denominator | float
 | visualization.dateTime            | Current visualization date and time     | DateTime
 | visualization.date                | Current visualization date              | Date
 | visualization.timeOfDay           | Current visualization time of day       | Time
@@ -274,8 +274,8 @@ TOCHECK: How to handle parent objects ? e.g.,  visualization, dataLayer, feature
 .Layer System Identifiers
 [width="90%",options="header"]
 |===
-| Name                          	       | Definition	                                             | Data type and value
-| dataLayer.identifier          	       | Identifier of data layers                                | string
+| Name                                    | Definition                                                | Data type and value
+| dataLayer.identifier                    | Identifier of data layers                                | string
 | dataLayer.type                        | Data type of data layers                                 | enumeration: vector, coverage, ...
 |===
 
@@ -300,7 +300,7 @@ TOCHECK: How to handle parent objects ? e.g.,  visualization, dataLayer, feature
 .Date class
 [width="90%",options="header"]
 |===
-| Name	         | Definition	                                | Data type and value | Multiplicity
+| Name            | Definition                                   | Data type and value | Multiplicity
 | year            |                                              | int                 | 1
 | month           |                                              | Month               | 1
 | day             |                                              | int                 | 1
@@ -309,8 +309,8 @@ TOCHECK: How to handle parent objects ? e.g.,  visualization, dataLayer, feature
 .TimeOfDay class
 [width="90%",options="header"]
 |===
-| Name	         | Definition	                                | Data type and value | Multiplicity
-| hour            |                                       	     | int                 | 1
+| Name            | Definition                                   | Data type and value | Multiplicity
+| hour            |                                               | int                 | 1
 | minutes         |                                              | Month               | 1
 | seconds         |                                              | int                 | 1
 |===
@@ -318,8 +318,8 @@ TOCHECK: How to handle parent objects ? e.g.,  visualization, dataLayer, feature
 .Class TimeInstant
 [width="90%",options="header"]
 |===
-| Name	         | Definition	                                | Data type and value | Multiplicity
-| date            |                                       	     | Date                | 1
+| Name            | Definition                                   | Data type and value | Multiplicity
+| date            |                                               | Date                | 1
 | time            |                                              | TimeOfDay           | 1
 |===
 
@@ -394,10 +394,10 @@ Without support for the _Any right-hand operand_ requirements class, the right-h
 .OperationExpression class
 [width="90%",options="header"]
 |===
-| Name	   | Definition	                     | Data type and value | Multiplicity
-| operand1  | First operand                   	| Expression          | 0..1
-| operator  | Operator                        	| Operator            | 1
-| operand2  | Second operand                  	| Expression          | 1
+| Name      | Definition                        | Data type and value | Multiplicity
+| operand1  | First operand                      | Expression          | 0..1
+| operator  | Operator                           | Operator            | 1
+| operand2  | Second operand                     | Expression          | 1
 |===
 
 [#img-uml-relational-logic-operators]
