@@ -7,3 +7,260 @@ to the conceptual model and requirements classes defined in this Standard, with 
 conformance to this Standard for Rendering engines based on SLD/SE and writing conversion tools
 that can convert in either or both direction between SLD/SE and the two encodings defined in this
 Standard.
+
+.SLD Example encoding style using "Core" requirements class
+====
+[source,sld]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<sld:StyledLayerDescriptor xmlns:sld="http://www.opengis.net/sld" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.1.0" xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/StyledLayerDescriptor.xsd">
+   <sld:NamedLayer>
+      <sld:Name>Landuse</sld:Name>
+      <sld:UserStyle>
+         <sld:Name>Styling a land use layer</sld:Name>
+         <sld:Abstract>Styling land use data with Style &amp; Symbology Core</sld:Abstract>
+         <sld:FeatureTypeStyle>
+            <sld:MinScaleDenominator>1</sld:MinScaleDenominator>
+            <sld:FeatureLayer>
+                <sld:Name>Landuse</sld:Name>
+                <sld:Visibility>true</sld:Visibility>
+            </sld:FeatureLayer>
+            <sld:Rule>
+               <sld:Name>Scaled visibility</sld:Name>
+               <sld:MaxScaleDenominator>200000</sld:MaxScaleDenominator>
+               <sld:Filter>
+                  <ogc:PropertyIsGreaterThanOrEqualTo>
+                     <ogc:PropertyName>date</ogc:PropertyName>
+                     <ogc:Literal>2020-01-01</ogc:Literal>
+                  </ogc:PropertyIsGreaterThanOrEqualTo>
+               </sld:Filter>
+               <sld:PolygonSymbolizer>
+                  <sld:Fill>
+                     <sld:CssParameter name="fill">#FF0000</sld:CssParameter>
+                     <sld:CssParameter name="fill-opacity">0.5</sld:CssParameter>
+                  </sld:Fill>
+               </sld:PolygonSymbolizer>
+            </sld:Rule>
+         </sld:FeatureTypeStyle>
+      </sld:UserStyle>
+   </sld:NamedLayer>
+</sld:StyledLayerDescriptor>
+----
+====
+
+===== Basic Vector Styling
+
+.SLD Example encoding style using "Basic Vector Styling" requirements class
+
+====
+[source,sld]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<StyledLayerDescriptor version="1.1.0" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc"
+    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/StyledLayerDescriptor.xsd">
+   <sld:NamedLayer>
+      <sld:Name>Landuse</sld:Name>
+      <sld:UserStyle>
+         <sld:Name>Styling a land use layer</sld:Name>
+         <sld:Abstract>Styling land use data with Style &amp; Symbology Basic Vector Styling</sld:Abstract>
+         <sld:FeatureTypeStyle>
+            <sld:Rule>
+               <sld:Name>parking</sld:Name>
+               <sld:Title>parking</sld:Title>
+               <ogc:Filter>
+                  <ogc:PropertyIsEqualTo>
+                     <ogc:PropertyName>landuse</ogc:PropertyName>
+                     <ogc:Literal>parking</ogc:Literal>
+                  </ogc:PropertyIsEqualTo>
+               </ogc:Filter>
+               <sld:MaxScaleDenominator>200000</sld:MaxScaleDenominator>
+               <sld:PolygonSymbolizer>
+                  <sld:Fill>
+                     <sld:CssParameter name="fill">#FF0000</sld:CssParameter>
+                     <sld:CssParameter name="fill-opacity">0.5</sld:CssParameter>
+                  </sld:Fill>
+                  <stroke>
+                     <CssParameter name="stroke">#000000</CssParameter>
+                     <CssParameter name="stroke-width">1</CssParameter>
+                  </stroke>
+               </sld:PolygonSymbolizer>
+            </sld:Rule>
+            // other rules go here ...
+         </sld:FeatureTypeStyle>
+      </sld:UserStyle>
+   </sld:NamedLayer>
+   // styling for next layer goes here ...
+</StyledLayerDescriptor>
+----
+====
+
+===== Basic Coverage Styling
+
+.SLD Example encoding style rendering DEM with a color map using "Basic Coverage Styling" requirements class
+====
+[source,sld]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<StyledLayerDescriptor version="1.1.0" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc"
+    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/StyledLayerDescriptor.xsd">
+   <sld:NamedLayer>
+      <sld:Name>Elevation</sld:Name>
+      <sld:UserStyle>
+         <sld:Name>DEM with color map</sld:Name>
+         <sld:Abstract>Applying a color map to a Digital Elevation Model with Style &amp; Symbology Basic Coverage Styling</sld:Abstract>
+         <sld:FeatureTypeStyle>
+            <sld:Rule>
+               <sld:Name>DEM with color map</sld:Name>
+               <sld:Title>DEM with color map</sld:Title>
+               <sld:MaxScaleDenominator>200000</sld:MaxScaleDenominator>
+               <sld:RasterSymbolizer>
+                  <sld:Opacity>0.8</sld:Opacity>
+                  <sld:ChannelSelection>
+                     <sld:GrayChannel>
+                        <sld:SourceChannelName>elevation</sld:SourceChannelName>
+                     </sld:GrayChannel>
+                  </sld:ChannelSelection>
+                  <sld:ColorMap>
+                     <sld:ColorMapEntry color="#608849" quantity="0" label="0"/>
+                     <sld:ColorMapEntry color="#E2DBA7" quantity="900" label="900"/>
+                     <sld:ColorMapEntry color="#FCC575" quantity="1300" label="1300"/>
+                     <sld:ColorMapEntry color="#FCA886" quantity="1900" label="1900"/>
+                     <sld:ColorMapEntry color="#FAFAFA" quantity="2500" label="2500"/>
+                  </sld:ColorMap>
+               </sld:RasterSymbolizer>
+            </sld:Rule>
+         </sld:FeatureTypeStyle>
+      </sld:UserStyle>
+   </sld:NamedLayer>
+</StyledLayerDescriptor>
+----
+====
+
+.SLD Example encoding style rendering sentinel-2 in natural color from 3 bands using "Basic Coverage Styling" requirements class
+====
+[source,sld]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<StyledLayerDescriptor version="1.1.0" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc"
+    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/StyledLayerDescriptor.xsd">
+   <sld:NamedLayer>
+      <sld:Name>sentinel-2 natural color</sld:Name>
+      <sld:UserStyle>
+         <sld:Name>sentinel-2 natural color</sld:Name>
+         <sld:Abstract>Styling a Sentinel-2A coverage with Style &amp; Symbology Basic Coverage Styling</sld:Abstract>
+         <sld:FeatureTypeStyle>
+            <sld:Rule>
+               <sld:Name>sentinel-2 natural color</sld:Name>
+               <sld:Title>sentinel-2 natural color</sld:Title>
+               <sld:MaxScaleDenominator>200000</sld:MaxScaleDenominator>
+               <sld:RasterSymbolizer>
+                  <sld:Opacity>0.8</sld:Opacity>
+                  <sld:ChannelSelection>
+                     <sld:RedChannel>
+                        <sld:SourceChannelName>B04</sld:SourceChannelName>
+                     </sld:RedChannel>
+                     <sld:GreenChannel>
+                        <sld:SourceChannelName>B03</sld:SourceChannelName>
+                     </sld:GreenChannel>
+                     <sld:BlueChannel>
+                        <sld:SourceChannelName>B02</sld:SourceChannelName>
+                     </sld:BlueChannel>
+                  </sld:ChannelSelection>
+                  <sld:ContrastEnhancement>
+                     <sld:Normalize/>
+                  </sld:ContrastEnhancement>
+               </sld:RasterSymbolizer>
+            </sld:Rule>
+         </sld:FeatureTypeStyle>
+      </sld:UserStyle>
+   </sld:NamedLayer>
+</StyledLayerDescriptor>
+----
+====
+
+===== Arithmetic Operations (with Basic Coverage Styling)
+
+.CCSSS Example encoding style rendering NDVI with color map using "Basic Coverage Styling" requirements class
+====
+[source,ccsss]
+----
+.title "sentinel-2 natural color"
+.abstract "Styling a Sentinel-2A coverage with Style & Symbology Basic Coverage Styling"
+
+#Sentinel2L2A[dataLayer.type = coverage]
+{
+   visibility: false;
+
+   [viz.sd < 200000]
+   {
+      visibility: true;
+      opacity: 0.8;
+      zOrder: 1;
+
+      singleChannel: (B08 - B04)/(B08 + B04);
+      alphaChannel: 1.0;
+      [SCL=8] { alphaChannel: 0.5; }   // Reduce alpha channel value for medium cloud proability
+      [SCL=9] { alphaChannel: 0.0; }   // Zero alpha channel value for high cloud proability
+      colorMap: ((-1.0 saddleBrown),(0.0 peru),(0.2 goldenrod),(0.5 olive),(0.6 yellowGreen),(0.8 greenYellow),(1.0 lime));
+   }
+}
+----
+====
+
+.SLD Example encoding style rendering NDVI with color map using "Basic Coverage Styling" requirements class
+====
+[source,sld]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<StyledLayerDescriptor version="1.1.0" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc"
+    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/StyledLayerDescriptor.xsd">
+   <sld:NamedLayer>
+      <sld:Name>NDVI</sld:Name>
+      <sld:UserStyle>
+         <sld:Name>NDVI</sld:Name>
+         <sld:Abstract>Styling a Sentinel-2A coverage with Style &amp; Symbology Basic Coverage Styling</sld:Abstract>
+         <sld:FeatureTypeStyle>
+            <sld:Rule>
+               <sld:Name>NDVI</sld:Name>
+               <sld:Title>NDVI</sld:Title>
+               <sld:MaxScaleDenominator>200000</sld:MaxScaleDenominator>
+               <sld:RasterSymbolizer>
+                  <sld:Opacity>0.8</sld:Opacity>
+                  <sld:ChannelSelection>
+                     <sld:GrayChannel>
+                        <sld:ContrastEnhancement>
+                           <sld:Normalize/>
+                        </sld:ContrastEnhancement>
+                        <sld:SourceChannelName>
+                           <ogc:Function name="Divide">
+                              <ogc:Function name="Subtract">
+                                 <ogc:PropertyName>B08</ogc:PropertyName>
+                                 <ogc:PropertyName>B04</ogc:PropertyName>
+                              </ogc:Function>
+                              <ogc:Function name="Add">
+                                 <ogc:PropertyName>B08</ogc:PropertyName>
+                                 <ogc:PropertyName>B04</ogc:PropertyName>
+                              </ogc:Function>
+                           </ogc:Function>
+                        </sld:SourceChannelName>
+                     </sld:GrayChannel>
+                  <sld:ChannelSelection>
+                  <sld:ColorMap type="intervals" extended="false" >
+                     <sld:ColorMapEntry color="#8B4513" quantity="-1.0" label="saddleBrown"/>
+                     <sld:ColorMapEntry color="#CD853F" quantity="0.0" label="peru"/>
+                     <sld:ColorMapEntry color="#DAA520" quantity="0.2" label="goldenrod"/>
+                     <sld:ColorMapEntry color="#556B2F" quantity="0.5" label="olive"/>
+                     <sld:ColorMapEntry color="#9ACD32" quantity="0.6" label="yellowGreen"/>
+                     <sld:ColorMapEntry color="#ADFF2F" quantity="0.8" label="greenYellow"/>
+                     <sld:ColorMapEntry color="#00FF00" quantity="1.0" label="lime"/>
+                  </sld:ColorMap>
+               </sld:RasterSymbolizer>
+            </sld:Rule>
+         </sld:FeatureTypeStyle>
+      </sld:UserStyle>
+   </sld:NamedLayer>
+</StyledLayerDescriptor>
