@@ -7,10 +7,10 @@ This requirements class adds support for vector graphic hierarchies and transfor
 .MultiGraphic and Transforms UML Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
-Transform2D --* FloatPoint
+Transform2D --* UnitPoint
 Transform2D : orientation: Angle
-Transform2D : scaling: FloatPoint
-Transform2D : translation: FloatPoint
+Transform2D : scaling: UnitPoint -- no unit
+Transform2D : translation: UnitPoint
 
 Graphic : transform: Transform2D
 Graphic --* Transform2D
@@ -36,10 +36,10 @@ The `transform.translation` is equivalent to the Graphic's `position` property.
 .Transform2D class
 [width="90%",options="header"]
 |===
-| Name         | Definition           | Type          | Multiplicity
-| orientation  | Orientation          | Angle         | 1
-| scaling      | Scaling              | FloatPoint    | 1
-| translation  | Translation          | FloatPoint    | 1
+| Name         | Definition           | Type                | Multiplicity
+| orientation  | Orientation          | Angle               | 1
+| scaling      | Scaling              | UnitPoint (no unit) | 1
+| translation  | Translation          | UnitPoint           | 1
 |===
 
 ==== Graphic Instances

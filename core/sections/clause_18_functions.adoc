@@ -377,10 +377,6 @@ include::../requirements/rc-spatial-relations.adoc[]
 .Temporal Relation Functions UML Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
-TimeInterval : start: TimeInstant
-TimeInterval : end: TimeInstant
-TimeInterval --* TimeInstant
-
 class TemporalRelationFunctions <<interface>>
 TemporalRelationFunctions --|> Function : standard functions
 TemporalRelationFunctions : t_after(TimeInstant a, TimeInstant b) bool
@@ -406,14 +402,6 @@ TemporalRelationFunctions : t_starts(TimeInterval a, TimeInterval b) bool
 TemporalRelationFunctions --> TimeInstant
 TemporalRelationFunctions --> TimeInterval
 ....
-
-.TimeInterval class
-[width="90%",options="header"]
-|===
-| Name            | Definition                                   | Data type   | Multiplicity
-| start           | start of the interval                        | TimeInstant | 1
-| end             | end of the interval                          | TimeInstant | 1
-|===
 
 .Temporal relation functions acting on time instants
 [width="90%",options="header"]

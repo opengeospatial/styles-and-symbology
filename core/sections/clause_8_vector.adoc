@@ -199,7 +199,7 @@ Marker --|> MultiGraphic
 MultiGraphic : elements: Graphic [0..*]
 MultiGraphic --* Graphic
 
-Graphic : position: FloatPoint
+Graphic : position: UnitPoint
 Graphic : opacity: float
 ....
 
@@ -219,9 +219,9 @@ A MultiGraphic itself inherits from a Graphic allowing to specify an opacity and
 .Graphic class
 [width="90%",options="header"]
 |===
-| Name      | Definition  | Data type and value   | Multiplicity
+| Name      | Definition  | Data type and value | Multiplicity
 | opacity   | Opacity     | float               | 0..1
-| position  | Position    | FloatPoint          | 0..1
+| position  | Position    | UnitPoint           | 0..1
 |===
 
 ////
@@ -253,7 +253,7 @@ or by a three-dimensional cube. The GraphicSize properties are documented in the
 
 ////
 
-.FloatPoint class
+.UnitPoint class
 [width="90%",options="header"]
 |===
 | Name      | Definition           | Data type and value   | Multiplicity
@@ -268,8 +268,8 @@ or by a three-dimensional cube. The GraphicSize properties are documented in the
 [plantuml, target=diagram-classes, format=png]
 ....
 Dot --|> Shape
-Dot : point: FloatPoint
-Dot --* FloatPoint
+Dot : point: UnitPoint
+Dot --* UnitPoint
 
 class Shape <<abstract>>
 Shape --|> Graphic
@@ -296,13 +296,13 @@ A Dot inherits from a Shape class allowing to define a `stroke` which controls t
 ....
 Image --|> Graphic
 Image  : image: Resource
-Image  : hotSpot: FloatPoint
+Image  : hotSpot: UnitPoint
 Image  : tint: Color
 Image  : blackTint: Color
 Image  : alphaThreshold: float
 Image --* Resource
 Image --* Color
-Image --* FloatPoint
+Image --* UnitPoint
 
 Resource : path: string[0..1]
 Resource : url: string[0..1]
@@ -317,12 +317,12 @@ An Image is one type of graphic defined by this requirements class that can be u
 .Image
 [width="90%",options="header"]
 |===
-| Name           | Definition                      | Type                       | Multiplicity
-| image          | The image to use                | Resource                   | 1
-| hotSpot        | 0,0 position in the image       | FloatPoint (uom-qualified) | 1
-| tint           | Tint (multiplying white)        | Color                      | 1
-| blackTint      | Black tint (used for black      | Color                      | 1
-| alphaThreshold | Alpha value considered pickable |float (uom-qualified)       | 1
+| Name           | Definition                      | Type                      | Multiplicity
+| image          | The image to use                | Resource                  | 1
+| hotSpot        | 0,0 position in the image       | UnitPoint (uom-qualified) | 1
+| tint           | Tint (multiplying white)        | Color                     | 1
+| blackTint      | Black tint (used for black      | Color                     | 1
+| alphaThreshold | Alpha value considered pickable | float                     | 1
 |===
 
 The actual image content is defined by a Resource, which can be specified by one or multiple properties:

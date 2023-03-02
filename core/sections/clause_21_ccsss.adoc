@@ -7,15 +7,456 @@ This requirements class defines an encoding for the Styles and Symbology Logical
 The primary objective of this encoding is to be easy to be expressive and facilitate hand-edition by cartographers.
 Parsing this encoding requires a custom parser.
 
-==== Encoding a style
+==== Cascading Style Sheets
 
-===== Styling Rules
+A style is encoded as a series of styling rules into a _style sheet_ document.
+Symbolizer properties set further down in rules override those set by rules at the same level apearing earlier (higher up).
 
-===== Expressions
+It is also possible to include another style sheet using the `.include` directive followed by a relative path enclosed within single quotes (`'` `'`), separated by a space e.g., `.include '../baseStyle.ccsss'`.
+The include directive is replaced by the content of that file in a pre-processing step in a recursive manner, so that style sheets can be _cascaded_.
 
-===== Selectors
+Because later rules allow to override earlier ones, this cascading allows to apply for example:
 
-===== Symbolizers
+* run-time styling preferences over default user styling,
+* user styling preferences over default application styling,
+* application styling preferences over default data provider styling.
+
+==== Comments
+
+A style sheet can also contain comments either using C-style multi-line comments (between `/*` and `*/`) or C++-style single-line comments (starting by `//`).
+
+==== Metadata elements
+
+In addition to styling rules, the style sheet can define metadata elements prefixed by a dot (`.`) as the first character on a line.
+The following metadata elements are defined:
+
+.Metadata elements
+[width="90%",options="header"]
+|===
+| Name           | Definition
+| title          | Short human-readable title for the style
+| abstract       | Detailed description of the style
+| authors        | Authors of the style
+| geoDataClasses | Comma-separated URIs of GeoDataClasses allowing to identify data sources for which the style is suitable
+|===
+
+NOTE: We should probably include these metadata elements in Core conceptual model.
+
+==== Styling Rules and Symbolizers
+
+A styling rule applies zero or more symbolizer properties if its Selector is evaluated to _true_.
+A styling rule may also include nested rules that are only evaluated when the parent rule itself is selected.
+Symbolizer properties set within a nested rule override symbolizer properties set in the parent rule.
+It is also possible to override only a portion of a property by assigning a value to member of an object,
+or an element of an array.
+
+The grammar for specifying a rule in this encoding is:
+
+[<selector>]*
+'`{`'
+   [<symbolizer property assignment>]*
+   [<nested rule>]*
+'`}`'
+
+The grammar for a symbolizer property assignment is:
+
+<symbolizer property name>
+   ['`.`' <member> | '`[`' <index> '`]`' ]*
+   '`:`' <expression> '`;`'
+
+==== Selectors
+
+A selector is either:
+
+* an expression as described in the <<ccsss,section below>>,
+* or a short-hand form for selecting a data layer:
+
+'`#`'<data layer name>
+
+[[ccsss]]
+==== Expressions
+
+===== CQL2-Text encoding
+
+Whether in Selectors or values of property symbolizers, Expressions are encoded using http://docs.ogc.org/DRAFTS/21-065.html#cql2-text[CQL2-Text].
+However, a number of extensions are introduced to cover the full range of capabilities defined by the styling and symbology conceptual model.
+
+The first such extension is that in the context of a symbolizer property value, expressions are not limited to boolean predicates being
+evaluated as true or false, but can return any type of values such as numerical, text, or complex values, including geometry.
+
+===== Instance expressions
+
+The concept of an object instance is introduced, with the grammar:
+
+<Class Name> '`(`' <member initializer list> '`)`'.
+
+This corresponds somewhat to CQL2 constructs for temporal intervals and WKT geometry for example,
+
+* `POLYGON( (0 40, 10 40, 10 50, 0 50, 0 40) )`
+* `INTERVAL('2021-01-01T00:00:00Z','2021-12-31T23:59:59Z')`
+
+In the first example, POLYGON is the class name, and the array of coordinates is a list of a single member initializer.
+In the second second example, INTERVAL is the class name, and the start and end dates are a list of two member initializers.
+
+In both of these examples, the members being initialized are implied from the order.
+Due to the heavy use of object instances in the symbology model, the ability to identify specific member to initialize is introduced.
+The syntax for doing so tries to be consistent with the overall CSS inspiration, and therefore the <member> ':' value is used,
+and the ';' is added as an alternative way to separate members in the initializer list.
+As examples, the above instantiations could also be written:
+
+* `POLYGON(rings: (0 40, 10 40, 10 50, 0 50, 0 40))`
+* `INTERVAL(start: '2021-01-01T00:00:00Z'; end: '2021-12-31T23:59:59Z')`
+
+Another capability introduced is the ability to infer the class from the expected type where the instance expression is used.
+For example, if a POLYGON object is assigned to a `poly` property expecting that object type, then the expression can be written simply as:
+
+* `(rings: (0 40, 10 40, 10 50, 0 50, 0 40))`
+
+In both of these examples, the members being initialized are implied from the order.
+
+When not all members of a class are initialized within an instantiation, a default value is inherited.
+Those default values are specified in a <<ccsss-default-values, dedicated section>> below
+
+NOTE: Should we diverge from CQL2 and allow the use of `{` `}` as an alternative to `(` `)` to define instances, and of `[` `]`
+as an alternative to `(` `)` to define arrays in this encoding for clarity?
+
+===== Tuples and related implications
+
+The concept of a tuple is introduced, corresponding to the CQL2-Text Well-Known Text (WKT) coordinates in the above polygon examples.
+Based on the logical model, each of those tuple actually correspond to a Point instance.
+In order to maintain consistency with the CQL2-Text WKT encoding, the logical model as well as the object instance encodings,
+a number of alternative encoding rules need to be established.
+A tuple must be able to replace either:
+* an array of coordinate values,
+* an instance of a class defining a single property being such an array (e.g., Point), or
+* a class identified as being replaceable by a tupple.
+
+Therefore, the following equivalent definitions are all valid where a POINT is expected:
+
+* `POINT(30 10)` -- The standard WKT form where the tuple replaces the array of coordinates, implying the _coordinates_ member
+* `POINT( (30, 10) )` -- Using an array of coordinates, implying the _coordinates_ member
+* `POINT(coordinates: 30 10)` -- The tuple replacing the array of coordinates, explicit coordinates _member_
+* `POINT(coordinates: (30, 10))` -- Using an array of coordinates, explicit coordinates _member_
+* `(30 10)` -- Implied class, tuple replacing array of coordinates, implied _coordinates_ member
+* `( (30, 10) )` -- Implied class, using array of coordinates, implied _coordinates_ member
+* `(coordinates: 30 10)` -- Implied class, tuple replacing array of coordinates, explicit _coordinates_ member
+* `(coordinates: (30, 10))` -- Implied class, using an array of coordinates, explicit _coordinates_ member
+* `30 10`  -- Implied class, tuple replacing Point instance
+
+The following are some equivalent examples of valid definitions where a polygon is expected:
+
+* `POLYGON( (0 40, 10 40, 10 50, 0 50, 0 40) )`
+* `POLYGON( (
+   POINT(0 40),
+   POINT(10 40),
+   POINT(10 50),
+   POINT(0 50),
+   POINT(0 40)
+  ) )`
+* `POLYGON( (
+   POINT( (0, 40) ),
+   POINT( (10, 40) ),
+   POINT( (10, 50) ),
+   POINT( (0, 50) ),
+   POINT( (0, 40) )
+  ) )`
+* `POLYGON( (
+   POINT(coordinates: (0, 40)),
+   POINT(coordinates: (10, 40)),
+   POINT(coordinates: (10, 50)),
+   POINT(coordinates: (0, 50)),
+   POINT(coordinates: (0, 40))
+  ) )`
+* `POLYGON( (
+   POINT(coordinates: 0 40),
+   POINT(coordinates: 10 40),
+   POINT(coordinates: 10 50),
+   POINT(coordinates: 0 50),
+   POINT(coordinates: 0 40)
+  ) )`
+
+The list of classes defined in this Standard that can be encoded as tupples are:
+
+* _Point_ (from WKT)
+* _UnitPoint_ (defining only coordinate values),
+* _TextAlignment_ (defining a horizontal and vertical alignment),
+* _Color_ (defining red, green and blue components),
+* _ValueColor_ (defining a value and color -- note that the color itself can be a tupple),
+* _ValueOpacity_ (defining a value and an opacity,
+* _Quaternion_ (defining w, x, y, z components),
+* _Vector3D_ and _FloatVector3D_ (defining x, y, z components) -- NOTE: Change to UnitPoint3D?.
+
+The tupple syntax can also be used to specify the _dashPattern_ array of dashed strokes.
+
+The following are equivalent example definitions where a _UnitPoint_ is expected where each coordinate can also be qualified with of unit of measure:
+
+* `50 pc 50 pc`
+* `UnitPoint(x: 50 pc; y: 50 pc;)`
+* `UnitPoint(x: 50 pc, y: 50 pc)`
+* `(50 pc, 50 pc)`
+
+The following are equivalent example definitions where a _TextAligment_ is expected:
+
+* `left top`
+* `TextAlignment(left, top)`
+* `TextAlignment(horizontal: left; vertical: top)`
+* `(left, top)`
+
+===== Units of measure
+
+The following abbreviations are used, following a value, to qualify it with a unit of measure.
+These are mainly used for _UnitPoint_ coordinates, as well as with distance value such as those specified for Shape graphics e.g., the radius of a circle.
+
+.Units of measure abbreviations
+[width="90%",options="header"]
+|===
+| Unit         |Abbreviation   | Notes
+| pixels       | px            | Display unit; not dependent on display resolution
+| meters       | m             | Real-world unit (SI unit of length)
+| feet         | ft            | Real-world unit (0.3048 m)
+| percent      | pc            | Relative value whose meaning depends on context e.g., Image's _hotSpot_, _scaling_.
+| points       | pt            | One point is equal to 1/72 inch (0.3528 mm).
+| em           | em            | One em is equal to the target's selected or default font point size.
+| screenInches | in            | Display unit (25.4 mm); see http://docs.ogc.org/DRAFTS/20-058.html#rc_display-resolution[OGC _API - Maps_ "Display Resolution" requirements class] (`mm-per-pixel`) which defaults to 0.28 mm/pixel (~90.7142857 pixels/inch).
+| screenCM     | cm            | Display unit (10 mm); see http://docs.ogc.org/DRAFTS/20-058.html#rc_display-resolution[OGC _API - Maps_ "Display Resolution" requirements class] (`mm-per-pixel`) which defaults to 0.28 mm/pixel (0.028 cm/pixel).
+| screenMM     | mm            | Display unit; see http://docs.ogc.org/DRAFTS/20-058.html#rc_display-resolution[OGC _API - Maps_ "Display Resolution" requirements class] (`mm-per-pixel`) which defaults to 0.28 mm/pixel.
+| (none)       |               | For relative values like scaling, 100 times less than if _pc_ is specified. For screen-space objects, defaults to pixels.
+|===
+
+===== Conditional expressions
+
+As an extension to CQL2-Text, this encoding adds support for conditional expressions using the grammar:
+
+<if-expression> '`?`' <then-expression> '`:`' <else-expression>
+
+===== Enumeration values
+
+As an extension to CQL2-Text, this encoding supports the concept of enumeration values, which do not need to be enclosed in single quotes.
+For compatibility with CQL2, the same identifier enclosed within single quotes is considered equivalent.
+
+Enumeration values must conform to the CQL2 _identifier_ grammar production rule, but may not be enclosed within double-quotes.
+
+In a context where an enumeration is expected, the enumeration value takes precedence over an identifier that may be resolved by the same name.
+In order to explicitly refer to the identifier, the identifier can be enclosed in double-quotes.
+
+===== Colors
+
+Color values can be expressed using any of the forms allowed for instantiations, or using a tupple:
+
+* `Color(255, 100, 50)`
+* `Color(r: 255, g: 100, b: 50)`
+* `(255, 100, 50)`
+* `(r: 255; g: 100; b: 50;)`
+* `255 100 50`
+
+Colors can also be expressed as a hexadecimal value prefixed by a `#` symbol, as in Web CSS:
+
+* `#FF6432`
+
+Finally, colors can also be expressed as an enumeration value for https://www.w3.org/wiki/CSS/Properties/color/keywords[named web colors]:
+
+* `red`
+* `'red'`
+
+.Named web color enumeration
+[width="90%",options="header"]
+|===
+|  Name                |Value (r, g, b)
+|  black               |   0,   0,   0 |
+   dimGray             | 105, 105, 105 |
+   gray                | 128, 128, 128 |
+   darkGray            | 169, 169, 165 |
+   silver              | 192, 192, 192 |
+   lightGray           | 211, 211, 211 |
+   gainsboro           | 220, 220, 220 |
+   whiteSmoke          | 245, 245, 245 |
+   white               | 255, 255, 255 |
+   rosyBrown           | 188, 143, 143 |
+   indianRed           | 205,  92,  92 |
+   brown               | 165,  42,  42 |
+   fireBrick           | 178,  34,  34 |
+   lightCoral          | 240, 128, 128 |
+   maroon              | 128,   0,   0 |
+   darkRed             | 139,   0,   0 |
+   red                 | 255,   0,   0 |
+   snow                | 255, 250, 250 |
+   mistyRose           | 255, 228, 225 |
+   salmon              | 250, 128, 114 |
+   tomato              | 255,  99,  71 |
+   darkSalmon          | 233, 150, 122 |
+   coral               | 255, 127,  80 |
+   orangeRed           | 255,  69,   0 |
+   lightSalmon         | 255, 160, 122 |
+   sienna              | 160,  82,  45 |
+   seaShell            | 255, 245, 238 |
+   chocolate           | 210, 105,  30 |
+   saddleBrown         | 139,  69,  19 |
+   sandyBrown          | 244, 164,  96 |
+   peachPuff           | 255, 218, 185 |
+   peru                | 205, 133,  63 |
+   linen               | 250, 240, 230 |
+   bisque              | 255, 228, 196 |
+   darkOrange          | 255, 140,   0 |
+   burlyWood           | 222, 184, 135 |
+   tan                 | 210, 180, 140 |
+   antiqueWhite        | 250, 235, 215 |
+   navajoWhite         | 255, 222, 173 |
+   blanchedAlmond      | 255, 235, 205 |
+   papayaWhip          | 255, 239, 213 |
+   mocassin            | 255, 228, 181 |
+   orange              | 255, 165,   0 |
+   wheat               | 245, 222, 179 |
+   oldLace             | 253, 245, 230 |
+   floralWhite         | 255, 250, 240 |
+   darkGoldenrod       | 184, 134,  11 |
+   goldenrod           | 218, 165,  32 |
+   cornsilk            | 255, 248, 220 |
+   gold                | 255, 215,   0 |
+   khaki               | 240, 230, 140 |
+   lemonChiffon        | 255, 250, 205 |
+   paleGoldenrod       | 238, 232, 170 |
+   darkKhaki           | 189, 183, 107 |
+   beige               | 245, 245, 220 |
+   lightGoldenRodYellow| 250, 250, 210 |
+   olive               | 128, 128,   0 |
+   yellow              | 255, 255,   0 |
+   lightYellow         | 255, 255, 224 |
+   ivory               | 255, 255, 240 |
+   oliveDrab           | 107, 142,  35 |
+   yellowGreen         | 154, 205,  50 |
+   darkOliveGreen      |  85, 107,  47 |
+   greenYellow         | 173, 255,  47 |
+   chartreuse          | 127, 255,   0 |
+   lawnGreen           | 124, 252,   0 |
+   darkSeaGreen        | 143, 188, 139 |
+   forestGreen         |  34, 139,  34 |
+   limeGreen           |  50, 205,  50 |
+   lightGreen          | 144, 238, 144 |
+   paleGreen           | 152, 251, 152 |
+   darkGreen           |   0, 100,   0 |
+   green               |   0, 128,   0 |
+   lime                |   0, 255,   0 |
+   honeyDew            | 240, 255, 240 |
+   seaGreen            |  46, 139,  87 |
+   mediumSeaGreen      |  60, 179, 113 |
+   springGreen         |   0, 255, 127 |
+   mintCream           | 245, 255, 250 |
+   mediumSpringGreen   |   0, 250, 154 |
+   mediumAquaMarine    | 102, 205, 170 |
+   aquamarine          | 127, 255, 212 |
+   turquoise           |  64, 224, 208 |
+   lightSeaGreen       |  32, 178, 170 |
+   mediumTurquoise     |  72, 209, 204 |
+   darkSlateGray       |  47,  79,  79 |
+   paleTurquoise       | 175, 238, 238 |
+   teal                |   0, 128, 128 |
+   darkCyan            |   0, 139, 139 |
+   aqua                |   0, 255, 255 |
+   cyan                |   0, 255, 255 |
+   lightCyan           | 224, 255, 255 |
+   azure               | 240, 255, 255 |
+   darkTurquoise       |   0, 206, 209 |
+   cadetBlue           |  95, 158, 160 |
+   powderBlue          | 176, 224, 230 |
+   lightBlue           | 173, 216, 230 |
+   deepSkyBlue         |   0, 191, 255 |
+   skyBlue             | 135, 206, 235 |
+   lightSkyBlue        | 135, 206, 250 |
+   steelBlue           |  70, 130, 180 |
+   aliceBlue           | 240, 248, 255 |
+   dodgerBlue          |  30, 144, 255 |
+   slateGray           | 112, 128, 144 |
+   lightSlateGray      | 119, 136, 153 |
+   lightSteelBlue      | 176, 196, 222 |
+   cornflowerBlue      | 100, 149, 237 |
+   royalBlue           |  65, 105, 225 |
+   midnightBlue        |  25,  25, 112 |
+   lavender            | 230, 230, 250 |
+   navy                |   0,   0, 128 |
+   darkBlue            |   0,   0, 139 |
+   mediumBlue          |   0,   0, 205 |
+   blue                |   0,   0, 255 |
+   ghostWhite          | 248, 248, 255 |
+   slateBlue           | 106,  90, 205 |
+   darkSlateBlue       |  72,  61, 139 |
+   mediumSlateBlue     | 123, 104, 238 |
+   mediumPurple        | 147, 112, 219 |
+   blueViolet          | 138,  43, 226 |
+   indigo              |  75,   0, 130 |
+   darkOrchid          | 153,  50, 204 |
+   darkViolet          | 148,   0, 211 |
+   mediumOrchid        | 186,  85, 211 |
+   thistle             | 216, 191, 216 |
+   plum                | 221, 160, 221 |
+   violet              | 238, 130, 238 |
+   purple              | 128,   0, 128 |
+   darkMagenta         | 139,   0, 139 |
+   magenta             | 255,   0, 255 |
+   fuschia             | 255,   0, 255 |
+   orchid              | 218, 112, 214 |
+   mediumVioletRed     | 199,  21, 133 |
+   deepPink            | 255,  20, 147 |
+   hotPink             | 255, 155, 180 |
+   lavenderBlush       | 255, 240, 245 |
+   paleVioletRed       | 219, 112, 147 |
+   crimson             | 220,  20,  60 |
+   pink                | 255, 192, 203 |
+   lightPink           | 255, 182, 193
+|===
+
+[[ccsss-default-values]]
+==== Default class member values
+
+The following default values are defined by this encoding.
+
+NOTE: Should this be encoding-specific, or defined in the conceptual model?
+
+.Symbolizer
+[width="90%",options="header"]
+|===
+| Name           | Default value
+| visibility     | true
+| opacity        | 1
+| zOrder         | 1
+| fill           | default Fill
+| stroke         | default Stroke
+| marker         | default Marker
+| alphaChannel   | 1
+| colorChannels  | For multi-field coverage: fields[0], fields[1], fields[2]
+| singleChannel  | For single-field coverage: fields[0]
+|===
+
+.Stroke class default values
+[width="90%",options="header"]
+|===
+| Name           | Default value
+| opacity        | 1
+| width          | 1 px
+| color          | black
+|===
+
+.Fill class default values
+[width="90%",options="header"]
+|===
+| Name           | Default value
+| opacity        | 1
+| color          | white
+|===
+
+.Marker class default values
+[width="90%",options="header"]
+|===
+| Name           | Default value
+| elements       | Single default Dot
+|===
+
+.Dot class default values
+[width="90%",options="header"]
+|===
+| Name           | Default value
+| size           | 10 px
+| color          | white
+|===
 
 ==== Examples
 
@@ -23,8 +464,8 @@ Parsing this encoding requires a custom parser.
 ====
 [source,ccsss]
 ----
-.title "Styling a land use layer"
-.abstract "Styling land use data with Style & Symbology Core"
+.title 'Styling a land use layer'
+.abstract 'Styling land use data with Style & Symbology Core'
 
 #Landuse[dataLayer.type = vector]
 {
@@ -46,8 +487,8 @@ Parsing this encoding requires a custom parser.
 ====
 [source,ccsss]
 ----
-.title "Styling vector features"
-.abstract "Basic vector features styling"
+.title 'Styling vector features'
+.abstract 'Basic vector features styling'
 
 #Landuse[dataLayer.type = vector and dataLayer.featuresGeometryDimensions = 2]
 {
@@ -55,7 +496,7 @@ Parsing this encoding requires a custom parser.
    visibility: false;
 
    // Show land use if zoomed in more than 1:200,000 for data valid within visualization's selected time range
-   [viz.sd < 200000 and validDate >= viz.startDate and validDate <= viz.endDate]
+   [viz.sd < 200000 and validDate >= viz.timeInterval.start.date and validDate <= viz.timeInterval.end.date]
    {
       visibility: true;
       opacity: 0.8;
@@ -88,9 +529,9 @@ Parsing this encoding requires a custom parser.
          // Add a text marker (positioned at centroid + horizontal offset) showing FunctionTitle property
          marker: (elements: (
             Text(
-               position: (20 0); // Offset 20 pixels to the right
+               position: 20 0; // Offset 20 pixels to the right
                text: FunctionTitle;
-               alignment: (left top);
+               alignment: left top;
                font: (
                   face: 'Arial';
                   size: 14;
@@ -104,27 +545,30 @@ Parsing this encoding requires a custom parser.
          // Add icons at centroid based on land use function code property
          [FunctionCode = 'parking']
          {
-            +marker.elements: (
+            marker.elements[1]: (
                Image(
-                  image: (uri: http://example.com/parkingIcon; path: 'parkingIcon.png'; id: 'parking'; type: 'image/png'; ext: 'png');
-                  hotSpot: (50 perc 50 perc); tint: white; blackTint: blue; alphaThreshold: 0.1;
+                  image: (uri: 'http://example.com/parkingIcon'; path: 'parkingIcon.png'; id: 'parking'; type: 'image/png'; ext: 'png');
+                  hotSpot: 50 pc 50 pc; tint: white; blackTint: blue; alphaThreshold: 0.1;
                )
+            )
          }
          [FunctionCode = 'park']
          {
-            +marker.elements: (
+            marker.elements[1]: (
                Image(
-                  image: (uri: http://example.com/park; path: 'park.png'; id: 'park'; type: 'image/png'; ext: 'png');
-                  hotSpot: (50 perc 50 perc); tint: white; blackTint: blue; alphaThreshold: 0.1;
+                  image: (uri: 'http://example.com/park'; path: 'park.png'; id: 'park'; type: 'image/png'; ext: 'png');
+                  hotSpot: 50 pc 50 pc; tint: white; blackTint: blue; alphaThreshold: 0.1;
                )
+            )
          }
          [FunctionCode = 'commercial']
          {
-            +marker.elements: (
+            marker.elements[1]: (
                Image(
-                  image: (uri: http://example.com/commercial; path: 'commercial.png'; id: 'commercial'; type: 'image/png'; ext: 'png');
-                  hotSpot: (50 perc 50 perc); tint: white; blackTint: blue; alphaThreshold: 0.1;
+                  image: (uri: 'http://example.com/commercial'; path: 'commercial.png'; id: 'commercial'; type: 'image/png'; ext: 'png');
+                  hotSpot: 50 pc 50 pc; tint: white; blackTint: blue; alphaThreshold: 0.1;
                )
+            )
          }
       }
    }
@@ -132,9 +576,9 @@ Parsing this encoding requires a custom parser.
 
 #Roads[dataLayer.type = vector and dataLayer.featuresGeometryDimensions = 1]
 {
-   visibility: false
+   visibility: false;
 
-   [viz.sd < 200000 and validDate >= viz.startDate and validDate <= viz.endDate]
+   [viz.sd < 200000 and validDate >= viz.timeInterval.start.date and validDate <= viz.timeInterval.end.date]
    {
       visibility: true
       opacity: 0.8;
@@ -159,9 +603,9 @@ Parsing this encoding requires a custom parser.
 
 #Amenities[dataLayer.type = 'vector' and dataLayer.featuresGeometryDimensions = 0]
 {
-   visibility: false
+   visibility: false;
 
-   [viz.sd < 200000 and validDate >= viz.startDate and validDate <= viz.endDate]
+   [viz.sd < 200000 and validDate >= viz.timeInterval.start.date and validDate <= viz.timeInterval.end.date]
    {
       visibility: true
       opacity: 0.5
@@ -174,23 +618,23 @@ Parsing this encoding requires a custom parser.
          marker: (elements: (
             Dot(  // larger white dot underneath
                size: 10 px; // Alias for base Shape class stroke width
-               alignment: (center middle);
+               alignment: center middle;
                color: white;
             ),
             Dot(  // smaller orange dot in center
                size: 8 px; // Alias for base Shape class stroke width
-               alignment: (center middle);
+               alignment: center middle;
                color: orange;
             )
          ));
          [viz.sd < 5000]
          {
             // Add a Text graphic to Marker at 1:5000
-            +marker.elements: (
+            marker.elements[1]: (
                Text(
-                  position: (20 0); // Offset 20 pixels to the right
+                  position: 20 0; // Offset 20 pixels to the right
                   text: Name; // Name of Amenity
-                  alignment: (left middle);
+                  alignment: left middle;
                   font: (
                      face: 'Arial';
                      size: 12;
@@ -200,6 +644,7 @@ Parsing this encoding requires a custom parser.
                      color: darkGray;
                   )
                )
+            )
          }
       }
    }
@@ -213,8 +658,8 @@ Parsing this encoding requires a custom parser.
 ====
 [source,ccsss]
 ----
-.title "DEM with color map"
-.abstract "Applying a color map to a Digital Elevation Model with Style & Symbology Basic Coverage Styling"
+.title 'DEM with color map'
+.abstract 'Applying a color map to a Digital Elevation Model with Style & Symbology Basic Coverage Styling'
 
 #Elevation[dataLayer.type = coverage]
 {
@@ -227,7 +672,7 @@ Parsing this encoding requires a custom parser.
       zOrder: 1;
 
       singleChannel: elevation; // Use elevation coverage field
-      colorMap: (0 (96 136 73)), (900 (226 219 167)), (1300 (252 197 117)), (1900 (254 168 134)), (2500, (250 250 250));
+      colorMap: (0 96 136 73, 900 226 219 167, 1300 252 197 117, 1900 254 168 134, 2500 250 250 250);
    }
 }
 ----
@@ -237,8 +682,8 @@ Parsing this encoding requires a custom parser.
 ====
 [source,ccsss]
 ----
-.title "sentinel-2 natural color"
-.abstract "Styling a Sentinel-2A coverage with Style & Symbology Basic Coverage Styling"
+.title 'sentinel-2 natural color'
+.abstract 'Styling a Sentinel-2A coverage with Style & Symbology Basic Coverage Styling'
 
 #Sentinel2L2A[dataLayer.type = coverage]
 {
@@ -265,8 +710,8 @@ Parsing this encoding requires a custom parser.
 ====
 [source,ccsss]
 ----
-.title "sentinel-2 natural color"
-.abstract "Styling a Sentinel-2A coverage with Style & Symbology Basic Coverage Styling"
+.title 'sentinel-2 natural color'
+.abstract 'Styling a Sentinel-2A coverage with Style & Symbology Basic Coverage Styling'
 
 #Sentinel2L2A[dataLayer.type = coverage]
 {
@@ -282,7 +727,7 @@ Parsing this encoding requires a custom parser.
       alphaChannel: 1.0;
       [SCL=8] { alphaChannel: 0.5; }   // Reduce alpha channel value for medium cloud proability
       [SCL=9] { alphaChannel: 0.0; }   // Zero alpha channel value for high cloud proability
-      colorMap: ((-1.0 saddleBrown),(0.0 peru),(0.2 goldenrod),(0.5 olive),(0.6 yellowGreen),(0.8 greenYellow),(1.0 lime));
+      colorMap: (-1.0 saddleBrown,0.0 peru,0.2 goldenrod,0.5 olive,0.6 yellowGreen,0.8 greenYellow,1.0 lime);
    }
 }
 ----
@@ -290,8 +735,63 @@ Parsing this encoding requires a custom parser.
 
 ===== Hill Shading
 
-// colorMap : ((0 black), (0.15 gray), (0.35 silver), (0.55 white));
-// opacityMap: ((0 0.75), (0.15 0.50), (0.35 0.25), (0.55 0.00));
+.CCSSS Example encoding style rendering DEM with hill-shading and a color map using "Basic Coverage Styling" and "Hill Shading" requirements classes
+====
+[source,ccsss]
+----
+.title 'hill-shaded DEM with color map'
+.abstract 'Applying hill-shading and a color map to a Digital Elevation Model with Style & Symbology Basic Coverage Styling'
+
+#Elevation[dataLayer.type = coverage]
+{
+   visibility: false;
+
+   [viz.sd < 200000]
+   {
+      visibility: true;
+      opacity: 0.8;
+      zOrder: 1;
+
+      singleChannel: elevation; // Use elevation coverage field
+      // This color map is mapped from elevation values
+      colorMap: (0 96 136 73, 900 226 219 167, 1300 252 197 117, 1900 254 168 134, 2500 250 250 250);
+      hillShading: (factor: 56; sun: (azimuth: 45.0; elevation: 60.0));
+   }
+}
+----
+====
+
+.CCSSS Example encoding style rendering DEM with hill-shading using an opacity and shading intensity color map using "Basic Coverage Styling" and "Hill Shading" requirements classes
+====
+[source,ccsss]
+----
+.title 'hill-shaded DEM with opacity and color map for shading intensity'
+.abstract 'Applying hill-shading a color map to a Digital Elevation Model with Style & Symbology Basic Coverage Styling'
+
+// This type of intensity-based hill shading can be overlaid on top of imagery or vector maps
+
+#Elevation[dataLayer.type = coverage]
+{
+   visibility: false;
+
+   [viz.sd < 200000]
+   {
+      visibility: true;
+      opacity: 0.8;
+      zOrder: 1;
+
+      singleChannel: elevation; // Use elevation coverage field
+      hillShading: (
+         factor: 56;
+         sun: (azimuth: 45.0; elevation: 60.0)
+         // These colors and opacity are mapped from the 0..1 shading intensity rather than elevation values
+         colorMap : (0 black, 0.15 gray, 0.35 silver, 0.55 white);
+         opacityMap: (0 0.75, 0.15 0.50, 0.35 0.25, 0.55 0.00);
+      );
+   }
+}
+----
+====
 
 === Requirements
 
