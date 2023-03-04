@@ -175,7 +175,7 @@ The following are some equivalent examples of valid definitions where a polygon 
    POINT(coordinates: 0 40)
   ) )`
 
-The list of classes defined in this Standard that can be encoded as tupples are:
+The classes defined in this Standard that can be encoded as tupples are:
 
 * _Point_ (from WKT)
 * _UnitPoint_ (defining only coordinate values),
@@ -695,7 +695,7 @@ NOTE: Should this be encoding-specific, or defined in the conceptual model?
       opacity: 0.8;
       zOrder: 1;
 
-      colorChannels: (r: B04; g: B03; b: B02);
+      colorChannels: B04 B03 B02;
       alphaChannel: 1.0;
       [SCL=8] { alphaChannel: 0.5; }   // Reduce alpha channel value for medium cloud proability
       [SCL=9] { alphaChannel: 0.0; }   // Zero alpha channel value for high cloud proability
@@ -710,8 +710,8 @@ NOTE: Should this be encoding-specific, or defined in the conceptual model?
 ====
 [source,ccsss]
 ----
-.title 'sentinel-2 natural color'
-.abstract 'Styling a Sentinel-2A coverage with Style & Symbology Basic Coverage Styling'
+.title 'sentinel-2 NDVI'
+.abstract 'Styling a Sentinel-2A coverage for NDVI with Style & Symbology Basic Coverage Styling'
 
 #Sentinel2L2A[dataLayer.type = coverage]
 {
