@@ -4,7 +4,7 @@
 === Overview
 
 This requirements class defines an encoding for the Styles and Symbology Logical Model inspired from Web Cascading Style Sheets (CSS) and other CSS-like cartographic symbology encodings.
-The primary objective of this encoding is to be easy to be expressive and facilitate hand-edition by cartographers.
+The primary objective of this encoding is expressiveness so as to facilitate hand-edition by cartographers.
 Parsing this encoding requires a custom parser.
 
 ==== Cascading Style Sheets
