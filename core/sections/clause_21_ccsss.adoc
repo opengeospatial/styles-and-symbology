@@ -123,13 +123,14 @@ as an alternative to `(` `)` to define arrays in this encoding for clarity?
 ===== Tuples and related implications
 
 The concept of a tuple is introduced, corresponding to the CQL2-Text Well-Known Text (WKT) coordinates in the above polygon examples.
-Based on the logical model, each of those tuple actually correspond to a Point instance.
+Based on the logical model, each of those tuples actually correspond to a Point instance.
 In order to maintain consistency with the CQL2-Text WKT encoding, the logical model as well as the object instance encodings,
 a number of alternative encoding rules need to be established.
 A tuple must be able to replace either:
+
 * an array of coordinate values,
 * an instance of a class defining a single property being such an array (e.g., Point), or
-* a class identified as being replaceable by a tupple.
+* a class identified as being replaceable by a tuple.
 
 Therefore, the following equivalent definitions are all valid where a POINT is expected:
 
@@ -175,20 +176,20 @@ The following are some equivalent examples of valid definitions where a polygon 
    POINT(coordinates: 0 40)
   ) )`
 
-The classes defined in this Standard that can be encoded as tupples are:
+The classes defined in this Standard that can be encoded as tuples are:
 
 * _Point_ (from WKT)
 * _UnitPoint_ (defining only coordinate values),
 * _TextAlignment_ (defining a horizontal and vertical alignment),
 * _Color_ (defining red, green and blue components),
-* _ValueColor_ (defining a value and color -- note that the color itself can be a tupple),
+* _ValueColor_ (defining a value and color -- note that the color itself can be a tuple),
 * _ValueOpacity_ (defining a value and an opacity,
 * _Quaternion_ (defining w, x, y, z components),
 * _Vector3D_ and _FloatVector3D_ (defining x, y, z components) -- NOTE: Change to UnitPoint3D?.
 
-The tupple syntax can also be used to specify the _dashPattern_ array of dashed strokes.
+The tuple syntax can also be used to specify the _dashPattern_ array of dashed strokes.
 
-The following are equivalent example definitions where a _UnitPoint_ is expected where each coordinate can also be qualified with of unit of measure:
+The following are equivalent example definitions where a _UnitPoint_ is expected allowing each coordinate to be qualified with a unit of measure:
 
 * `50 pc 50 pc`
 * `UnitPoint(x: 50 pc; y: 50 pc;)`
@@ -241,7 +242,7 @@ In order to explicitly refer to the identifier, the identifier can be enclosed i
 
 ===== Colors
 
-Color values can be expressed using any of the forms allowed for instantiations, or using a tupple:
+Color values can be expressed using any of the forms allowed for instantiations, or using a tuple:
 
 * `Color(255, 100, 50)`
 * `Color(r: 255, g: 100, b: 50)`

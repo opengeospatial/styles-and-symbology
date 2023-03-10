@@ -30,7 +30,7 @@ The following three new Symbolizer properties are defined by this requirements c
 | Name   | Definition                                                       | Data type and value  | Multiplicity
 | fill   | Fill to fill inside of geometries                                | Fill                 | 0..1
 | stroke | Stroke to render geometry outlines                               | Stroke               | 0..1
-| marker | Marker to render at geometries points or centroid (for polygons) | float                | 0..1
+| marker | Marker to render at geometries points or centroid (for polygons) | Marker               | 0..1
 |===
 
 ==== Extended Identifiers for vector features
@@ -166,7 +166,7 @@ GraphicalUnit : screenCM
 GraphicalUnit : screenMM
 ....
 
-For styling parameters that define sizing and positioning of graphical objects (width, displacement, etc.), a specific the unit of measure needs to be provided for the rendering engine.
+For styling parameters that define sizing and positioning of graphical objects (width, displacement, etc.), a specific unit of measure needs to be provided for the rendering engine.
 Therefore, properties where a unit of measure is relevant can be qualified with a particular uom codes.
 
 Below is the list of allowed units of measure as per UCUM (except for pixel):
