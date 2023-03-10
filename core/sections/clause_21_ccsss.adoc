@@ -484,12 +484,12 @@ NOTE: Should this be encoding-specific, or defined in the conceptual model?
 
 ===== Basic Vector Styling
 
-.CCSSS Example encoding style using "Basic Vector Styling" requirements class
+.CCSSS Example encoding style for polygon features using "Basic Vector Styling" requirements class
 ====
 [source,ccsss]
 ----
-.title 'Styling vector features'
-.abstract 'Basic vector features styling'
+.title 'Styling polygon vector features'
+.abstract 'Basic vector features styling (polygons)'
 
 #Landuse[dataLayer.type = vector and dataLayer.featuresGeometryDimensions = 2]
 {
@@ -574,6 +574,15 @@ NOTE: Should this be encoding-specific, or defined in the conceptual model?
       }
    }
 }
+----
+====
+
+.CCSSS Example encoding style for line features using "Basic Vector Styling" requirements class
+====
+[source,ccsss]
+----
+.title 'Styling line vector features'
+.abstract 'Basic vector features styling (lines)'
 
 #Roads[dataLayer.type = vector and dataLayer.featuresGeometryDimensions = 1]
 {
@@ -601,6 +610,15 @@ NOTE: Should this be encoding-specific, or defined in the conceptual model?
       }
    }
 }
+----
+====
+
+.CCSSS Example encoding style for point features using "Basic Vector Styling" requirements class
+====
+[source,ccsss]
+----
+.title 'Styling point vector features'
+.abstract 'Basic vector features styling (points)'
 
 #Amenities[dataLayer.type = 'vector' and dataLayer.featuresGeometryDimensions = 0]
 {
