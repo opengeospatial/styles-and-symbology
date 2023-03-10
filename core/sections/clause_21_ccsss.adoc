@@ -23,7 +23,7 @@ Because later rules allow to override earlier ones, this cascading allows to app
 
 ==== Comments
 
-A style sheet can also contain comments either using C-style multi-line comments (between `/*` and `*/`) or C++-style single-line comments (starting by `//`).
+A style sheet can also contain comments either using C-style multi-line comments (between `/\*` and `*/`) or C++-style single-line comments (starting with `//`).
 
 ==== Metadata elements
 
