@@ -206,7 +206,9 @@ Visualization : scaleDenominator: double
 Visualization : dateTime: TimeInstant
 Visualization : date: Date
 Visualization : timeOfDay: TimeOfDay
+Visualization : timeInterval: TimeInterval
 Visualization --* TimeInstant
+Visualization --* TimeInterval
 Visualization --o Date
 Visualization --o TimeOfDay
 
@@ -225,6 +227,10 @@ TimeInstant : date: Date
 TimeInstant : time: TimeOfDay
 TimeInstant --* Date
 TimeInstant --* TimeOfDay
+
+TimeInterval : start: TimeInstant
+TimeInterval : end: TimeInstant
+TimeInterval --* TimeInstant
 
 class Date
 Date : year: int
@@ -264,19 +270,20 @@ TOCHECK: How to handle parent objects ? e.g.,  visualization, dataLayer, feature
 .Visualization System Identifiers
 [width="90%",options="header"]
 |===
-| Name                             | Definition                             | Data type and value
+| Name                             | Definition                              | Data type and value
 | visualization.scaleDenominator   | Current visualization scale denominator | float
-| visualization.dateTime            | Current visualization date and time     | DateTime
-| visualization.date                | Current visualization date              | Date
-| visualization.timeOfDay           | Current visualization time of day       | Time
+| visualization.dateTime           | Current visualization date and time     | DateTime
+| visualization.date               | Current visualization date              | Date
+| visualization.timeOfDay          | Current visualization time of day       | Time
+| visualization.timeInterval       | Current visualization time of day       | TimeInterval
 |===
 
 .Layer System Identifiers
 [width="90%",options="header"]
 |===
-| Name                                    | Definition                                                | Data type and value
+| Name                                    | Definition                                               | Data type and value
 | dataLayer.identifier                    | Identifier of data layers                                | string
-| dataLayer.type                        | Data type of data layers                                 | enumeration: vector, coverage, ...
+| dataLayer.type                          | Data type of data layers                                 | enumeration: vector, coverage, ...
 |===
 
 .Month enumeration
@@ -319,10 +326,17 @@ TOCHECK: How to handle parent objects ? e.g.,  visualization, dataLayer, feature
 [width="90%",options="header"]
 |===
 | Name            | Definition                                   | Data type and value | Multiplicity
-| date            |                                               | Date                | 1
+| date            |                                              | Date                | 1
 | time            |                                              | TimeOfDay           | 1
 |===
 
+.TimeInterval class
+[width="90%",options="header"]
+|===
+| Name            | Definition                                   | Data type   | Multiplicity
+| start           | start of the interval                        | TimeInstant | 1
+| end             | end of the interval                          | TimeInstant | 1
+|===
 
 ////
 TODO: In other req classes:
