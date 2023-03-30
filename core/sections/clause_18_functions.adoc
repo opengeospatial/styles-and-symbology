@@ -103,6 +103,25 @@ SpatialRelationFunctions --> Geometry
 | s_coveredBy  | s_coveredBy(Geometry a, Geometry b) | bool        |
 |===
 
+NOTE: Although _s_covers()_ and _s_coveredBy()_ are not defined in _Simple Features Access (SFA)_, they are part of the _Dimensionally Extended-9 Intersection Model (DE-9IM)_.
+_covers()_ is a more inclusive relation than _contains()_ that does not distinguish between points in the boundary vs. in the interior of geometries, and for most situations is the correct relation to use.
+_coveredBy()_ is a more inclusive relation than _within()_, and similarly is the correct relation to use for most situations.
+These relations are already implemented in several backends, but they can also be implemented using the _relate()_ method defined in SFA using the following masks:
+
+```
+covers(a, b):
+   relate(a, b, T*****FF*) or
+   relate(a, b, *T****FF*) or
+   relate(a, b, ***T**FF*) or
+   relate(a, b, ****T*FF*)
+
+coveredBy(a, b):
+   relate(a, b, T*F**F***) or
+   relate(a, b, *TF**F***) or
+   relate(a, b, **FT*F***) or
+   relate(a, b, **F*TF***)
+```
+
 ===== Geometry System Identifiers
 
 [#img-uml-class-spatialrelation-systemIDs]
