@@ -1,6 +1,6 @@
 # OGC Styles & Symbology
 
-This repository hosts the working draft documents for the _Core Models and Encodings for Styling and Symbology - Part 1: Core_ ("SymCore") **2.0**.
+This repository hosts the working draft documents for the _OGC Styles & Symbology Models and Encodings - Part 1: Core_ ("SymCore") **2.0**.
 
 The latest version of this draft is available in [HTML](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html) or [PDF](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.pdf).
 
