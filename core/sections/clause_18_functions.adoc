@@ -518,8 +518,10 @@ class GeometryManipulationFunctions <<interface>>
 GeometryManipulationFunctions --|> Function : standard functions
 GeometryManipulationFunctions : s_intersection(Geometry a, Geometry b) Geometry
 GeometryManipulationFunctions : s_union(Geometry a, Geometry b) Geometry
-GeometryManipulationFunctions : s_subtraction(Geometry a, Geometry b) Geometry
+GeometryManipulationFunctions : s_difference(Geometry a, Geometry b) Geometry
+GeometryManipulationFunctions : s_symDifference(Geometry a, Geometry b) Geometry
 GeometryManipulationFunctions : s_buffer(Geometry a, double d) Geometry
+GeometryManipulationFunctions : s_convexHull(Geometry a) Geometry
 GeometryManipulationFunctions : s_envelope(Geometry a) BoundingBox
 GeometryManipulationFunctions --> Geometry
 ....
@@ -530,8 +532,11 @@ GeometryManipulationFunctions --> Geometry
 | Name            | Parameters               | Return type  | Definition
 | s_intersection  | (Geometry a, Geometry b) | Geometry     |
 | s_union         | (Geometry a, Geometry b) | Geometry     |
-| s_subtraction   | (Geometry a, Geometry b) | Geometry     |
+| s_difference    | (Geometry a, Geometry b) | Geometry     |
+| s_symDifference | (Geometry a, Geometry b) | Geometry     |
+| s_convexHull    | (Geometry a)             | Geometry     |
 | s_buffer        | (Geometry a, double d)   | Geometry     |
+| s_envelope      | (Geometry a)             | BoundingBox  |
 |===
 
 ==== Requirements
