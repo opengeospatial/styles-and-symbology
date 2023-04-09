@@ -5,3 +5,33 @@
 This annex illustrates the capabilities of the different requirements classes defined in this standard
 with a map gallery of practical use cases alongside the styles used to generate the maps
 encoded in the _Cascading Styles and Symbology Stylesheets_ encoding defined in this Standard.
+
+See supplementary materials for same style sheets encoded using the JSON Styles & Symbology encoding.
+
+=== Choropleth (graduated map)
+
+Requirements class used:
+
+* <<rc-core, Core>>
+* <<rc-vector, Basic Vector Features Styling>>
+
+Data sources used
+
+- A rectangular grid of the fraction of high vegetation.
+
+.Style encoded using CCSSS encoding
+====
+[source,ccsss]
+----
+{
+  // Note: The following line is optional as 1 pixel black stroke is the default
+  stroke: { black; width: 1px }
+  [highVegetationFract between 0   and 0.2] { fill: { yellow }; };
+  [highVegetationFract between 0.2 and 0.5] { fill: { orange }; };
+  [highVegetationFract > 0.5]               { fill: { red } };
+}
+----
+====
+
+.Example rendering of the Choropleth map
+image::figures/gallery-choropleth.png[]
