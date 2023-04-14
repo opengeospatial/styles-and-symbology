@@ -109,6 +109,7 @@ The selector (also sometimes called a _filter_), for the rule is defined as a pr
    // Symbolizer properties to be set if this rule is selected
    visibility: false;
 
+   // Nested rule only considered if this parent rule is selected
    [viz.sd < 200000] // Selector for this nested rule
    {
       // Symbolizer properties to be set if this nested rule is selected
@@ -341,7 +342,7 @@ TOCHECK: How to handle parent objects ? e.g.,  visualization, dataLayer, feature
 {
    visibility: false;
 
-   [viz.sd < 200000] // Roads will only be visible at scale 1:200,0000 and closer
+   [viz.sd < 200000] // Roads will only be visible at scale 1:200,000 and closer
    {
       visibility: true;
    }
@@ -595,7 +596,7 @@ This requirements class defines the following Relational Operators:
 {
    visibility: false;
 
-   // Roads will be visible between scales 1:20,0000 and 1:200,0000
+   // Roads will be visible between scales 1:20,000 and 1:200,000
    [viz.sd > 20000 and viz.sd < 200000]
    {
       visibility: true;
