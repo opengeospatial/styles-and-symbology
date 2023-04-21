@@ -62,11 +62,14 @@ A StylingRule specifies that a particular Symbolizer (defining how to portray da
 A StylingRule can contain nested rules, which will only be applied if the the parent rule's Selector is evaluated to true, and whose Symbolizers will inherit from and override the parent StylingRule's Symbolizer.
 
 ////
-Do we need these?
+Do we need these? Should the style metadata be included in Core requirements class?
 
 | title   | Human readable title   | ParameterValue data type   | One
 | abstract   | Human readable description   | ParameterValue data type   | Zero or one
 ////
+
+
+// Should defaults be defined in the conceptual / logical model, or specific to encodings?
 
 ////
 
@@ -91,6 +94,33 @@ What actually needs i18n? Rule labels for legends? The choice between feature pr
 
 The selector (also sometimes called a _filter_), for the rule is defined as a predicate expression evaluating to either true or false.
 
+.Example showcasing a Style made of StylingRules using CCSSS encoding
+====
+[source,ccsss]
+----
+#Landuse    // Selector for this first rule
+{
+   // Symbolizer properties to be set if this rule is selected
+   visibility: false;
+}
+
+#Roads    // Selector for this second rule
+{
+   // Symbolizer properties to be set if this rule is selected
+   visibility: false;
+
+   // Nested rule only considered if this parent rule is selected
+   [viz.sd < 200000] // Selector for this nested rule
+   {
+      // Symbolizer properties to be set if this nested rule is selected
+      visibility: true;
+   }
+}
+----
+====
+
+// TODO: Illustrate above example with two pictures at different scales
+
 ==== Symbolizers
 
 A Symbolizer describes how to portray geographic data (e.g., vector features or gridded coverage data) based on a set of properties.
@@ -112,6 +142,32 @@ Separate requirements classes and later parts will extend this Symbolizer class 
 | opacity    | Degree of opacity            | float                | 0..1
 | zOrder     | Specify a rendering order    | int                  | 0..1
 |===
+
+.CCSSS Example showcasing the limited symbolization possible with this Core requirements class
+====
+[source,ccsss]
+----
+{
+   visibility: false;
+
+   #Landuse
+   {
+      opacity = 0.5;
+      zOrder = 1;
+      visibility = true;
+   }
+
+   #Buildings
+   {
+      opacity = 0.8;
+      zOrder = 2;
+      visibility = true;
+   }
+}
+----
+====
+
+// TODO: Illustrate above example with picture
 
 ////
 -- I don't think we need the following explanation anymore:
@@ -278,13 +334,21 @@ TOCHECK: How to handle parent objects ? e.g.,  visualization, dataLayer, feature
 | visualization.timeInterval       | Current visualization time of day       | TimeInterval
 |===
 
-.Layer System Identifiers
-[width="90%",options="header"]
-|===
-| Name                                    | Definition                                               | Data type and value
-| dataLayer.identifier                    | Identifier of data layers                                | string
-| dataLayer.type                          | Data type of data layers                                 | enumeration: vector, coverage, ...
-|===
+.CCSSS Example showcasing scale-dependent selector using system identifiers
+====
+[source,ccsss]
+----
+#Roads
+{
+   visibility: false;
+
+   [viz.sd < 200000] // Roads will only be visible at scale 1:200,000 and closer
+   {
+      visibility: true;
+   }
+}
+----
+====
 
 .Month enumeration
 [width="90%",options="header"]
@@ -338,6 +402,59 @@ TOCHECK: How to handle parent objects ? e.g.,  visualization, dataLayer, feature
 | end             | end of the interval                          | TimeInstant | 1
 |===
 
+.CCSSS Example showcasing visualization time-dependent selector using system identifiers
+====
+[source,ccsss]
+----
+#Landuse
+{
+   visibility: false;
+
+   // Landuse will only be visible when visualization date is later than January 1, 2020
+   [viz.date > DATE('2020-01-01')]
+   {
+      visibility: true;
+   }
+}
+----
+====
+
+.Layer System Identifiers
+[width="90%",options="header"]
+|===
+| Name                                    | Definition                                               | Data type and value
+| dataLayer.identifier                    | Identifier of data layers                                | string
+| dataLayer.type                          | Data type of data layers                                 | enumeration: vector, coverage, ...
+|===
+
+.CCSSS Example showcasing selectors depending on layer identifiers and data type using system identifiers
+====
+[source,ccsss]
+----
+[dataLayer.type = vector]
+{
+   // Display vector layers at 60% opacity by default
+   opacity: 0.6;
+
+   [dataLayer.identifier = 'Landuse']
+   {
+      // Except for Landuse that should show at 80% opacity
+      opacity: 0.8;
+   }
+
+   // In CCSSS, the #<layerid> syntax is equivalent
+   // to [dataLayer.identifier = '<layerid>']
+   #Roads
+   {
+      opacity = 1.0; // and roads at 100% opacity
+   }
+}
+----
+====
+
+// TODO: Illustrate above example with picture
+
+
 ////
 TODO: In other req classes:
 
@@ -388,14 +505,14 @@ A similar literal class concept was originally defined in the OGC Filter Encodin
 
 The following types of literals are defined:
 
-* An integer literal represents a whole numeric value
-* A real literal represents a real number (integer, fractional or irrational number)
-* Text literals are Unicode character strings
-* A `null` literal represents an unset value
-* Enumeration value literals allow to refer by name to a set of pre-defined values associated with the context where they are used
-* Boolean literals are a specialized type of enumeration literals which are either `true` or `false`
-* Array literals (see <<array-expressions,Array Expressions>>)
-* Instance literals (see <<instance-expressions,Instance Expressions>>)
+* An integer literal represents a whole numeric value (CCSSS example: `123`)
+* A real literal represents a real number (integer, fractional or irrational number) (CCSSS example: `0.85`)
+* Text literals are Unicode character strings (CCSSS example: `'København'`)
+* A null literal represents an unset value (CCSSS example: `null`)
+* Enumeration value literals allow to refer by name to a set of pre-defined values associated with the context where they are used (CCSSS example: `vector`)
+* Boolean literals are a specialized type of enumeration literals which are either true or false (CCSSS example: `false`)
+* Array literals (see <<array-expressions,Array Expressions>>) (CCSSS example: `(1, 2, 3)`)
+* Instance literals (see <<instance-expressions,Instance Expressions>>) (CCSSS examples: `Color(20, 100, 80)` or `Color(r: 20, g: 100, b: 80)`)
 
 ===== Operation Expressions
 
@@ -408,7 +525,7 @@ Without support for the _Any right-hand operand_ requirements class, the right-h
 .OperationExpression class
 [width="90%",options="header"]
 |===
-| Name      | Definition                        | Data type and value | Multiplicity
+| Name      | Definition                         | Data type and value | Multiplicity
 | operand1  | First operand                      | Expression          | 0..1
 | operator  | Operator                           | Operator            | 1
 | operand2  | Second operand                     | Expression          | 1
@@ -445,10 +562,10 @@ This requirements class defines the following Logical Operators :
 .Logical Operators
 [width="90%",options="header"]
 |===
-| Name                     | Symbol    | Type   | Definition
-| not                      | `not`     | unary  | True if and only if the operand is false
-| and                      | `and`     | binary | True if and only if both operands are true
-| or                       | `or`      | binary | True if and only if either or both of the operands is true
+| Name                     | CCSSS Example   | Type   | Definition
+| not                      | `not`           | unary  | True if and only if the operand is false
+| and                      | `and`           | binary | True if and only if both operands are true
+| or                       | `or`            | binary | True if and only if either or both of the operands is true
 |===
 
 This requirements class defines the following Relational Operators:
@@ -456,7 +573,7 @@ This requirements class defines the following Relational Operators:
 .Relational Operators
 [width="90%",options="header"]
 |===
-| Name                     | Symbol                |Type     | Definition
+| Name                     | CCSSS Example         |Type     | Definition
 | equalTo                  | `=`                   |binary   | The first operand is equal to the second one
 | notEqualTo               | `<>`                  |binary   | The first operand is not equal to the second one
 | is (null)                | `is`                  |binary   | Only used with `null` literal for second operand (the first operand is null)
@@ -471,10 +588,29 @@ This requirements class defines the following Relational Operators:
 | notBetween               | `not between ... and` |ternary  | The first operand is not between the second and third operands (inclusively)
 |===
 
+.CCSSS Example showcasing the use of logical and relational operators in a selector
+====
+[source,ccsss]
+----
+#Roads
+{
+   visibility: false;
+
+   // Roads will be visible between scales 1:20,000 and 1:200,000
+   [viz.sd > 20000 and viz.sd < 200000]
+   {
+      visibility: true;
+   }
+}
+----
+====
+
 [[array-expressions]]
 ===== Array Expressions
 
 An array expressions defines zero, one, or more element expressions forming an ordered set.
+
+CCSSS example: `(123.0, viz.sd)`.
 
 An _array literal_ is a special type of array expression whose elements are all literals.
 
@@ -484,10 +620,40 @@ An _array literal_ is a special type of array expression whose elements are all 
 An instance expressions instantiates an object of a class while optionally specifying values for member components.
 The default values for any member if not explicitly overridden can is specified by the class member definitions.
 
+CCSSS examples:
+
+* `DateTime(year: 2022, month: april, day: 6)`
+* `Color(r: 20, g: 100, b: 80)`)
+
+// We should probably consider including operators for accessing instance members, and indexing array elements.
+// As new requirements classes ?
+
 An _instance literal_ is a special type of instance expression assigning only literal expressions to its member components.
 
 A Symbolizer may either set an object property with a complete new instance, or specifically override a particular member of that object property.
 This capability is particularly useful when using nested StylingRules, where a nested rule can inherit the Symbolizer from the parent StylingRule.
+
+.CCSSS Example showcasing the use of logical and relational operators in a selector
+====
+[source,ccsss]
+----
+#Roads
+{
+   // Default to a gray stroke (completely replace stroke property)
+   stroke: { gray };
+   // For scales closer than 1:200,000 ...
+   [viz.sd < 200000]
+   {
+      stroke.width: 5px; // inherit gray color, but modify the width to be 5 pixels.
+
+      // For scales closer than 1:10,000, replace the stroke completely with a 5 meters blue stroke
+      [viz.sd < 10000] { stroke: { blue, width: 5m } }
+   }
+}
+----
+====
+
+// TODO: Insert pretty picture here
 
 === Requirements
 

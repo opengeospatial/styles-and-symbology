@@ -1,6 +1,6 @@
 # OGC Styles & Symbology
 
-This repository hosts the working draft documents for the _Core Models and Encodings for Styling and Symbology - Part 1: Core_ ("SymCore") **2.0**.
+This repository hosts the working draft documents for the _OGC Styles & Symbology Models and Encodings - Part 1: Core_ ("SymCore") **2.0**.
 
 The latest version of this draft is available in [HTML](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html) or [PDF](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.pdf).
 
@@ -13,7 +13,7 @@ It does so by featuring:
 - a basic [**Coverage Styling**](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc26) requirements class,
 - requirements classes providing additional styling functionality,
 - a [**JSON encoding**](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc67) of the conceptual and logical model facilitating machine readability,
-- a [**CSS-inspired encoding**](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc70) of the conceptual and logical model facilating hand-editing.
+- a [**CSS-inspired encoding**](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc70) of the conceptual and logical model facilitating hand-editing.
 
 _The current **published** version of OGC Symbology Conceptual Model: Core Part (SymCore) **1.0** is available in [HTML](https://docs.ogc.org/is/18-067r3/18-067r3.html) or [PDF](https://docs.ogc.org/is/18-067r3/18-067r3.pdf)._
 
