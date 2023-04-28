@@ -574,14 +574,14 @@ This requirements class defines the following Relational Operators:
 [width="90%",options="header"]
 |===
 | Name                     | CCSSS Example         |Type     | Definition
-| equalTo                  | `=`                   |binary   | The first operand is equal to the second one
-| notEqualTo               | `<>`                  |binary   | The first operand is not equal to the second one
+| equal                    | `=`                   |binary   | The first operand is equal to the second one
+| notEqual                 | `<>`                  |binary   | The first operand is not equal to the second one
 | is (null)                | `is`                  |binary   | Only used with `null` literal for second operand (the first operand is null)
 | isNot (null)             | `is not`              |binary   | Only used with `null` literal for second operand (the first operand is not null)
-| smallerThan              | `<`                   |binary   | The first operand is smaller than the second one
-| greaterThan              | `>`                   |binary   | The first operand is greater than the second one
-| smallerOrEqual           | `\<=`                 |binary   | The first operand is smaller than or equal to the second one
-| greaterOrEqual           | `>=`                  |binary   | The first operand is greater than or equal to the second one
+| lesser                   | `<`                   |binary   | The first operand is smaller than the second one
+| greater                  | `>`                   |binary   | The first operand is greater than the second one
+| lesserEqual              | `\<=`                 |binary   | The first operand is smaller than or equal to the second one
+| greaterEqual             | `>=`                  |binary   | The first operand is greater than or equal to the second one
 | in (array)               | `in`                  |binary   | Only used with an array for second operand (the first operand is one of the elements of the array)
 | notIn (array)            | `not in`              |binary   | Only used with an array for second operand (the first operand is not one of the elements of the array)
 | between                  | `between ... and`     |ternary  | The first operand is between the second and third operands (inclusively)
