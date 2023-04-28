@@ -40,6 +40,10 @@ For example, the following is equivalent to the _CartoSym CSS_ representation of
 }
 ```
 
+Variables are encoded as JSON Pointer to a top-level `"$variables"` section in the same source file, or in another included file.
+Base style sheets can be included using an "$include" property in the top-level object followed by either a single relative file path string
+or an array of relative file path strings to include.
+
 ==== Example
 
 The following example demonstrates the CartoSym JSON encoding for the same example Basic Vector Styling for polygons equivalent to the one seen in
