@@ -5,7 +5,59 @@
 
 This requirements class defines a JSON encoding for the Styles and Symbology Logical Model.
 The primary objective of this encoding is to be readily parsable and writable by machines using a standard JSON parser.
-Styles encoded with this encoding are not easily hand-edited by carographers.
+Styles encoded with this encoding are not easily hand-edited by cartographers.
+
+The encoding of expressions for both selectors and symbolizer parameter values in this encoding is based on the CQL2-JSON encoding.
+
+In order to represent a partial update to an object property of a symbolizer, an object with all the modified properties is
+specified, as well as setting the `"alter"` property to `true`. For example, the following is equivalent to the _CartoSym CSS_ representation of
+`fill.color.r: 100`, and will preserve the values of the other fill properties as well as the green and blue component of the fill color set
+ by earlier rules or specified by defaults:
+
+```json
+"fill": {
+   "alter": true,
+   "color": {
+      "alter": true,
+      "r": 100
+   }
+}
+```
+
+A similar mechanism is also defined to modify only some elements of an array by using an object with `"index"` set to the zero-based array index,
+and `"value"` set to new value with which to update that array element. This mechanism can be combined with the partial update of objects
+to only modify some properties of an object array element, or to partially modify an array inside of an object property.
+For example, the following is equivalent to the _CartoSym CSS_ representation of
+`marker.elements[1]: Text { text: "Marker" }`:
+
+```json
+"marker": {
+   "alter": true,
+   "elements": {
+      "index": 1,
+      "value": { "type": "Text", "text": "Marker" }
+   }
+}
+```
+
+==== Example
+
+The following example demonstrates the CartoSym JSON encoding for the same example Basic Vector Styling for polygons equivalent to the one seen in
+the following CartoSym CSS section (Example 1 in 21.1.8.1. Basic Vector Styling).
+
+[source,json,options="unnumbered"]
+----
+include::../examples/polygon-example.cs.json[]
+----
+
+==== JSON Schema
+
+The following JSON Schema describes the encoding.
+
+[source,json,options="unnumbered"]
+----
+include::../schemas/CartoSym-JSON.schema.json[]
+----
 
 === Requirements
 
