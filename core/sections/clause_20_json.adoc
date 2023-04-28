@@ -40,9 +40,11 @@ For example, the following is equivalent to the _CartoSym CSS_ representation of
 }
 ```
 
-Variables are encoded as JSON Pointer to a top-level `"$variables"` section in the same source file, or in another included file.
+Variables are encoded as JSON Pointer to a top-level `"$variables"` section in the same source file, or in an included file e.g.,
+`{ "$ref": "#/$variables/myVariable" }`.
 Base style sheets can be included using an "$include" property in the top-level object followed by either a single relative file path string
-or an array of relative file path strings to include.
+or an array of relative file path strings to include. The styling rules from the included files will be included before any styling rules
+defined by the current file, allowing to override the symbolization fully or partially.
 
 ==== Example
 
