@@ -12,7 +12,7 @@
                { "type": "string" },
                { "type": "array", "items": { "type": "string" }, "minItems": 1 }
             ]
-         ],
+         },
          "metadata": {
             "type": "object",
             "properties":
