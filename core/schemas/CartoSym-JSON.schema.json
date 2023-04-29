@@ -52,13 +52,21 @@
          "$comment": { "type": "string" },
 
          "visibility": { "$ref": "#/$defs/boolExpression" },
-         "opacity": { "$ref": "#/$defs/opacity" },
+         "opacity": { "$ref": "#/$defs/zeroToOne" },
          "zOrder": { "$ref": "#/$defs/numericExpression" },
 
          "fill": { "$ref": "#/$defs/fill" },
          "stroke": { "$ref": "#/$defs/stroke" },
          "marker": { "$ref": "#/$defs/marker" },
-         "label": { "$ref": "#/$defs/label" }
+         "label": { "$ref": "#/$defs/label" },
+
+         "colorChannels": { "$ref": "#/$defs/color0to1" },
+         "alphaChannel": { "$ref": "#/$defs/zeroToOne" },
+         "singleChannel": { "$ref": "#/$defs/zeroToOne" },
+         "colorMap": { "$ref": "#/$defs/colorMap" },
+         "opacityMap": { "$ref": "#/$defs/opacityMap" },
+
+         "hillShading": { "$ref": "#/$defs/hillShading" },
       }
     },
     "fill":
@@ -67,13 +75,69 @@
          { "$ref": "#/$defs/idOrFnExpression" },
          {
             "type": "object",
-            "properties":
-            {
+            "properties": {
                "alter": { "type": "boolean" },
                "color": { "$ref": "#/$defs/color" },
-               "opacity": { "$ref": "#/$defs/opacity" }
+               "opacity": { "$ref": "#/$defs/zeroToOne" },
+               "pattern": { "$ref": "#/$defs/graphic" },
+               "gradient": { "$ref": "#/$defs/gradient" },
+               "stippleStyle": { "$ref": "#/$defs/stippleStyle" },
+               "hatchStyle": { "$ref": "#/$defs/hatchStyle" }
             }
          }
+       ]
+    },
+    "gradient":
+    {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         {
+            "type": "object",
+            "properties": {
+               "alter": { "type": "boolean" },
+               "type": { "type": "string", "enum": [ "linear", "radial" ] },
+               "keys": {
+                  "oneOf": [
+                     {
+                        "type": "array",
+                        "items": { "$ref": "#/$defs/colorKey" }
+                     },
+                     {
+                        "type": "object",
+                        "required": [ "index", "value" ],
+                        "properties": {
+                           "index": { "type": "integer", "minimum": 0 },
+                           "value": { "$ref": "#/$defs/colorKey" }
+                        }
+                     }
+                  ]
+               }
+            }
+         }
+       ]
+    },
+    "colorKey":
+    {
+       "type": "object",
+       "properties": {
+          "alter": { "type": "boolean" },
+          "percent": { "$ref": "#/$defs/percent" },
+          "color": { "$ref": "#/$defs/color" },
+          "opacity": { "$ref": "#/$defs/zeroToOne" }
+       }
+    },
+    "stippleStyle":
+    {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         { "type": "string", "enum": [ "light", "medium", "heavy" ] }
+       ]
+    },
+    "hatchStyle":
+    {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         { "type": "string", "enum": [ "forward", "backward", "xCross", "cross" ] }
        ]
     },
     "stroke":
@@ -88,11 +152,51 @@
                   "properties":
                   {
                      "casing": { "$ref": "#/$defs/strokeStyling" },
-                     "centerLine": { "$ref": "#/$defs/strokeStyling" }
+                     "centerLine": { "$ref": "#/$defs/strokeStyling" },
+                     "join": { "$ref": "#/$defs/strokeJoin" },
+                     "cap": { "$ref": "#/$defs/strokeCap" },
+                     "dashPattern": { "$ref": "#/$defs/dashPattern" },
+                     "pattern": { "$ref": "#/$defs/graphic" }
                   }
                }
             ]
          }
+       ]
+    },
+    "dashPattern":
+    {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         {
+            "type": "array",
+            "items":
+            {
+               "type": "integer",
+               "minimum": 0
+            }
+         },
+         {
+            "type": "object",
+            "required": [ "index", "value" ],
+            "properties": {
+               "index": { "type": "integer", "minimum": 0 },
+               "value": { "type": "integer", "minimum": 0 }
+            }
+         }
+       ]
+    },
+    "strokeJoin":
+    {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         { "type": "string", "enum": [ "miter", "round", "bevel" ] }
+       ]
+    },
+    "strokeCap":
+    {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         { "type": "string", "enum": [ "butt", "round", "square" ] }
        ]
     },
     "marker": { "$ref": "#/$defs/multiGraphic" },
@@ -148,8 +252,104 @@
        "properties": {
           "alter": { "type": "boolean" },
           "position": { "$ref": "#/$defs/unitPoint" },
-          "opacity": { "$ref": "#/$defs/opacity" }
+          "opacity": { "$ref": "#/$defs/zeroToOne" },
+          "transform": { "$ref": "#/$defs/transform2D" },
+          "transform3D": { "$ref": "#/$defs/transform3D" }
        }
+    },
+    "transform2D": {
+       "type": "object",
+       "properties": {
+          "alter": { "type": "boolean" },
+          "orientation": { "$ref": "#/$defs/angle" },
+          "scaling": { "$ref": "#/$defs/scale2D" },
+          "translation": { "$ref": "#/$defs/unitPoint" }
+       }
+    },
+    "transform3D": {
+       "type": "object",
+       "properties": {
+          "alter": { "type": "boolean" },
+          "orientation": { "$ref": "#/$defs/orientation3D" },
+          "scaling": { "$ref": "#/$defs/scale3D" },
+          "translation": { "$ref": "#/$defs/unitPoint" }
+       }
+    },
+    "scale2D":
+    {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": { "$ref": "#/$defs/numericExpression" }
+         },
+         {
+            "type": "object",
+            "properties":
+            {
+               "x": { "$ref": "#/$defs/numericExpression" },
+               "y": { "$ref": "#/$defs/numericExpression" },
+               "alter": { "type": "boolean" }
+            }
+         }
+       ]
+    },
+    "scale3D":
+    {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 3,
+            "items": { "$ref": "#/$defs/numericExpression" }
+         },
+         {
+            "type": "object",
+            "properties":
+            {
+               "x": { "$ref": "#/$defs/numericExpression" },
+               "y": { "$ref": "#/$defs/numericExpression" },
+               "z": { "$ref": "#/$defs/numericExpression" },
+               "alter": { "type": "boolean" }
+            }
+         }
+       ]
+    },
+    "orientation3D":
+    {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         {
+            "type": "array",
+            "minItems": 4,
+            "maxItems": 4,
+            "items": { "$ref": "#/$defs/numericExpression" }
+         },
+         {
+            "type": "object",
+            "properties":
+            {
+               "w": { "$ref": "#/$defs/numericExpression" },
+               "x": { "$ref": "#/$defs/numericExpression" },
+               "y": { "$ref": "#/$defs/numericExpression" },
+               "z": { "$ref": "#/$defs/numericExpression" },
+               "alter": { "type": "boolean" }
+            }
+         },
+         {
+            "type": "object",
+            "properties":
+            {
+               "yaw": { "$ref": "#/$defs/numericExpression" },
+               "pitch": { "$ref": "#/$defs/numericExpression" },
+               "roll": { "$ref": "#/$defs/numericExpression" },
+               "alter": { "type": "boolean" }
+            }
+         }
+       ]
     },
     "graphic": {
        "oneOf": [
@@ -157,8 +357,24 @@
          { "$ref": "#/$defs/image" },
          { "$ref": "#/$defs/shape" },
          { "$ref": "#/$defs/text" },
-         { "$ref": "#/$defs/multiGraphic" }
+         { "$ref": "#/$defs/model" },
+         { "$ref": "#/$defs/multiGraphic" },
+         { "$ref": "#/$defs/graphicInstance" }
        ]
+    },
+    "graphicInstance": {
+      "allOf": [
+         { "$ref": "#/$defs/abstractGraphic" },
+         {
+             "type": "object",
+             "required": [ "type", "element" ],
+             "properties":
+             {
+                "type": { "type": "string", "enum": [ "GraphicInstance" ] },
+                "element": { "$ref": "#/$defs/graphic" }
+             }
+         }
+      ]
     },
     "image": {
       "allOf": [
@@ -173,7 +389,21 @@
                 "hotSpot": { "$ref": "#/$defs/unitPoint" },
                 "tint": { "$ref": "#/$defs/color" },
                 "blackTint": { "$ref": "#/$defs/color" },
-                "alphaThreshold": { "$ref": "#/$defs/opacity" }
+                "alphaThreshold": { "$ref": "#/$defs/zeroToOne" }
+             }
+         }
+      ]
+    },
+    "model": {
+      "allOf": [
+         { "$ref": "#/$defs/abstractGraphic" },
+         {
+             "type": "object",
+             "required": [ "type", "model" ],
+             "properties":
+             {
+                "type": { "type": "string", "enum": [ "Model" ] },
+                "model": { "$ref": "#/$defs/resource" }
              }
          }
       ]
@@ -248,7 +478,22 @@
                 "italic": { "$ref": "#/$defs/boolExpression" },
                 "underline": { "$ref": "#/$defs/boolExpression" },
                 "color": { "$ref": "#/$defs/color" },
-                "opacity": { "$ref": "#/$defs/opacity" }
+                "opacity": { "$ref": "#/$defs/zeroToOne" },
+                "outline": { "$ref": "#/$defs/fontOutline" }
+             }
+          }
+       ]
+    },
+    "fontOutline": {
+       "oneOf": [
+          { "$ref": "#/$defs/idOrFnExpression" },
+          {
+             "type": "object",
+             "properties": {
+                "alter": { "type": "boolean" },
+                "size": { "$ref": "#/$defs/numericExpression" },
+                "opacity": { "$ref": "#/$defs/zeroToOne" },
+                "color": { "$ref": "#/$defs/color" }
              }
           }
        ]
@@ -570,7 +815,7 @@
             {
                "alter": { "type": "boolean" },
                "color": { "$ref": "#/$defs/color" },
-               "opacity": { "$ref": "#/$defs/opacity" },
+               "opacity": { "$ref": "#/$defs/zeroToOne" },
                "width": { "$ref": "#/$defs/unitValue" }
             }
          }
@@ -621,12 +866,179 @@
          }
        ]
     },
-    "opacity":
+    "percent":
     {
        "anyOf": [
-          { "type": "number", "minimum": 0, "maximum": 1 },
-          { "$ref": "#/$defs/numericExpression" }
+          { "$ref": "#/$defs/numericExpression" },
+          { "type": "number", "minimum": 0.0, "maximum": 100.0 }
        ]
+    },
+    "zeroToOne":
+    {
+       "anyOf": [
+          { "$ref": "#/$defs/numericExpression" },
+          { "type": "number", "minimum": 0, "maximum": 1 }
+       ]
+    },
+    "colorComponent0to255":
+    {
+       "anyOf": [
+         { "$ref": "#/$defs/numericExpression" },
+         { "type": "integer", "mininum": 0, "maximum": 255 }
+       ]
+    },
+    "webColorName":
+    {
+      "type": "string",
+      "enum": [
+         "black",
+         "dimGray",
+         "dimGrey",
+         "gray",
+         "grey",
+         "darkGray",
+         "darkGrey",
+         "silver",
+         "lightGray",
+         "lightGrey",
+         "gainsboro",
+         "whiteSmoke",
+         "white",
+         "rosyBrown",
+         "indianRed",
+         "brown",
+         "fireBrick",
+         "lightCoral",
+         "maroon",
+         "darkRed",
+         "red",
+         "snow",
+         "mistyRose",
+         "salmon",
+         "tomato",
+         "darkSalmon",
+         "coral",
+         "orangeRed",
+         "lightSalmon",
+         "sienna",
+         "seaShell",
+         "chocolate",
+         "saddleBrown",
+         "sandyBrown",
+         "peachPuff",
+         "peru",
+         "linen",
+         "bisque",
+         "darkOrange",
+         "burlyWood",
+         "tan",
+         "antiqueWhite",
+         "navajoWhite",
+         "blanchedAlmond",
+         "papayaWhip",
+         "moccasin",
+         "orange",
+         "wheat",
+         "oldLace",
+         "floralWhite",
+         "darkGoldenrod",
+         "goldenrod",
+         "cornsilk",
+         "gold",
+         "khaki",
+         "lemonChiffon",
+         "paleGoldenrod",
+         "darkKhaki",
+         "beige",
+         "lightGoldenRodYellow",
+         "olive",
+         "yellow",
+         "lightYellow",
+         "ivory",
+         "oliveDrab",
+         "yellowGreen",
+         "darkOliveGreen",
+         "greenYellow",
+         "chartreuse",
+         "lawnGreen",
+         "darkSeaGreen",
+         "forestGreen",
+         "limeGreen",
+         "lightGreen",
+         "paleGreen",
+         "darkGreen",
+         "green",
+         "lime",
+         "honeyDew",
+         "seaGreen",
+         "mediumSeaGreen",
+         "springGreen",
+         "mintCream",
+         "mediumSpringGreen",
+         "mediumAquaMarine",
+         "aquamarine",
+         "turquoise",
+         "lightSeaGreen",
+         "mediumTurquoise",
+         "darkSlateGray",
+         "darkSlateGrey",
+         "paleTurquoise",
+         "teal",
+         "darkCyan",
+         "aqua",
+         "cyan",
+         "lightCyan",
+         "azure",
+         "darkTurquoise",
+         "cadetBlue",
+         "powderBlue",
+         "lightBlue",
+         "deepSkyBlue",
+         "skyBlue",
+         "lightSkyBlue",
+         "steelBlue",
+         "aliceBlue",
+         "dodgerBlue",
+         "slateGray",
+         "slateGrey",
+         "lightSlateGray",
+         "lightSlateGrey",
+         "lightSteelBlue",
+         "cornflowerBlue",
+         "royalBlue",
+         "midnightBlue",
+         "lavender",
+         "navy",
+         "darkBlue",
+         "mediumBlue",
+         "blue",
+         "ghostWhite",
+         "slateBlue",
+         "darkSlateBlue",
+         "mediumSlateBlue",
+         "mediumPurple",
+         "blueViolet",
+         "indigo",
+         "darkOrchid",
+         "darkViolet",
+         "mediumOrchid",
+         "thistle",
+         "plum",
+         "violet",
+         "purple",
+         "darkMagenta",
+         "magenta",
+         "fuschia",
+         "orchid",
+         "mediumVioletRed",
+         "deepPink",
+         "hotPink",
+         "lavenderBlush",
+         "paleVioletRed",
+         "crimson",
+         "pink",
+         "lightPink"
+      ]
     },
     "color":
     {
@@ -636,169 +1048,153 @@
             "type": "object",
             "properties":
             {
-               "r": { "type": "integer", "mininum": 0, "maximum": 255 },
-               "g": { "type": "integer", "mininum": 0, "maximum": 255 },
-               "b": { "type": "integer", "mininum": 0, "maximum": 255 },
+               "r": { "$ref": "#/$defs/colorComponent0to255" },
+               "g": { "$ref": "#/$defs/colorComponent0to255" },
+               "b": { "$ref": "#/$defs/colorComponent0to255" },
                "alter": { "type": "boolean" }
             }
          },
          {
             "type": "array",
-            "items": { "type": "integer", "mininum": 0, "maximum": 255 },
+            "items": { "$ref": "#/$defs/colorComponent0to255" },
             "minItems": 3,
             "maxItems": 3
          },
+         { "$ref": "#/$defs/webColorName" }
+       ]
+    },
+    "color0to1":
+    {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
          {
-            "type": "string",
-            "enum": [
-               "black",
-               "dimGray",
-               "dimGrey",
-               "gray",
-               "grey",
-               "darkGray",
-               "darkGrey",
-               "silver",
-               "lightGray",
-               "lightGrey",
-               "gainsboro",
-               "whiteSmoke",
-               "white",
-               "rosyBrown",
-               "indianRed",
-               "brown",
-               "fireBrick",
-               "lightCoral",
-               "maroon",
-               "darkRed",
-               "red",
-               "snow",
-               "mistyRose",
-               "salmon",
-               "tomato",
-               "darkSalmon",
-               "coral",
-               "orangeRed",
-               "lightSalmon",
-               "sienna",
-               "seaShell",
-               "chocolate",
-               "saddleBrown",
-               "sandyBrown",
-               "peachPuff",
-               "peru",
-               "linen",
-               "bisque",
-               "darkOrange",
-               "burlyWood",
-               "tan",
-               "antiqueWhite",
-               "navajoWhite",
-               "blanchedAlmond",
-               "papayaWhip",
-               "moccasin",
-               "orange",
-               "wheat",
-               "oldLace",
-               "floralWhite",
-               "darkGoldenrod",
-               "goldenrod",
-               "cornsilk",
-               "gold",
-               "khaki",
-               "lemonChiffon",
-               "paleGoldenrod",
-               "darkKhaki",
-               "beige",
-               "lightGoldenRodYellow",
-               "olive",
-               "yellow",
-               "lightYellow",
-               "ivory",
-               "oliveDrab",
-               "yellowGreen",
-               "darkOliveGreen",
-               "greenYellow",
-               "chartreuse",
-               "lawnGreen",
-               "darkSeaGreen",
-               "forestGreen",
-               "limeGreen",
-               "lightGreen",
-               "paleGreen",
-               "darkGreen",
-               "green",
-               "lime",
-               "honeyDew",
-               "seaGreen",
-               "mediumSeaGreen",
-               "springGreen",
-               "mintCream",
-               "mediumSpringGreen",
-               "mediumAquaMarine",
-               "aquamarine",
-               "turquoise",
-               "lightSeaGreen",
-               "mediumTurquoise",
-               "darkSlateGray",
-               "darkSlateGrey",
-               "paleTurquoise",
-               "teal",
-               "darkCyan",
-               "aqua",
-               "cyan",
-               "lightCyan",
-               "azure",
-               "darkTurquoise",
-               "cadetBlue",
-               "powderBlue",
-               "lightBlue",
-               "deepSkyBlue",
-               "skyBlue",
-               "lightSkyBlue",
-               "steelBlue",
-               "aliceBlue",
-               "dodgerBlue",
-               "slateGray",
-               "slateGrey",
-               "lightSlateGray",
-               "lightSlateGrey",
-               "lightSteelBlue",
-               "cornflowerBlue",
-               "royalBlue",
-               "midnightBlue",
-               "lavender",
-               "navy",
-               "darkBlue",
-               "mediumBlue",
-               "blue",
-               "ghostWhite",
-               "slateBlue",
-               "darkSlateBlue",
-               "mediumSlateBlue",
-               "mediumPurple",
-               "blueViolet",
-               "indigo",
-               "darkOrchid",
-               "darkViolet",
-               "mediumOrchid",
-               "thistle",
-               "plum",
-               "violet",
-               "purple",
-               "darkMagenta",
-               "magenta",
-               "fuschia",
-               "orchid",
-               "mediumVioletRed",
-               "deepPink",
-               "hotPink",
-               "lavenderBlush",
-               "paleVioletRed",
-               "crimson",
-               "pink",
-               "lightPink"
-            ]
+            "type": "object",
+            "properties":
+            {
+               "r": { "$ref": "#/$defs/zeroToOne" },
+               "g": { "$ref": "#/$defs/zeroToOne" },
+               "b": { "$ref": "#/$defs/zeroToOne" },
+               "alter": { "type": "boolean" }
+            }
+         },
+         {
+            "type": "array",
+            "items": { "$ref": "#/$defs/zeroToOne" },
+            "minItems": 3,
+            "maxItems": 3
+         },
+         { "$ref": "#/$defs/webColorName" }
+       ]
+    },
+    "colorMap":
+    {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         {
+            "type": "array",
+            "items":
+            {
+               "type": "array",
+               "minItems": 2,
+               "maxItems": 3,
+               "prefixItems": [
+                  { "$ref": "#/$defs/numericExpression" },
+                  { "$ref": "#/$defs/color" },
+                  { "type": "string" }
+               ]
+            },
+            "minItems": 1
+         }
+       ]
+    },
+    "opacityMap":
+    {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         {
+            "type": "array",
+            "items":
+            {
+               "type": "array",
+               "minItems": 2,
+               "maxItems": 3,
+               "prefixItems": [
+                  { "$ref": "#/$defs/numericExpression" },
+                  { "$ref": "#/$defs/zeroToOne" },
+                  { "type": "string" }
+               ]
+            },
+            "minItems": 1
+         }
+       ]
+    },
+    "hillShading": {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         {
+             "type": "object",
+             "properties": {
+                "factor": { "$ref": "#/$defs/numericExpression" },
+                "sun": { "$ref": "#/$defs/azimuthElevation" },
+                "colorMap": { "$ref": "#/$defs/hsColorMap" },
+                "opacityMap": { "$ref": "#/$defs/hsOpacityMap" },
+                "alter": { "type": "boolean" }
+             }
+         }
+       ]
+    },
+    "azimuthElevation": {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         {
+             "type": "object",
+             "properties": {
+                "azimuth": { "$ref": "#/$defs/angle" },
+                "elevation": { "$ref": "#/$defs/angle" },
+                "alter": { "type": "boolean" }
+             }
+         }
+       ]
+    },
+    "hsColorMap":
+    {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         {
+            "type": "array",
+            "items":
+            {
+               "type": "array",
+               "minItems": 2,
+               "maxItems": 3,
+               "prefixItems": [
+                  { "$ref": "#/$defs/zeroToOne" },
+                  { "$ref": "#/$defs/color" },
+                  { "type": "string" }
+               ]
+            },
+            "minItems": 1
+         }
+       ]
+    },
+    "hsOpacityMap":
+    {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         {
+            "type": "array",
+            "items":
+            {
+               "type": "array",
+               "minItems": 2,
+               "maxItems": 3,
+               "prefixItems": [
+                  { "$ref": "#/$defs/zeroToOne" },
+                  { "$ref": "#/$defs/zeroToOne" },
+                  { "type": "string" }
+               ]
+            },
+            "minItems": 1
          }
        ]
     },

@@ -63,7 +63,7 @@ This requirements class adds support for hatch, stipple and gradient fills.
 [width="90%",options="header"]
 |===
 | Name           | Definition       | Type         | Multiplicity
-| hatchStyle     | Hatch styl       | HatchStyle   | 0..1
+| hatchStyle     | Hatch style      | HatchStyle   | 0..1
 | stippleStyle   | Opacity          | StippleStyle | 0..1
 | gradient       | Percent          | ColorKey     | 0..*
 |===
