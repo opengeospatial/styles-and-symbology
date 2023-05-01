@@ -1,4 +1,4 @@
-== Requirements Class "Symbolizer Parameter Value Expresssions"
+== Requirements Class "Symbolizer Parameter Value Expressions"
 === Overview
 
 This requirements class adds support for using **ParameterValues** i.e., arbitrary **Expressions** (not only literals), for all **Symbolizer** properties.
