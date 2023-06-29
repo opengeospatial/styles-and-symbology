@@ -66,7 +66,7 @@
          "colorMap": { "$ref": "#/$defs/colorMap" },
          "opacityMap": { "$ref": "#/$defs/opacityMap" },
 
-         "hillShading": { "$ref": "#/$defs/hillShading" },
+         "hillShading": { "$ref": "#/$defs/hillShading" }
       }
     },
     "fill":
@@ -498,6 +498,20 @@
           }
        ]
     },
+    "shapeOutline": {
+       "oneOf": [
+          { "$ref": "#/$defs/idOrFnExpression" },
+          {
+             "type": "object",
+             "properties": {
+                "alter": { "type": "boolean" },
+                "thickness": { "$ref": "#/$defs/unitValue" },
+                "opacity": { "$ref": "#/$defs/zeroToOne" },
+                "color": { "$ref": "#/$defs/color" }
+             }
+          }
+       ]
+    },
     "abstractShape": {
       "allOf": [
          { "$ref": "#/$defs/abstractGraphic" },
@@ -506,7 +520,8 @@
             "required": [ "type" ],
             "properties": {
                "type": { "type": "string" },
-               "stroke": { "$ref": "#/$defs/stroke" }
+               "stroke": { "$ref": "#/$defs/stroke" },
+               "outline": { "$ref": "#/$defs/shapeOutline" }
             }
          }
       ]
@@ -1202,7 +1217,8 @@
        "anyOf": [
           { "$ref": "#/$defs/systemIdentifier" },
           { "$ref": "#/$defs/propertyRef" },
-          { "$ref": "#/$defs/functionRef" }
+          { "$ref": "#/$defs/functionCall" },
+          { "$ref": "#/$defs/conditionalExpression" }
        ]
     },
     "anyExpression": {
@@ -1226,14 +1242,51 @@
                "dataLayer",
                "dataLayer.id",
                "dataLayer.type",
+               "dataLayer.features",
+               "dataLayer.featuresGeometry",
                "dataLayer.featuresGeometryDimensions",
+               "feature",
+               "feature.id",
+               "feature.geometry",
+               "feature.geometryDimensions",
                "vis",
                "vis.sd",
+               "vis.date",
+               "vis.date.day",
+               "vis.date.month",
+               "vis.date.year",
+               "vis.dateTime",
+               "vis.dateTime.date",
+               "vis.dateTime.date.day",
+               "vis.dateTime.date.month",
+               "vis.dateTime.date.year",
+               "vis.dateTime.time",
+               "vis.dateTime.time.hour",
+               "vis.dateTime.time.minutes",
+               "vis.dateTime.time.seconds",
                "vis.timeInterval",
                "vis.timeInterval.start",
                "vis.timeInterval.start.date",
+               "vis.timeInterval.start.date.day",
+               "vis.timeInterval.start.date.month",
+               "vis.timeInterval.start.date.year",
+               "vis.timeInterval.start.time",
+               "vis.timeInterval.start.time.hour",
+               "vis.timeInterval.start.time.minutes",
+               "vis.timeInterval.start.time.seconds",
                "vis.timeInterval.end",
-               "vis.timeInterval.date"
+               "vis.timeInterval.end.date",
+               "vis.timeInterval.end.date.day",
+               "vis.timeInterval.end.date.month",
+               "vis.timeInterval.end.date.year",
+               "vis.timeInterval.end.time",
+               "vis.timeInterval.end.time.hour",
+               "vis.timeInterval.end.time.minutes",
+               "vis.timeInterval.end.time.seconds",
+               "vis.timeOfDay",
+               "vis.timeOfDay.hour",
+               "vis.timeOfDay.minutes",
+               "vis.timeOfDay.seconds"
              ]
           }
        }
@@ -1247,7 +1300,8 @@
           { "$ref": "#/$defs/spatialPredicate" },
           { "$ref": "#/$defs/temporalPredicate" },
           { "$ref": "#/$defs/arrayPredicate" },
-          { "$ref": "#/$defs/functionRef" },
+          { "$ref": "#/$defs/functionCall" },
+          { "$ref": "#/$defs/conditionalExpression" },
           { "type": "boolean" }
         ]
     },
@@ -1292,6 +1346,7 @@
       "oneOf": [
         { "$ref": "#/$defs/binaryComparisonPredicate" },
         { "$ref": "#/$defs/isLikePredicate" },
+        { "$ref": "#/$defs/textOpPredicate" },
         { "$ref": "#/$defs/isBetweenPredicate" },
         { "$ref": "#/$defs/isInListPredicate" },
         { "$ref": "#/$defs/isNullPredicate" }
@@ -1335,7 +1390,8 @@
         { "$ref": "#/$defs/instantInstance" },
         { "$ref": "#/$defs/propertyRef" },
         { "$ref": "#/$defs/systemIdentifier" },
-        { "$ref": "#/$defs/functionRef" }
+        { "$ref": "#/$defs/functionCall" },
+        { "$ref": "#/$defs/conditionalExpression" }
       ]
     },
 
@@ -1360,23 +1416,49 @@
           ],
           "additionalItems": false
     },
+    "textOpPredicate": {
+      "type": "object",
+      "required": [ "op", "args" ],
+      "properties": {
+        "op": {
+          "type": "string",
+          "enum": [ "contains", "startsWith", "endsWith" ]
+        },
+        "args": {
+          "type": "array",
+          "prefixItems": [
+            { "$ref": "#/$defs/characterExpression" },
+            { "$ref": "#/$defs/characterExpression" }
+          ],
+          "additionalItems": false
+        }
+      }
+    },
     "patternExpression": {
       "oneOf": [
         {
           "type": "object",
-          "required": [ "casei" ],
+          "required": [ "op", "args" ],
           "properties": {
-            "casei": {
-              "$ref": "#/$defs/patternExpression"
+            "op": { "type": "string", "enum": [ "casei" ] },
+            "args": {
+               "type": "array",
+               "items": { "$ref": "#/$defs/patternExpression" },
+               "minItems": 1,
+               "maxItems": 1
             }
           }
         },
         {
           "type": "object",
-          "required": [ "accenti" ],
+          "required": [ "op", "args" ],
           "properties": {
-            "accenti": {
-              "$ref": "#/$defs/patternExpression"
+            "op": { "type": "string", "enum": [ "accenti" ] },
+            "args": {
+               "type": "array",
+               "items": { "$ref": "#/$defs/patternExpression" },
+               "minItems": 1,
+               "maxItems": 1
             }
           }
         },
@@ -1403,10 +1485,14 @@
     "numericExpression": {
       "oneOf": [
         { "$ref": "#/$defs/arithmeticExpression" },
+        { "$ref": "#/$defs/bitwiseLogical" },
+        { "$ref": "#/$defs/bitwiseShift" },
+        { "$ref": "#/$defs/bitwiseNot" },
         { "type": "number" },
         { "$ref": "#/$defs/propertyRef" },
         { "$ref": "#/$defs/systemIdentifier" },
-        { "$ref": "#/$defs/functionRef" }
+        { "$ref": "#/$defs/functionCall" },
+        { "$ref": "#/$defs/conditionalExpression" }
       ]
     },
 
@@ -1497,7 +1583,8 @@
         { "$ref": "#/$defs/spatialInstance" },
         { "$ref": "#/$defs/propertyRef" },
         { "$ref": "#/$defs/systemIdentifier" },
-        { "$ref": "#/$defs/functionRef" }
+        { "$ref": "#/$defs/functionCall" },
+        { "$ref": "#/$defs/conditionalExpression" }
       ]
     },
 
@@ -1541,7 +1628,8 @@
         { "$ref": "#/$defs/temporalInstance" },
         { "$ref": "#/$defs/propertyRef" },
         { "$ref": "#/$defs/systemIdentifier" },
-        { "$ref": "#/$defs/functionRef" }
+        { "$ref": "#/$defs/functionCall" },
+        { "$ref": "#/$defs/conditionalExpression" }
       ]
     },
 
@@ -1558,19 +1646,21 @@
             "a_overlaps"
           ]
         },
-        "args": {
-            "type": "array",
-            "minItems": 2,
-            "maxItems": 2,
-            "items": {
-              "oneOf": [
-                { "$ref": "#/$defs/array" },
-                { "$ref": "#/$defs/propertyRef" },
-                { "$ref": "#/$defs/systemIdentifier" },
-                { "$ref": "#/$defs/functionRef" }
-              ]
-            }
-        }
+        "args": { "$ref": "#/$defs/arrayArguments" }
+      }
+    },
+    "arrayArguments": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "oneOf": [
+          { "$ref": "#/$defs/array" },
+          { "$ref": "#/$defs/propertyRef" },
+          { "$ref": "#/$defs/systemIdentifier" },
+          { "$ref": "#/$defs/functionCall" },
+          { "$ref": "#/$defs/conditionalExpression" }
+        ]
       }
     },
     "arrayExpression": {
@@ -1580,7 +1670,8 @@
           { "$ref": "#/$defs/array" },
           { "$ref": "#/$defs/propertyRef" },
           { "$ref": "#/$defs/systemIdentifier" },
-          { "$ref": "#/$defs/functionRef" }
+          { "$ref": "#/$defs/functionCall" },
+          { "$ref": "#/$defs/conditionalExpression" }
         ]
       }
     },
@@ -1618,12 +1709,89 @@
       "items": {
         "oneOf": [
           { "$ref": "#/$defs/arithmeticExpression" },
+          { "$ref": "#/$defs/bitwiseLogical" },
+          { "$ref": "#/$defs/bitwiseShift" },
+          { "$ref": "#/$defs/bitwiseNot" },
           { "$ref": "#/$defs/propertyRef" },
           { "$ref": "#/$defs/systemIdentifier" },
-          { "$ref": "#/$defs/functionRef" },
+          { "$ref": "#/$defs/functionCall" },
+          { "$ref": "#/$defs/conditionalExpression" },
           { "type": "number" }
         ]
       }
+    },
+
+    "hexNumber": {
+       "type": "string",
+       "pattern": "^([a-fA-F0-9])+"
+    },
+    "bitwiseLogical": {
+      "type": "object",
+      "required": [ "op", "args" ],
+      "properties": {
+        "op": {
+          "type": "string",
+          "enum": [ "bitAnd", "bitOr", "bitXor" ]
+        },
+        "args": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "$ref": "#/$defs/bitwiseOperand"
+            }
+        }
+      }
+    },
+    "bitwiseNot": {
+      "type": "object",
+      "required": [ "op", "args" ],
+      "properties": {
+        "op": {
+          "type": "string",
+          "enum": [ "bitNot" ]
+        },
+        "args": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 1,
+            "items": {
+              "$ref": "#/$defs/bitwiseOperand"
+            }
+        }
+      }
+    },
+    "bitwiseShift": {
+      "type": "object",
+      "required": [ "op", "args" ],
+      "properties": {
+        "op": {
+          "type": "string",
+          "enum": [ "<<", ">>" ]
+        },
+        "args": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "$ref": "#/$defs/bitwiseOperand"
+            }
+        }
+      }
+    },
+    "bitwiseOperand": {
+        "oneOf": [
+          { "$ref": "#/$defs/arithmeticExpression" },
+          { "$ref": "#/$defs/bitwiseLogical" },
+          { "$ref": "#/$defs/bitwiseShift" },
+          { "$ref": "#/$defs/bitwiseNot" },
+          { "$ref": "#/$defs/propertyRef" },
+          { "$ref": "#/$defs/systemIdentifier" },
+          { "$ref": "#/$defs/functionCall" },
+          { "$ref": "#/$defs/conditionalExpression" },
+          { "type": "integer" },
+          { "$ref": "#/$defs/hexNumber" }
+        ]
     },
 
     "propertyRef": {
@@ -1636,21 +1804,110 @@
 
     "casei": {
       "type": "object",
-      "required": [ "casei" ],
+      "required": [ "op", "args" ],
       "properties": {
-        "casei": {
-          "$ref": "#/$defs/characterExpression"
+        "op": { "type": "string", "enum": [ "casei" ] },
+        "args": {
+           "type": "array",
+           "items": { "$ref": "#/$defs/characterExpression" },
+           "minItems": 1,
+           "maxItems": 1
         }
       }
     },
 
     "accenti": {
       "type": "object",
-      "required": [ "accenti" ],
+      "required": [ "op", "args" ],
       "properties": {
-        "accenti": {
-          "$ref": "#/$defs/characterExpression"
+        "op": { "type": "string", "enum": [ "accenti" ] },
+        "args": {
+           "type": "array",
+           "items": { "$ref": "#/$defs/characterExpression" },
+           "minItems": 1,
+           "maxItems": 1
         }
+      }
+    },
+
+    "lowerUpperCase": {
+      "type": "object",
+      "required": [ "op", "args" ],
+      "properties": {
+         "op": {
+           "type": "string",
+           "enum": [ "lowerCase", "upperCase" ]
+         },
+         "args": {
+           "type": "array",
+           "items": { "$ref": "#/$defs/characterExpression" },
+           "minItems": 1,
+           "maxItems": 1
+         }
+      }
+    },
+
+    "concatenate": {
+      "type": "object",
+      "required": [ "op", "args" ],
+      "properties":
+      {
+         "op": {
+           "type": "string",
+           "enum": [ "concatenate" ]
+         },
+         "args": {
+           "type": "array",
+           "items": { "$ref": "#/$defs/characterExpression" },
+           "minItems": 2
+         }
+      }
+    },
+
+    "substitute": {
+      "type": "object",
+      "required": [ "op", "args" ],
+      "properties":
+      {
+         "name": {
+           "type": "string",
+           "enum": [ "substitute" ]
+         },
+         "args": {
+           "type": "array",
+           "items": { "$ref": "#/$defs/characterExpression" },
+           "minItems": 3,
+           "maxItems": 3
+         }
+      }
+    },
+
+    "format": {
+      "type": "object",
+      "required": [ "op", "args" ],
+      "properties":
+      {
+         "name": {
+           "type": "string",
+           "enum": [ "format" ]
+         },
+         "args": {
+           "type": "array",
+           "items": {
+             "oneOf": [
+               { "$ref": "#/$defs/characterExpression" },
+               { "$ref": "#/$defs/numericExpression" },
+               { "$dynamicRef": "#boolExpression" },
+               { "$ref": "#/$defs/geomExpression" },
+               { "$ref": "#/$defs/temporalExpression" },
+               { "$ref": "#/$defs/array" }
+             ]
+           },
+           "prefixItems": [
+             { "$ref": "#/$defs/characterExpression" }
+           ],
+           "minItems": 1
+         }
       }
     },
 
@@ -1658,30 +1915,97 @@
       "oneOf": [
         { "$ref": "#/$defs/casei" },
         { "$ref": "#/$defs/accenti" },
+        { "$ref": "#/$defs/lowerUpperCase" },
+        { "$ref": "#/$defs/concatenate" },
+        { "$ref": "#/$defs/substitute" },
+        { "$ref": "#/$defs/format" },
         { "type": "string" },
         { "$ref": "#/$defs/propertyRef" },
         { "$ref": "#/$defs/systemIdentifier" },
-        { "$ref": "#/$defs/functionRef" }
+        { "$ref": "#/$defs/functionCall" },
+        { "$ref": "#/$defs/conditionalExpression" }
       ]
     },
 
-    "functionRef": {
+    "geometryManipulationBinary": {
       "type": "object",
-      "required": [ "function" ],
-      "properties": {
-        "function": {
-          "$ref": "#/$defs/function"
-        }
+      "required": [ "op", "args" ],
+      "properties":
+      {
+         "name": {
+           "type": "string",
+           "enum": [ "s_intersection", "s_union", "s_difference", "s_symDifference" ]
+         },
+         "args": {
+           "type": "array",
+           "items": { "$ref": "#/$defs/spatialInstance" },
+           "minItems": 2,
+           "maxItems": 2
+         }
       }
     },
 
-    "function": {
+    "geometryManipulationUnary": {
       "type": "object",
-      "required": [ "name" ],
+      "required": [ "op", "args" ],
+      "properties":
+      {
+         "name": {
+           "type": "string",
+           "enum": [ "s_convexHull", "s_envelope" ]
+         },
+         "args": {
+           "type": "array",
+           "items": { "$ref": "#/$defs/spatialInstance" },
+           "minItems": 1,
+           "maxItems": 1
+         }
+      }
+    },
+
+    "geometryBuffer": {
+      "type": "object",
+      "required": [ "op", "args" ],
+      "properties":
+      {
+         "name": {
+           "type": "string",
+           "enum": [ "s_buffer" ]
+         },
+         "args": {
+           "type": "array",
+           "prefixItems": [
+             { "$ref": "#/$defs/spatialInstance" },
+             { "$ref": "#/$defs/numericExpression" }
+           ],
+           "minItems": 2,
+           "maxItems": 2
+         }
+      }
+    },
+
+    "conditionalExpression": {
+      "type": "object",
+      "required": [ "op", "args" ],
       "properties": {
-        "name": {
-          "type": "string"
-        },
+        "op": { "type": "string", "enum": [ "?:" ] },
+        "args": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "prefixItems": [
+             { "$dynamicRef": "#boolExpression" },
+             { "$ref": "anyExpression" },
+             { "$ref": "anyExpression" }
+          ]
+        }
+      }
+    },
+    "functionCall": {
+      "type": "object",
+      "required": [ "op", "args" ],
+      "properties": {
+        "op": { "type": "string" },
         "args": {
           "type": "array",
           "items": {
@@ -1710,7 +2034,10 @@
     "spatialInstance": {
       "oneOf": [
         { "$ref": "#/$defs/geometryLiteral" },
-        { "$ref": "#/$defs/bboxLiteral" }
+        { "$ref": "#/$defs/bboxLiteral" },
+        { "$ref": "#/$defs/geometryManipulationBinary" },
+        { "$ref": "#/$defs/geometryManipulationUnary" },
+        { "$ref": "#/$defs/geometryBuffer" }
       ]
     },
     "geometryLiteral": {
@@ -1981,7 +2308,8 @@
           { "type": "string", "enum": [ ".." ] },
           { "$ref": "#/$defs/propertyRef" },
           { "$ref": "#/$defs/systemIdentifier" },
-          { "$ref": "#/$defs/functionRef" }
+          { "$ref": "#/$defs/functionCall" },
+          { "$ref": "#/$defs/conditionalExpression" }
         ]
       }
     }
