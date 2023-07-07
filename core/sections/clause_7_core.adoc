@@ -655,6 +655,58 @@ This capability is particularly useful when using nested StylingRules, where a n
 
 // TODO: Insert pretty picture here
 
+[[ccsss-default-values]]
+==== Default class member values
+
+The following default values are defined by this encoding.
+
+.Symbolizer
+[width="90%",options="header"]
+|===
+| Name           | Default value
+| visibility     | true
+| opacity        | 1
+| zOrder         | 1
+| fill           | default Fill
+| stroke         | default Stroke
+| marker         | default Marker
+| alphaChannel   | 1
+| colorChannels  | For multi-field coverage: fields[0], fields[1], fields[2]
+| singleChannel  | For single-field coverage: fields[0]
+|===
+
+.Stroke class default values
+[width="90%",options="header"]
+|===
+| Name           | Default value
+| opacity        | 1
+| width          | 1 px
+| color          | black
+|===
+
+.Fill class default values
+[width="90%",options="header"]
+|===
+| Name           | Default value
+| opacity        | 1
+| color          | white
+|===
+
+.Marker class default values
+[width="90%",options="header"]
+|===
+| Name           | Default value
+| elements       | Single default Dot
+|===
+
+.Dot class default values
+[width="90%",options="header"]
+|===
+| Name           | Default value
+| size           | 10 px
+| color          | white
+|===
+
 === Requirements
 
 include::../requirements/rc-core.adoc[]

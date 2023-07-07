@@ -12,6 +12,50 @@ inherit:: http://www.opengis.net/spec/symbology-1/2.0/req/core
 subject:: Style encodings and Renderers
 ====
 
+[[req-vector-gamma]]
+===== Symbolizer `gamma` property
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/vector/gamma
+part:: An Encoding SHOULD support defining a `gamma` Symbolizer property as a float.
+part:: A Renderer SHOULD support ...
+====
+
+[[req-vector-gradient]]
+===== Symbolizer `gradient` property
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/vector/gradient
+part:: An Encoding SHALL support defining a `gradient` Symbolizer property as an object including a `type` and a `stops` array of color stops.
+part:: A Renderer SHALL support filling vector geometry based on a `gradient` property specifying a `type` and a `stops` array of color stops.
+====
+
+[[req-vector-gradient-type]]
+===== Gradient `type` property
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/vector/gradient/type
+part:: An Encoding SHALL support defining a `type` property of a `gradient` Symbolizer as a string with a value of `linear` or `radial`.
+part:: A Renderer SHALL support filling vector geometry based on a `gradient` property specifying a `type` of `linear` or `radial`.
+====
+
+[[req-vector-gradient-stops]]
+===== Gradient `stops` property
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/vector/gradient/stops
+part:: An Encoding SHALL support defining a `stops` property of a `gradient` Symbolizer as an array of color stops.
+part:: A Renderer SHALL support filling vector geometry based on a `gradient` property specifying a `stops` array of color stops.
+====
+
 [[req-vector-fill]]
 ===== Symbolizer `fill` property
 

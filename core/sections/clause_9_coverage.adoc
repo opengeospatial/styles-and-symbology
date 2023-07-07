@@ -99,6 +99,82 @@ and applies wherever this basic RGB Color class is used.
 | b	   | Blue         | float                 | 1
 |===
 
+==== Gamma
+
+[#img-uml-class-gamma]
+.Gamma class UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+class Gamma <<extended>>
+Gamma : gamma: float
+....
+
+.Gamma class
+[width="90%",options="header"]
+|===
+| Name       | Definition              | Type   | Multiplicity
+| gamma      | Gamma value             | float  | 1
+|===
+
+The Gamma class is used to define the gamma correction value to be applied to the color channels.
+
+==== Gradient
+
+[#img-uml-class-gradient]
+.Gradient class UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+@startuml
+class Gradient {
+  + type: GradientType
+  + angle: float
+  + position
+  + colorStops: List<ColorStop>
+  + size: Size
+}
+
+enum GradientType {
+  linear
+  radial
+  repeating
+  conic
+}
+
+class Size {
+  + length: float
+  + lengthPercentage: float
+  + position: Position
+}
+
+enum Position {
+  left
+  center
+  right
+  top
+  middle
+  bottom
+}
+
+Gradient "1" o-- "1" GradientType
+Gradient "1" o-- "1" Size
+
+Gradient "1" o-- "1" Position
+@enduml
+....
+
+A gradient is a graphical effect that produces a gradual transition between two or more colors. 3 main types of gradients are supported: linear, radial and conic. All of the parameters are inherited from their corresponding classes.
+
+.Gradient class
+[width="90%",options="header"]
+|===
+| Name       | Definition              | Type            | Multiplicity
+GradientType | Type of gradient        | enum            | 1
+angle        | Angle of gradient       | float           | 1
+position     | Position of gradient    | Position        | 1
+colorStops   | Color stops of gradient | List<ColorStop> | 1
+size         | Size of gradient        | Size            | 1
+|===
+
 ==== Requirements
 
 include::../requirements/rc-coverage.adoc[]

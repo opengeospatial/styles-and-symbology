@@ -76,7 +76,7 @@ In addition, the following new System Identifiers are defined by this requiremen
 ==== Colors
 
 [#img-uml-class-color]
-.Color class UML Diagram
+.RGB Color class UML Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
 Color : r: float
@@ -84,17 +84,111 @@ Color : g: float
 Color : b: float
 ....
 
-Both the Fill and Stroke allow to define a Color, specified using red, green and blue components.
-The ability to define Colors in other spaces (e.g., Lab, CMYK) is defined in separate requirements classes
-and applies wherever this basic RGB Color class is used.
-
-.Color class
+.RGB Color class
 [width="90%",options="header"]
 |===
 | Name   | Definition       | Type   | Multiplicity
 | r       | Red component   | float  | 1
 | g       | Green component | float  | 1
 | b       | Blue component  | float  | 1
+|===
+
+[#img-uml-class-hsl]
+.HSL Color class UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+HSL : h: float
+HSL : s: float
+HSL : l: float
+....
+
+.HSL Color class
+[width="90%",options="header"]
+|===
+| Name   | Definition       | Type   | Multiplicity
+| h       | Hue component   | float  | 1
+| s       | Saturation component | float  | 1
+| l       | Lightness component  | float  | 1
+|===
+
+Both the Fill and Stroke allow to define a Color, specified using red, green and blue components.
+The ability to define Colors in other spaces (e.g., Lab, CMYK) is defined in separate requirements classes
+and applies wherever this basic RGB or HSL Color class is used.
+
+==== Gamma
+
+[#img-uml-class-gamma]
+.Gamma class UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+class Gamma <<extended>>
+Gamma : gamma: float
+....
+
+.Gamma class
+[width="90%",options="header"]
+|===
+| Name       | Definition              | Type   | Multiplicity
+| gamma      | Gamma value             | float  | 1
+|===
+
+The Gamma class is used to define the gamma correction value to be applied to the color of a Fill or Stroke.
+
+==== Gradient
+
+[#img-uml-class-gradient]
+.Gradient class UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+@startuml
+class Gradient {
+  + type: GradientType
+  + angle: float
+  + position
+  + colorStops: List<ColorStop>
+  + size: Size
+}
+
+enum GradientType {
+  linear
+  radial
+  repeating
+  conic
+}
+
+class Size {
+  + length: float
+  + lengthPercentage: float
+  + position: Position
+}
+
+enum Position {
+  left
+  center
+  right
+  top
+  middle
+  bottom
+}
+
+Gradient "1" o-- "1" GradientType
+Gradient "1" o-- "1" Size
+
+Gradient "1" o-- "1" Position
+@enduml
+....
+
+A gradient is a graphical effect that produces a gradual transition between two or more colors. 3 main types of gradients are supported: linear, radial and conic. All of the parameters are inherited from their corresponding classes.
+
+.Gradient class
+[width="90%",options="header"]
+|===
+| Name       | Definition              | Type            | Multiplicity
+GradientType | Type of gradient        | enum            | 1
+angle        | Angle of gradient       | float           | 1
+position     | Position of gradient    | Position        | 1
+colorStops   | Color stops of gradient | List<ColorStop> | 1
+size         | Size of gradient        | Size            | 1
 |===
 
 ==== Fills

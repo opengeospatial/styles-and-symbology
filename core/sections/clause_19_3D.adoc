@@ -13,6 +13,7 @@ Transform3D : scaling: FloatVector3D
 Transform3D --* Quaternion
 Transform3D --* Vector3D
 Transform3D --* FloatVector3D
+Transform3D --* Extrusion
 
 Quaternion : x: double
 Quaternion : y: double
@@ -26,6 +27,11 @@ Vector3D : z: double
 FloatVector3D : x: float
 FloatVector3D : y: float
 FloatVector3D : z: float
+
+Extrusion : x: float
+Extrusion : y: float
+Extrusion : z: float
+Extrusion : height: float
 
 Model --|> Graphic
 Model : model: Resource
@@ -59,6 +65,16 @@ NOTE: The 2D position, orientation and scaling properties defined in the _MultiG
 | orientation   | orientation          | Quaternion           | 1
 | position      | position             | Vector3D             | 1
 | scaling       | scaling              | FloatVector3D        | 1
+|===
+
+.Extrusion class
+[width="90%",options="header"]
+|===
+| Name       | Definition         | Data type and value | Multiplicity
+| x          | x coordinate       | float               | 1
+| y          | y coordinate       | float               | 1
+| z          | z coordinate       | float               | 1
+| height     | height             | float               | 1
 |===
 
 .Vector3D class
