@@ -62,3 +62,49 @@ identifier:: /req/coverage/opacity-map
 part:: An Encoding SHALL support defining a `opacityMap` Symbolizer property as an array of `value` (float) and `opacity` (float) pairs which can be tagged with a `name`.
 part:: A Renderer SHALL support ...
 ====
+
+[[req-coverage-gamma]]
+===== Symbolizer `gamma` property
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/coverage/gamma
+part:: An Encoding SHOULD support defining a `gamma` Symbolizer property as a float.
+part:: A Renderer SHOULD support ...
+====
+
+[[req-coverage-contrast]]
+
+[[req-coverage-gradient]]
+===== Symbolizer `gradient` property
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/vector/gradient
+part:: An Encoding SHALL support defining a `gradient` Symbolizer property as an object including a `type` and a `stops` array of color stops.
+part:: A Renderer SHALL support filling vector geometry based on a `gradient` property specifying a `type` and a `stops` array of color stops.
+====
+
+[[req-coverage-gradient-type]]
+===== Gradient `type` property
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/vector/gradient/type
+part:: An Encoding SHALL support defining a `type` property of a `gradient` Symbolizer as a string with a value of `linear` or `radial`.
+part:: A Renderer SHALL support filling vector geometry based on a `gradient` property specifying a `type` of `linear` or `radial`.
+====
+
+[[req-coverage-gradient-stops]]
+===== Gradient `stops` property
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/vector/gradient/stops
+part:: An Encoding SHALL support defining a `stops` property of a `gradient` Symbolizer as an array of color stops.
+part:: A Renderer SHALL support filling vector geometry based on a `gradient` property specifying a `stops` array of color stops.
+====

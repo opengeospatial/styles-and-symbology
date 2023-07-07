@@ -234,3 +234,14 @@ identifier:: /req/core/instances
 part:: An Encoding SHALL support ...
 part:: A Renderer SHALL support ...
 ====
+
+[[req-core-default-values]]
+==== Default class member values
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/core/default-values
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
