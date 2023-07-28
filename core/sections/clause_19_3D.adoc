@@ -1,4 +1,4 @@
-== Requirements Class "3D Models and Transforms"
+== Requirements Class "3D Graphics, Models and Transforms"
 === Overview
 
 [plantuml, target=diagram-classes, format=png]
@@ -13,7 +13,6 @@ Transform3D : scaling: FloatVector3D
 Transform3D --* Quaternion
 Transform3D --* Vector3D
 Transform3D --* FloatVector3D
-Transform3D --* Extrusion
 
 Quaternion : x: double
 Quaternion : y: double
@@ -27,11 +26,6 @@ Vector3D : z: double
 FloatVector3D : x: float
 FloatVector3D : y: float
 FloatVector3D : z: float
-
-Extrusion : x: float
-Extrusion : y: float
-Extrusion : z: float
-Extrusion : height: float
 
 Model --|> Graphic
 Model : model: Resource
@@ -67,16 +61,6 @@ NOTE: The 2D position, orientation and scaling properties defined in the _MultiG
 | scaling       | scaling              | FloatVector3D        | 1
 |===
 
-.Extrusion class
-[width="90%",options="header"]
-|===
-| Name       | Definition         | Data type and value | Multiplicity
-| x          | x coordinate       | float               | 1
-| y          | y coordinate       | float               | 1
-| z          | z coordinate       | float               | 1
-| height     | height             | float               | 1
-|===
-
 .Vector3D class
 [width="90%",options="header"]
 |===
@@ -103,6 +87,25 @@ NOTE: The 2D position, orientation and scaling properties defined in the _MultiG
 | y          | y coordinate       | double              | 1
 | z          | z coordinate       | double              | 1
 | w          | w coordinate       | double              | 1
+|===
+
+==== Symbolizer extension for "3D Extrusion"
+
+[plantuml, target=diagram-classes, format=png]
+....
+class Extrusion <<extended>>
+Extrusion : terrain-relative: boolean
+Extrusion : height: float
+Extrusion : base: float
+....
+
+.Extrusion class
+[width="90%",options="header"]
+|===
+| Name       | Definition         | Data type and value | Multiplicity
+| terrain-relative | terrain-relative | boolean         | 1
+| height     | height             | float               | 1
+| base       | base               | float               | 1
 |===
 
 === Requirements

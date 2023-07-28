@@ -581,6 +581,7 @@ GeometryManipulationFunctions : s_buffer(Geometry a, double d) Geometry
 GeometryManipulationFunctions : s_concaveHull(Geometry a) Geometry
 GeometryManipulationFunctions : s_convexHull(Geometry a) Geometry
 GeometryManipulationFunctions : s_envelope(Geometry a) BoundingBox
+GeometryManipulationFunctions : s_geometryN(Geometry a, int n) Geometry
 GeometryManipulationFunctions : s_centroid(Geometry a) Point
 GeometryManipulationFunctions : s_OffsetCurve(Geometry a, double d) Geometry
 GeometryManipulationFunctions : s_VoronoiLines(Geometry a) Geometry
@@ -601,6 +602,7 @@ GeometryManipulationFunctions --> Geometry
 | s_convexHull    | (Geometry a)             | Geometry     |
 | s_buffer        | (Geometry a, double d)   | Geometry     |
 | s_envelope      | (Geometry a)             | BoundingBox  |
+| s_geometryN     | (Geometry a, int n)      | Geometry     |
 | s_centroid      | (Geometry a)             | Point        |
 | s_OffsetCurve   | (Geometry a, double d)   | Geometry     |
 | s_VoronoiLines  | (Geometry a)             | Geometry     |
@@ -608,6 +610,32 @@ GeometryManipulationFunctions --> Geometry
 | s_DelaunayTriangles | (Geometry a)          | Geometry     |
 |===
 
+
 ==== Requirements
 
 include::../requirements/rc-geometry-manipulation.adoc[]
+
+
+=== Requirements Classe "Recoding Function"
+
+==== Overview
+
+[#img-uml-class-recoding-functions]
+.Recoding Functions UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+class RecodingFunctions <<interface>>
+RecodingFunctions --|> Function : standard functions
+RecodingFunctions : recode(string s, map < string, string > m) string
+....
+
+.Recoding functions
+[width="90%",options="header"]
+|===
+| Name            | Parameters               | Return type  | Definition
+| recode          | (string s, map < string, string > m) | string |
+|===
+
+==== Requirements
+
+include::../requirements/rc-recoding.adoc[]
