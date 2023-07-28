@@ -99,24 +99,62 @@ and applies wherever this basic RGB Color class is used.
 | b	   | Blue         | float                 | 1
 |===
 
-==== Gamma
+==== ContrastEnhancement
 
-[#img-uml-class-gamma]
-.Gamma class UML Diagram
+[#img-uml-class-contrastEnhancement]
+.ContrastEnhancement class UML Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
+class ContrastEnhancement <<extended>>
+ContrastEnhancement : gamma: Gamma
+ContrastEnhancement : histogram: Histogram
+ContrastEnhancement : normalize: boolean
+
 class Gamma <<extended>>
 Gamma : gamma: float
+
+class Histogram <<extended>>
+Histogram : histogram: List<float>
+
+class Normalize <<extended>>
+Normalize : normalize: boolean
+
+ContrastEnhancement "1" o-- "1" Gamma
+ContrastEnhancement "1" o-- "1" Histogram
+ContrastEnhancement "1" o-- "1" Normalize
 ....
 
-.Gamma class
+.ContrastEnhancement properties
 [width="90%",options="header"]
 |===
-| Name       | Definition              | Type   | Multiplicity
-| gamma      | Gamma value             | float  | 1
+| Name              | Definition	                                  | Data type and value   | Multiplicity
+| gamma             | Gamma value to apply to the coverage            | float                 | 0..1
+| histogram         | Histogram to apply to the coverage              | Histogram             | 0..1
+| normalize         | Normalize the coverage values                   | boolean               | 0..1
 |===
 
-The Gamma class is used to define the gamma correction value to be applied to the color channels.
+.Gamma properties
+[width="90%",options="header"]
+|===
+| Name              | Definition	                                  | Data type and value   | Multiplicity
+| gamma             | Gamma value to apply to the coverage            | float                 | 1
+|===
+
+.Histogram properties
+[width="90%",options="header"]
+|===
+| Name              | Definition	                                  | Data type and value   | Multiplicity
+| histogram         | Histogram to apply to the coverage              | List<float>           | 1
+|===
+
+.Normalize properties
+[width="90%",options="header"]
+|===
+| Name              | Definition	                                  | Data type and value   | Multiplicity
+| normalize         | Normalize the coverage values                   | boolean               | 1
+|===
+
+This requirements class adds the capability to apply a contrast enhancement to the coverage being portrayed.
 
 ==== Gradient
 
@@ -237,5 +275,35 @@ The `sun` property is specified using this AzimuthElevation class:
 |===
 
 ==== Requirements
+==== OverlapBehavior
+  
+[#img-uml-class-overlapBehavior]
+.OverlapBehavior class UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+class OverlapBehavior <<extended>>
+OverlapBehavior : LatestOnTop: boolean
+OverlapBehavior : earliestOnTop: boolean
+OverlapBehavior : average: boolean
+OverlapBehavior : random: boolean
+....
+
+This requirements class adds the capability to specify how to portray coverages that overlap in the same location.
+
+==== Coverage to Feature transformation
+
+[#img-uml-class-coverageToFeatureTransformation]
+.CoverageToFeatureTransformation class UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+class CoverageToFeatureTransformation <<extended>>
+CoverageToFeatureTransformation : PointCollection: PointCollection
+CoverageToFeatureTransformation : Contour: Contour
+....
+
+// add an example with windbarbs (see https://docs.geoserver.org/main/en/user/styling/css/styledmarks.html)
+// another example (contour) could be hypsometric tints (see https://www.sarahbellmaps.com/drawing-color-hillshade-a-tutorial-with-time-lapse-videos)
+
+This requirements class adds the capability to transform a coverage into a feature collection.
 
 include::../requirements/rc-hillshading.adoc[]
