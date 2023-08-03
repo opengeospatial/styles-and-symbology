@@ -158,11 +158,10 @@ This requirements class adds the capability to apply a contrast enhancement to t
 
 ==== Gradient
 
-[#img-uml-class-gradient]
+[#img-uml-class-coverage-gradient]
 .Gradient class UML Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
-@startuml
 class Gradient {
   + type: GradientType
   + angle: float
@@ -197,7 +196,6 @@ Gradient "1" o-- "1" GradientType
 Gradient "1" o-- "1" Size
 
 Gradient "1" o-- "1" Position
-@enduml
 ....
 
 A gradient is a graphical effect that produces a gradual transition between two or more colors. 3 main types of gradients are supported: linear, radial and conic. All of the parameters are inherited from their corresponding classes.
