@@ -49,6 +49,7 @@ class SystemIdentifierExpression <<extended>>
 SystemIdentifierExpression : feature
 SystemIdentifierExpression : feature.identifier
 SystemIdentifierExpression : feature.geometryDimensions
+SystemIdentifierExpression : feature.pass
 SystemIdentifierExpression : dataLayer.features
 SystemIdentifierExpression : dataLayer.featuresGeometryDimensions
 SystemIdentifierExpression --> Feature
@@ -70,117 +71,19 @@ In addition, the following new System Identifiers are defined by this requiremen
 | Name                                  | Definition                                               | Data type and value
 | feature.identifier                    | Identifier of a particular feature                       | string or number
 | feature.geometryDimensions            | Dimension of geometry for a particular feature           | 0 (points), 1 (lines), 2 (polygons), 3 (polyhedrons)
+| feature.pass                          | Current rendering pass for the same feature              | int
 | dataLayer.featuresGeometryDimension   | Dimension of feature geometry (if same for all features) | 0 (points), 1 (lines), 2 (polygons), 3 (polyhedrons), `null` (mixed)
 |===
 
-==== viz.pass
+====== Feature Rendering Passes
 
-[#img-uml-class-viz-pass]
-.viz.pass class UML Diagram
-[plantuml, target=diagram-classes, format=png]
-....
-class viz.pass <<extended>>
-viz.pass : viz.pass: int
-....
+This requirements class adds support for rendering vector geometry or coverage cells with
+multiple times with different symbolizer properties, as well as for re-ordering the rendering order
+so that either a single feature or an entire data layer is rendered after previous rendering passes have been completed.
 
-.viz.pass class
-[width="90%",options="header"]
-|===
-| Name   | Definition       | Type   | Multiplicity
-| viz.pass | viz.pass value   | int    | 1
-|===
-
-// an example encoding of viz.pass and portayal might be added here
-
-==== sortByGroup
-
-[#img-uml-class-sortByGroup]
-.sortByGroup class UML Diagram
-[plantuml, target=diagram-classes, format=png]
-....
-class sortByGroup <<extended>>
-sortByGroup : sortByGroup: string
-....
-
-.CCSSS Example showcasing the combination of vizPass and sortByGroup
-====
-[source,ccsss]
-----
-{
-   #railways and bridge = 1 
-   {
-    stroke: #333333;
-    stroke-width: 8;
-    z-index: 0;
-   }
-  #minorroads
-   {
-    stroke: #a69269;
-    stroke-width: 3;
-    z-index: 0;
-   }
-  #mainroads
-   {
-    stroke: #ff0000;
-    stroke-width: 5;
-    z-index: 0;
-   }
-  #motorways
-   {
-    stroke: #990000;
-    stroke-width: 8;
-    z-index: 0;
-   }
-  #railways and bridge = 1
-  {
-    stroke: #ffffff;
-    stroke-width: 6;
-    z-index: 1;
-  }
-  #railways
-  {
-    stroke: #333333;
-    stroke-width: 3;
-    z-index: 2;
-  }
-  #railways
-  {
-    stroke: #ffffff;
-    stroke-width: 1.5;
-    stroke-dasharray: 5, 5;
-    z-index: 3;
-  }
-  #motorways
-  {
-    stroke: #ff6666;
-    stroke-width: 6;
-    stroke-linecap: round;
-    z-index: 3;
-  }
-  #minorroads
-  {
-    stroke: #ffffff;
-    stroke-width: 2,5;
-    stroke-linecap: round;
-    z-index: 3;
-  }
-  #mainroads
-  {
-    stroke: #ff9999;
-    stroke-width: 4;
-    stroke-linecap: round;
-    z-index: 3;
-  }
-  * { sort-by: "viz.pass"; 
-      sort-by-group: "roadsGroup";
-    }
-}
-----
-
-.Example rendering of viz.pass and sortByGroup
-image::figures/roads-group.png[]
-
-// Add another use case or mention GeoServer in the credits: https://docs.geoserver.org/2.23.x/en/user/styling/sld/extensions/z-order/example.html
+See also the _visualization pass_ defined in
+<<rc-core, Core>> requirements class, which allows to render all data layers entire map
+with different symbolizers.
 
 ==== Colors
 

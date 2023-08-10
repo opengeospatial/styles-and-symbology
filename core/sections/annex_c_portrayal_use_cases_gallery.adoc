@@ -81,3 +81,75 @@ Citation: Olefeldt, D., Goswami, S., Grosse, G., Hayes, D., Hugelius, G., Kuhry,
 
 .Example rendering of the thermokarst landscapes
 image::figures/gallery-thermokarst1.png[]
+
+=== Visualization passes
+
+.Example rendering of complex visual ordering (placeholder from https://docs.geoserver.org/2.23.x/en/user/styling/sld/extensions/z-order/example.html[GeoServer documentation])
+image::figures/roads-group.png[]
+
+
+// TODO: Set up our own example
+
+.CCSSS Example showcasing use of viz.pass for both casing and ordering based on `z_order` attribute
+====
+[source,ccsss]
+----
+{
+   [viz.pass = 4 * z_order + 0]
+   {
+      [class = 'railways'][bridge = 1] { stroke: { color: #333333; width: 8; }; }
+      [class = 'minorroads']           { stroke: { color: #a69269; width: 3; }; }
+      [class = 'mainroads']            { stroke: { color: #ff0000; width: 5; }; }
+      [class = 'motorways']            { stroke: { color: #990000; width: 8; }; }
+   }
+
+   [viz.pass = 4 * z_order + 1]
+   {
+      [class = 'railways'][bridge = 1] { stroke: { color: #ffffff; width: 6; }; }
+   }
+
+   [viz.pass = 4 * z_order + 2]
+   {
+      [class = 'railways'] { stroke: { color: #333333; width: 3; }; }
+   }
+
+   [viz.pass = 4 * z_order + 3]
+   {
+      [class = 'railways]    { stroke: { color: #ffffff; width: 1.5; dashPattern: 5, 5; }; }
+      [class = 'motorways']  { stroke: { color: #ff6666; width: 6;   cap: round; }; }
+      [class = 'minorroads'] { stroke: { color: #ffffff; width: 2.5; cap: round; }; }
+      [class = 'mainroads']  { stroke: { color: #ff9999; width: 4;   cap: round; }; }
+   }
+}
+----
+====
+
+=== Z-ordering and feature rendering passes
+
+.CCSSS Example using built-in casing
+====
+[source,ccsss]
+----
+{
+   zOrder: z_order;
+   [feature.pass = -1][class = 'railways'][bridge = 1]
+   {
+      stroke: { color: #ffffff; width: 6; casing: { color: #333333; width: 1; }; };
+   }
+   [class = 'minorroads']  { stroke: { color: #ffffff; width: 2.5; cap: round;        casing: { color: #a69269; width: 0.25; }; }; }
+   [class = 'mainroads']   { stroke: { color: #ff9999; width: 4;   cap: round;        casing: { color: #ff0000; width: 0.5;  }; }; }
+   [class = 'motorways']   { stroke: { color: #ff6666; width: 6;   cap: round;        casing: { color: #990000; width: 1;    }; }; }
+   [class = 'railways']    { stroke: { color: #ffffff; width: 1.5; dashPattern: 5, 5; casing: { color: #333333; width: 0.75; }; }; }
+}
+----
+====
+
+////
+   Styles & Symbology Painter's algorithm
+
+      For each viz.pass:
+         For each distinct zOrder:
+            For each built-in Casing pass:
+               For each feature pass:
+                  Render feature symbolizer
+////

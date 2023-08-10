@@ -252,6 +252,7 @@ SystemIdentifierExpression : visualization.scaleDenominator
 SystemIdentifierExpression : visualization.dateTime
 SystemIdentifierExpression : visualization.date
 SystemIdentifierExpression : visualization.timeOfDay
+SystemIdentifierExpression : visualization.pass
 SystemIdentifierExpression : dataLayer
 SystemIdentifierExpression : dataLayer.identifier
 SystemIdentifierExpression : dataLayer.type
@@ -263,6 +264,7 @@ Visualization : dateTime: TimeInstant
 Visualization : date: Date
 Visualization : timeOfDay: TimeOfDay
 Visualization : timeInterval: TimeInterval
+Visualization : pass: int
 Visualization --* TimeInstant
 Visualization --* TimeInterval
 Visualization --o Date
@@ -332,6 +334,42 @@ TOCHECK: How to handle parent objects ? e.g.,  visualization, dataLayer, feature
 | visualization.date               | Current visualization date              | Date
 | visualization.timeOfDay          | Current visualization time of day       | Time
 | visualization.timeInterval       | Current visualization time of day       | TimeInterval
+| visualization.pass               | Current visualization rendering pass    | int
+|===
+
+======= Visualization Rendering Passes
+
+Setting up symbolization rules for a selector on a visualization pass allows to render all data of
+the map using different set of symbolizers.
+A later pass will only begin after all data layers and their features / coverage cells have been rendered
+with the symbolizers set for earlier visualization passes.
+
+See also the _feature pass_ introduced in
+<<rc-vector, Vector>> requirements class, which allows to render the same feature multiple times
+with different symbolizers before rendering the next feature.
+
+////
+   Styles & Symbology Painter's algorithm
+
+      For each viz.pass:
+         For each distinct zOrder:
+            (if applicable, for each built-in Casing pass:)
+               For each data layer: (part of that zOrder -- layers may automatically be organized on separate zOrder by default)
+                  For each feature / cell: (of equal z order)
+                     For each feature.pass:
+                        Render feature symbolizer
+////
+
+.Styles & Symbology Visual Ordering Constructs
+[width="90%",options="header"]
+|===
+| Construct          | Construct type                   | Data type |Behavior description
+| zOrder             | Symbolizer property              | float     | In a single pass, modify default order of features / layers
+| visualization.pass | System identifier for selector   | integer   | Render all selected geometry features / coverage cells of data layers
+                                                                      more than once with different symbolization,
+                                                                      or after whole map drawn in previous pass
+| feature.pass    | System identifier for selector   | integer      | Render feature geometry / coverage cell more than once potentially with
+                                                                      different symbolization before rendering next data point.
 |===
 
 .CCSSS Example showcasing scale-dependent selector using system identifiers

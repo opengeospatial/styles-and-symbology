@@ -8,6 +8,15 @@ conformance to this Standard for Rendering engines based on SLD/SE and writing c
 that can convert in either or both direction between SLD/SE and the two encodings defined in this
 Standard.
 
+.Mapping of visual ordering constructs
+[width="90%",options="header"]
+|===
+| Construct         | Construct type                     | GeoCSS Equivalent                     | SLD Equivalent
+| zOrder            | Symbolizer property                | sort-by                               | v-option: SortBy
+| viz.pass          | System identifier for selector     | z-index, sort-by (with sort-by-group) |  FeatureTypeStyle, v-option: SortBy + SortByGroup
+| feature.pass      | System identifier for selector     | Symbolizer order                      | Symbolizer order
+|===
+
 .SLD Example encoding style using "Core" requirements class
 ====
 [source,sld]
