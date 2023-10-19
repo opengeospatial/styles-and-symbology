@@ -117,8 +117,8 @@ include::../requirements/rc-casing-centerline.adoc[]
 ....
 class Stroke <<extended>>
 Stroke : pattern: Graphic [0..1]
-Stroke : gap: float [0..1]
-Stroke : initialGap: float [0..1]
+Stroke : patternGap: float [0..1]
+Stroke : patternInitialGap: float [0..1]
 Stroke --* Graphic
 ....
 
@@ -127,10 +127,10 @@ This requirements class adds support for Strokes with a pattern defined by a Gra
 .Extended Stroke class
 [width="90%",options="header"]
 |===
-| Name      | Definition         | Type         | Multiplicity
-| pattern   | Pattern graphic    | Graphic      | 0..1
-| gap       | Gap                | float        | 0..1
-| initialGap| Initial gap        | float        | 0..1
+| Name               | Definition                                 | Type         | Multiplicity
+| pattern            | Pattern graphic                            | Graphic      | 0..1
+| patternGap         | Gap between instances of pattern graphic   | float        | 0..1
+| patternInitialGap  | Initial gap before first pattern graphic   | float        | 0..1
 |===
 
 ==== Requirements
