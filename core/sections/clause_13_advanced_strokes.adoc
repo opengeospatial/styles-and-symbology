@@ -64,13 +64,8 @@ include::../requirements/rc-joins-caps.adoc[]
 [plantuml, target=diagram-classes, format=png]
 ....
 class Stroke <<extended>>
-Stroke : dashArray: array [0..1]
-Stroke : dashOffset: numeric [0..1]
-Stroke --* dashArray
-Stroke --* dashOffset
-
-class dashArray: array
-class dashOffset: numeric
+Stroke : dashPattern: integer [*]
+Stroke : dashOffset: float [0..1]
 ....
 
 This requirements class adds support for dashed Strokes.
@@ -79,8 +74,8 @@ This requirements class adds support for dashed Strokes.
 [width="90%",options="header"]
 |===
 | Name          | Definition         | Type         | Multiplicity
-| dashArray     | Dash array         | array        | 0..1
-| dashOffset    | Dash offset        | float or percent  | 0..1
+| dashPattern   | Dash pattern       | int          | 0..*
+| dashOffset    | Dash offset        | UnitValue    | 0..1
 |===
 
 ==== Requirements
@@ -122,11 +117,9 @@ include::../requirements/rc-casing-centerline.adoc[]
 ....
 class Stroke <<extended>>
 Stroke : pattern: Graphic [0..1]
-Stroke : Gap: float [0..1]
-Stroke : InitialGap: float [0..1]
+Stroke : gap: float [0..1]
+Stroke : initialGap: float [0..1]
 Stroke --* Graphic
-Stroke --* Gap
-Stroke --* InitialGap
 ....
 
 This requirements class adds support for Strokes with a pattern defined by a Graphic.
