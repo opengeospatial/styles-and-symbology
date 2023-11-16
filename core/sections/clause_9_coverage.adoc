@@ -273,22 +273,12 @@ The `sun` property is specified using this AzimuthElevation class:
 |===
 
 ==== Requirements
-==== OverlapBehavior
-  
-[#img-uml-class-overlapBehavior]
-.OverlapBehavior class UML Diagram
-[plantuml, target=diagram-classes, format=png]
-....
-class OverlapBehavior <<extended>>
-OverlapBehavior : LatestOnTop: boolean
-OverlapBehavior : earliestOnTop: boolean
-OverlapBehavior : average: boolean
-OverlapBehavior : random: boolean
-....
 
-This requirements class adds the capability to specify how to portray coverages that overlap in the same location.
+include::../requirements/rc-hillshading.adoc[]
 
-==== Coverage to Feature transformation
+=== Requirements Class "Coverage to Feature transformation"
+
+==== Overview
 
 [#img-uml-class-coverageToFeatureTransformation]
 .CoverageToFeatureTransformation class UML Diagram
@@ -304,4 +294,6 @@ CoverageToFeatureTransformation : Contour: Contour
 
 This requirements class adds the capability to transform a coverage into a feature collection.
 
-include::../requirements/rc-hillshading.adoc[]
+==== Requirements
+
+//TODO: include::../requirements/rc-coverage-to-feature.adoc[]

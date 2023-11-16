@@ -639,3 +639,64 @@ RecodingFunctions : recode(string s, map < string, string > m) string
 ==== Requirements
 
 include::../requirements/rc-recoding.adoc[]
+
+[[rc-aggregation]]
+=== Requirements Class "Aggregation"
+
+==== Overview
+
+Aggregate(expression to aggregate, aggregation method, array of dimensions to aggregate upon).
+
+The following aggregation methods are supported: min, max, average, sum, first, last, median, stdDev. 
+
+Basic example use of aggregate function to compute the minimum NDVI over time dimension:
+
+`Aggregate((B08-B04)/(B08+B04), 'min', ['time'])`
+
+Example use in CartoSym-CSS of to compute a minimum EVI over time dimension:
+
+```
+.title 'EVI Sentinel-2 Style'
+.abstract 'Applying a color map to an aggregated minimal Enhanced Vegetation Index (EVI)_ of sentinel-2 data'
+{
+   singleChannel: Aggregate(2.5 * (B08/10000 - B04/10000) / (1 + B08/10000 + 6 * B04/10000 + -7.5 * B02/10000), 'min', ['time']);
+   colorMap:
+   [
+      { -2.0, black }, { -1.1, #BFBFBF }, { -0.2, #DBDBDB },
+      { -0.1, #FFFFE0 }, {  0.0, #FFFACC }, { 0.025, #EDE8B5 },
+      { 0.05, #DED99C }, { 0.075, #CCC782 }, { 0.1, #BFB86B },
+      { 0.125, #B0C261 }, { 0.15, #A3CC59 }, { 0.175, #91BF52 },
+      { 0.2, #80B347 }, { 0.25, #70A340 }, { 0.3, #619636 },
+      { 0.35, #4F8A2E }, { 0.4, #407D24 }, { 0.45, #306E1C },
+      { 0.5, #216112 }, { 0.55, #F540A }, { 0.6, #004500 }
+   ];
+}
+```
+
+Example use in CartoSym-CSS of to use average of RGB bands over time dimension:
+
+```
+.title 'Average Sentinel-2 imagery over time'
+.abstract ''
+{
+   colorChannels.r: Aggregate(B04, 'average', ['time']);
+   colorChannels.g: Aggregate(B03, 'average', ['time']);
+   colorChannels.b: Aggregate(B02, 'average', ['time']);
+}
+```
+
+Example use in CartoSym-CSS of to use latest RGB bands over time dimension:
+
+```
+.title 'Use the latest Sentinel-2 imagery'
+.abstract ''
+{
+   colorChannels.r: Aggregate(B04, 'last', ['time']);
+   colorChannels.g: Aggregate(B03, 'last', ['time']);
+   colorChannels.b: Aggregate(B02, 'last', ['time']);
+}
+```
+
+==== Requirements
+
+//TODO: include::../requirements/rc-aggregation.adoc[]
