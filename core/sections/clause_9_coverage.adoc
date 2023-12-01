@@ -99,118 +99,6 @@ and applies wherever this basic RGB Color class is used.
 | b	   | Blue         | float                 | 1
 |===
 
-==== ContrastEnhancement
-
-[#img-uml-class-contrastEnhancement]
-.ContrastEnhancement class UML Diagram
-[plantuml, target=diagram-classes, format=png]
-....
-class ContrastEnhancement <<extended>>
-ContrastEnhancement : gamma: Gamma
-ContrastEnhancement : histogram: Histogram
-ContrastEnhancement : normalize: boolean
-
-class Gamma <<extended>>
-Gamma : gamma: float
-
-class Histogram <<extended>>
-Histogram : histogram: List<float>
-
-class Normalize <<extended>>
-Normalize : normalize: boolean
-
-ContrastEnhancement "1" o-- "1" Gamma
-ContrastEnhancement "1" o-- "1" Histogram
-ContrastEnhancement "1" o-- "1" Normalize
-....
-
-.ContrastEnhancement properties
-[width="90%",options="header"]
-|===
-| Name              | Definition	                                  | Data type and value   | Multiplicity
-| gamma             | Gamma value to apply to the coverage            | float                 | 0..1
-| histogram         | Histogram to apply to the coverage              | Histogram             | 0..1
-| normalize         | Normalize the coverage values                   | boolean               | 0..1
-|===
-
-.Gamma properties
-[width="90%",options="header"]
-|===
-| Name              | Definition	                                  | Data type and value   | Multiplicity
-| gamma             | Gamma value to apply to the coverage            | float                 | 1
-|===
-
-.Histogram properties
-[width="90%",options="header"]
-|===
-| Name              | Definition	                                  | Data type and value   | Multiplicity
-| histogram         | Histogram to apply to the coverage              | List<float>           | 1
-|===
-
-.Normalize properties
-[width="90%",options="header"]
-|===
-| Name              | Definition	                                  | Data type and value   | Multiplicity
-| normalize         | Normalize the coverage values                   | boolean               | 1
-|===
-
-This requirements class adds the capability to apply a contrast enhancement to the coverage being portrayed.
-
-==== Gradient
-
-[#img-uml-class-coverage-gradient]
-.Gradient class UML Diagram
-[plantuml, target=diagram-classes, format=png]
-....
-class Gradient {
-  + type: GradientType
-  + angle: float
-  + position
-  + colorStops: List<ColorStop>
-  + size: Size
-}
-
-enum GradientType {
-  linear
-  radial
-  repeating
-  conic
-}
-
-class Size {
-  + length: float
-  + lengthPercentage: float
-  + position: Position
-}
-
-enum Position {
-  left
-  center
-  right
-  top
-  middle
-  bottom
-}
-
-Gradient "1" o-- "1" GradientType
-Gradient "1" o-- "1" Size
-
-Gradient "1" o-- "1" Position
-....
-
-A gradient is a graphical effect that produces a gradual transition between two or more colors. 3 main types of gradients are supported: linear, radial and conic. All of the parameters are inherited from their corresponding classes.
-
-.Gradient class
-[width="90%",options="header"]
-|===
-| Name       | Definition              | Type            | Multiplicity
-GradientType | Type of gradient        | enum            | 1
-angle        | Angle of gradient       | float           | 1
-position     | Position of gradient    | Position        | 1
-colorStops   | Color stops of gradient | List<ColorStop> | 1
-size         | Size of gradient        | Size            | 1
-|===
-
 ==== Requirements
 
 include::../requirements/rc-coverage.adoc[]
@@ -297,3 +185,83 @@ This requirements class adds the capability to transform a coverage into a featu
 ==== Requirements
 
 //TODO: include::../requirements/rc-coverage-to-feature.adoc[]
+
+=== Requirements Class "Contrast Enhancement"
+
+==== Overview
+
+[#img-uml-class-contrastEnhancement]
+.Symbolizer class UML Diagram (extended for contrast enhancement)
+[plantuml, target=diagram-classes, format=png]
+....
+class Symbolizer <<extended>>
+
+contrastEnhancement: ContrastEnhancement
+
+class ContrastEnhancement <<enumeration>>
+ContrastEnhancement : none
+ContrastEnhancement : normalize
+ContrastEnhancement : histogram
+....
+
+.Contrast enhancement Symbolizer properties
+[width="90%",options="header"]
+|===
+| Name               | Definition	                                  | Data type and value   | Multiplicity
+| contrastEnhancement| Contrast enhancement to apply to the coverage  | ContrastEnhancement   | 0..1
+|===
+
+.ContrastEnhancement enumeration
+[width="90%",options="header"]
+|===
+| Name              | Definition	                                  
+| none              | No contrast enhancement                         
+| normalize         | Stretches the contrast so that the dimmest color is stretched to black
+and the brightest color is stretched to white, with all colors in between stretched out
+linearly
+| histogram         | Stretches the contrast based on a histogram of how many
+colors are at each brightness level on input, with the goal of producing equal number of
+pixels in the image at each brightness level on output
+|===
+
+==== Requirements
+
+//TODO: include::../requirements/rc-contrast-enhancement.adoc[]
+
+=== Requirements Class "Hue, Saturation, Lightness Modifier" 
+
+==== Overview
+
+[#img-uml-class-hslModifier]
+.Symbolizer class UML Diagram (extended HSL modifier)
+[plantuml, target=diagram-classes, format=png]
+....
+class Symbolizer <<extended>>
+
+hslModifier: HSLModifier
+
+class HSLModifier
+HSLModifier : hue: double
+HSLModifier : saturation: double
+HSLModifier : lightness: double
+....
+
+.HSL modifier Symbolizer properties
+[width="90%",options="header"]
+|===
+| Name               | Definition	                                                 | Data type and value   | Multiplicity
+| hslModifier        | Hue, Saturation, Lightness modifier to apply to the coverage  | HSLModifier           | 0..1
+|===
+
+.HSLModifier properties
+[width="90%",options="header"]
+|===
+| Name               | Definition	                                  | Data type and value   | Multiplicity
+| hue                | Hue modifier to apply to the coverage. Values range from -360 to 360 (degrees).          | double                | 0..1
+| saturation         | Saturation modifier to apply to the coverage (multiplication factor)   | double                | 0..1
+| lightness          | Lightness modifier to apply to the coverage (multiplication factor)    | double                | 0..1
+|===
+
+==== Requirements
+
+//TODO: include::../requirements/rc-hsl-modifiers.adoc[]
