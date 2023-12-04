@@ -228,40 +228,40 @@ pixels in the image at each brightness level on output
 
 //TODO: include::../requirements/rc-contrast-enhancement.adoc[]
 
-=== Requirements Class "Hue, Saturation, Lightness Modifier" 
+=== Requirements Class "Hue, Saturation, Value Modifier"
 
 ==== Overview
 
-[#img-uml-class-hslModifier]
-.Symbolizer class UML Diagram (extended HSL modifier)
+[#img-uml-class-hsvModifier]
+.Symbolizer class UML Diagram (extended HSV modifier)
 [plantuml, target=diagram-classes, format=png]
 ....
 class Symbolizer <<extended>>
 
-hslModifier: HSLModifier
+hsvModifier: HSVModifier
 
-class HSLModifier
+class HSVModifier
 HSLModifier : hue: double
 HSLModifier : saturation: double
-HSLModifier : lightness: double
+HSLModifier : value: double
 ....
 
-.HSL modifier Symbolizer properties
+.HSV modifier Symbolizer properties
 [width="90%",options="header"]
 |===
 | Name               | Definition	                                                 | Data type and value   | Multiplicity
-| hslModifier        | Hue, Saturation, Lightness modifier to apply to the coverage  | HSLModifier           | 0..1
+| hsvModifier        | Hue, Saturation, Value modifier to apply to the coverage      | HSVModifier           | 0..1
 |===
 
-.HSLModifier properties
+.HSVModifier properties
 [width="90%",options="header"]
 |===
 | Name               | Definition	                                  | Data type and value   | Multiplicity
 | hue                | Hue modifier to apply to the coverage. Values range from -360 to 360 (degrees).          | double                | 0..1
 | saturation         | Saturation modifier to apply to the coverage (multiplication factor)   | double                | 0..1
-| lightness          | Lightness modifier to apply to the coverage (multiplication factor)    | double                | 0..1
+| value          | Value modifier to apply to the coverage (multiplication factor)    | double                | 0..1
 |===
 
 ==== Requirements
 
-//TODO: include::../requirements/rc-hsl-modifiers.adoc[]
+//TODO: include::../requirements/rc-hsv-modifiers.adoc[]
