@@ -172,6 +172,8 @@ This requirements class adds the capability to render a coverage as individual p
 
 This requirements class adds the capability to transform a coverage into a feature collection.
 
+// add an example with windbarbs (see https://docs.geoserver.org/main/en/user/styling/css/styledmarks.html)
+
 [#img-uml-class-coverageAsPoints]
 .Symbolizer class UML Diagram (extended for rendering coverages as markers)
 [plantuml, target=diagram-classes, format=png]
@@ -182,7 +184,12 @@ Symbolizer : marker: Marker [0..1]
 Symbolizer --* Marker
 ....
 
-// add an example with windbarbs (see https://docs.geoserver.org/main/en/user/styling/css/styledmarks.html)
+.Coverages as points Symbolizer properties
+[width="90%",options="header"]
+|===
+| Name      | Definition	                                   | Data type and value   | Multiplicity
+| marker    | Marker to render at every point of the coverage | Marker                | 0..1
+|===
 
 ==== Requirements
 
@@ -193,6 +200,8 @@ Symbolizer --* Marker
 ==== Overview
 
 This requirements class adds the capability to render a coverage as contours, as if it were a MultiLineString or MultiPolygon vector feature, using a fill and/or stroke.
+
+// add an example (contour) as hypsometric tints (see https://www.sarahbellmaps.com/drawing-color-hillshade-a-tutorial-with-time-lapse-videos)
 
 [#img-uml-class-coverageAsContours]
 .Symbolizer class UML Diagram (extended for transforming coverages to contours)
@@ -213,7 +222,22 @@ Symbolizer --* Fill
 Symbolizer --* Stroke
 ....
 
-// add an example (contour) as hypsometric tints (see https://www.sarahbellmaps.com/drawing-color-hillshade-a-tutorial-with-time-lapse-videos)
+.ContourSettings properties
+[width="90%",options="header"]
+|===
+| Name             | Definition	                                       | Data type and value   | Multiplicity
+| contourMinValue  | Minimum value for which to start drawing contours  | double                | 1
+| contourMaxValue  | Maximum value for which to end drawing contours    | double                | 0..1
+| contourGap       | Gap in values for drawing contours                 | double                | 1
+| contourValue     | Value for which to draw contours                   | double                | 1
+|===
+
+.Coverages as contours Symbolizer properties
+[width="90%",options="header"]
+|===
+| Name             | Definition	                                  | Data type and value   | Multiplicity
+| coverageContours | Settings for styling coverage as contours     | ContourSettings       | 0..1
+|===
 
 ==== Requirements
 
