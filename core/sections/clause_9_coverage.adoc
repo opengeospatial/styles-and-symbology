@@ -164,27 +164,60 @@ The `sun` property is specified using this AzimuthElevation class:
 
 include::../requirements/rc-hillshading.adoc[]
 
-=== Requirements Class "Coverage to Feature transformation"
+=== Requirements Class "Coverage as points"
 
 ==== Overview
 
-[#img-uml-class-coverageToFeatureTransformation]
-.CoverageToFeatureTransformation class UML Diagram
-[plantuml, target=diagram-classes, format=png]
-....
-class CoverageToFeatureTransformation <<extended>>
-CoverageToFeatureTransformation : PointCollection: PointCollection
-CoverageToFeatureTransformation : Contour: Contour
-....
-
-// add an example with windbarbs (see https://docs.geoserver.org/main/en/user/styling/css/styledmarks.html)
-// another example (contour) could be hypsometric tints (see https://www.sarahbellmaps.com/drawing-color-hillshade-a-tutorial-with-time-lapse-videos)
+This requirements class adds the capability to render a coverage as individual points, as if it were a MultiPoint vector feature, using a marker.
 
 This requirements class adds the capability to transform a coverage into a feature collection.
 
+[#img-uml-class-coverageAsPoints]
+.Symbolizer class UML Diagram (extended for rendering coverages as markers)
+[plantuml, target=diagram-classes, format=png]
+....
+
+class Symbolizer <<extended>>
+Symbolizer : marker: Marker [0..1]
+Symbolizer --* Marker
+....
+
+// add an example with windbarbs (see https://docs.geoserver.org/main/en/user/styling/css/styledmarks.html)
+
 ==== Requirements
 
-//TODO: include::../requirements/rc-coverage-to-feature.adoc[]
+//TODO: include::../requirements/rc-coverage-as-points.adoc[]
+
+=== Requirements Class "Coverage as contours"
+
+==== Overview
+
+This requirements class adds the capability to render a coverage as contours, as if it were a MultiLineString or MultiPolygon vector feature, using a fill and/or stroke.
+
+[#img-uml-class-coverageAsContours]
+.Symbolizer class UML Diagram (extended for transforming coverages to contours)
+[plantuml, target=diagram-classes, format=png]
+....
+
+class ContourSettings
+ContourSettings : contourMinValue: double
+ContourSettings : contourMaxValue: double
+ContourSettings : contourGap: double
+ContourSettings : contourValue: double -- IdentifierExpression
+
+class Symbolizer <<extended>>
+Symbolizer : coverageContours: ContourSettings
+Symbolizer : fill: Fill [0..1]
+Symbolizer : stroke: Stroke [0..1]
+Symbolizer --* Fill
+Symbolizer --* Stroke
+....
+
+// add an example (contour) as hypsometric tints (see https://www.sarahbellmaps.com/drawing-color-hillshade-a-tutorial-with-time-lapse-videos)
+
+==== Requirements
+
+//TODO: include::../requirements/rc-coverage-as-contours.adoc[]
 
 === Requirements Class "Contrast Enhancement"
 
@@ -194,14 +227,13 @@ This requirements class adds the capability to transform a coverage into a featu
 .Symbolizer class UML Diagram (extended for contrast enhancement)
 [plantuml, target=diagram-classes, format=png]
 ....
-class Symbolizer <<extended>>
-
-contrastEnhancement: ContrastEnhancement
-
 class ContrastEnhancement <<enumeration>>
 ContrastEnhancement : none
 ContrastEnhancement : normalize
 ContrastEnhancement : histogram
+
+class Symbolizer <<extended>>
+Symbolizer : contrastEnhancement: ContrastEnhancement
 ....
 
 .Contrast enhancement Symbolizer properties
@@ -214,8 +246,8 @@ ContrastEnhancement : histogram
 .ContrastEnhancement enumeration
 [width="90%",options="header"]
 |===
-| Name              | Definition	                                  
-| none              | No contrast enhancement                         
+| Name              | Definition
+| none              | No contrast enhancement
 | normalize         | Stretches the contrast so that the dimmest color is stretched to black
 and the brightest color is stretched to white, with all colors in between stretched out
 linearly
@@ -237,13 +269,12 @@ pixels in the image at each brightness level on output
 [plantuml, target=diagram-classes, format=png]
 ....
 class Symbolizer <<extended>>
-
-hsvModifier: HSVModifier
+Symbolizer : hsvModifier: HSVModifier
 
 class HSVModifier
-HSLModifier : hue: double
-HSLModifier : saturation: double
-HSLModifier : value: double
+HSVModifier : hue: double
+HSVModifier : saturation: double
+HSVModifier : value: double
 ....
 
 .HSV modifier Symbolizer properties
