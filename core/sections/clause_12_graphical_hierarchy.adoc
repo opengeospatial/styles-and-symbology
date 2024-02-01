@@ -66,15 +66,15 @@ ImageOutline : outlineStyle: OutlineStyle
 .ImageOutline OutlineStyle properties
 [width="90%",options="header"]
 |===
-| Name    | Definition           | Type     | Multiplicity
-dotted    | Dotted outline       | boolean  | 1
-dashed    | Dashed outline       | boolean  | 1
-solid     | Solid outline        | boolean  | 1
-double    | Double outline       | boolean  | 1
-groove    | Groove outline       | boolean  | 1
-ridge     | Ridge outline        | boolean  | 1
-inset     | Inset outline        | boolean  | 1
-outset    | Outset outline       | boolean  | 1
+| Name      | Definition           | Type     | Multiplicity
+| dotted    | Dotted outline       | boolean  | 1
+| dashed    | Dashed outline       | boolean  | 1
+| solid     | Solid outline        | boolean  | 1
+| double    | Double outline       | boolean  | 1
+| groove    | Groove outline       | boolean  | 1
+| ridge     | Ridge outline        | boolean  | 1
+| inset     | Inset outline        | boolean  | 1
+| outset    | Outset outline       | boolean  | 1
 |===
 
 === Requirements

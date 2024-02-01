@@ -578,15 +578,13 @@ GeometryManipulationFunctions : s_union(Geometry a, Geometry b) Geometry
 GeometryManipulationFunctions : s_difference(Geometry a, Geometry b) Geometry
 GeometryManipulationFunctions : s_symDifference(Geometry a, Geometry b) Geometry
 GeometryManipulationFunctions : s_buffer(Geometry a, double d) Geometry
-GeometryManipulationFunctions : s_concaveHull(Geometry a) Geometry
 GeometryManipulationFunctions : s_convexHull(Geometry a) Geometry
 GeometryManipulationFunctions : s_envelope(Geometry a) BoundingBox
-GeometryManipulationFunctions : s_geometryN(Geometry a, int n) Geometry
 GeometryManipulationFunctions : s_centroid(Geometry a) Point
-GeometryManipulationFunctions : s_OffsetCurve(Geometry a, double d) Geometry
-GeometryManipulationFunctions : s_VoronoiLines(Geometry a) Geometry
-GeometryManipulationFunctions : s_VoronoiPolygons(Geometry a) Geometry
-GeometryManipulationFunctions : s_DelaunayTriangles(Geometry a) Geometry
+GeometryManipulationFunctions : s_offsetCurve(Geometry a, double d) Geometry
+GeometryManipulationFunctions : s_voronoiLines(Geometry a) Geometry
+GeometryManipulationFunctions : s_voronoiPolygons(Geometry a) Geometry
+GeometryManipulationFunctions : s_delaunayTriangles(Geometry a) Geometry
 GeometryManipulationFunctions --> Geometry
 ....
 
@@ -598,16 +596,14 @@ GeometryManipulationFunctions --> Geometry
 | s_union         | (Geometry a, Geometry b) | Geometry     |
 | s_difference    | (Geometry a, Geometry b) | Geometry     |
 | s_symDifference | (Geometry a, Geometry b) | Geometry     |
-| s_concaveHull   | (Geometry a)             | Geometry     |
 | s_convexHull    | (Geometry a)             | Geometry     |
 | s_buffer        | (Geometry a, double d)   | Geometry     |
 | s_envelope      | (Geometry a)             | BoundingBox  |
-| s_geometryN     | (Geometry a, int n)      | Geometry     |
 | s_centroid      | (Geometry a)             | Point        |
-| s_OffsetCurve   | (Geometry a, double d)   | Geometry     |
-| s_VoronoiLines  | (Geometry a)             | Geometry     |
-| s_VoronoiPolygons | (Geometry a)           | Geometry     |
-| s_DelaunayTriangles | (Geometry a)          | Geometry     |
+| s_offsetCurve   | (Geometry a, double d)   | Geometry     |
+| s_voronoiLines  | (Geometry a)             | Geometry     |
+| s_voronoiPolygons | (Geometry a)           | Geometry     |
+| s_delaunayTriangles | (Geometry a)          | Geometry     |
 |===
 
 

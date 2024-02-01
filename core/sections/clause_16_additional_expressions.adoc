@@ -60,6 +60,8 @@ elements that can be associated with application control such as a slider or dro
 | name        | Name of the variable                           | string        | 1
 |===
 
+// __NOTE:__ Consider adding a member and array element access expression
+
 ==== Requirements
 
 include::../requirements/rc-variables.adoc[]

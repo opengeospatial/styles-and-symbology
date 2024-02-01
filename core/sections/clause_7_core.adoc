@@ -337,7 +337,7 @@ TOCHECK: How to handle parent objects ? e.g.,  visualization, dataLayer, feature
 | visualization.pass               | Current visualization rendering pass    | int
 |===
 
-======= Visualization Rendering Passes
+**Visualization Rendering Passes**
 
 Setting up symbolization rules for a selector on a visualization pass allows to render all data of
 the map using different set of symbolizers.
