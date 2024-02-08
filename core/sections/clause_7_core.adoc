@@ -337,6 +337,22 @@ TOCHECK: How to handle parent objects ? e.g.,  visualization, dataLayer, feature
 | visualization.pass               | Current visualization rendering pass    | int
 |===
 
+.CCSSS Example showcasing scale-dependent selector using system identifiers
+====
+[source,ccsss]
+----
+#Roads
+{
+   visibility: false;
+
+   [viz.sd < 200000] // Roads will only be visible at scale 1:200,000 and closer
+   {
+      visibility: true;
+   }
+}
+----
+====
+
 **Visualization Rendering Passes**
 
 Setting up symbolization rules for a selector on a visualization pass allows to render all data of
@@ -371,22 +387,6 @@ with different symbolizers before rendering the next feature.
 | feature.pass    | System identifier for selector   | integer      | Render feature geometry / coverage cell more than once potentially with
                                                                       different symbolization before rendering next data point.
 |===
-
-.CCSSS Example showcasing scale-dependent selector using system identifiers
-====
-[source,ccsss]
-----
-#Roads
-{
-   visibility: false;
-
-   [viz.sd < 200000] // Roads will only be visible at scale 1:200,000 and closer
-   {
-      visibility: true;
-   }
-}
-----
-====
 
 .Month enumeration
 [width="90%",options="header"]
