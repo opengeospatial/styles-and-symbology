@@ -53,28 +53,30 @@ The GraphicInstance class allows instantiating multiple instances of a single Gr
 | element | Instantiated graphic | Graphic  | 1
 |===
 
-==== ImageOutlines
+==== Image Outlines
 
 [#img-uml-class-imageoutline]
 .ImageOutline UML Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
-ImageOutline : image: Image
-ImageOutline : outlineStyle: OutlineStyle
+Image --* ImageOutline
+Image : outline: ImageOutline
+
+ImageOutline : size: float
+ImageOutline : opacity: float
+ImageOutline : color: Color
+ImageOutline --* Color
 ....
 
-.ImageOutline OutlineStyle properties
+This requirements class adds support for Image outlines to improve readability on any background.
+
+.ImageOutline class
 [width="90%",options="header"]
 |===
-| Name      | Definition           | Type     | Multiplicity
-| dotted    | Dotted outline       | boolean  | 1
-| dashed    | Dashed outline       | boolean  | 1
-| solid     | Solid outline        | boolean  | 1
-| double    | Double outline       | boolean  | 1
-| groove    | Groove outline       | boolean  | 1
-| ridge     | Ridge outline        | boolean  | 1
-| inset     | Inset outline        | boolean  | 1
-| outset    | Outset outline       | boolean  | 1
+| Name      | Definition               | Data type and value   | Multiplicity
+| size      | Size of the outline      | float                 | 0..1
+| opacity   | Opacity of the outline   | float                 | 0..1
+| color     | Color of the outline     | Color                 | 0..1
 |===
 
 === Requirements
