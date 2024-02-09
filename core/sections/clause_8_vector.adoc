@@ -152,12 +152,12 @@ A gradient is a graphical effect that produces a gradual transition between two 
 .Gradient class
 [width="90%",options="header"]
 |===
-| Name       | Definition              | Type            | Multiplicity
-GradientType | Type of gradient        | enum            | 1
-angle        | Angle of gradient       | float           | 1
-position     | Position of gradient    | Position        | 1
-colorStops   | Color stops of gradient | List<ColorStop> | 1
-size         | Size of gradient        | Size            | 1
+| Name         | Definition              | Type            | Multiplicity
+| GradientType | Type of gradient        | enum            | 1
+| angle        | Angle of gradient       | float           | 1
+| position     | Position of gradient    | Position        | 1
+| colorStops   | Color stops of gradient | List<ColorStop> | 1
+| size         | Size of gradient        | Size            | 1
 |===
 
 ==== Fills
@@ -440,7 +440,6 @@ VAlignment : top
 VAlignment : middle
 VAlignment : bottom
 ....
-
 
 A Text is one type of Graphic defined by this requirements class that can be used as part of a Marker.
 
