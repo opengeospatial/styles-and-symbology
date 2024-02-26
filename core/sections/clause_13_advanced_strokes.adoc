@@ -10,8 +10,8 @@
 class Stroke <<extended>>
 Stroke : join: StrokeJoin [0..1]
 Stroke : cap: StrokeCap [0..1]
-Stroke --* StrokeJoin
-Stroke --* StrokeCap
+Stroke *-- StrokeJoin
+Stroke *-- StrokeCap
 
 enum StrokeJoin
 StrokeJoin : miter
@@ -119,7 +119,7 @@ class Stroke <<extended>>
 Stroke : pattern: Graphic [0..1]
 Stroke : patternGap: float [0..1]
 Stroke : patternInitialGap: float [0..1]
-Stroke --* Graphic
+Stroke *-- Graphic
 ....
 
 This requirements class adds support for Strokes with a pattern defined by a Graphic.

@@ -18,15 +18,15 @@ Symbolizer : alphaChannel: double -- IdentifierExpression
 Symbolizer : singleChannel: double -- IdentifierExpression
 Symbolizer : colorMap: ValueColor[*]
 Symbolizer : opacityMap: ValueOpacity[*]
-Symbolizer --* ValueOpacity
-Symbolizer --* ValueColor
-Symbolizer --* Color
+Symbolizer *-- ValueOpacity
+Symbolizer *-- ValueColor
+Symbolizer *-- Color
 Symbolizer --> IdentifierExpression
 
 ValueColor : value: double
 ValueColor : color: Color
 ValueColor : label: text
-ValueColor --* Color
+ValueColor *-- Color
 
 ValueOpacity : value: double
 ValueOpacity : opacity: float
@@ -113,19 +113,19 @@ include::../requirements/rc-coverage.adoc[]
 ....
 AzimuthElevation : azimuth: Angle
 AzimuthElevation : elevation: Angle
-AzimuthElevation --* Angle
+AzimuthElevation *-- Angle
 
 HillShading : factor: double
 HillShading : sun: AzimuthElevation
 HillShading : colorMap: ValueColor[*]
 HillShading : opacityMap: ValueOpacity[*]
-HillShading --* AzimuthElevation
-HillShading --* ValueColor
-HillShading --* ValueOpacity
+HillShading *-- AzimuthElevation
+HillShading *-- ValueColor
+HillShading *-- ValueOpacity
 
 class Symbolizer <<extended>>
 Symbolizer : hillShading: HillShading
-Symbolizer --* HillShading
+Symbolizer *-- HillShading
 ....
 
 This requirements classand adds the capability to portray elevation coverages with a hill shading style.
@@ -181,7 +181,7 @@ This requirements class adds the capability to transform a coverage into a featu
 
 class Symbolizer <<extended>>
 Symbolizer : marker: Marker [0..1]
-Symbolizer --* Marker
+Symbolizer *-- Marker
 ....
 
 .Coverages as points Symbolizer properties
@@ -218,8 +218,8 @@ class Symbolizer <<extended>>
 Symbolizer : coverageContours: ContourSettings
 Symbolizer : fill: Fill [0..1]
 Symbolizer : stroke: Stroke [0..1]
-Symbolizer --* Fill
-Symbolizer --* Stroke
+Symbolizer *-- Fill
+Symbolizer *-- Stroke
 ....
 
 .ContourSettings properties

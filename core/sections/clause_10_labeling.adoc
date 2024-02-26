@@ -9,11 +9,11 @@
 ....
 class Symbolizer <<extended>>
 Symbolizer : label: Label [0..1]
-Symbolizer --* Label
+Symbolizer *-- Label
 
 Label --|> MultiGraphic
 Label : placement: LabelPlacement
-Label --* LabelPlacement
+Label *-- LabelPlacement
 
 LabelPlacement : priority: float
 LabelPlacement : minSpacing: float
@@ -61,13 +61,13 @@ include::../requirements/rc-labeling.adoc[]
 .Font outlines UML Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
-Font --* FontOutline
+Font *-- FontOutline
 Font : outline: FontOutline
 
 FontOutline : size: float
 FontOutline : opacity: float
 FontOutline : color: Color
-FontOutline --* Color
+FontOutline *-- Color
 ....
 
 This requirements class adds support for Text font outlines to improve readability on any background.
@@ -102,13 +102,13 @@ include::../requirements/rc-font-outlines.adoc[]
 .ImageOutline UML Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
-Image --* ImageOutline
+Image *-- ImageOutline
 Image : outline: ImageOutline
 
 ImageOutline : size: float
 ImageOutline : opacity: float
 ImageOutline : color: Color
-ImageOutline --* Color
+ImageOutline *-- Color
 ....
 
 This requirements class adds support for Image outlines to improve readability on any background.

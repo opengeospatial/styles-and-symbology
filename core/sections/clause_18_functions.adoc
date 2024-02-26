@@ -17,8 +17,8 @@ abstract class Expression
 FunctionCallExpression --|> Expression
 FunctionCallExpression : function: Function
 FunctionCallExpression : arguments: Expression[0..*]
-FunctionCallExpression --* Function
-FunctionCallExpression --* Expression
+FunctionCallExpression *-- Function
+FunctionCallExpression *-- Expression
 
 Function : name: string
 Function : parameters: map < string, type >
@@ -176,10 +176,10 @@ SystemIdentifierExpression : feature.geometry
 SystemIdentifierExpression : dataLayer.featuresGeometry
 
 SystemIdentifierExpression --> Feature
-DataLayer --* Geometry
-DataLayer --* Feature
+DataLayer *-- Geometry
+DataLayer *-- Feature
 DataLayer --o Geometry
-Feature --* Geometry
+Feature *-- Geometry
 ....
 
 SpatialRelationFunctions are defined in the https://portal.ogc.org/files/?artifact_id=25355[OGC Simple Feature Access - Part 1: Common Architecture] specification and listed in the following table. They involve operations on geometries.
@@ -199,36 +199,36 @@ Point --|> Geometry
 
 MultiPoint --|> Geometry
 MultiPoint : points: Point[1..*]
-MultiPoint --* Point
+MultiPoint *-- Point
 
 LineString --|> Geometry
 LineString : points: Point[2..*]
-LineString --* Point
+LineString *-- Point
 
 MultiLineString --|> Geometry
 MultiLineString : lineStrings: LineString[1..*]
-MultiLineString --* LineString
+MultiLineString *-- LineString
 
 LinearRing : points: Point[3..*]
-LinearRing --* Point
+LinearRing *-- Point
 
 Polygon --|> Geometry
 Polygon : exteriorRing:  LinearRing
 Polygon : interiorRings: LinearRing[0..*]
-Polygon --* LinearRing
+Polygon *-- LinearRing
 
 MultiPolygon --|> Geometry
 MultiPolygon : polygons: Polygon[1..*]
-MultiPolygon --* Polygon
+MultiPolygon *-- Polygon
 
 GeometryCollection --|> Geometry
 GeometryCollection : geometries : Geometry[1..*]
-GeometryCollection --* Geometry
+GeometryCollection *-- Geometry
 
 BoundingBox --|> Geometry
 BoundingBox : lowerBound: Point
 BoundingBox : upperBound: Point
-BoundingBox --* Point
+BoundingBox *-- Point
 ....
 
 ====== Bounding boxes

@@ -7,13 +7,13 @@ This requirements class adds support for vector graphic hierarchies and transfor
 .MultiGraphic and Transforms UML Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
-Transform2D --* UnitPoint
+Transform2D *-- UnitPoint
 Transform2D : orientation: Angle
 Transform2D : scaling: UnitPoint -- no unit
 Transform2D : translation: UnitPoint
 
 Graphic : transform: Transform2D
-Graphic --* Transform2D
+Graphic *-- Transform2D
 
 GraphicInstance --|> Graphic
 GraphicInstance : element: Graphic

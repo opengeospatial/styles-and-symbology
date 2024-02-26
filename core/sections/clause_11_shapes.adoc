@@ -14,12 +14,12 @@ This requirements class adds support for vector shape graphics.
 abstract class ClosedShape
 ClosedShape --|> Shape
 ClosedShape : fill: Fill [0..1]
-ClosedShape --* Fill
+ClosedShape *-- Fill
 
 Rectangle --|> ClosedShape
 Rectangle : topLeft: UnitPoint
 Rectangle : bottomRight: UnitPoint
-Rectangle --* UnitPoint
+Rectangle *-- UnitPoint
 
 RoundedRectangle --|> Rectangle
 RoundedRectangle : rx: float -- uom-qualified
@@ -28,13 +28,13 @@ RoundedRectangle : ry: float -- uom-qualified
 Circle --|> ClosedShape
 Circle : center: UnitPoint
 Circle : radius: float -- uom-qualified
-Circle --* UnitPoint
+Circle *-- UnitPoint
 
 Ellipse --|> ClosedShape
 Ellipse : center: UnitPoint
 Ellipse : radiusX: float -- uom-qualified
 Ellipse : radiusY: float -- uom-qualified
-Ellipse --* UnitPoint
+Ellipse *-- UnitPoint
 ....
 
 .Class ClosedShape
@@ -96,7 +96,7 @@ Arc : center: UnitPoint
 Arc : radius: float -- uom-qualified
 Arc : startAngle: Angle
 Arc : deltaAngle: Angle
-Arc --* UnitPoint
+Arc *-- UnitPoint
 
 SectorArc --|> Arc
 SectorArc --|> ClosedShape
@@ -137,17 +137,17 @@ ChordArc --|> ClosedShape
 [plantuml, target=diagram-classes, format=png]
 ....
 PathNodes : points: UnitPoint[1..*]
-PathNodes --* UnitPoint
+PathNodes *-- UnitPoint
 
 Path --|> Shape
 Path : nodes: PathNodes
-Path --* PathNodes
+Path *-- PathNodes
 
 ClosedPath --|> Path
 ClosedPath --|> ClosedShape
 ClosedShape --|> Shape
 ClosedPath : innerNodes: PathNodes[0..*]
-ClosedPath --* PathNodes
+ClosedPath *-- PathNodes
 ....
 
 .Path class

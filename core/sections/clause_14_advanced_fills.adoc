@@ -9,7 +9,7 @@
 ....
 class Fill <<extended>>
 Fill : pattern: Graphic [0..1]
-Fill --* Graphic
+Fill *-- Graphic
 ....
 
 This requirements class adds support for defining how to fill a shape with a pattern.
@@ -36,14 +36,14 @@ class Fill <<extended>>
 Fill : gradient: ColorKey [*]
 Fill : stippleStyle: StippleStyle
 Fill : hatchStyle: HatchStyle
-Fill --* ColorKey
-Fill --* StippleStyle
-Fill --* HatchStyle
+Fill *-- ColorKey
+Fill *-- StippleStyle
+Fill *-- HatchStyle
 
 ColorKey : color: Color
 ColorKey : opacity: float
 ColorKey : percent: float
-ColorKey --* Color
+ColorKey *-- Color
 
 enum StippleStyle
 StippleStyle : light

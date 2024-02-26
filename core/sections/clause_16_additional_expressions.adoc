@@ -24,7 +24,7 @@ ConditionalExpression --|> Expression
 ConditionalExpression : condition: Expression
 ConditionalExpression : thenExp: Expression
 ConditionalExpression : elseExp: Expression
-ConditionalExpression --* Expression
+ConditionalExpression *-- Expression
 ....
 
 .ConditionalExpression class
