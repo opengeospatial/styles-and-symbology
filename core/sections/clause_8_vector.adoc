@@ -114,7 +114,7 @@ Color : b: float
 class Gradient {
   + type: GradientType
   + angle: float
-  + position
+  + position: Position
   + colorStops: List<ColorStop>
   + size: Size
 }
@@ -141,10 +141,10 @@ enum Position {
   bottom
 }
 
-Gradient "1" o-- "1" GradientType
-Gradient "1" o-- "1" Size
+Gradient *-- GradientType
+Gradient *-- Size
 
-Gradient "1" o-- "1" Position
+Gradient *-- Position
 ....
 
 A gradient is a graphical effect that produces a gradual transition between two or more colors. 3 main types of gradients are supported: linear, radial and conic. All of the parameters are inherited from their corresponding classes.

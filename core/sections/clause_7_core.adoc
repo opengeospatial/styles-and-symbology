@@ -20,7 +20,7 @@ StylingRule *-- Expression : selector
 Symbolizer : visibility: bool
 Symbolizer : opacity: float
 Symbolizer : zOrder: integer
-Symbolizer *-- StylingRule
+Symbolizer --* StylingRule
 Symbolizer --> Expression : parameter values
 
 /'Note: zOrder needs discussion on whether it should be relative or float
@@ -573,6 +573,7 @@ Without support for the _Any right-hand operand_ requirements class, the right-h
 .Core Logic and Relational Operators UML Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
+enum Operator
 enum LogicOperator
 LogicOperator --|> Operator
 LogicOperator : and

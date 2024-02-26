@@ -80,7 +80,7 @@ include::../requirements/rc-bitwise.adoc[]
 ==== Overview
 
 [#img-uml-class-text-relation]
-.Bitwise Operators UML Diagram
+.TextRelation Operators UML Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
 enum TextRelationOperator
