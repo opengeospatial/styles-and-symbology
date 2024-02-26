@@ -9,7 +9,7 @@ values from the range (e.g., individual imagery bands) to color channels or to a
 as providing an option to apply a color and/or opacity map based on the values.
 
 [#img-uml-class-coverageSymbolizer]
-.Extended Symbolizer Class UML Diagram
+.Basic Coverage Symbolizer Class UML Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
 class Symbolizer <<extended>>
@@ -108,12 +108,12 @@ include::../requirements/rc-coverage.adoc[]
 ==== Overview
 
 [#img-uml-class-hilldhading]
-.Extended Symbolizer Class UML Diagram
+.HillShading Symbolizer Class UML Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
 AzimuthElevation : azimuth: Angle
 AzimuthElevation : elevation: Angle
-AzimuthElevation *-- Angle
+AzimuthElevation --* Angle
 
 HillShading : factor: double
 HillShading : sun: AzimuthElevation
