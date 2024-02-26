@@ -217,7 +217,7 @@ A Stroke object inherits from a base _StrokeStyling_ class, which is re-used in 
 .Graphical Units Enumeration UML Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
-class GraphicalUnit <<enumeration>>
+enum GraphicalUnit
 GraphicalUnit : pixels
 GraphicalUnit : meters
 GraphicalUnit : feet
@@ -334,7 +334,7 @@ Dot --|> Shape
 Dot : point: UnitPoint
 Dot --* UnitPoint
 
-class Shape <<abstract>>
+abstract class Shape
 Shape --|> Graphic
 Shape : stroke: Stroke [0..1]
 Shape --* Stroke
@@ -430,12 +430,12 @@ TextAlignment : vertical: VAlignment
 TextAlignment --* HAlignment
 TextAlignment --* VAlignment
 
-class HAlignment <<enumeration>>
+enum HAlignment
 HAlignment : left
 HAlignment : center
 HAlignment : right
 
-class VAlignment <<enumeration>>
+enum VAlignment
 VAlignment : top
 VAlignment : middle
 VAlignment : bottom

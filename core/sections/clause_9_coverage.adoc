@@ -251,7 +251,7 @@ Symbolizer --* Stroke
 .Symbolizer class UML Diagram (extended for contrast enhancement)
 [plantuml, target=diagram-classes, format=png]
 ....
-class ContrastEnhancement <<enumeration>>
+enum ContrastEnhancement
 ContrastEnhancement : none
 ContrastEnhancement : normalize
 ContrastEnhancement : histogram

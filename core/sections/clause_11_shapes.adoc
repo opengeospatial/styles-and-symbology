@@ -11,7 +11,7 @@ This requirements class adds support for vector shape graphics.
 .Rectangles, Circles and Ellipses Classes UML Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
-class ClosedShape <<abstract>>
+abstract class ClosedShape
 ClosedShape --|> Shape
 ClosedShape : fill: Fill [0..1]
 ClosedShape --* Fill

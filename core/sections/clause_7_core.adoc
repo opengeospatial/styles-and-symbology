@@ -193,9 +193,9 @@ as to define the values of Symbolizer properties.
 .Expression Classes UML Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
-class Expression <<abstract>>
+abstract class Expression
 
-class LiteralExpression <<abstract>>
+abstract class LiteralExpression
 LiteralExpression --|> Expression
 
 IdentifierExpression --|> Expression
@@ -245,7 +245,7 @@ Typical example of identifier expressions include feature properties (e.g., `pop
 .System Identifiers UML Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
-class SystemIdentifierExpression <<enumeration>>
+enum SystemIdentifierExpression
 SystemIdentifierExpression --|> IdentifierExpression
 SystemIdentifierExpression : visualization
 SystemIdentifierExpression : visualization.scaleDenominator
@@ -275,7 +275,7 @@ DataLayer : identifier: string
 DataLayer : type: DataLayerType
 DataLayer --* DataLayerType
 
-class DataLayerType <<enumeration>>
+enum DataLayerType
 DataLayerType : map
 DataLayerType : vector
 DataLayerType : coverage
@@ -301,7 +301,7 @@ TimeOfDay : hour: int
 TimeOfDay : minutes: int
 TimeOfDay : seconds: double
 
-class Month <<enumeration>>
+enum Month
 Month : january
 Month : february
 Month : march
@@ -504,11 +504,11 @@ TODO: In other req classes:
 [[literal-expressions]]
 ===== Literal Expressions
 
-[#img-uml-class-literas]
+[#img-uml-class-literals]
 .Literal Classes UML Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
-class LiteralExpression <<abstract>>
+abstract LiteralExpression
 
 TextLiteral --|> LiteralExpression
 TextLiteral : text: string
@@ -518,7 +518,7 @@ EnumValueLiteral : enum: type
 EnumValueLiteral : value: string
 EnumValueLiteral : numericValue: int64
 
-class BoolLiteral <<enumeration>>
+enum BoolLiteral
 BoolLiteral --|> EnumValueLiteral
 BoolLiteral : false
 BoolLiteral : true
@@ -573,13 +573,13 @@ Without support for the _Any right-hand operand_ requirements class, the right-h
 .Core Logic and Relational Operators UML Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
-class LogicOperator <<enumeration>>
+enum LogicOperator
 LogicOperator --|> Operator
 LogicOperator : and
 LogicOperator : or
 LogicOperator : not -- unary
 
-class RelationalOperator <<enumeration>>
+enum RelationalOperator
 RelationalOperator --|> Operator
 RelationalOperator : equal
 RelationalOperator : notEqual

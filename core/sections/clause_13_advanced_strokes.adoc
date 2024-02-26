@@ -13,12 +13,12 @@ Stroke : cap: StrokeCap [0..1]
 Stroke --* StrokeJoin
 Stroke --* StrokeCap
 
-class StrokeJoin <<enumeration>>
+enum StrokeJoin
 StrokeJoin : miter
 StrokeJoin : round
 StrokeJoin : bevel
 
-class StrokeCap <<enumeration>>
+enum StrokeCap
 StrokeCap : butt
 StrokeCap : round
 StrokeCap : square

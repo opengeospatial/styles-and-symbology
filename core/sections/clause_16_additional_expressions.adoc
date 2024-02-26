@@ -19,7 +19,7 @@ include::../requirements/rc-righthand.adoc[]
 .Conditional Expressions UML Class Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
-class Expression <<abstract>>
+abstract class Expression
 ConditionalExpression --|> Expression
 ConditionalExpression : condition: Expression
 ConditionalExpression : thenExp: Expression
@@ -43,7 +43,7 @@ ConditionalExpression --* Expression
 .Variable Expressions UML Class Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
-class Expression <<abstract>>
+abstract class Expression
 VariableExpression --|> Expression
 VariableExpression : name: string
 ....
