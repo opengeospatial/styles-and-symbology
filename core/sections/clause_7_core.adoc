@@ -9,13 +9,13 @@ The requirements described in this section define the symbology core requirement
 [plantuml, target=diagram-classes, format=png]
 ....
 Style : stylingRules: StylingRule[0..*]
-Style --* StylingRule
+Style *-- StylingRule
 
 StylingRule : symbolizer: Symbolizer[0..1]
 StylingRule : selector: Expression[0..1]
 StylingRule : nestedRules: StylingRule[0..*]
-StylingRule --* StylingRule
-StylingRule --* Expression : selector
+StylingRule *-- StylingRule
+StylingRule *-- Expression : selector
 
 Symbolizer : visibility: bool
 Symbolizer : opacity: float
@@ -193,9 +193,9 @@ as to define the values of Symbolizer properties.
 .Expression Classes UML Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
-class Expression <<abstract>>
+abstract class Expression
 
-class LiteralExpression <<abstract>>
+abstract class LiteralExpression
 LiteralExpression --|> Expression
 
 IdentifierExpression --|> Expression
@@ -206,18 +206,18 @@ SystemIdentifierExpression --|> IdentifierExpression
 InstanceExpression --|> Expression
 InstanceExpression : objectClass: type
 InstanceExpression : members: map < string, Expression >
-InstanceExpression --* Expression
+InstanceExpression *-- Expression
 
 ArrayExpression --|> Expression
 ArrayExpression : elements: Expression[0..*]
-ArrayExpression --* Expression
+ArrayExpression *-- Expression
 
 OperationExpression --|> Expression
 OperationExpression : operand1: Expression[0..1]
 OperationExpression : operator: Operator
 OperationExpression : operand2: Expression
-OperationExpression --* Operator
-OperationExpression --* Expression
+OperationExpression *-- Operator
+OperationExpression *-- Expression
 
 'class SubExpression
 'SubExpression --|> Expression -- Parentheses could be purely an encoding concept based on the need to maintain priority...
@@ -245,7 +245,7 @@ Typical example of identifier expressions include feature properties (e.g., `pop
 .System Identifiers UML Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
-class SystemIdentifierExpression <<enumeration>>
+enum SystemIdentifierExpression
 SystemIdentifierExpression --|> IdentifierExpression
 SystemIdentifierExpression : visualization
 SystemIdentifierExpression : visualization.scaleDenominator
@@ -265,17 +265,17 @@ Visualization : date: Date
 Visualization : timeOfDay: TimeOfDay
 Visualization : timeInterval: TimeInterval
 Visualization : pass: int
-Visualization --* TimeInstant
-Visualization --* TimeInterval
+Visualization *-- TimeInstant
+Visualization *-- TimeInterval
 Visualization --o Date
 Visualization --o TimeOfDay
 
 class DataLayer
 DataLayer : identifier: string
 DataLayer : type: DataLayerType
-DataLayer --* DataLayerType
+DataLayer *-- DataLayerType
 
-class DataLayerType <<enumeration>>
+enum DataLayerType
 DataLayerType : map
 DataLayerType : vector
 DataLayerType : coverage
@@ -283,25 +283,25 @@ DataLayerType : coverage
 class TimeInstant
 TimeInstant : date: Date
 TimeInstant : time: TimeOfDay
-TimeInstant --* Date
-TimeInstant --* TimeOfDay
+TimeInstant *-- Date
+TimeInstant *-- TimeOfDay
 
 TimeInterval : start: TimeInstant
 TimeInterval : end: TimeInstant
-TimeInterval --* TimeInstant
+TimeInterval *-- TimeInstant
 
 class Date
 Date : year: int
 Date : month: Month
 Date : day: int
-Date --* Month
+Date *-- Month
 
 class TimeOfDay
 TimeOfDay : hour: int
 TimeOfDay : minutes: int
 TimeOfDay : seconds: double
 
-class Month <<enumeration>>
+enum Month
 Month : january
 Month : february
 Month : march
@@ -504,11 +504,11 @@ TODO: In other req classes:
 [[literal-expressions]]
 ===== Literal Expressions
 
-[#img-uml-class-literas]
+[#img-uml-class-literals]
 .Literal Classes UML Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
-class LiteralExpression <<abstract>>
+abstract LiteralExpression
 
 TextLiteral --|> LiteralExpression
 TextLiteral : text: string
@@ -518,7 +518,7 @@ EnumValueLiteral : enum: type
 EnumValueLiteral : value: string
 EnumValueLiteral : numericValue: int64
 
-class BoolLiteral <<enumeration>>
+enum BoolLiteral
 BoolLiteral --|> EnumValueLiteral
 BoolLiteral : false
 BoolLiteral : true
@@ -573,13 +573,13 @@ Without support for the _Any right-hand operand_ requirements class, the right-h
 .Core Logic and Relational Operators UML Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
-class LogicOperator <<enumeration>>
+enum LogicOperator
 LogicOperator --|> Operator
 LogicOperator : and
 LogicOperator : or
 LogicOperator : not -- unary
 
-class RelationalOperator <<enumeration>>
+enum RelationalOperator
 RelationalOperator --|> Operator
 RelationalOperator : equal
 RelationalOperator : notEqual

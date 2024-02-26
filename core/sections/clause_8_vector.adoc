@@ -17,9 +17,9 @@ class Symbolizer <<extended>>
 Symbolizer : fill: Fill [0..1]
 Symbolizer : stroke: Stroke [0..1]
 Symbolizer : marker: Marker [0..1]
-Symbolizer --* Fill
-Symbolizer --* Stroke
-Symbolizer --* Marker
+Symbolizer *-- Fill
+Symbolizer *-- Stroke
+Symbolizer *-- Marker
 ....
 
 The following three new Symbolizer properties are defined by this requirements class:
@@ -60,7 +60,7 @@ Feature : geometryDimensions: int
 
 DataLayer : features: Feature[*]
 DataLayer : featuresGeometryDimensions: int
-DataLayer --* Feature
+DataLayer *-- Feature
 ....
 
 In addition, the following new System Identifiers are defined by this requirements class:
@@ -168,7 +168,7 @@ A gradient is a graphical effect that produces a gradual transition between two 
 ....
 Fill : color: Color
 Fill : opacity: float
-Fill --* Color
+Fill *-- Color
 ....
 
 A Fill defines the graphical symbolizing parameters required to draw the filling of a two-dimensional shape such as a polygon.
@@ -189,14 +189,14 @@ Separate conformance classes can extend this Fill class with additional properti
 [plantuml, target=diagram-classes, format=png]
 ....
 Stroke --|> StrokeStyling
-Stroke --* StrokeStyling
+Stroke *-- StrokeStyling
 
 StrokeStyling : color: Color
 StrokeStyling : opacity: float
 StrokeStyling : width: float
 StrokeStyling : widthUnit: GraphicalUnit
-StrokeStyling --* Color
-StrokeStyling --* GraphicalUnit
+StrokeStyling *-- Color
+StrokeStyling *-- GraphicalUnit
 ....
 
 A Stroke defines the graphical symbolizing parameters for drawing an outline (e.g., for linear geometries or the exterior of a polygon geometry). As an abstract class and part of the base of the core graphical concepts, StrokeClass is a global point of extension to specify concrete ways to draw outlines (e.g., the PenStroke and GraphicStroke extensions). The StrokeClass properties are documented in the following table.
@@ -217,7 +217,7 @@ A Stroke object inherits from a base _StrokeStyling_ class, which is re-used in 
 .Graphical Units Enumeration UML Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
-class GraphicalUnit <<enumeration>>
+enum GraphicalUnit
 GraphicalUnit : pixels
 GraphicalUnit : meters
 GraphicalUnit : feet
@@ -260,7 +260,7 @@ Consequently, either the unit of measure is determined through the uom code dire
 Marker --|> MultiGraphic
 
 MultiGraphic : elements: Graphic [0..*]
-MultiGraphic --* Graphic
+MultiGraphic *-- Graphic
 
 Graphic : position: UnitPoint
 Graphic : opacity: float
@@ -332,12 +332,12 @@ or by a three-dimensional cube. The GraphicSize properties are documented in the
 ....
 Dot --|> Shape
 Dot : point: UnitPoint
-Dot --* UnitPoint
+Dot *-- UnitPoint
 
-class Shape <<abstract>>
+abstract class Shape
 Shape --|> Graphic
 Shape : stroke: Stroke [0..1]
-Shape --* Stroke
+Shape *-- Stroke
 ....
 
 A round Dot is one type of Graphic defined by this requirements class that can be used as part of a Marker.
@@ -363,9 +363,9 @@ Image  : hotSpot: UnitPoint
 Image  : tint: Color
 Image  : blackTint: Color
 Image  : alphaThreshold: float
-Image --* Resource
-Image --* Color
-Image --* UnitPoint
+Image *-- Resource
+Image *-- Color
+Image *-- UnitPoint
 
 Resource : path: string[0..1]
 Resource : url: string[0..1]
@@ -412,8 +412,8 @@ Text --|> Graphic
 Text : text: string -- IdentifierExpression
 Text : font: Font
 Text : alignment: TextAlignment
-Text --* Font
-Text --* TextAlignment
+Text *-- Font
+Text *-- TextAlignment
 Text --> IdentifierExpressions
 
 Font : face: string
@@ -423,19 +423,19 @@ Font : italic: bool
 Font : underline: bool
 Font : color: Color
 Font : opacity: float
-Font --* Color
+Font *-- Color
 
 TextAlignment : horizontal: HAlignment
 TextAlignment : vertical: VAlignment
-TextAlignment --* HAlignment
-TextAlignment --* VAlignment
+TextAlignment *-- HAlignment
+TextAlignment *-- VAlignment
 
-class HAlignment <<enumeration>>
+enum HAlignment
 HAlignment : left
 HAlignment : center
 HAlignment : right
 
-class VAlignment <<enumeration>>
+enum VAlignment
 VAlignment : top
 VAlignment : middle
 VAlignment : bottom

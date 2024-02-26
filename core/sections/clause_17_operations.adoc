@@ -10,7 +10,7 @@ This requirements class adds support for arithmetic operations.
 .Arithmetic Operators UML Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
-class ArithmeticOperator <<enumeration>>
+enum ArithmeticOperator
 ArithmeticOperator --|> Operator
 ArithmeticOperator : add
 ArithmeticOperator : sub
@@ -48,7 +48,7 @@ This requirements class adds support for operations on individual bits.
 .Bitwise Operators UML Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
-class BitwiseOperator <<enumeration>>
+enum BitwiseOperator
 BitwiseOperator --|> Operator
 BitwiseOperator : bitAnd
 BitwiseOperator : bitOr
@@ -83,7 +83,7 @@ include::../requirements/rc-bitwise.adoc[]
 .Bitwise Operators UML Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
-class TextRelationOperator <<enumeration>>
+enum TextRelationOperator
 TextRelationOperator --|> Operator
 TextRelationOperator : like
 TextRelationOperator : notLike

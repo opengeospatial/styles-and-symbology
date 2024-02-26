@@ -12,13 +12,13 @@ This requirements class adds support for function call expressions.
 .Functions UML Class Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
-class Expression <<abstract>>
+abstract class Expression
 
 FunctionCallExpression --|> Expression
 FunctionCallExpression : function: Function
 FunctionCallExpression : arguments: Expression[0..*]
-FunctionCallExpression --* Function
-FunctionCallExpression --* Expression
+FunctionCallExpression *-- Function
+FunctionCallExpression *-- Expression
 
 Function : name: string
 Function : parameters: map < string, type >
@@ -66,7 +66,7 @@ include::../requirements/rc-functions.adoc[]
 .Math Functions UML Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
-class MathFunctions <<interface>>
+interface MathFunctions
 MathFunctions --|> Function : standard functions
 MathFunctions : abs(x : double) double
 MathFunctions : acos(x : double) double
@@ -104,7 +104,7 @@ include::../requirements/rc-math-functions.adoc[]
 .Spatial Relation Functions UML Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
-class SpatialRelationFunctions <<interface>>
+interface SpatialRelationFunctions
 SpatialRelationFunctions --|> Function : standard functions
 SpatialRelationFunctions : s_intersects(Geometry a, Geometry b) bool
 SpatialRelationFunctions : s_contains(Geometry a, Geometry b) bool
@@ -176,10 +176,10 @@ SystemIdentifierExpression : feature.geometry
 SystemIdentifierExpression : dataLayer.featuresGeometry
 
 SystemIdentifierExpression --> Feature
-DataLayer --* Geometry
-DataLayer --* Feature
+DataLayer *-- Geometry
+DataLayer *-- Feature
 DataLayer --o Geometry
-Feature --* Geometry
+Feature *-- Geometry
 ....
 
 SpatialRelationFunctions are defined in the https://portal.ogc.org/files/?artifact_id=25355[OGC Simple Feature Access - Part 1: Common Architecture] specification and listed in the following table. They involve operations on geometries.
@@ -192,43 +192,43 @@ SpatialRelationFunctions are defined in the https://portal.ogc.org/files/?artifa
 .Geometry Classes UML Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
-class Geometry <<abstract>>
+abstract class Geometry
 
 Point : coordinates: double[2..*]
 Point --|> Geometry
 
 MultiPoint --|> Geometry
 MultiPoint : points: Point[1..*]
-MultiPoint --* Point
+MultiPoint *-- Point
 
 LineString --|> Geometry
 LineString : points: Point[2..*]
-LineString --* Point
+LineString *-- Point
 
 MultiLineString --|> Geometry
 MultiLineString : lineStrings: LineString[1..*]
-MultiLineString --* LineString
+MultiLineString *-- LineString
 
 LinearRing : points: Point[3..*]
-LinearRing --* Point
+LinearRing *-- Point
 
 Polygon --|> Geometry
 Polygon : exteriorRing:  LinearRing
 Polygon : interiorRings: LinearRing[0..*]
-Polygon --* LinearRing
+Polygon *-- LinearRing
 
 MultiPolygon --|> Geometry
 MultiPolygon : polygons: Polygon[1..*]
-MultiPolygon --* Polygon
+MultiPolygon *-- Polygon
 
 GeometryCollection --|> Geometry
 GeometryCollection : geometries : Geometry[1..*]
-GeometryCollection --* Geometry
+GeometryCollection *-- Geometry
 
 BoundingBox --|> Geometry
 BoundingBox : lowerBound: Point
 BoundingBox : upperBound: Point
-BoundingBox --* Point
+BoundingBox *-- Point
 ....
 
 ====== Bounding boxes
@@ -433,7 +433,7 @@ include::../requirements/rc-spatial-relations.adoc[]
 .Temporal Relation Functions UML Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
-class TemporalRelationFunctions <<interface>>
+interface TemporalRelationFunctions
 TemporalRelationFunctions --|> Function : standard functions
 TemporalRelationFunctions : t_after(TimeInstant a, TimeInstant b) bool
 TemporalRelationFunctions : t_before(TimeInstant a, TimeInstant b) bool
@@ -503,7 +503,7 @@ include::../requirements/rc-temporal-relations.adoc[]
 .Array Relation Functions UML Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
-class ArrayRelationFunctions <<interface>>
+interface ArrayRelationFunctions
 ArrayRelationFunctions --|> Function : standard functions
 ArrayRelationFunctions : a_containedBy(array a, array b) bool
 ArrayRelationFunctions : a_contains(array a, array b) bool
@@ -534,7 +534,7 @@ include::../requirements/rc-array-relations.adoc[]
 .Text Manipulation Functions UML Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
-class TextManipulationFunctions <<interface>>
+interface TextManipulationFunctions
 TextManipulationFunctions --|> Function : standard functions
 TextManipulationFunctions : caseInsensitize(string s) string
 TextManipulationFunctions : accentInsensitize(string s) string
@@ -570,7 +570,7 @@ include::../requirements/rc-text-manipulation.adoc[]
 .Geometry Manipulation Functions UML Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
-class GeometryManipulationFunctions <<interface>>
+interface GeometryManipulationFunctions
 GeometryManipulationFunctions --|> Function : standard functions
 GeometryManipulationFunctions : s_intersection(Geometry a, Geometry b) Geometry
 GeometryManipulationFunctions : s_union(Geometry a, Geometry b) Geometry
@@ -617,7 +617,7 @@ include::../requirements/rc-geometry-manipulation.adoc[]
 .Recoding Functions UML Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
-class RecodingFunctions <<interface>>
+interface RecodingFunctions
 RecodingFunctions --|> Function : standard functions
 RecodingFunctions : recode(string s, map < string, string > m) string
 ....
