@@ -35,9 +35,10 @@ include::../requirements/rc-pattern-fills.adoc[]
 [plantuml, target=diagram-classes, format=png]
 ....
 class Fill <<extended>>
-Fill : gradient: ColorKey [*]
+Fill : gradient: Gradient
 Fill : stippleStyle: StippleStyle
 Fill : hatchStyle: HatchStyle
+Fill *-- Gradient
 Fill *-- ColorKey
 Fill *-- StippleStyle
 Fill *-- HatchStyle
@@ -46,6 +47,19 @@ ColorKey : color: Color
 ColorKey : opacity: float
 ColorKey : percent: float
 ColorKey *-- Color
+
+Gradient : type
+Gradient : angle
+Gradient : position
+Gradient : keys
+Gradient : size
+Gradient *-- GradientType
+
+enum GradientType
+GradientType : linear
+GradientType : radial
+GradientType : repeating
+GradientType : conic
 
 enum StippleStyle
 StippleStyle : light
@@ -59,15 +73,15 @@ HatchStyle : xCross
 HatchStyle : cross
 ....
 
-This requirements class adds support for hatch, stipple and gradient fills.
+This requirements class adds support for hatch, stipple and gradient fills. A hatch fill is a pattern of lines, and a stipple fill is a pattern of dots. A gradient fill is a gradual transition between two or more colors.
 
 .Extended Fill class
 [width="90%",options="header"]
 |===
 | Name           | Definition       | Type         | Multiplicity
 | hatchStyle     | Hatch style      | HatchStyle   | 0..1
-| stippleStyle   | Opacity          | StippleStyle | 0..1
-| gradient       | Percent          | ColorKey     | 0..*
+| stippleStyle   | Stipple style    | StippleStyle | 0..1
+| gradient       | Gradient         | Gradient     | 0..*
 |===
 
 ====== Gradients
@@ -79,6 +93,27 @@ This requirements class adds support for hatch, stipple and gradient fills.
 | color     | Color            | Color                 | 1
 | opacity   | Opacity          | float                 | 0..1
 | percent   | Percent          | float                 | 0..1
+|===
+
+.GradientType enum
+[width="90%",options="header"]
+|===
+| Name      | Definition
+| linear    | Linear gradient
+| radial    | Radial gradient
+| repeating | Repeating gradient
+| conic     | Conic gradient
+|===
+
+.Gradient class
+[width="90%",options="header"]
+|===
+| Name         | Definition              | Type            | Multiplicity
+| type         | Type of gradient        | GradientType    | 1
+| angle        | Angle of gradient       | float           | 1
+| position     | Position of gradient    | Position        | 1
+| keys         | Percent                 | ColorKey        | 0..*
+| size         | Size of gradient        | Size            | 1
 |===
 
 ====== Stipples

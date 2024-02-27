@@ -105,61 +105,6 @@ Color : b: float
 | b       | Blue component  | float  | 1
 |===
 
-==== Gradient
-
-[#img-uml-class-gradient]
-.Gradient class UML Diagram
-[plantuml, target=diagram-classes, format=png]
-....
-class Gradient {
-  + type: GradientType
-  + angle: float
-  + position: Position
-  + colorStops: List<ColorStop>
-  + size: Size
-}
-
-enum GradientType {
-  linear
-  radial
-  repeating
-  conic
-}
-
-class Size {
-  + length: float
-  + lengthPercentage: float
-  + position: Position
-}
-
-enum Position {
-  left
-  center
-  right
-  top
-  middle
-  bottom
-}
-
-Gradient *-- GradientType
-Gradient *-- Size
-
-Gradient *-- Position
-....
-
-A gradient is a graphical effect that produces a gradual transition between two or more colors. 3 main types of gradients are supported: linear, radial and conic. All of the parameters are inherited from their corresponding classes.
-
-.Gradient class
-[width="90%",options="header"]
-|===
-| Name         | Definition              | Type            | Multiplicity
-| GradientType | Type of gradient        | enum            | 1
-| angle        | Angle of gradient       | float           | 1
-| position     | Position of gradient    | Position        | 1
-| colorStops   | Color stops of gradient | List<ColorStop> | 1
-| size         | Size of gradient        | Size            | 1
-|===
-
 ==== Fills
 
 [#img-uml-class-fill]
