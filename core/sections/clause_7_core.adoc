@@ -224,7 +224,15 @@ OperationExpression *-- Expression
 'class ExpressionList -- Expression with multiplicity?
 ....
 
-===== Parameter Values
+<<<<<<< HEAD
+==== Requirements
+
+include::../requirements/rc-core.adoc[]
+
+=======
+>>>>>>> f839acd350092bcb5e69fc5fac43abfc22cd1fd4
+[[rc-parametervalues]]
+=== Requirements Class "Parameter Values"
 
 The use of an expression as a Symbolizer property is called a _Parameter Value_, where an Expression can be substituted
 where a particular data type is expected, in which case the Expression will be resolved to that expected data type.
@@ -500,6 +508,10 @@ TODO: In other req classes:
 * dataLayer.featuresGeometry            -- for advanced comparison of feature against all other features
 * feature.geometry                      -- for spatial operators
 ////
+
+==== Requirements
+
+include::../requirements/rc-parameter-values.adoc[]
 
 [[literal-expressions]]
 ===== Literal Expressions

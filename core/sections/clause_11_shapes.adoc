@@ -1,5 +1,6 @@
 == Requirements Classes for Shapes
 
+[[rc-shapegraphics]]
 === Requirements Class "Shape Graphics"
 ==== Overview
 
@@ -172,7 +173,8 @@ A closed path is a ClosedShape that can be filled, and can optionally contain in
 
 include::../requirements/rc-shapes.adoc[]
 
-=== Requirements Class "Shapes Outlines"
+[[rc-shapeoutlines]]
+=== Requirements Class "Shape Outlines"
 ==== Overview
 
 // Review members of ShapeOutline

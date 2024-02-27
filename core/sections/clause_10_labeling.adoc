@@ -1,5 +1,6 @@
 == Requirements Classes for Labeling
 
+[[rc-labels]]
 === Requirements Class "Basic Labeling"
 ==== Overview
 
@@ -54,6 +55,7 @@ LabelClass properties are documented in the following table.
 
 include::../requirements/rc-labeling.adoc[]
 
+[[rc-fontoutlines]]
 === Requirements Class "Font Outlines"
 ==== Overview
 

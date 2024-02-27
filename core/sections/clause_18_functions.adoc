@@ -692,4 +692,4 @@ Example use in CartoSym-CSS of to use latest RGB bands over time dimension:
 
 ==== Requirements
 
-//TODO: include::../requirements/rc-aggregation.adoc[]
+include::../requirements/rc-aggregation.adoc[]

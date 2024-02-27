@@ -1,5 +1,6 @@
 == Requirements Classes for Advanced fills
 
+[[rc-patternfills]]
 === Requirements Class "Pattern Fills"
 ==== Overview
 
@@ -25,6 +26,7 @@ This requirements class adds support for defining how to fill a shape with a pat
 
 include::../requirements/rc-pattern-fills.adoc[]
 
+[[rc-hatchesgradientsstipples]]
 === Requirements Class "Hatches and Gradients, Stipples"
 ==== Overview
 

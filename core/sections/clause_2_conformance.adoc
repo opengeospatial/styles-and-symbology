@@ -107,6 +107,10 @@ The Text Relation Operators Requirements Class specifies requirements for defini
 
 The Functions Requirements Class specifies requirements for defining function call expressions.
 
+**<<rc-math,Requirements Class "Math Functions">>** (http://www.opengis.net/spec/symbology-1/2.0/conf/rc-math)
+
+The Math Functions Requirements Class specifies requirements for defining math functions to be used with numeric properties.
+
 *<<rc-spatial,Requirements Class "Spatial Relation Functions">>* (http://www.opengis.net/spec/symbology-1/2.0/req/spatial)
 
 The Spatial Relation Requirements Class specifies requirements for standardized spatial relation functions to be used with feature geometry.
@@ -126,6 +130,10 @@ The Text Manipulation Requirements Class specifies requirements for standardized
 *<<rc-geometrymanipulation,Requirements Class "Geometry Manipulation Functions">>* (http://www.opengis.net/spec/symbology-1/2.0/req/geometrymanipulation)
 
 The Geometry Manipulation Requirements Class specifies requirements for standardized geometry manipulation functions to be used with feature geometry.
+
+*<<rc-aggregation,Requirements Class Aggregation>>* (http://www.opengis.net/spec/symbology-1/2.0/conf/rc-aggregation)
+
+The Aggregation Requirements Class specifies requirements for defining aggregation functions to be used with numeric properties.
 
 === Requirements classes for advanced stroke and fills
 
@@ -188,29 +196,31 @@ is declared by appending `-partial-concept` to the conformance URI.
 |<<rc-labels,Basic Labeling>>                                     |http://www.opengis.net/spec/symbology-1/2.0/conf/labels
 |<<rc-hillshading,Hill Shading>>                                  |http://www.opengis.net/spec/symbology-1/2.0/conf/hillshading
 |<<rc-fontoutlines,Font Outlines>>                                |http://www.opengis.net/spec/symbology-1/2.0/conf/fontoutlines
-|<<rc-hatchesgradientsstipples,Hatches, Gradients and Stipples>>  |http://www.opengis.net/spec/symbology-1/2.0/conf/hatchesgradientsstipples
+|<<rc-hatchesgradientsstipples,Hatches and Gradients, Stipples>>  |http://www.opengis.net/spec/symbology-1/2.0/conf/hatchesgradientsstipples
 |<<rc-shapegraphics,Shape Graphics>>                              |http://www.opengis.net/spec/symbology-1/2.0/conf/shapegraphics
 |<<rc-dashes,Dashes>>                                             |http://www.opengis.net/spec/symbology-1/2.0/conf/dashes
 |<<rc-casing,Casing and Centerline>>                              |http://www.opengis.net/spec/symbology-1/2.0/conf/casing
 |<<rc-parametervalues,Parameter Values>>                          |http://www.opengis.net/spec/symbology-1/2.0/conf/parametervalues
 |<<rc-functions,Function Expressions>>                            |http://www.opengis.net/spec/symbology-1/2.0/conf/functions
+|<<rc-math,Math Functions>>                                       |http://www.opengis.net/spec/symbology-1/2.0/conf/rc-math
 |<<rc-spatial,Spatial Relation Functions>>                        |http://www.opengis.net/spec/symbology-1/2.0/conf/spatial
 |<<rc-temporal,Temporal Relation Functions>>                      |http://www.opengis.net/spec/symbology-1/2.0/conf/temporal
 |<<rc-arrayrelations,Array Relation Functions>>                   |http://www.opengis.net/spec/symbology-1/2.0/conf/arrayrelations
 |<<rc-textmanipulation,Text Manipulation Functions>>              |http://www.opengis.net/spec/symbology-1/2.0/conf/textmanipulation
 |<<rc-geometrymanipulation,Geometry Manipulation Functions>>      |http://www.opengis.net/spec/symbology-1/2.0/conf/geometrymanipulation
+|<<rc-aggregation,Aggregation>>                                   |http://www.opengis.net/spec/symbology-1/2.0/conf/rc-aggregation
 |<<rc-arithmetic,Arithmetic Operators>>                           |http://www.opengis.net/spec/symbology-1/2.0/conf/arithmetic
 |<<rc-bitwise,Bitwise Operators>>                                 |http://www.opengis.net/spec/symbology-1/2.0/conf/bitwise
 |<<rc-textrelation,Text Relation Operators>>                      |http://www.opengis.net/spec/symbology-1/2.0/conf/textrelation
-|<<rc-righthand,Right-hand Identifiers>>                          |http://www.opengis.net/spec/symbology-1/2.0/conf/righthand
+|<<rc-righthand,Any right-hand operands>>                         |http://www.opengis.net/spec/symbology-1/2.0/conf/righthand
 |<<rc-conditional,Conditional Expressions>>                       |http://www.opengis.net/spec/symbology-1/2.0/conf/conditional
 |<<rc-variables,Variables>>                                       |http://www.opengis.net/spec/symbology-1/2.0/conf/variables
 |<<rc-joinscaps,Joins and Caps>>                                  |http://www.opengis.net/spec/symbology-1/2.0/conf/joinscaps
 |<<rc-patternstrokes,Pattern Strokes>>                            |http://www.opengis.net/spec/symbology-1/2.0/conf/patternstrokes
 |<<rc-patternfills,Pattern Fills>>                                |http://www.opengis.net/spec/symbology-1/2.0/conf/patternfills
 |<<rc-shapeoutlines,Shape Outlines>>                              |http://www.opengis.net/spec/symbology-1/2.0/conf/shapeoutlines
-|<<rc-transforms,MultiGraphics and Transforms>>                   |http://www.opengis.net/spec/symbology-1/2.0/conf/transforms
-|<<rc-threedim,3D Models and Transforms>>                         |http://www.opengis.net/spec/symbology-1/2.0/conf/threedim
+|<<rc-transforms,Multi Graphics and Transforms>>                  |http://www.opengis.net/spec/symbology-1/2.0/conf/transforms
+|<<rc-threedim,3D Graphics, Models and Transforms>>               |http://www.opengis.net/spec/symbology-1/2.0/conf/threedim
 |<<rc-json,JSON Styles and Symbology>>                            |http://www.opengis.net/spec/symbology-1/2.0/conf/json
 |<<rc-ccsss,Cascading Cartographic Symbology Style Sheets>>       |http://www.opengis.net/spec/symbology-1/2.0/conf/ccsss
 |===

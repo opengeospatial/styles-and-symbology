@@ -1,5 +1,6 @@
 == Requirements Classes for Additional expressions
 
+[[rc-righthand]]
 === Requirements Class "Any right-hand operands"
 ==== Overview
 
@@ -10,10 +11,11 @@ For expressions encoded using CQL2, it is analogous to the _CQL2 Property-Proper
 
 include::../requirements/rc-righthand.adoc[]
 
+[[rc-conditional]]
 === Requirements Class "Conditional Expressions"
 ==== Overview
 
-===== Conditional expressions
+==== Conditional expressions
 
 [#img-uml-class-conditional-expression]
 .Conditional Expressions UML Class Diagram
@@ -36,6 +38,14 @@ ConditionalExpression *-- Expression
 | elseExp     | Expression resolving to when condition is false| Expession     | 1
 |===
 
+<<<<<<< HEAD
+==== Requirements
+
+include::../requirements/rc-conditional.adoc[]
+
+=======
+>>>>>>> f839acd350092bcb5e69fc5fac43abfc22cd1fd4
+[[rc-variables]]
 === Requirements Class "Variables"
 ==== Overview
 

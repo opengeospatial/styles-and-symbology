@@ -1,5 +1,6 @@
 == Requirements Classes for Advanced strokes
 
+[[rc-joinscaps]]
 === Requirements Class "Joins and Caps"
 ==== Overview
 
@@ -56,6 +57,7 @@ This requirements class adds support for Strokes rendered with additional join a
 
 include::../requirements/rc-joins-caps.adoc[]
 
+[[rc-dashes]]
 === Requirements Class "Dashes"
 ==== Overview
 
@@ -82,6 +84,7 @@ This requirements class adds support for dashed Strokes.
 
 include::../requirements/rc-dashes.adoc[]
 
+[[rc-casing]]
 === Requirements Class "Casing and Centerline"
 ==== Overview
 
@@ -108,6 +111,7 @@ This requirements class adds support for Strokes with a casing and centerline.
 
 include::../requirements/rc-casing-centerline.adoc[]
 
+[[rc-patternstrokes]]
 === Requirements Class "Pattern Strokes"
 ==== Overview
 
