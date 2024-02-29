@@ -8,6 +8,10 @@ conformance to this Standard for Rendering engines based on SLD/SE and writing c
 that can convert in either or both direction between SLD/SE and the two encodings defined in this
 Standard.
 
+// === Requirements Class "Core"
+// ==== Examples
+// ...
+
 .Mapping of visual ordering constructs
 [width="90%",options="header"]
 |===

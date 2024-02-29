@@ -1,0 +1,10 @@
+#Landuse
+{
+   visibility : FALSE;
+}
+
+#Roads
+{
+   visibility : FALSE;
+   {{ sd : 200000; }}
+}

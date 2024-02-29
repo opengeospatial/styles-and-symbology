@@ -1,0 +1,178 @@
+##############################
+# High level style sheet rules
+##############################
+
+styleSheet: stylingRuleList;
+
+stylingRuleList:
+     stylingRule
+   | stylingRuleList stylingRule;
+
+stylingRule:
+   [ selector ]* "{" [propertyAssignmentList] [stylingRuleList] "}"
+
+selector:
+     [ "#" identifier ]
+   | "[" expression "]" ;
+
+##############################
+# CQL2ish Expressions
+##############################
+
+##############################
+# Numeric Literals
+numericLiteral = unsignedNumericLiteral | signedNumericLiteral;
+
+unsignedNumericLiteral = exactNumericLiteral | approximateNumericLiteral;
+
+signedNumericLiteral = [sign] exactNumericLiteral | approximateNumericLiteral;
+
+exactNumericLiteral = unsignedInteger [ "." [ unsignedInteger ] ]
+                      | "." unsignedInteger;
+
+approximateNumericLiteral = mantissa "E" exponent;
+
+mantissa = exactNumericLiteral;
+
+exponent = signedInteger;
+
+signedInteger = [ sign ] unsignedInteger;
+
+unsignedInteger = {digit};
+
+sign = "+" | "-";
+
+##############################
+# Character Literals
+
+characterLiteral = "'" [ {character} ] "'";
+
+character = alpha | digit | whitespace | escapeQuote;
+
+escapeQuote = "''" | "\'";
+
+alpha = "\x0007".."\x0008"     # bell, bs
+      | "\x0021".."\x0026"     # !, ", #, $, %, &
+      | "\x0028".."\x002F"     # (, ), *, +, comma, -, ., /
+      | "\x003A".."\x0084"     # --+
+      | "\x0086".."\x009F"     #   |
+      | "\x00A1".."\x167F"     #   |
+      | "\x1681".."\x1FFF"     #   |
+      | "\x200B".."\x2027"     #   +-> :,;,<,=,>,?,@,A-Z,[,\,],^,_,`,a-z,...
+      | "\x202A".."\x202E"     #   |
+      | "\x2030".."\x205E"     #   |
+      | "\x2060".."\x2FFF"     #   |
+      | "\x3001".."\xD7FF"     # --+
+      | "\xE000".."\xFFFD"     # See note 8.
+      | "\x10000".."\x10FFFF"; # See note 9.
+
+##############################
+# Identifiers
+
+idStart:
+   ":" | [A-Z] | "_" | [a-z] | [#xC0-#xD6] | [#xD8-#xF6] | [#xF8-#x2FF] | [#x370-#x37D] | [#x37F-#x1FFF] | [#x200C-#x200D] | [#x2070-#x218F] | [#x2C00-#x2FEF] | [#x3001-#xD7FF] | [#xF900-#xFDCF] | [#xFDF0-#xFFFD] | [#x10000-#xEFFFF]
+   ;
+
+idCont: "-" | "." | [0-9] | #xB7 | [#x0300-#x036F] | [#x203F-#x2040]  ;
+
+identifier:
+     idStart [idCont]*
+   | '"' . '"' ;
+
+#############################
+# Expressions
+
+expression:
+     expIdentifier
+   | expConstant
+   | expString
+   | expCall
+   | expOperation
+   | expInstance
+   | expMember
+   | expIndex
+   | "(" expression ")";
+
+expIdentifier: identifier;
+
+expConstant: numericLiteral;
+
+expString: characterLiteral;
+
+expMember: expression "." identifier;
+
+expIndex: expression "[" expConstant "]";
+
+#############################
+# Expressions: Instances
+
+expInstance: [identifier] "{" [propertyAssignmentList] "}";
+
+lhValue:
+     identifier
+   | lhValue "." identifier
+   | lhValue "[" expConstant "]" ;
+
+propertyAssignment: lhValue ":" expression;
+
+propertyAssignmentList:
+   propertyAssignment |
+   propertyAssignmentList ";" propertyAssignment;
+
+#############################
+# Expressions: Arrays
+
+expArray: "[" [arrayElements] "]";
+
+arrayElements:
+     expression
+   | arrayElements "," expression ;
+
+#############################
+# Expressions: Function calls
+
+expCall: identifier "(" arguments ")" ;
+
+arguments:
+   expression
+   | arguments "," expression;
+
+#############################
+# Expressions: Operations
+
+expOperation:
+     expression arithmeticOperator expression
+   | expression binaryLogicalOperator expression
+   | expression relationalOperator expression
+   | expression betweenOperator expression "and" expression
+   | expression "?" expression ":" expression
+   | unaryLogicalOperator expression ;
+
+binaryLogicalOperator: "and" | "or" ;
+
+unaryLogicalOperator: "not" ;
+
+arithmeticOperator:
+     "-"
+   | "+"
+   | "*"
+   | "/"
+   | "div"
+   | "%"
+   | "^";
+
+relationalOperator:
+     "<"
+   | "<="
+   | ">"
+   | ">= "
+   | "in"
+   | "not" "in"
+   | "is"
+   | "is" "not"
+   | "like"
+   | "not" "like" ;
+
+betweenOperator:
+     "between"
+   | "not" "between";
