@@ -180,15 +180,15 @@ This requirements class adds the capability to transform a coverage into a featu
 ....
 
 class Symbolizer <<extended>>
-Symbolizer : marker: Marker [0..1]
-Symbolizer *-- Marker
+Symbolizer : mark: Mark [0..1]
+Symbolizer *-- Mark
 ....
 
 .Coverages as points Symbolizer properties
 [width="90%",options="header"]
 |===
 | Name      | Definition	                                   | Data type and value   | Multiplicity
-| marker    | Marker to render at every point of the coverage | Marker                | 0..1
+| mark    | Marker to render at every point of the coverage | Marker                | 0..1
 |===
 
 ==== Requirements
