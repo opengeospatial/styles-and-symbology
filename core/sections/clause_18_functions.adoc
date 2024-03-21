@@ -609,7 +609,7 @@ GeometryManipulationFunctions --> Geometry
 
 include::../requirements/rc-geometry-manipulation.adoc[]
 
-=== Requirements Classe "Recoding Function"
+=== Requirements Class "Recoding Function"
 
 ==== Overview
 
