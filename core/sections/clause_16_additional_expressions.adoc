@@ -38,13 +38,10 @@ ConditionalExpression *-- Expression
 | elseExp     | Expression resolving to when condition is false| Expession     | 1
 |===
 
-<<<<<<< HEAD
 ==== Requirements
 
 include::../requirements/rc-conditional.adoc[]
 
-=======
->>>>>>> f839acd350092bcb5e69fc5fac43abfc22cd1fd4
 [[rc-variables]]
 === Requirements Class "Variables"
 ==== Overview
