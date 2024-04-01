@@ -82,14 +82,16 @@ fragment WHITESPACE:  '\u0009'  // Character tabulation
            | '\u205F'  // Medium mathematical space
            | '\u3000'; // Ideographic space
 
-CHARACTER_LITERAL : '\'' CHARACTER* '\'';
+fragment CHARACTER : CHARACTER_NODLBQUOTE | '"' | ESCAPED_QUOTE;
+fragment CHARACTER_NODLBQUOTE : ALPHA_NODBLQUOTE | [0-9] | WHITESPACE;
 
-fragment CHARACTER : ALPHA | [0-9] | WHITESPACE | ESCAPED_QUOTE;
+CHARACTER_LITERAL : '\'' CHARACTER* '\'';
 
 fragment ESCAPED_QUOTE :'\'\'' | '\\\'';
 
-fragment ALPHA : '\u0007'..'\u0008'     // bell, bs
-      | '\u0021'..'\u0026'     // !, ", #, $, %, &
+fragment ALPHA_NODBLQUOTE : '\u0007'..'\u0008'     // bell, bs
+      | '\u0021'               // !
+      | '\u0023'..'\u0026'     // #, $, %, &
       | '\u0028'..'\u002F'     // (, ), *, +, comma, -, ., /
       | '\u003A'..'\u0084'     // --+
       | '\u0086'..'\u009F'     //   |
@@ -105,7 +107,7 @@ fragment ALPHA : '\u0007'..'\u0008'     // bell, bs
 
 // Identifiers
 
-IDENTIFIER: UNQUOTED_IDENTIFIER | '"' UNQUOTED_IDENTIFIER '"';
+IDENTIFIER: UNQUOTED_IDENTIFIER | '"' CHARACTER_NODLBQUOTE* '"';
 
 fragment UNQUOTED_IDENTIFIER: IDENTIFIER_START IDENTIFIER_PART*;
 
