@@ -35,14 +35,14 @@ selector:
 idOrConstant:
      IDENTIFIER
    | expConstant;
-   
+
 tuple:
      idOrConstant idOrConstant
-   | tuple idOrConstant; 
+   | tuple idOrConstant;
 
 expression:
      //IDENTIFIER //expIdentifier
-     
+
      idOrConstant |
 
    // | expMember

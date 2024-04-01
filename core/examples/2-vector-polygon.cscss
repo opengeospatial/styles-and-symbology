@@ -1,7 +1,7 @@
 .title 'Styling polygon vector features'
 .abstract 'Basic vector features styling (polygons)'
 
-#Landuse[dataLayer.type = vector and dataLayer.featuresGeometryDimensions = 2]
+Landuse[dataLayer.type = vector and dataLayer.featuresGeometryDimensions = 2]
 {
    // Do not show Landuse layer by default
    visibility: false;
@@ -12,8 +12,8 @@
       visibility: true;
       opacity: 0.8;
       zOrder: 1;
-      fill: (color: gray; opacity: 0.5);
-      stroke: (color: gray; width: 2.0 px; opacity: 1.0);
+      fill: {color: gray; opacity: 0.5};
+      stroke: {color: gray; width: 2.0 px; opacity: 1.0};
 
       // Select different fill and stroke color based on FunctionCode property
       [FunctionCode = 'parking']
@@ -38,48 +38,45 @@
          // Change stroke width to 4 pixels
          stroke.width: 4.0 px;
          // Add a text marker (positioned at centroid + horizontal offset) showing FunctionTitle property
-         marker: (elements: (
+         marker: {elements: [
             Text(
                position: 20 0; // Offset 20 pixels to the right
                text: FunctionTitle;
                alignment: left top;
-               font: (
+               font: {
                   face: 'Arial';
                   size: 14;
                   bold: true;
                   italic: true;
                   opacity: 1.0;
                   color: black;
-               )
+               };
             )
-         ));
+         ]};
          // Add icons at centroid based on land use function code property
          [FunctionCode = 'parking']
          {
-            marker.elements[1]: (
-               Image(
-                  image: (uri: 'http://example.com/parkingIcon'; path: 'parkingIcon.png'; id: 'parking'; type: 'image/png'; ext: 'png');
+            marker.elements[1]:
+               Image {
+                  image: {uri: 'http://example.com/parkingIcon'; path: 'parkingIcon.png'; id: 'parking'; type: 'image/png'; ext: 'png'};
                   hotSpot: 50 pc 50 pc; tint: white; blackTint: blue; alphaThreshold: 0.1;
-               )
-            )
+               };
          }
          [FunctionCode = 'park']
          {
-            marker.elements[1]: (
-               Image(
-                  image: (uri: 'http://example.com/park'; path: 'park.png'; id: 'park'; type: 'image/png'; ext: 'png');
+            marker.elements[1]:
+               Image {
+                  image: {uri: 'http://example.com/park'; path: 'park.png'; id: 'park'; type: 'image/png'; ext: 'png'};
                   hotSpot: 50 pc 50 pc; tint: white; blackTint: blue; alphaThreshold: 0.1;
-               )
-            )
+               };
          }
          [FunctionCode = 'commercial']
          {
-            marker.elements[1]: (
-               Image(
-                  image: (uri: 'http://example.com/commercial'; path: 'commercial.png'; id: 'commercial'; type: 'image/png'; ext: 'png');
+            marker.elements[1]:
+               Image {
+                  image: {uri: 'http://example.com/commercial'; path: 'commercial.png'; id: 'commercial'; type: 'image/png'; ext: 'png'};
                   hotSpot: 50 pc 50 pc; tint: white; blackTint: blue; alphaThreshold: 0.1;
-               )
-            )
+               };
          }
       }
    }

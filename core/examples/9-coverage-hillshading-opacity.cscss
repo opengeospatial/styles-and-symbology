@@ -1,0 +1,25 @@
+.title 'hill-shaded DEM with opacity and color map for shading intensity'
+.abstract 'Applying hill-shading a color map to a Digital Elevation Model with Style & Symbology Basic Coverage Styling'
+
+// This type of intensity-based hill shading can be overlaid on top of imagery or vector maps
+
+Elevation[dataLayer.type = coverage]
+{
+   visibility: false;
+
+   [viz.sd < 200000]
+   {
+      visibility: true;
+      opacity: 0.8;
+      zOrder: 1;
+
+      singleChannel: elevation; // Use elevation coverage field
+      hillShading: {
+         factor: 56;
+         sun: {azimuth: 45.0; elevation: 60.0};
+         // These colors and opacity are mapped from the 0..1 shading intensity rather than elevation values
+         colorMap : [0 black, 0.15 gray, 0.35 silver, 0.55 white];
+         opacityMap: [0 0.75, 0.15 0.50, 0.35 0.25, 0.55 0.00];
+      };
+   }
+}

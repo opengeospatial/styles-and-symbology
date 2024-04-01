@@ -1,0 +1,50 @@
+.title 'Styling point vector features'
+.abstract 'Basic vector features styling (points)'
+
+Amenities[dataLayer.type = 'vector' and dataLayer.featuresGeometryDimensions = 0]
+{
+   visibility: false;
+
+   [viz.sd < 200000 and validDate >= viz.timeInterval.start.date and validDate <= viz.timeInterval.end.date]
+   {
+      visibility: true;
+      opacity: 0.5;
+      zOrder: 3;
+
+      // If zoomed in more than 1:10,000
+      [viz.sd < 10000]
+      {
+         // Add a double-Dot marker (positioned at centroid)
+         marker: { elements: [
+            Dot {  // larger white dot underneath
+               size: 10 px; // Alias for base Shape class stroke width
+               alignment: center middle;
+               color: white;
+            },
+            Dot {  // smaller orange dot in center
+               size: 8 px; // Alias for base Shape class stroke width
+               alignment: center middle;
+               color: orange;
+            }
+         ]};
+         [viz.sd < 5000]
+         {
+            // Add a Text graphic to Marker at 1:5000
+            marker.elements[1]:
+               Text {
+                  position: 20 0; // Offset 20 pixels to the right
+                  text: Name; // Name of Amenity
+                  alignment: left middle;
+                  font: {
+                     face: 'Arial';
+                     size: 12;
+                     bold: false;
+                     italic: false;
+                     opacity: 1.0;
+                     color: darkGray;
+                  }
+               };
+         }
+      }
+   }
+}

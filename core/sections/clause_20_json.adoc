@@ -53,7 +53,7 @@ the following CartoSym CSS section (Example 1 in 21.1.8.1. Basic Vector Styling)
 
 [source,json,options="unnumbered"]
 ----
-include::../examples/polygon-example.cs.json[]
+include::../examples/2-vector-polygon.cs.json[]
 ----
 
 ==== JSON Schema
