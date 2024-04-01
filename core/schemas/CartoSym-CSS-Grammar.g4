@@ -26,10 +26,6 @@ selector:
    | LSBR expression RSBR ;
 
 ///////////////////////////////
-// CQL2ish Expressions
-///////////////////////////////
-
-///////////////////////////////
 // Expressions
 
 idOrConstant:
@@ -41,14 +37,10 @@ tuple:
    | tuple idOrConstant;
 
 expression:
-     //IDENTIFIER //expIdentifier
+     idOrConstant
 
-     idOrConstant |
+   | expression DOT IDENTIFIER   // Member access
 
-   // | expMember
-   /*|*/ expression DOT IDENTIFIER
-
-   //| expConstant
    | expString
    | expCall
    | expArray
@@ -57,10 +49,9 @@ expression:
 
    | LPAR expression RPAR
 
-   // | expIndex
-   | expression LSBR expConstant RSBR
+   | expression LSBR expConstant RSBR  // Indexing
 
-   //| expOperation
+   // Operations
    | expression arithmeticOperatorExp expression
    | expression arithmeticOperatorMul expression
    | expression arithmeticOperatorAdd expression
@@ -71,27 +62,12 @@ expression:
    | unaryLogicalOperator expression
    | unaryArithmeticOperator expression
 
-   // | expTuple
-   //| expression expression
    | tuple
    ;
-
-// expIdentifier: IDENTIFIER;
 
 expConstant: NUMERIC_LITERAL UNIT? | HEX_LITERAL;
 
 expString: CHARACTER_LITERAL;
-
-
-/*
-expTuple:
-     expression
-   | expTuple expression;
-*/
-
-// expMember: expression DOT IDENTIFIER;
-
-// expIndex: expression LSBR expConstant RSBR;
 
 ///////////////////////////////
 // Expressions: Instances
@@ -151,22 +127,6 @@ expCall: IDENTIFIER LPAR arguments RPAR ;
 arguments:
    expression
    | arguments COMMA expression;
-
-///////////////////////////////
-// Expressions: Operations
-
-/*
-expOperation:
-     expression arithmeticOperatorExp expression
-   | expression arithmeticOperatorMul expression
-   | expression arithmeticOperatorAdd expression
-   | expression binaryLogicalOperator expression
-   | expression relationalOperator expression
-   | expression betweenOperator expression AND expression
-   | expression QUESTION expression COLON expression
-   | unaryLogicalOperator expression
-   | unaryArithmeticOperator expression;
-*/
 
 binaryLogicalOperator: AND | OR ;
 

@@ -15,7 +15,7 @@ sentinel2l2a[dataLayer.type = coverage]
       alphaChannel: 1.0;
       colorMap: [-1.0 saddleBrown,0.0 peru,0.2 goldenrod,0.5 olive,0.6 yellowGreen,0.8 greenYellow,1.0 lime];
 
-      [SCL=8] { alphaChannel: 0.5; }   // Reduce alpha channel value for medium cloud proability
-      [SCL=9] { alphaChannel: 0.0; }   // Zero alpha channel value for high cloud proability
+      [SCL=8] { alphaChannel: 0.5; }   // Reduce alpha channel value for medium cloud probability
+      [SCL=9] { alphaChannel: 0.0; }   // Zero alpha channel value for high cloud probability
    }
 }

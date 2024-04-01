@@ -33,6 +33,8 @@ POW: '^';
 MINUS: '-';
 PLUS: '+';
 
+// Numeric Literals
+
 UNIT:
    'px' |
    'm' |
@@ -47,13 +49,12 @@ UNIT:
 HEX_LITERAL :
     '#' ([0-9] | [a-f] | [A-F])+;
 
-// Numeric Literals
-
 NUMERIC_LITERAL :
-    //('+'|'-')?
         ( [0-9]+ ('.' ([0-9]+)? )? |
         '.' [0-9]+ )
     ('E' ('+'|'-')? [0-9]+)?;
+
+// Character Literals
 
 fragment WHITESPACE:  '\u0009'  // Character tabulation
            | '\u000A'  // Line feed
@@ -81,8 +82,6 @@ fragment WHITESPACE:  '\u0009'  // Character tabulation
            | '\u205F'  // Medium mathematical space
            | '\u3000'; // Ideographic space
 
-// Character Literals
-
 CHARACTER_LITERAL : '\'' CHARACTER* '\'';
 
 fragment CHARACTER : ALPHA | [0-9] | WHITESPACE | ESCAPED_QUOTE;
@@ -101,8 +100,8 @@ fragment ALPHA : '\u0007'..'\u0008'     // bell, bs
       | '\u2030'..'\u205E'     //   |
       | '\u2060'..'\u2FFF'     //   |
       | '\u3001'..'\uD7FF'     // --+
-      | '\uE000'..'\uFFFD'     // See note 8.
-   /*   | '\u10000'..'\u10FFFF'*/; // See note 9.
+      | '\uE000'..'\uFFFD'     // See (CQL2) note 8.
+      ;
 
 // Identifiers
 
@@ -123,14 +122,14 @@ fragment IDENTIFIER_START:
                 | '\u00D8'..'\u00F6'   // Ø-ö Latin-1 Supplement Letters
                 | '\u00F8'..'\u02FF'   // ø-ÿ Latin-1 Supplement Letters
                 | '\u0370'..'\u037D'   // Ͱ-ͽ Greek and Coptic (without ';')
-                | '\u037F'..'\u1FFE'   // See note 1.
+                | '\u037F'..'\u1FFE'   // See (CQL2) note 1.
                 | '\u200C'..'\u200D'   // zero width non-joiner and joiner
-                | '\u2070'..'\u218F'   // See note 2.
-                | '\u2C00'..'\u2FEF'   // See note 3.
-                | '\u3001'..'\uD7FF'   // See note 4.
-                | '\uF900'..'\uFDCF'   // See note 5.
-                | '\uFDF0'..'\uFFFD'    // See note 6.
-                /*| '\u10000'..'\uEFFFF'*/; // See note 7.
+                | '\u2070'..'\u218F'   // See (CQL2) note 2.
+                | '\u2C00'..'\u2FEF'   // See (CQL2) note 3.
+                | '\u3001'..'\uD7FF'   // See (CQL2) note 4.
+                | '\uF900'..'\uFDCF'   // See (CQL2) note 5.
+                | '\uFDF0'..'\uFFFD'   // See (CQL2) note 6.
+                ;
 
 COMMENT
     : '/*' .*? '*/' -> channel(COMMENTS)
