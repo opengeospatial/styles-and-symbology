@@ -98,13 +98,13 @@ The selector (also sometimes called a _filter_), for the rule is defined as a pr
 ====
 [source,ccsss]
 ----
-#Landuse    // Selector for this first rule
+Landuse    // Selector for this first rule
 {
    // Symbolizer properties to be set if this rule is selected
    visibility: false;
 }
 
-#Roads    // Selector for this second rule
+Roads    // Selector for this second rule
 {
    // Symbolizer properties to be set if this rule is selected
    visibility: false;
@@ -150,14 +150,14 @@ Separate requirements classes and later parts will extend this Symbolizer class 
 {
    visibility: false;
 
-   #Landuse
+   Landuse
    {
       opacity = 0.5;
       zOrder = 1;
       visibility = true;
    }
 
-   #Buildings
+   Buildings
    {
       opacity = 0.8;
       zOrder = 2;
@@ -341,7 +341,7 @@ TOCHECK: How to handle parent objects ? e.g.,  visualization, dataLayer, feature
 ====
 [source,ccsss]
 ----
-#Roads
+Roads
 {
    visibility: false;
 
@@ -444,7 +444,7 @@ with different symbolizers before rendering the next feature.
 ====
 [source,ccsss]
 ----
-#Landuse
+Landuse
 {
    visibility: false;
 
@@ -480,9 +480,9 @@ with different symbolizers before rendering the next feature.
       opacity: 0.8;
    }
 
-   // In CCSSS, the #<layerid> syntax is equivalent
+   // In CCSSS, the <layerid> syntax is equivalent
    // to [dataLayer.identifier = '<layerid>']
-   #Roads
+   Roads
    {
       opacity = 1.0; // and roads at 100% opacity
    }
@@ -631,7 +631,7 @@ This requirements class defines the following Relational Operators:
 ====
 [source,ccsss]
 ----
-#Roads
+Roads
 {
    visibility: false;
 
@@ -676,7 +676,7 @@ This capability is particularly useful when using nested StylingRules, where a n
 ====
 [source,ccsss]
 ----
-#Roads
+Roads
 {
    // Default to a gray stroke (completely replace stroke property)
    stroke: { gray };

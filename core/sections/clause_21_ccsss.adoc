@@ -68,10 +68,10 @@ The grammar for a symbolizer property assignment is:
 
 A selector is either:
 
-* an expression as described in the <<ccsss,section below>>,
-* or a short-hand form for selecting a data layer:
+* an expression as described in the <<ccsss,section below>> (combined together as a logical AND),
+* or a short-hand form for selecting a data layer (combined between them as a logical OR, but combined with other selectors as a logical AND):
 
-'`#`'<data layer name>
+<data layer name>
 
 [[ccsss]]
 ==== Expressions
@@ -117,8 +117,10 @@ In both of these examples, the members being initialized are implied from the or
 When not all members of a class are initialized within an instantiation, a default value is inherited.
 Those default values are specified in a <<ccsss-default-values, dedicated section>> below
 
-NOTE: Should we diverge from CQL2 and allow the use of `{` `}` as an alternative to `(` `)` to define instances, and of `[` `]`
-as an alternative to `(` `)` to define arrays in this encoding for clarity?
+NOTE: CartoSym-CSS supports and recommends the use of `{` `}` for object instances, and of `[` `]` for arrays,
+for also supports `(` `)` in these contexts for compatibility with the CQL2-Text and WKT encodings.
+A CQL2-Text expression (including WKT geometry) can therefore be used directly as an expression in a selector or symbolizer parameter value.
+However, a CartoSym-CSS expression making use of the curly and/or square brackets will not be a valid CQL2 expression.
 
 ===== Tuples and related implications
 
@@ -135,13 +137,14 @@ A tuple must be able to replace either:
 Therefore, the following equivalent definitions are all valid where a POINT is expected:
 
 * `POINT(30 10)` -- The standard WKT form where the tuple replaces the array of coordinates, implying the _coordinates_ member
-* `POINT( (30, 10) )` -- Using an array of coordinates, implying the _coordinates_ member
-* `POINT(coordinates: 30 10)` -- The tuple replacing the array of coordinates, explicit coordinates _member_
-* `POINT(coordinates: (30, 10))` -- Using an array of coordinates, explicit coordinates _member_
-* `(30 10)` -- Implied class, tuple replacing array of coordinates, implied _coordinates_ member
-* `( (30, 10) )` -- Implied class, using array of coordinates, implied _coordinates_ member
-* `(coordinates: 30 10)` -- Implied class, tuple replacing array of coordinates, explicit _coordinates_ member
-* `(coordinates: (30, 10))` -- Implied class, using an array of coordinates, explicit _coordinates_ member
+* `POINT( (30, 10) )` -- Using an array of coordinates, implying the _coordinates_ member, using the CQL2 square brackets
+* `POINT{ [30, 10] }` -- Using an array of coordinates, implying the _coordinates_ member, using the CartoSym-CSS square and curly brackets
+* `POINT{coordinates: 30 10}` -- The tuple replacing the array of coordinates, explicit coordinates _member_
+* `POINT{coordinates: [30, 10]}` -- Using an array of coordinates, explicit coordinates _member_
+* `{30 10}` -- Implied class, tuple replacing array of coordinates, implied _coordinates_ member
+* `{ [30, 10] }` -- Implied class, using array of coordinates, implied _coordinates_ member
+* `{coordinates: 30 10}` -- Implied class, tuple replacing array of coordinates, explicit _coordinates_ member
+* `{coordinates: [30, 10]}` -- Implied class, using an array of coordinates, explicit _coordinates_ member
 * `30 10`  -- Implied class, tuple replacing Point instance
 
 The following are some equivalent examples of valid definitions where a polygon is expected:
@@ -176,6 +179,8 @@ The following are some equivalent examples of valid definitions where a polygon 
    POINT(coordinates: 0 40)
   ) )`
 
+The element of tuples can be either numeric literals or identifiers.
+
 The classes defined in this Standard that can be encoded as tuples are:
 
 * _Point_ (from WKT)
@@ -194,14 +199,14 @@ The following are equivalent example definitions where a _UnitPoint_ is expected
 * `50 pc 50 pc`
 * `UnitPoint(x: 50 pc; y: 50 pc;)`
 * `UnitPoint(x: 50 pc, y: 50 pc)`
-* `(50 pc, 50 pc)`
+* `{50 pc, 50 pc}`
 
 The following are equivalent example definitions where a _TextAligment_ is expected:
 
 * `left top`
 * `TextAlignment(left, top)`
 * `TextAlignment(horizontal: left; vertical: top)`
-* `(left, top)`
+* `{left, top}`
 
 ===== Units of measure
 
@@ -218,7 +223,7 @@ These are mainly used for _UnitPoint_ coordinates, as well as with distance valu
 | percent      | pc            | Relative value whose meaning depends on context e.g., Image's _hotSpot_, _scaling_.
 | points       | pt            | One point is equal to 1/72 inch (0.3528 mm).
 | em           | em            | One em is equal to the target's selected or default font point size.
-| screenInches | in            | Display unit (25.4 mm); see http://docs.ogc.org/DRAFTS/20-058.html#rc_display-resolution[OGC _API - Maps_ "Display Resolution" requirements class] (`mm-per-pixel`) which defaults to 0.28 mm/pixel (~90.7142857 pixels/inch).
+| screenInches | inch          | Display unit (25.4 mm); see http://docs.ogc.org/DRAFTS/20-058.html#rc_display-resolution[OGC _API - Maps_ "Display Resolution" requirements class] (`mm-per-pixel`) which defaults to 0.28 mm/pixel (~90.7142857 pixels/inch).
 | screenCM     | cm            | Display unit (10 mm); see http://docs.ogc.org/DRAFTS/20-058.html#rc_display-resolution[OGC _API - Maps_ "Display Resolution" requirements class] (`mm-per-pixel`) which defaults to 0.28 mm/pixel (0.028 cm/pixel).
 | screenMM     | mm            | Display unit; see http://docs.ogc.org/DRAFTS/20-058.html#rc_display-resolution[OGC _API - Maps_ "Display Resolution" requirements class] (`mm-per-pixel`) which defaults to 0.28 mm/pixel.
 | (none)       |               | For relative values like scaling, 100 times less than if _pc_ is specified. For screen-space objects, defaults to pixels.
@@ -245,9 +250,11 @@ In order to explicitly refer to the identifier, the identifier can be enclosed i
 Color values can be expressed using any of the forms allowed for instantiations, or using a tuple:
 
 * `Color(255, 100, 50)`
+* `Color{255, 100, 50}`
 * `Color(r: 255, g: 100, b: 50)`
-* `(255, 100, 50)`
-* `(r: 255; g: 100; b: 50;)`
+* `Color{r: 255, g: 100, b: 50}`
+* `{255, 100, 50}`
+* `{r: 255; g: 100; b: 50;}`
 * `255 100 50`
 
 Colors can also be expressed as a hexadecimal value prefixed by a `#` symbol, as in Web CSS:
