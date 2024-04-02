@@ -82,7 +82,7 @@ part:: A Renderer SHOULD support ...
 [requirement]
 ====
 [%metadata]
-identifier:: /req/vector/gradient
+identifier:: /req/coverage/gradient
 part:: An Encoding SHALL support defining a `gradient` Symbolizer property as an object including a `type` and a `stops` array of color stops.
 part:: A Renderer SHALL support filling vector geometry based on a `gradient` property specifying a `type` and a `stops` array of color stops.
 ====
@@ -93,7 +93,7 @@ part:: A Renderer SHALL support filling vector geometry based on a `gradient` pr
 [requirement]
 ====
 [%metadata]
-identifier:: /req/vector/gradient/type
+identifier:: /req/coverage/gradient/type
 part:: An Encoding SHALL support defining a `type` property of a `gradient` Symbolizer as a string with a value of `linear` or `radial`.
 part:: A Renderer SHALL support filling vector geometry based on a `gradient` property specifying a `type` of `linear` or `radial`.
 ====
@@ -104,7 +104,7 @@ part:: A Renderer SHALL support filling vector geometry based on a `gradient` pr
 [requirement]
 ====
 [%metadata]
-identifier:: /req/vector/gradient/stops
+identifier:: /req/coverage/gradient/stops
 part:: An Encoding SHALL support defining a `stops` property of a `gradient` Symbolizer as an array of color stops.
 part:: A Renderer SHALL support filling vector geometry based on a `gradient` property specifying a `stops` array of color stops.
 ====
