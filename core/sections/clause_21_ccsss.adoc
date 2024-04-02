@@ -118,7 +118,7 @@ When not all members of a class are initialized within an instantiation, a defau
 Those default values are specified in a <<ccsss-default-values, dedicated section>> below
 
 NOTE: CartoSym-CSS supports and recommends the use of `{` `}` for object instances, and of `[` `]` for arrays,
-for also supports `(` `)` in these contexts for compatibility with the CQL2-Text and WKT encodings.
+but also supports `(` `)` in these contexts for compatibility with the CQL2-Text and WKT encodings.
 A CQL2-Text expression (including WKT geometry) can therefore be used directly as an expression in a selector or symbolizer parameter value.
 However, a CartoSym-CSS expression making use of the curly and/or square brackets will not be a valid CQL2 expression.
 
