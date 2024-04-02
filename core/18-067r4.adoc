@@ -21,7 +21,7 @@
 :submitting-organizations: HEIG-VD (School of Management and Engineering Vaud); CNRS (National Center for Scientific Research); Strategic ACI; IGN; Ecere
 :docfile: document.adoc
 :mn-document-class: ogc
-:mn-output-extensions: html,doc,xml,pdf
+:mn-output-extensions: html,doc,xml,pdf,rxl
 :local-cache-only:
 :data-uri-image:
 :pdf-uri: ./18-067r4.pdf
