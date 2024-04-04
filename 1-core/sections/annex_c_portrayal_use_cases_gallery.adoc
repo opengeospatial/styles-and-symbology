@@ -153,3 +153,29 @@ image::figures/roads-group.png[]
                For each feature pass:
                   Render feature symbolizer
 ////
+
+=== Natural Earth (economies)
+
+.Example rendering of the Natural Earth map, colored by economies
+image::figures/natural_earth_econonomy.png[]
+
+.CartoSym-CSS used to produce above Natural Earth map colored by economies
+====
+[source,cscss]
+----
+include::../examples/10-natural_earth_economies.cscss[]
+----
+====
+
+=== Natural Earth (continents)
+
+.Example rendering of the Natural Earth map, colored by continent
+image::figures/natural_earth.png[]
+
+.CartoSym-CSS used to produce above Natural Earth map colored by continents
+====
+[source,cscss]
+----
+include::../examples/11-natural_earth_continents.cscss[]
+----
+====

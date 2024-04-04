@@ -1,0 +1,330 @@
+{ visibility: false; }
+
+ne_10m_admin_0_countries
+{
+   visibility: true;
+   zOrder: 1;
+   opacity: 0.3686275;
+
+   label: { elements: [ Text { text: name,
+                               font: { face: 'Tahoma',
+                                       size: 14,
+                                       outline: { size: 3,
+                                                  opacity: 0.75,
+                                                  color: white }
+                                      }
+                               } ] };
+
+   [CONTINENT = 'Africa']
+   {
+      fill.color: #e29176;
+   }
+
+   [CONTINENT = 'Antartica']
+   {
+      fill.color: #3a0fc8;
+   }
+
+   [CONTINENT = 'Asia']
+   {
+      fill.color: #3a0fc8;
+   }
+
+   [CONTINENT = 'Europe']
+   {
+      fill.color: #d2c85c;
+   }
+
+   [CONTINENT = 'North America']
+   {
+      fill.color: #15ed4b;
+   }
+
+   [CONTINENT = 'Oceania']
+   {
+      fill.color: #3ad3c6;
+   }
+
+   [CONTINENT = 'South America']
+   {
+      fill.color: #ef4b8f;
+   }
+}
+
+ne_10m_urban_areas
+{
+   visibility: true;
+   fill: { opacity: 0.8, color: #ffe469 };
+   stroke: { color: yellow, width: 0 };
+   zOrder: 31;
+}
+
+ne_10m_graticules_10
+{
+   visibility: true;
+   stroke: { color: gainsboro, width: 0.1 };
+   zOrder: 3;
+}
+
+ne_10m_graticules_30
+{
+   visibility: true;
+   stroke: { color: gray, width: 0.1 };
+   zOrder: 4;
+}
+
+ne_10m_populated_places
+{
+   visibility: true;
+   zOrder: 24;
+
+   [SCALERANK = 0]
+   {
+      label: { elements: [
+         Dot { color: white, size: 10 },
+         Dot { color: darkOrange, size: 6 },
+         Text { text: NAME,
+                position2D : { 10, -4 },
+                font: { face: 'Tahoma',
+                        size: 12,
+                        outline: { color: white,
+                                   size: 3.5,
+                                   opacity: 0.75 }
+                       },
+                alignment: { left, middle } }
+      ] };
+   }
+}
+
+ne_10m_geography_regions_polys
+{
+   visibility: true;
+   fill: { opacity: 0 };
+   stroke: { width: 0 };
+   label: { elements: [ Text {
+                  text: name,
+                  font: { face: 'Times New Roman',
+                  size: 12,
+                  italic: true,
+                  color: papayaWhip,
+                  outline: { size: 3,
+                             color: black,
+                             opacity: 0.35 }
+                         },
+                  alignment: { center, middle }
+                               }
+                      ] };
+   zOrder: 64;
+}
+
+ne_10m_bathymetry_I_2000
+{
+   visibility: true;
+   fill: { color: #95bce6 };
+   stroke: { width: 0, opacity: 0 };
+   zOrder: 3;
+}
+
+ne_10m_bathymetry_L_0
+{
+   visibility: true;
+   fill: { color: #d1e9ff };
+   stroke: { width: 0, opacity: 0 };
+   zOrder: 0;
+}
+
+ne_10m_bathymetry_K_200
+{
+   visibility: true;
+   fill: { color: #bfe0ff };
+   stroke: { width: 0, opacity: 0 };
+   zOrder: 1;
+}
+
+ne_10m_bathymetry_J_1000
+{
+   visibility: true;
+   fill: { color: #aacff2 };
+   stroke: { width: 0, opacity: 0 };
+   zOrder: 2;
+}
+
+ne_10m_bathymetry_H_3000
+{
+   visibility: true;
+   fill: { color: #86b3eb };
+   stroke: { width: 0, opacity: 0 };
+   zOrder: 4;
+}
+
+ne_10m_bathymetry_G_4000
+{
+   visibility: true;
+   fill: { color: #629fd9 };
+   stroke: { width: 0, opacity: 0 };
+   zOrder: 5;
+}
+
+ne_10m_bathymetry_F_5000
+{
+   visibility: true;
+   fill: { color: #528fcc };
+   stroke: { width: 0, opacity: 0 };
+   zOrder: 6;
+}
+
+ne_10m_bathymetry_E_6000
+{
+   visibility: true;
+   fill: { color: #427cb3 };
+   stroke: { width: 0, opacity: 0 };
+   zOrder: 7;
+}
+
+ne_10m_bathymetry_D_7000
+{
+   visibility: true;
+   fill: { color: #2b66a6 };
+   stroke: { width: 0, opacity: 0 };
+   zOrder: 8;
+}
+
+ne_10m_bathymetry_C_8000
+{
+   visibility: true;
+   fill: { color: #385b8c };
+   stroke: { width: 0, opacity: 0 };
+   zOrder: 9;
+}
+
+ne_10m_bathymetry_B_9000
+{
+   visibility: true;
+   fill: { color: #2a3268 };
+   stroke: { width: 0, opacity: 0 };
+   zOrder: 10;
+}
+
+ne_10m_bathymetry_A_10000
+{
+   visibility: true;
+   fill: { color: #1e1c47 };
+   stroke: { width: 0, opacity: 0 };
+   zOrder: 11;
+}
+
+ne_10m_playas
+{
+   visibility: true;
+   opacity: 0.4235294;
+   fill: { color: burlyWood };
+   stroke: { width: 0 };
+   zOrder: 75;
+}
+
+ne_10m_ocean
+{
+   visibility: true;
+   fill: { color: #e4f4f7 };
+   stroke: { width: 0 };
+   zOrder: 4;
+}
+
+ne_10m_admin_1_states_provinces
+{
+   visibility: true;
+   fill: { opacity: 0 };
+   stroke: { color: silver, width: 0.5 };
+   zOrder: 3;
+}
+
+ne_10m_rivers_lake_centerlines
+{
+   visibility: true;
+   stroke: { color: dodgerBlue, width: 0.5 };
+   zOrder: 36;
+}
+
+ne_10m_rivers_europe
+{
+   visibility: true;
+   stroke: { color: dodgerBlue, width: 0.5 };
+   zOrder: 25;
+}
+
+ne_10m_reefs
+{
+   visibility: true;
+   stroke: { color: #00af7a };
+   zOrder: 35;
+}
+
+ne_10m_lakes_pluvial
+{
+   visibility: true;
+   fill: { color: dodgerBlue };
+   stroke: { width: 0 };
+   zOrder: 22;
+}
+
+ne_10m_lakes_north_america
+{
+   visibility: true;
+   fill: { color: dodgerBlue };
+   stroke: { width: 0 };
+   zOrder: 70;
+}
+
+ne_10m_lakes_europe
+{
+   visibility: true;
+   fill: { color: dodgerBlue };
+   stroke: { width: 0 };
+   zOrder: 68;
+}
+
+ne_10m_lakes
+{
+   visibility: true;
+   fill: { color: dodgerBlue };
+   stroke: { width: 0 };
+   zOrder: 67;
+}
+
+ne_10m_glaciated_areas
+{
+   visibility: true;
+   fill: { opacity: 0.16, color: aqua };
+   stroke: { width: 0 };
+   zOrder: 65;
+}
+
+ne_10m_geography_marine_polys
+{
+   visibility: true;
+   fill: { opacity: 0 };
+   stroke: { width: 0 };
+   zOrder: 87;
+   [SCALERANK = 0]
+   {
+      label: { elements: [ Text { text: name,
+                                  font: { face: 'Tahoma',
+                                          size: 12,
+                                          color: dodgerBlue,
+                                          italic: true,
+                                          outline: { size: 3,
+                                                     opacity: 0.75,
+                                                     color: #10508b
+                                                    }
+                                         } } ] };
+   }
+}
+
+ne_10m_roads
+{
+   visibility: true;
+   zOrder: 86;
+   [SCALERANK <= 3]{
+   stroke: { width: 0.66, color : #c42e31 };
+   }
+}
