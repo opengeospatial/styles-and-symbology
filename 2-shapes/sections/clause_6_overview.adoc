@@ -1,0 +1,41 @@
+[[overview]]
+== Overview
+
+This Standard defines conformance classes for:
+
+* a core symbology conceptual and logical model based on Styles as a list of StylingRules consisting of a Symbolizer and optional Selector Expression (<<rc-core,Section 7>>),
+* additional conformance classes extending this core model with:
+   ** basic portrayal capabilities of vector features (<<rc-vector,Section 8>>),
+   ** portrayal capabilities of coverage data (<<rc-coverage,Section 9>>),
+   ** label placement and font outlines capabilities (<<rc-labels,Section 10>>),
+   ** shape graphics capabilities including circles, ellipses, arcs, rectangles (including rounded rectangles) and paths (polylines and polygons), with the ability to use outlines (<<rc-shapes,Section 11>>),
+   ** vector graphic hierarchy capabilities, including full 2D transforms (<<rc-multigraphics,Section 12>>),
+   ** advanced strokes capabilities, including specific joins and caps, dashed lines, casing and centerlines, and graphic patterns (<<rc-joinscaps,Section 13>>),
+   ** advanced fill capabilities, including graphic patterns, hatches, gradients and stipples (<<rc-hatchesgradientsstipples,Section 14>>),
+   ** using expressions as parameter values for any symbolizer properties (<<rc-parametervalues,Section 15>>),
+   ** using identifiers in the right side of operation expressions, conditional expressions and variables (<<rc-righthand,Section 16>>),
+   ** arithmetic, bitwise and text relation operators (<<rc-arithmetic,Section 17>>),
+   ** function call expressions and standardized functions for spatial, temporal and array relations, as well as text and geometry manipulation (<<rc-functions,Section 18>>), and
+   ** using 3D model graphics and 3D transforms (<<rc-righthand,Section 19>>),
+* two encodings for the logical and conceptual model covering all of these conformance classes:
+   ** an encoding based on JSON that can be readily parsed by JSON parser (<<rc-json,Section 20>>), and
+   ** a more expressive encoding based on Web CSS which is better suited to hand-edit styles (<<rc-ccsss,Section 21>>).
+
+In addition, the following annexes are included:
+
+* a normative Abstract Test Suite for the conformance classes (<<annex-ats,Annex A>>),
+* an informative mapping of SLD/SE and notable vendor extensions to the conceptual model and requirements classes (<<annex-sldse,Annex B>>),
+* an informative map gallery of practical use cases alongside the styles used to generate the maps encoded in the _Cascading Cartographic and Symbology Style Sheets_ encoding (<<annex-mapgallery,Annex C>>), and
+* an informative revision history (<<annex-revisions,Annex D>>).
+
+////
+We need new diagrams to illustrate the conformance classes and encoding and the fact that this is all included in this standard.
+
+.The core model and its potential extensions
+image::figures/figure1.png[]
+
+Figure 2 explains the relation between the core, the potential extensions, and their encodings. A community style extension must be based on a core element and will be encoding-independent. An extension should have a concrete encoding. As the figure shows encoding could be implemented in various formats.
+
+.From core and extensions to encodings: principles of implementation
+image::figures/figure2.png[]
+////

@@ -1,0 +1,59 @@
+[[rc-transforms]]
+== Requirements Class "Multi Graphics and Transforms"
+=== Overview
+
+This requirements class adds support for vector graphic hierarchies and transformations.
+
+[#img-uml-class-multigraphic-transforms]
+.MultiGraphic and Transforms UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+Transform2D *-- UnitPoint
+Transform2D : orientation: Angle
+Transform2D : scaling: UnitPoint -- no unit
+Transform2D : translation: UnitPoint
+
+Graphic : transform: Transform2D
+Graphic *-- Transform2D
+
+GraphicInstance --|> Graphic
+GraphicInstance : element: Graphic
+GraphicInstance --o Graphic
+....
+
+==== Graphic and MultiGraphic Extensions
+
+This requirements class removes the restriction on MultiGraphics containing other MultiGraphics.
+
+.Extended Graphic class
+[width="90%",options="header"]
+|===
+| Name      | Definition           | Type          | Multiplicity
+| transform | 2D transformation    | Transform2D   | 1
+|===
+
+The `transform.translation` is equivalent to the Graphic's `position` property.
+
+.Transform2D class
+[width="90%",options="header"]
+|===
+| Name         | Definition           | Type                | Multiplicity
+| orientation  | Orientation          | Angle               | 1
+| scaling      | Scaling              | UnitPoint (no unit) | 1
+| translation  | Translation          | UnitPoint           | 1
+|===
+
+==== Graphic Instances
+
+The GraphicInstance class allows instantiating multiple instances of a single Graphic definition object, with each instance having a different tranformation applied.
+
+.GraphicInstance class
+[width="90%",options="header"]
+|===
+| Name    | Definition           | Type     | Multiplicity
+| element | Instantiated graphic | Graphic  | 1
+|===
+
+=== Requirements
+
+include::../requirements/rc-graphical-hierarchy.adoc[]

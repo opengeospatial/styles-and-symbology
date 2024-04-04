@@ -1,0 +1,751 @@
+[[rc-core]]
+== Requirements Class "Core"
+
+=== Overview
+The requirements described in this section define the symbology core requirement class. The following UML diagram (<<img-uml-class-core>>) shows the fundamental concepts of the Symbology Conceptual and Logical Model:
+
+[#img-uml-class-core]
+.Symbology Core Classes UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+Style : stylingRules: StylingRule[0..*]
+Style *-- StylingRule
+
+StylingRule : symbolizer: Symbolizer[0..1]
+StylingRule : selector: Expression[0..1]
+StylingRule : nestedRules: StylingRule[0..*]
+StylingRule *-- StylingRule
+StylingRule *-- Expression : selector
+
+Symbolizer : visibility: bool
+Symbolizer : opacity: float
+Symbolizer : zOrder: integer
+Symbolizer --* StylingRule
+Symbolizer --> Expression : parameter values
+
+/'Note: zOrder needs discussion on whether it should be relative or float
+and how to relate to encodings where the visual priority order
+comes from the order of the rules.'/
+....
+
+==== Styles
+
+A Style is the root concept of the Styles and Symbology Conceptual Model and consists of an ordered list of StylingRules.
+The StylingRules are to be applied in order so that rules selected later override earlier ones.
+This allows to compose styles in a cascading manner by inheriting from a base style then overriding some specific portrayal behaviors.
+
+////
+This class organizes the rules of symbolizing instructions to be applied by a rendering engine on a layer of geographic features
+(e.g., vector based spatial data or raster data).
+
+Please note that the graphic pipeline of the rendering engine must be expressed unambiguously for each concrete implementation of a Style in order to enable cartographic portrayal interoperability.
+////
+
+////
+Can we omit this metadata? This might belon instead to the encoding or styles metadata.
+
+| name      | A string value to reference the Style   | ParameterValue data type   | Zero or one
+| title      | Human readable title   | ParameterValue data type   | 0..1
+| abstract   | Human readable description   | ParameterValue data type   | 0..1
+////
+
+.Style class
+[width="90%",options="header"]
+|===
+| Name         | Definition                        | Data type and value | Multiplicity
+| stylingRules | Styling rules defining the style   | StylingRule         | 0..*
+|===
+
+==== Styling Rules
+
+A StylingRule specifies that a particular Symbolizer (defining how to portray data) should be applied if the rule is selected based on a Selector expression (e.g., feature-property conditions or map scales).
+A StylingRule can contain nested rules, which will only be applied if the the parent rule's Selector is evaluated to true, and whose Symbolizers will inherit from and override the parent StylingRule's Symbolizer.
+
+////
+Do we need these? Should the style metadata be included in Core requirements class?
+
+| title   | Human readable title   | ParameterValue data type   | One
+| abstract   | Human readable description   | ParameterValue data type   | Zero or one
+////
+
+
+// Should defaults be defined in the conceptual / logical model, or specific to encodings?
+
+////
+
+Internationalization support would be great.
+Where exactly do we need this?
+The following was in ParameterValue, but most parameter values will be numbers/colors, or feature/covergge properties.
+What actually needs i18n? Rule labels for legends? The choice between feature properties available in different languages?
+
+| language   | Language identifier for the ParameterValue element. (a)   | Character String. This language identifier shall be as specified in IETF RFC 4646.   | zero or more
+(a) The language identifier should offer a way to adapt the ParameterValue to a specified language, e.g., display the title of a Rule element both in English and French.
+////
+
+.StylingRule
+[width="90%",options="header"]
+|===
+| Name         | Definition                                                      | Data type and value      | Multiplicity
+| name         | A name for the rule (useful for generating legends)             | string                   | 0..1
+| selector     | Selector defining the condition to apply the rule's symbolizer  | Expression               | 0..1
+| symbolizer   | Symbolizer to apply by the rendering engine                     | Symbolizer               | 0..1
+| nestedRules  | Additional styling rules to consider if this rule is selected partially overriding this rule's symbolizer | StylingRule              | 0..*
+|===
+
+The selector (also sometimes called a _filter_), for the rule is defined as a predicate expression evaluating to either true or false.
+
+.Example showcasing a Style made of StylingRules using CCSSS encoding
+====
+[source,ccsss]
+----
+Landuse    // Selector for this first rule
+{
+   // Symbolizer properties to be set if this rule is selected
+   visibility: false;
+}
+
+Roads    // Selector for this second rule
+{
+   // Symbolizer properties to be set if this rule is selected
+   visibility: false;
+
+   // Nested rule only considered if this parent rule is selected
+   [viz.sd < 200000] // Selector for this nested rule
+   {
+      // Symbolizer properties to be set if this nested rule is selected
+      visibility: true;
+   }
+}
+----
+====
+
+// TODO: Illustrate above example with two pictures at different scales
+
+==== Symbolizers
+
+A Symbolizer describes how to portray geographic data (e.g., vector features or gridded coverage data) based on a set of properties.
+This core requirements class only defines three basic properties relevant to most portrayal use cases.
+Separate requirements classes and later parts will extend this Symbolizer class with additional properties to provide more advanced portrayal capabilities.
+
+////
+| name   | A string value to reference the Symbolizer   | ParameterValue data type   | Zero or one
+| title   | Human readable title   | ParameterValue data type   | One
+| abstract   | Human readable description   | ParameterValue data type   | Zero or one
+| uom   | Unit of measure to apply to all graphical properties of a Symbolizer   | uom code   | Zero or one
+////
+
+.Symbolizer class
+[width="90%",options="header"]
+|===
+| Name        | Definition                   | Data type and value  | Multiplicity
+| visibility | Whether to display the data  | bool                 | 0..1
+| opacity    | Degree of opacity            | float                | 0..1
+| zOrder     | Specify a rendering order    | int                  | 0..1
+|===
+
+.CCSSS Example showcasing the limited symbolization possible with this Core requirements class
+====
+[source,ccsss]
+----
+{
+   visibility: false;
+
+   Landuse
+   {
+      opacity = 0.5;
+      zOrder = 1;
+      visibility = true;
+   }
+
+   Buildings
+   {
+      opacity = 0.8;
+      zOrder = 2;
+      visibility = true;
+   }
+}
+----
+====
+
+// TODO: Illustrate above example with picture
+
+////
+-- I don't think we need the following explanation anymore:
+
+To understand what the symbolizer concept is, consider a “Lake” feature type represented by a Polygon that is to be symbolized as a “blue” filled polygon with its boundary drawn with a “black” stroke.
+As symbolizer is an abstract class: a concrete extension called here, for example, AreaSymbolizer, which must be provided to render an interior “fill” and an outlining “stroke.”
+Consequently, the AreaSymbolizer extension will implement concrete extensions of the abstract Stroke and Fill classes of the conceptual model.
+
+Depending on the type of geographical object, a set of symbolizer extensions can be conceived. For example a LineSymbolizer to draw a river, a PointSymbolizer to represent the “Hospitals,” or a
+LabelSymbolizer to render the road name along a line.
+////
+
+==== Expressions
+
+Expressions are a syntactic entity that may be evaluated to determine its value (from https://en.wikipedia.org/wiki/Expression_(computer_science)[Wikipedia]).
+The concept has similar meaning to Expressions as defined in the OGC Filter Encoding 2.0 standard, and can also be implemented with the OGC Common Query Language (CQL2),
+with the caveat that the Expressions defined here are not restricted to evaluate to a boolean value as is the case for the first version of CQL2.
+
+Expressions can be used in two places according to this Styles & Symbology conceptual model: as a Selector defining the condition whether to apply a StylingRule or not, as well
+as to define the values of Symbolizer properties.
+
+[#img-uml-class-expressions]
+.Expression Classes UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+abstract class Expression
+
+abstract class LiteralExpression
+LiteralExpression --|> Expression
+
+IdentifierExpression --|> Expression
+IdentifierExpression : name: string
+
+SystemIdentifierExpression --|> IdentifierExpression
+
+InstanceExpression --|> Expression
+InstanceExpression : objectClass: type
+InstanceExpression : members: map < string, Expression >
+InstanceExpression *-- Expression
+
+ArrayExpression --|> Expression
+ArrayExpression : elements: Expression[0..*]
+ArrayExpression *-- Expression
+
+OperationExpression --|> Expression
+OperationExpression : operand1: Expression[0..1]
+OperationExpression : operator: Operator
+OperationExpression : operand2: Expression
+OperationExpression *-- Operator
+OperationExpression *-- Expression
+
+'class SubExpression
+'SubExpression --|> Expression -- Parentheses could be purely an encoding concept based on the need to maintain priority...
+'class ExpressionList -- Expression with multiplicity?
+....
+
+===== Parameter Values
+
+The use of an expression as a Symbolizer property is called a _Parameter Value_, where an Expression can be substituted
+where a particular data type is expected, in which case the Expression will be resolved to that expected data type.
+Conceptually, all Symbolizer properties can be specified using any type of expression _Parameter Value_, but this is not required by
+this core conformance class, and specific requirements classes such as the "Symbolizer Parameter Value Expresssions"
+requirements class enable this behavior. Without a requirements class specifying otherwise, only <<literal-expressions,Literal Expressions>>
+compatible with the expected data type are allowed as _Parameter Values_.
+
+===== Identifier Expressions
+
+An Identifier Expression is represented by a textual property that gets resolved at runtime.
+
+Typical example of identifier expressions include feature properties (e.g., `population`) and coverage range values (e.g., a particular imagery band `B8`).
+
+====== System Identifiers
+
+[#img-uml-class-systemIDs]
+.System Identifiers UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+enum SystemIdentifierExpression
+SystemIdentifierExpression --|> IdentifierExpression
+SystemIdentifierExpression : visualization
+SystemIdentifierExpression : visualization.scaleDenominator
+SystemIdentifierExpression : visualization.dateTime
+SystemIdentifierExpression : visualization.date
+SystemIdentifierExpression : visualization.timeOfDay
+SystemIdentifierExpression : visualization.pass
+SystemIdentifierExpression : dataLayer
+SystemIdentifierExpression : dataLayer.identifier
+SystemIdentifierExpression : dataLayer.type
+SystemIdentifierExpression --> Visualization
+SystemIdentifierExpression --> DataLayer
+
+Visualization : scaleDenominator: double
+Visualization : dateTime: TimeInstant
+Visualization : date: Date
+Visualization : timeOfDay: TimeOfDay
+Visualization : timeInterval: TimeInterval
+Visualization : pass: int
+Visualization *-- TimeInstant
+Visualization *-- TimeInterval
+Visualization --o Date
+Visualization --o TimeOfDay
+
+class DataLayer
+DataLayer : identifier: string
+DataLayer : type: DataLayerType
+DataLayer *-- DataLayerType
+
+enum DataLayerType
+DataLayerType : map
+DataLayerType : vector
+DataLayerType : coverage
+
+class TimeInstant
+TimeInstant : date: Date
+TimeInstant : time: TimeOfDay
+TimeInstant *-- Date
+TimeInstant *-- TimeOfDay
+
+TimeInterval : start: TimeInstant
+TimeInterval : end: TimeInstant
+TimeInterval *-- TimeInstant
+
+class Date
+Date : year: int
+Date : month: Month
+Date : day: int
+Date *-- Month
+
+class TimeOfDay
+TimeOfDay : hour: int
+TimeOfDay : minutes: int
+TimeOfDay : seconds: double
+
+enum Month
+Month : january
+Month : february
+Month : march
+Month : april
+Month : may
+Month : june
+Month : july
+Month : august
+Month : september
+Month : october
+Month : november
+Month : december
+....
+
+One specific type of identifier expressions use System Identifiers.
+A System Identifier refers to an internal state of the system, or a particular aspect of the data being portrayed.
+
+The following System Identifiers are defined by this conformance class:
+
+////
+TOCHECK: How to handle parent objects ? e.g.,  visualization, dataLayer, feature
+////
+
+.Visualization System Identifiers
+[width="90%",options="header"]
+|===
+| Name                             | Definition                              | Data type and value
+| visualization.scaleDenominator   | Current visualization scale denominator | float
+| visualization.dateTime           | Current visualization date and time     | DateTime
+| visualization.date               | Current visualization date              | Date
+| visualization.timeOfDay          | Current visualization time of day       | Time
+| visualization.timeInterval       | Current visualization time of day       | TimeInterval
+| visualization.pass               | Current visualization rendering pass    | int
+|===
+
+.CCSSS Example showcasing scale-dependent selector using system identifiers
+====
+[source,ccsss]
+----
+Roads
+{
+   visibility: false;
+
+   [viz.sd < 200000] // Roads will only be visible at scale 1:200,000 and closer
+   {
+      visibility: true;
+   }
+}
+----
+====
+
+**Visualization Rendering Passes**
+
+Setting up symbolization rules for a selector on a visualization pass allows to render all data of
+the map using different set of symbolizers.
+A later pass will only begin after all data layers and their features / coverage cells have been rendered
+with the symbolizers set for earlier visualization passes.
+
+See also the _feature pass_ introduced in
+<<rc-vector, Basic Vector Styling>> requirements class, which allows to render the same feature multiple times
+with different symbolizers before rendering the next feature.
+
+////
+   Styles & Symbology Painter's algorithm
+
+      For each viz.pass:
+         For each distinct zOrder:
+            (if applicable, for each built-in Casing pass:)
+               For each data layer: (part of that zOrder -- layers may automatically be organized on separate zOrder by default)
+                  For each feature / cell: (of equal z order)
+                     For each feature.pass:
+                        Render feature symbolizer
+////
+
+.Styles & Symbology Visual Ordering Constructs
+[width="90%",options="header"]
+|===
+| Construct          | Construct type                   | Data type |Behavior description
+| zOrder             | Symbolizer property              | float     | In a single pass, modify default order of features / layers
+| visualization.pass | System identifier for selector   | integer   | Render all selected geometry features / coverage cells of data layers
+                                                                      more than once with different symbolization,
+                                                                      or after whole map drawn in previous pass
+| feature.pass    | System identifier for selector   | integer      | Render feature geometry / coverage cell more than once potentially with
+                                                                      different symbolization before rendering next data point.
+|===
+
+.Month enumeration
+[width="90%",options="header"]
+|===
+| Name
+| january
+| february
+| march
+| april
+| may
+| june
+| july
+| august
+| september
+| october
+| november
+| december
+|===
+
+.Date class
+[width="90%",options="header"]
+|===
+| Name            | Definition                                   | Data type and value | Multiplicity
+| year            |                                              | int                 | 1
+| month           |                                              | Month               | 1
+| day             |                                              | int                 | 1
+|===
+
+.TimeOfDay class
+[width="90%",options="header"]
+|===
+| Name            | Definition                                   | Data type and value | Multiplicity
+| hour            |                                               | int                 | 1
+| minutes         |                                              | Month               | 1
+| seconds         |                                              | int                 | 1
+|===
+
+.Class TimeInstant
+[width="90%",options="header"]
+|===
+| Name            | Definition                                   | Data type and value | Multiplicity
+| date            |                                              | Date                | 1
+| time            |                                              | TimeOfDay           | 1
+|===
+
+.TimeInterval class
+[width="90%",options="header"]
+|===
+| Name            | Definition                                   | Data type   | Multiplicity
+| start           | start of the interval                        | TimeInstant | 1
+| end             | end of the interval                          | TimeInstant | 1
+|===
+
+.CCSSS Example showcasing visualization time-dependent selector using system identifiers
+====
+[source,ccsss]
+----
+Landuse
+{
+   visibility: false;
+
+   // Landuse will only be visible when visualization date is later than January 1, 2020
+   [viz.date > DATE('2020-01-01')]
+   {
+      visibility: true;
+   }
+}
+----
+====
+
+.Layer System Identifiers
+[width="90%",options="header"]
+|===
+| Name                                    | Definition                                               | Data type and value
+| dataLayer.identifier                    | Identifier of data layers                                | string
+| dataLayer.type                          | Data type of data layers                                 | enumeration: vector, coverage, ...
+|===
+
+.CCSSS Example showcasing selectors depending on layer identifiers and data type using system identifiers
+====
+[source,ccsss]
+----
+[dataLayer.type = vector]
+{
+   // Display vector layers at 60% opacity by default
+   opacity: 0.6;
+
+   [dataLayer.identifier = 'Landuse']
+   {
+      // Except for Landuse that should show at 80% opacity
+      opacity: 0.8;
+   }
+
+   // In CCSSS, the <layerid> syntax is equivalent
+   // to [dataLayer.identifier = '<layerid>']
+   Roads
+   {
+      opacity = 1.0; // and roads at 100% opacity
+   }
+}
+----
+====
+
+// TODO: Illustrate above example with picture
+
+
+////
+TODO: In other req classes:
+
+* dataLayer.features                    -- for advanced comparison of feature against all other features
+* dataLayer.featuresGeometry            -- for advanced comparison of feature against all other features
+* feature.geometry                      -- for spatial operators
+////
+
+[[literal-expressions]]
+===== Literal Expressions
+
+[#img-uml-class-literals]
+.Literal Classes UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+abstract LiteralExpression
+
+TextLiteral --|> LiteralExpression
+TextLiteral : text: string
+
+EnumValueLiteral --|> LiteralExpression
+EnumValueLiteral : enum: type
+EnumValueLiteral : value: string
+EnumValueLiteral : numericValue: int64
+
+enum BoolLiteral
+BoolLiteral --|> EnumValueLiteral
+BoolLiteral : false
+BoolLiteral : true
+
+NullLiteral --|> LiteralExpression
+
+IntegerLiteral --|> LiteralExpression
+IntegerLiteral : value: int64
+
+RealLiteral --|> LiteralExpression
+RealLiteral : value: double
+
+ArrayLiteral --|> ArrayExpression
+ArrayLiteral --|> LiteralExpression
+
+InstanceLiteral --|> InstanceExpression
+InstanceLiteral --|> LiteralExpression
+....
+
+A literal expression is an expression that has a fixed value in the encoding of the style.
+A similar literal class concept was originally defined in the OGC Filter Encoding 2.0 standard section 7.5.1.
+
+The following types of literals are defined:
+
+* An integer literal represents a whole numeric value (CCSSS example: `123`)
+* A real literal represents a real number (integer, fractional or irrational number) (CCSSS example: `0.85`)
+* Text literals are Unicode character strings (CCSSS example: `'København'`)
+* A null literal represents an unset value (CCSSS example: `null`)
+* Enumeration value literals allow to refer by name to a set of pre-defined values associated with the context where they are used (CCSSS example: `vector`)
+* Boolean literals are a specialized type of enumeration literals which are either true or false (CCSSS example: `false`)
+* Array literals (see <<array-expressions,Array Expressions>>) (CCSSS example: `(1, 2, 3)`)
+* Instance literals (see <<instance-expressions,Instance Expressions>>) (CCSSS examples: `Color(20, 100, 80)` or `Color(r: 20, g: 100, b: 80)`)
+
+===== Operation Expressions
+
+An Operation Expression performs an operation specified by an Operator on one, two or three operand expressions, depending on whether they unary, binary or ternary operators.
+This core requirements class defines only Logical and Relational operators.
+Implementations are also required to support prioritizing operations (typically encoded using parentheses: `(` `)`).
+Other requirements classes introduce support for additional operators for arithmetic, text and bitwise operations.
+Without support for the _Any right-hand operand_ requirements class, the right-hand operands of RelationExpressions are limited to LiteralExpressions.
+
+.OperationExpression class
+[width="90%",options="header"]
+|===
+| Name      | Definition                         | Data type and value | Multiplicity
+| operand1  | First operand                      | Expression          | 0..1
+| operator  | Operator                           | Operator            | 1
+| operand2  | Second operand                     | Expression          | 1
+|===
+
+[#img-uml-relational-logic-operators]
+.Core Logic and Relational Operators UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+enum Operator
+enum LogicOperator
+LogicOperator --|> Operator
+LogicOperator : and
+LogicOperator : or
+LogicOperator : not -- unary
+
+enum RelationalOperator
+RelationalOperator --|> Operator
+RelationalOperator : equal
+RelationalOperator : notEqual
+RelationalOperator : is
+RelationalOperator : isNot
+RelationalOperator : greater
+RelationalOperator : lesser
+RelationalOperator : greaterEqual
+RelationalOperator : lesserEqual
+RelationalOperator : between
+RelationalOperator : notBetween
+RelationalOperator : in -- right operand is array
+RelationalOperator : notIn -- right operand is array
+....
+
+This requirements class defines the following Logical Operators :
+
+.Logical Operators
+[width="90%",options="header"]
+|===
+| Name                     | CCSSS Example   | Type   | Definition
+| not                      | `not`           | unary  | True if and only if the operand is false
+| and                      | `and`           | binary | True if and only if both operands are true
+| or                       | `or`            | binary | True if and only if either or both of the operands is true
+|===
+
+This requirements class defines the following Relational Operators:
+
+.Relational Operators
+[width="90%",options="header"]
+|===
+| Name                     | CCSSS Example         |Type     | Definition
+| equal                    | `=`                   |binary   | The first operand is equal to the second one
+| notEqual                 | `<>`                  |binary   | The first operand is not equal to the second one
+| is (null)                | `is`                  |binary   | Only used with `null` literal for second operand (the first operand is null)
+| isNot (null)             | `is not`              |binary   | Only used with `null` literal for second operand (the first operand is not null)
+| lesser                   | `<`                   |binary   | The first operand is smaller than the second one
+| greater                  | `>`                   |binary   | The first operand is greater than the second one
+| lesserEqual              | `\<=`                 |binary   | The first operand is smaller than or equal to the second one
+| greaterEqual             | `>=`                  |binary   | The first operand is greater than or equal to the second one
+| in (array)               | `in`                  |binary   | Only used with an array for second operand (the first operand is one of the elements of the array)
+| notIn (array)            | `not in`              |binary   | Only used with an array for second operand (the first operand is not one of the elements of the array)
+| between                  | `between ... and`     |ternary  | The first operand is between the second and third operands (inclusively)
+| notBetween               | `not between ... and` |ternary  | The first operand is not between the second and third operands (inclusively)
+|===
+
+.CCSSS Example showcasing the use of logical and relational operators in a selector
+====
+[source,ccsss]
+----
+Roads
+{
+   visibility: false;
+
+   // Roads will be visible between scales 1:20,000 and 1:200,000
+   [viz.sd > 20000 and viz.sd < 200000]
+   {
+      visibility: true;
+   }
+}
+----
+====
+
+[[array-expressions]]
+===== Array Expressions
+
+An array expressions defines zero, one, or more element expressions forming an ordered set.
+
+CCSSS example: `(123.0, viz.sd)`.
+
+An _array literal_ is a special type of array expression whose elements are all literals.
+
+[[instance-expressions]]
+===== Instance Expressions
+
+An instance expressions instantiates an object of a class while optionally specifying values for member components.
+The default values for any member if not explicitly overridden can is specified by the class member definitions.
+
+CCSSS examples:
+
+* `DateTime(year: 2022, month: april, day: 6)`
+* `Color(r: 20, g: 100, b: 80)`)
+
+// We should probably consider including operators for accessing instance members, and indexing array elements.
+// As new requirements classes ?
+
+An _instance literal_ is a special type of instance expression assigning only literal expressions to its member components.
+
+A Symbolizer may either set an object property with a complete new instance, or specifically override a particular member of that object property.
+This capability is particularly useful when using nested StylingRules, where a nested rule can inherit the Symbolizer from the parent StylingRule.
+
+.CCSSS Example showcasing the use of logical and relational operators in a selector
+====
+[source,ccsss]
+----
+Roads
+{
+   // Default to a gray stroke (completely replace stroke property)
+   stroke: { gray };
+   // For scales closer than 1:200,000 ...
+   [viz.sd < 200000]
+   {
+      stroke.width: 5px; // inherit gray color, but modify the width to be 5 pixels.
+
+      // For scales closer than 1:10,000, replace the stroke completely with a 5 meters blue stroke
+      [viz.sd < 10000] { stroke: { blue, width: 5m } }
+   }
+}
+----
+====
+
+// TODO: Insert pretty picture here
+
+[[ccsss-default-values]]
+==== Default class member values
+
+The following default values are defined by this encoding.
+
+.Symbolizer
+[width="90%",options="header"]
+|===
+| Name           | Default value
+| visibility     | true
+| opacity        | 1
+| zOrder         | 1
+| fill           | default Fill
+| stroke         | default Stroke
+| marker         | default Marker
+| alphaChannel   | 1
+| colorChannels  | For multi-field coverage: fields[0], fields[1], fields[2]
+| singleChannel  | For single-field coverage: fields[0]
+|===
+
+.Stroke class default values
+[width="90%",options="header"]
+|===
+| Name           | Default value
+| opacity        | 1
+| width          | 1 px
+| color          | black
+|===
+
+.Fill class default values
+[width="90%",options="header"]
+|===
+| Name           | Default value
+| opacity        | 1
+| color          | white
+|===
+
+.Marker class default values
+[width="90%",options="header"]
+|===
+| Name           | Default value
+| elements       | Single default Dot
+|===
+
+.Dot class default values
+[width="90%",options="header"]
+|===
+| Name           | Default value
+| size           | 10 px
+| color          | white
+|===
+
+=== Requirements
+
+include::../requirements/rc-core.adoc[]

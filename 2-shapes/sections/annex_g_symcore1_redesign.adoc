@@ -1,0 +1,14 @@
+[appendix]
+== A REDESIGN OF OGC SYMBOLOGY ENCODING STANDARD FOR SHARING CARTOGRAPHY
+
+The ins and outs of the SymCore conceptual model are explained through the research article, below. Also, this article helps the reader to understand how the conceptual model can be extended (core and extensions approach).
+
+Bocher E, Ertz O. 2018. A redesign of OGC Symbology Encoding standard for sharing cartography. PeerJ Computer Science 4:e143 https://doi.org/10.7717/peerj-cs.143
+
+The abstract of the article is imported here.
+
+
+[example%unnumbered]
+====
+Despite most Spatial Data Infrastructures offering service-based visualization of geospatial data, requirements are often at a very basic level leading to poor quality of maps. This is a general observation for any geospatial architecture as soon as open standards as those of the Open Geospatial Consortium (OGC) are applied. To improve the situation, this paper does focus on improvements at the portrayal interoperability side by considering standardization aspects. We propose two major redesign recommendations. First to consolidate the cartographic theory at the core of the OGC Symbology Encoding standard. Secondly to build the standard in a modular way so as to be ready to be extended with upcoming future cartographic requirements. Thus, we start by defining portrayal interoperability by means of typical-use cases that frame the concept of sharing cartography. Then we bring to light the strengths and limits of the relevant open standards to consider in this context. Finally we propose a set of recommendations to overcome the limits so as to make these use cases a true reality. Even if the definition of a cartographic-oriented standard is not able to act as a complete cartographic design framework by itself, we argue that pushing forward the standardization work dedicated to cartography is a way to share and disseminate good practices and finally to improve the quality of the visualizations.
+====

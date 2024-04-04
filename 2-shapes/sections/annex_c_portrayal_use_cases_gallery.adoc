@@ -1,0 +1,155 @@
+[appendix,obligation="informative"]
+[[annex-mapgallery]]
+== Portrayal Use Cases Gallery
+
+This annex illustrates the capabilities of the different requirements classes defined in this standard
+with a map gallery of practical use cases alongside the styles used to generate the maps
+encoded in the _Cascading Styles and Symbology Stylesheets_ encoding defined in this Standard.
+
+See supplementary materials for same style sheets encoded using the JSON Styles & Symbology encoding.
+
+=== Choropleth (graduated map)
+
+Requirements class used:
+
+* <<rc-core, Core>>
+* <<rc-vector, Basic Vector Features Styling>>
+
+Data sources used
+
+- A rectangular grid of the fraction of high vegetation.
+
+.Style encoded using CCSSS encoding
+====
+[source,ccsss]
+----
+{
+  // Note: The following line is optional as 1 pixel black stroke is the default
+  stroke: { black; width: 1px }
+  [highVegetationFract between 0   and 0.2] { fill: { yellow }; };
+  [highVegetationFract between 0.2 and 0.5] { fill: { orange }; };
+  [highVegetationFract > 0.5]               { fill: { red } };
+}
+----
+====
+
+.Example rendering of the Choropleth map
+image::figures/gallery-choropleth.png[]
+
+=== Overriding rules
+
+Requirements class used:
+
+* <<rc-core, Core>>
+* <<rc-vector, Basic Vector Features Styling>>
+
+Data sources used
+
+- Circumpolar distribution and carbon storage of thermokarst landscapes
+
+Citation: Olefeldt, D., Goswami, S., Grosse, G., Hayes, D., Hugelius, G., Kuhry, P., McGuire, A.D, Romanovsky, V.E, Sannel, A.B.K., Schuur, E.A.G., Turetsky, M.R: Circumpolar distribution and carbon storage of thermokarst landscapes. Nature Communications, 7, 13043. Available at: https://www.nature.com/articles/ncomms13043#f3 (2016)
+
+.Style encoded using CCSSS encoding
+====
+[source,ccsss]
+----
+#Thermokarst
+{
+   stroke: { width: 0 };
+   [TKWP = 'Low'                                    ]{ fill: { #a1ff74 }; }
+   [TKThLP = 'Low'                                  ]{ fill: { #74b2ff }; }
+   [TKHP = 'Low'                                    ]{ fill: { #fd846d }; }
+   [TKWP = 'Low' AND TKHP = 'Low'                   ]{ fill: { #f7ff7c }; }
+   [TKWP = 'Low' AND TKThLP = 'Low'                 ]{ fill: { #beffe9 }; }
+   [TKWP = 'Low' AND TKThLP = 'Low' AND TKHP = 'Low']{ fill: { #9d9d9d }; }
+   [TKWP = 'Moderate'                               ]{ fill: { #4de600 }; }
+   [TKThLP = 'Moderate'                             ]{ fill: { #0070ff }; }
+   [TKHP = 'Moderate'                               ]{ fill: { #fe0001 }; }
+   [TKWP = 'Moderate' AND TKHP = 'Moderate'         ]{ fill: { #eae600 }; }
+   [TKThLP = 'Moderate' AND TKHP = 'Moderate'       ]{ fill: { #ff00c4 }; }
+   [TKWP = 'Moderate' AND TKThLP = 'Moderate'       ]{ fill: { #00e7a9 }; }
+   [TKWP = 'High'                                   ]{ fill: { #39a60d }; }
+   [TKThLP = 'High'                                 ]{ fill: { #014da9 }; }
+   [TKHP = 'High'                                   ]{ fill: { #9a0602 }; }
+   [TKWP = 'High' AND TKThLP = 'High'               ]{ fill: { #00a882 }; }
+   [TKWP = 'Very High'                              ]{ fill: { #334d27 }; }
+   [TKThLP = 'Very High'                            ]{ fill: { #002674 }; }
+   [TKWP = 'Very High' AND TKThLP = 'Very High'     ]{ fill: { #007f7e }; }
+}
+----
+====
+
+.Example rendering of the thermokarst landscapes
+image::figures/gallery-thermokarst1.png[]
+
+=== Visualization passes
+
+.Example rendering of complex visual ordering (placeholder from https://docs.geoserver.org/2.23.x/en/user/styling/sld/extensions/z-order/example.html[GeoServer documentation])
+image::figures/roads-group.png[]
+
+
+// TODO: Set up our own example
+
+.CCSSS Example showcasing use of viz.pass for both casing and ordering based on `z_order` attribute
+====
+[source,ccsss]
+----
+{
+   [viz.pass = 4 * z_order + 0]
+   {
+      [class = 'railways'][bridge = 1] { stroke: { color: #333333; width: 8; }; }
+      [class = 'minorroads']           { stroke: { color: #a69269; width: 3; }; }
+      [class = 'mainroads']            { stroke: { color: #ff0000; width: 5; }; }
+      [class = 'motorways']            { stroke: { color: #990000; width: 8; }; }
+   }
+
+   [viz.pass = 4 * z_order + 1]
+   {
+      [class = 'railways'][bridge = 1] { stroke: { color: #ffffff; width: 6; }; }
+   }
+
+   [viz.pass = 4 * z_order + 2]
+   {
+      [class = 'railways'] { stroke: { color: #333333; width: 3; }; }
+   }
+
+   [viz.pass = 4 * z_order + 3]
+   {
+      [class = 'railways]    { stroke: { color: #ffffff; width: 1.5; dashPattern: 5, 5; }; }
+      [class = 'motorways']  { stroke: { color: #ff6666; width: 6;   cap: round; }; }
+      [class = 'minorroads'] { stroke: { color: #ffffff; width: 2.5; cap: round; }; }
+      [class = 'mainroads']  { stroke: { color: #ff9999; width: 4;   cap: round; }; }
+   }
+}
+----
+====
+
+=== Z-ordering and feature rendering passes
+
+.CCSSS Example using built-in casing
+====
+[source,ccsss]
+----
+{
+   zOrder: z_order;
+   [feature.pass = -1][class = 'railways'][bridge = 1]
+   {
+      stroke: { color: #ffffff; width: 6; casing: { color: #333333; width: 1; }; };
+   }
+   [class = 'minorroads']  { stroke: { color: #ffffff; width: 2.5; cap: round;        casing: { color: #a69269; width: 0.25; }; }; }
+   [class = 'mainroads']   { stroke: { color: #ff9999; width: 4;   cap: round;        casing: { color: #ff0000; width: 0.5;  }; }; }
+   [class = 'motorways']   { stroke: { color: #ff6666; width: 6;   cap: round;        casing: { color: #990000; width: 1;    }; }; }
+   [class = 'railways']    { stroke: { color: #ffffff; width: 1.5; dashPattern: 5, 5; casing: { color: #333333; width: 0.75; }; }; }
+}
+----
+====
+
+////
+   Styles & Symbology Painter's algorithm
+
+      For each viz.pass:
+         For each distinct zOrder:
+            For each built-in Casing pass:
+               For each feature pass:
+                  Render feature symbolizer
+////

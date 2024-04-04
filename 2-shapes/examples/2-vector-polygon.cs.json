@@ -1,0 +1,186 @@
+{
+   "metadata":
+   {
+      "title": "Styling polygon vector features",
+      "abstract": "Basic vector features styling (polygons)"
+   },
+   "stylingRules": [
+      {
+         "selector":
+         {
+            "op": "and",
+            "args": [
+               { "op": "=", "args": [ { "sysId": "dataLayer.id" }, "Landuse" ] },
+               { "op": "=", "args": [ { "sysId": "dataLayer.type" }, "vector" ] },
+               { "op": "=", "args": [ { "sysId": "dataLayer.featuresGeometryDimensions" }, 2 ] }
+            ]
+         },
+         "symbolizer":
+         {
+            "$comment": "Do not show Landuse layer by default",
+            "visibility": false
+         },
+         "nestedRules": [
+            {
+               "$comment": "Show land use if zoomed in more than 1:200,000 for data valid within visualization's selected time range",
+               "selector":
+               {
+                  "op": "and",
+                  "args": [
+                     { "op": "<", "args": [ { "sysId": "vis.id" }, 200000 ] },
+                     { "op": ">=", "args": [ { "property": "validDate" }, { "sysId": "vis.timeInterval.start.date" } ] },
+                     { "op": "<=", "args": [ { "property": "validDate" }, { "sysId": "vis.timeInterval.end.date" } ] }
+                  ]
+               },
+               "symbolizer":
+               {
+                  "visibility": true,
+                  "opacity": 0.8,
+                  "zOrder": 1,
+                  "fill": { "color": "gray", "opacity": 0.5 },
+                  "stroke": { "color": "gray", "width": { "px": 2.0 }, "opacity": 1.0 }
+               },
+               "nestedRules": [
+                  {
+                     "$comment": "Select different fill and stroke color based on FunctionCode property",
+                     "selector": { "op": "=", "args": [ { "property": "FuntionCode" }, "parking" ] },
+                     "symbolizer":
+                     {
+                        "fill": { "alter": true, "color": "darkGray" },
+                        "stroke": { "alter": true, "color": [ 32, 32, 32 ] }
+                     }
+                  },
+                  {
+                     "selector": { "op": "=", "args": [ { "property": "FuntionCode" }, "park" ] },
+                     "symbolizer":
+                     {
+                        "fill": { "alter": true, "color": "darkGreen" },
+                        "stroke": { "alter": true, "color": "green" }
+                     }
+                  },
+                  {
+                     "selector": { "op": "=", "args": [ { "property": "FuntionCode" }, "commercial" ] },
+                     "symbolizer":
+                     {
+                        "fill": { "alter": true, "color": "lightGray" },
+                        "stroke": { "alter": true, "color": "lightGray" }
+                     }
+                  },
+                  {
+                     "$comment": "If zoomed in more than 1:10,000",
+                     "selector": { "op": "<", "args": [ { "sysId": "vis.sd" }, 10000 ] },
+                     "symbolizer":
+                     {
+                        "$comment": "Change stroke width to 4 pixels and add a text marker (positioned at centroid + horizontal offset) showing FunctionTitle property",
+                        "stroke": { "alter": true, "width": { "px": 4.0 } },
+                        "marker": {
+                           "elements": [
+                              {
+                                 "type": "Text",
+                                 "position": [20, 0],
+                                 "$comment": "Offset 20 pixels to the right",
+                                 "text": { "property": "FunctionTitle" },
+                                 "alignment": [ "left", "top" ],
+                                 "font": {
+                                    "face": "Arial",
+                                    "size": 14,
+                                    "bold": true,
+                                    "italic": true,
+                                    "opacity": 1.0,
+                                    "color": [ 0, 0, 0 ]
+                                 }
+                              }
+                           ]
+                        }
+                     },
+                     "nestedRules": [
+                        {
+                           "$comment": "Add icons at centroid based on land use function code property",
+                           "selector": { "op": "=", "args": [ { "property": "FuntionCode" }, "parking" ] },
+                           "symbolizer":
+                           {
+                              "marker": {
+                                 "alter": true,
+                                 "elements":
+                                 {
+                                    "index": 1,
+                                    "value": {
+                                       "type": "Image",
+                                       "image": {
+                                          "uri": "http://example.com/parkingIcon",
+                                          "path": "parkingIcon.png",
+                                          "id": "parking",
+                                          "type": "image/png",
+                                          "ext": "png"
+                                       },
+                                       "hotSpot": [ { "pc": 50 }, { "pc": 50 } ],
+                                       "tint": "white",
+                                       "blackTint": "blue",
+                                       "alphaThreshold": 0.1
+                                    }
+                                 }
+                              }
+                           }
+                        },
+                        {
+                           "$comment": "Add icons at centroid based on land use function code property",
+                           "selector": { "op": "=", "args": [ { "property": "FuntionCode" }, "park" ] },
+                           "symbolizer":
+                           {
+                              "marker": {
+                                 "alter": true,
+                                 "elements": {
+                                    "index": 1,
+                                    "value": {
+                                       "type": "Image",
+                                       "image": {
+                                          "uri": "http://example.com/park",
+                                          "path": "park.png",
+                                          "id": "park",
+                                          "type": "image/png",
+                                          "ext": "png"
+                                       },
+                                       "hotSpot": [ { "pc": 50 }, { "pc": 50 } ],
+                                       "tint": "white",
+                                       "blackTint": "blue",
+                                       "alphaThreshold": 0.1
+                                    }
+                                 }
+                              }
+                           }
+                        },
+                        {
+                           "$comment": "Add icons at centroid based on land use function code property",
+                           "selector": { "op": "=", "args": [ { "property": "FuntionCode" }, "commercial" ] },
+                           "symbolizer":
+                           {
+                              "marker": {
+                                 "alter": true,
+                                 "elements": {
+                                    "index": 1,
+                                    "value": {
+                                       "type": "Image",
+                                       "image": {
+                                          "uri": "http://example.com/commercial",
+                                          "path": "commercial.png",
+                                          "id": "commercial",
+                                          "type": "image/png",
+                                          "ext": "png"
+                                       },
+                                       "hotSpot": [ { "pc": 50 }, { "pc": 50 } ],
+                                       "tint": "white",
+                                       "blackTint": "blue",
+                                       "alphaThreshold": 0.1
+                                    }
+                                 }
+                              }
+                           }
+                        }
+                     ]
+                  }
+               ]
+            }
+         ]
+      }
+   ]
+}

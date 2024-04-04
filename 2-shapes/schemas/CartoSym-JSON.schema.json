@@ -1,0 +1,2317 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$ref": "#/$defs/style",
+  "$defs": {
+    "style": {
+      "type": "object",
+      "required": [ "stylingRules" ],
+      "properties": {
+         "$comment": { "type": "string" },
+         "$include": {
+            "oneOf": [
+               { "type": "string" },
+               { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+            ]
+         },
+         "metadata": {
+            "type": "object",
+            "properties":
+            {
+               "$comment": { "type": "string" },
+               "title": { "type": "string" },
+               "abstract": { "type": "string" },
+               "authors": { "type": "array", "items": { "type": "string" } },
+               "geoDataClasses": { "type": "array", "items": { "type": "string", "format": "uri" } }
+            }
+         },
+         "stylingRules": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/stylingRule" }
+         },
+         "$variables": { "type": "object" }
+      }
+    },
+    "stylingRule": {
+      "type": "object",
+      "properties":
+      {
+         "$comment": { "type": "string" },
+         "selector": { "$ref": "#/$defs/boolExpression" },
+         "symbolizer": { "$ref": "#/$defs/symbolizer" },
+         "nestedRules":
+         {
+            "type": "array",
+            "items": { "$ref": "#/$defs/stylingRule" }
+         }
+      }
+    },
+    "symbolizer": {
+      "type": "object",
+      "properties":
+      {
+         "$comment": { "type": "string" },
+
+         "visibility": { "$ref": "#/$defs/boolExpression" },
+         "opacity": { "$ref": "#/$defs/zeroToOne" },
+         "zOrder": { "$ref": "#/$defs/numericExpression" },
+
+         "fill": { "$ref": "#/$defs/fill" },
+         "stroke": { "$ref": "#/$defs/stroke" },
+         "marker": { "$ref": "#/$defs/marker" },
+         "label": { "$ref": "#/$defs/label" },
+
+         "colorChannels": { "$ref": "#/$defs/color0to1" },
+         "alphaChannel": { "$ref": "#/$defs/zeroToOne" },
+         "singleChannel": { "$ref": "#/$defs/zeroToOne" },
+         "colorMap": { "$ref": "#/$defs/colorMap" },
+         "opacityMap": { "$ref": "#/$defs/opacityMap" },
+
+         "hillShading": { "$ref": "#/$defs/hillShading" }
+      }
+    },
+    "fill":
+    {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         {
+            "type": "object",
+            "properties": {
+               "alter": { "type": "boolean" },
+               "color": { "$ref": "#/$defs/color" },
+               "opacity": { "$ref": "#/$defs/zeroToOne" },
+               "pattern": { "$ref": "#/$defs/graphic" },
+               "gradient": { "$ref": "#/$defs/gradient" },
+               "stippleStyle": { "$ref": "#/$defs/stippleStyle" },
+               "hatchStyle": { "$ref": "#/$defs/hatchStyle" }
+            }
+         }
+       ]
+    },
+    "gradient":
+    {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         {
+            "type": "object",
+            "properties": {
+               "alter": { "type": "boolean" },
+               "type": { "type": "string", "enum": [ "linear", "radial" ] },
+               "keys": {
+                  "oneOf": [
+                     {
+                        "type": "array",
+                        "items": { "$ref": "#/$defs/colorKey" }
+                     },
+                     {
+                        "type": "object",
+                        "required": [ "index", "value" ],
+                        "properties": {
+                           "index": { "type": "integer", "minimum": 0 },
+                           "value": { "$ref": "#/$defs/colorKey" }
+                        }
+                     }
+                  ]
+               }
+            }
+         }
+       ]
+    },
+    "colorKey":
+    {
+       "type": "object",
+       "properties": {
+          "alter": { "type": "boolean" },
+          "percent": { "$ref": "#/$defs/percent" },
+          "color": { "$ref": "#/$defs/color" },
+          "opacity": { "$ref": "#/$defs/zeroToOne" }
+       }
+    },
+    "stippleStyle":
+    {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         { "type": "string", "enum": [ "light", "medium", "heavy" ] }
+       ]
+    },
+    "hatchStyle":
+    {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         { "type": "string", "enum": [ "forward", "backward", "xCross", "cross" ] }
+       ]
+    },
+    "stroke":
+    {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         {
+            "allOf": [
+               { "$ref": "#/$defs/strokeStyling" },
+               {
+                  "type": "object",
+                  "properties":
+                  {
+                     "casing": { "$ref": "#/$defs/strokeStyling" },
+                     "centerLine": { "$ref": "#/$defs/strokeStyling" },
+                     "join": { "$ref": "#/$defs/strokeJoin" },
+                     "cap": { "$ref": "#/$defs/strokeCap" },
+                     "dashPattern": { "$ref": "#/$defs/dashPattern" },
+                     "pattern": { "$ref": "#/$defs/graphic" }
+                  }
+               }
+            ]
+         }
+       ]
+    },
+    "dashPattern":
+    {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         {
+            "type": "array",
+            "items":
+            {
+               "type": "integer",
+               "minimum": 0
+            }
+         },
+         {
+            "type": "object",
+            "required": [ "index", "value" ],
+            "properties": {
+               "index": { "type": "integer", "minimum": 0 },
+               "value": { "type": "integer", "minimum": 0 }
+            }
+         }
+       ]
+    },
+    "strokeJoin":
+    {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         { "type": "string", "enum": [ "miter", "round", "bevel" ] }
+       ]
+    },
+    "strokeCap":
+    {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         { "type": "string", "enum": [ "butt", "round", "square" ] }
+       ]
+    },
+    "marker": { "$ref": "#/$defs/multiGraphic" },
+    "label": {
+       "allOf": [
+          { "$ref": "#/$defs/multiGraphic" },
+          {
+             "type": "object",
+             "properties":
+             {
+                "placement": { "$ref": "#/$defs/labelPlacement" }
+             }
+          }
+       ]
+    },
+    "multiGraphic": {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         {
+            "allOf": [
+               { "$ref": "#/$defs/abstractGraphic" },
+               {
+                  "type": "object",
+                  "required": [ "elements" ],
+                  "properties":
+                  {
+                     "elements": { "$ref": "#/$defs/graphicArray" }
+                  }
+               }
+            ]
+         }
+       ]
+    },
+    "graphicArray": {
+       "oneOf": [
+         { "$ref": "#/$defs/arrayExpression" },
+         {
+            "type": "array",
+            "items": { "$ref": "#/$defs/graphic" }
+         },
+         {
+            "type": "object",
+            "required": [ "index", "value" ],
+            "properties": {
+               "index": { "type": "integer", "minimum": 0 },
+               "value": { "$ref": "#/$defs/graphic" }
+            }
+         }
+       ]
+    },
+    "abstractGraphic": {
+       "type": "object",
+       "properties": {
+          "alter": { "type": "boolean" },
+          "position": { "$ref": "#/$defs/unitPoint" },
+          "opacity": { "$ref": "#/$defs/zeroToOne" },
+          "transform": { "$ref": "#/$defs/transform2D" },
+          "transform3D": { "$ref": "#/$defs/transform3D" }
+       }
+    },
+    "transform2D": {
+       "type": "object",
+       "properties": {
+          "alter": { "type": "boolean" },
+          "orientation": { "$ref": "#/$defs/angle" },
+          "scaling": { "$ref": "#/$defs/scale2D" },
+          "translation": { "$ref": "#/$defs/unitPoint" }
+       }
+    },
+    "transform3D": {
+       "type": "object",
+       "properties": {
+          "alter": { "type": "boolean" },
+          "orientation": { "$ref": "#/$defs/orientation3D" },
+          "scaling": { "$ref": "#/$defs/scale3D" },
+          "translation": { "$ref": "#/$defs/unitPoint" }
+       }
+    },
+    "scale2D":
+    {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": { "$ref": "#/$defs/numericExpression" }
+         },
+         {
+            "type": "object",
+            "properties":
+            {
+               "x": { "$ref": "#/$defs/numericExpression" },
+               "y": { "$ref": "#/$defs/numericExpression" },
+               "alter": { "type": "boolean" }
+            }
+         }
+       ]
+    },
+    "scale3D":
+    {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 3,
+            "items": { "$ref": "#/$defs/numericExpression" }
+         },
+         {
+            "type": "object",
+            "properties":
+            {
+               "x": { "$ref": "#/$defs/numericExpression" },
+               "y": { "$ref": "#/$defs/numericExpression" },
+               "z": { "$ref": "#/$defs/numericExpression" },
+               "alter": { "type": "boolean" }
+            }
+         }
+       ]
+    },
+    "orientation3D":
+    {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         {
+            "type": "array",
+            "minItems": 4,
+            "maxItems": 4,
+            "items": { "$ref": "#/$defs/numericExpression" }
+         },
+         {
+            "type": "object",
+            "properties":
+            {
+               "w": { "$ref": "#/$defs/numericExpression" },
+               "x": { "$ref": "#/$defs/numericExpression" },
+               "y": { "$ref": "#/$defs/numericExpression" },
+               "z": { "$ref": "#/$defs/numericExpression" },
+               "alter": { "type": "boolean" }
+            }
+         },
+         {
+            "type": "object",
+            "properties":
+            {
+               "yaw": { "$ref": "#/$defs/numericExpression" },
+               "pitch": { "$ref": "#/$defs/numericExpression" },
+               "roll": { "$ref": "#/$defs/numericExpression" },
+               "alter": { "type": "boolean" }
+            }
+         }
+       ]
+    },
+    "graphic": {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         { "$ref": "#/$defs/image" },
+         { "$ref": "#/$defs/shape" },
+         { "$ref": "#/$defs/text" },
+         { "$ref": "#/$defs/model" },
+         { "$ref": "#/$defs/multiGraphic" },
+         { "$ref": "#/$defs/graphicInstance" }
+       ]
+    },
+    "graphicInstance": {
+      "allOf": [
+         { "$ref": "#/$defs/abstractGraphic" },
+         {
+             "type": "object",
+             "required": [ "type", "element" ],
+             "properties":
+             {
+                "type": { "type": "string", "enum": [ "GraphicInstance" ] },
+                "element": { "$ref": "#/$defs/graphic" }
+             }
+         }
+      ]
+    },
+    "image": {
+      "allOf": [
+         { "$ref": "#/$defs/abstractGraphic" },
+         {
+             "type": "object",
+             "required": [ "type", "image" ],
+             "properties":
+             {
+                "type": { "type": "string", "enum": [ "Image" ] },
+                "image": { "$ref": "#/$defs/resource" },
+                "hotSpot": { "$ref": "#/$defs/unitPoint" },
+                "tint": { "$ref": "#/$defs/color" },
+                "blackTint": { "$ref": "#/$defs/color" },
+                "alphaThreshold": { "$ref": "#/$defs/zeroToOne" }
+             }
+         }
+      ]
+    },
+    "model": {
+      "allOf": [
+         { "$ref": "#/$defs/abstractGraphic" },
+         {
+             "type": "object",
+             "required": [ "type", "model" ],
+             "properties":
+             {
+                "type": { "type": "string", "enum": [ "Model" ] },
+                "model": { "$ref": "#/$defs/resource" }
+             }
+         }
+      ]
+    },
+    "text": {
+      "allOf": [
+         { "$ref": "#/$defs/abstractGraphic" },
+         {
+             "type": "object",
+             "required": [ "type", "text" ],
+             "properties":
+             {
+                "type": { "type": "string", "enum": [ "Text" ] },
+                "text": { "$ref": "#/$defs/characterExpression" },
+                "font": { "$ref": "#/$defs/font" },
+                "alignment": { "$ref": "#/$defs/textAlignment" }
+             }
+         }
+       ]
+    },
+    "textAlignment": {
+       "oneOf": [
+          { "$ref": "#/$defs/idOrFnExpression" },
+          {
+             "type": "array",
+             "minItems": 2,
+             "maxItems": 2,
+             "prefixItems": [
+                { "$ref": "#/$defs/hAlignment" },
+                { "$ref": "#/$defs/vAlignment" }
+              ]
+          },
+          {
+             "type": "object",
+             "properties":
+             {
+               "hAlignment": { "$ref": "#/$defs/hAlignment" },
+               "vAlignment": { "$ref": "#/$defs/vAlignment" },
+               "alter": { "type": "boolean" }
+             }
+          }
+       ]
+    },
+    "hAlignment": {
+       "oneOf": [
+          { "$ref": "#/$defs/idOrFnExpression" },
+          {
+             "type": "string",
+             "enum": [ "left", "center", "right" ]
+          }
+       ]
+    },
+    "vAlignment": {
+       "oneOf": [
+          { "$ref": "#/$defs/idOrFnExpression" },
+          {
+            "type": "string",
+            "enum": [ "top", "middle", "bottom" ]
+          }
+       ]
+    },
+    "font": {
+       "oneOf": [
+          { "$ref": "#/$defs/idOrFnExpression" },
+          {
+             "type": "object",
+             "properties": {
+                "alter": { "type": "boolean" },
+                "face": { "$ref": "#/$defs/characterExpression" },
+                "size": { "$ref": "#/$defs/numericExpression" },
+                "bold": { "$ref": "#/$defs/boolExpression" },
+                "italic": { "$ref": "#/$defs/boolExpression" },
+                "underline": { "$ref": "#/$defs/boolExpression" },
+                "color": { "$ref": "#/$defs/color" },
+                "opacity": { "$ref": "#/$defs/zeroToOne" },
+                "outline": { "$ref": "#/$defs/fontOutline" }
+             }
+          }
+       ]
+    },
+    "fontOutline": {
+       "oneOf": [
+          { "$ref": "#/$defs/idOrFnExpression" },
+          {
+             "type": "object",
+             "properties": {
+                "alter": { "type": "boolean" },
+                "size": { "$ref": "#/$defs/numericExpression" },
+                "opacity": { "$ref": "#/$defs/zeroToOne" },
+                "color": { "$ref": "#/$defs/color" }
+             }
+          }
+       ]
+    },
+    "shapeOutline": {
+       "oneOf": [
+          { "$ref": "#/$defs/idOrFnExpression" },
+          {
+             "type": "object",
+             "properties": {
+                "alter": { "type": "boolean" },
+                "thickness": { "$ref": "#/$defs/unitValue" },
+                "opacity": { "$ref": "#/$defs/zeroToOne" },
+                "color": { "$ref": "#/$defs/color" }
+             }
+          }
+       ]
+    },
+    "abstractShape": {
+      "allOf": [
+         { "$ref": "#/$defs/abstractGraphic" },
+         {
+            "type": "object",
+            "required": [ "type" ],
+            "properties": {
+               "type": { "type": "string" },
+               "stroke": { "$ref": "#/$defs/stroke" },
+               "outline": { "$ref": "#/$defs/shapeOutline" }
+            }
+         }
+      ]
+    },
+    "shape": {
+      "oneOf": [
+         { "$ref": "#/$defs/dot" },
+         { "$ref": "#/$defs/arc" },
+         { "$ref": "#/$defs/path" },
+         { "$ref": "#/$defs/rectangle" },
+         { "$ref": "#/$defs/circle" },
+         { "$ref": "#/$defs/ellipse" },
+         { "$ref": "#/$defs/sectorArc" },
+         { "$ref": "#/$defs/chordArc" },
+         { "$ref": "#/$defs/closedPath" }
+      ]
+    },
+    "closedShape": {
+      "allOf": [
+         { "$ref": "#/$defs/abstractShape" },
+         {
+            "type": "object",
+            "properties": {
+               "fill": { "$ref": "#/$defs/fill" }
+            }
+         }
+      ]
+    },
+    "dot": {
+      "allOf": [
+         { "$ref": "#/$defs/abstractShape" },
+         {
+          "type": "object",
+          "required": [ "type" ],
+          "properties":
+          {
+             "type": { "type": "string", "enum": [ "Dot" ] }
+          }
+         }
+       ]
+    },
+    "abstractArc": {
+      "allOf": [
+         { "$ref": "#/$defs/abstractShape" },
+         {
+          "type": "object",
+          "required": [ "startAngle", "deltaAngle", "radius" ],
+          "properties":
+          {
+             "center": { "$ref": "#/$defs/unitPoint" },
+             "radius": { "$ref": "#/$defs/unitValue" },
+             "startAngle": { "$ref": "#/$defs/angle" },
+             "deltaAngle": { "$ref": "#/$defs/angle" }
+          }
+         }
+       ]
+    },
+    "arc": {
+       "allOf" : [
+         { "$ref": "#/$defs/abstractArc" },
+         {
+             "type": "object",
+             "required": [ "type" ],
+             "properties":
+             {
+                "type": { "type": "string", "enum": [ "Arc" ] }
+             }
+         }
+       ]
+    },
+    "sectorArc": {
+       "allOf" : [
+         { "$ref": "#/$defs/closedShape" },
+         { "$ref": "#/$defs/abstractArc" },
+         {
+             "type": "object",
+             "required": [ "type" ],
+             "properties":
+             {
+                "type": { "type": "string", "enum": [ "SectorArc" ] }
+             }
+         }
+       ]
+    },
+    "chordArc": {
+       "allOf" : [
+         { "$ref": "#/$defs/closedShape" },
+         { "$ref": "#/$defs/abstractArc" },
+         {
+             "type": "object",
+             "required": [ "type" ],
+             "properties":
+             {
+                "type": { "type": "string", "enum": [ "ChordArc" ] }
+             }
+         }
+       ]
+    },
+    "circle": {
+       "allOf" : [
+         { "$ref": "#/$defs/closedShape" },
+         {
+          "type": "object",
+          "required": [ "type" ],
+          "properties":
+          {
+             "type": { "type": "string", "enum": [ "Circle" ] },
+             "center": { "$ref": "#/$defs/unitPoint" },
+             "radius": { "$ref": "#/$defs/unitValue" }
+          }
+         }
+       ]
+    },
+    "ellipse": {
+       "allOf" : [
+         { "$ref": "#/$defs/closedShape" },
+         {
+          "type": "object",
+          "required": [ "type", "radii" ],
+          "properties":
+          {
+             "type": { "type": "string", "enum": [ "Ellipse" ] },
+             "center": { "$ref": "#/$defs/unitPoint" },
+             "radii": {
+                "oneOf": [
+                   {
+                      "type": "array",
+                      "minItems": 2,
+                      "maxItems": 2,
+                      "items": { "$ref": "#/$defs/unitValue" }
+                   },
+                   {
+                      "type": "object",
+                      "properties":
+                      {
+                        "x": { "$ref": "#/$defs/unitValue" },
+                        "y": { "$ref": "#/$defs/unitValue" },
+                        "alter": { "type": "boolean" }
+                      }
+                   }
+                ]
+             }
+          }
+         }
+       ]
+    },
+    "rectangle": {
+       "allOf" : [
+         { "$ref": "#/$defs/closedShape" },
+         {
+          "type": "object",
+          "required": [ "type", "topLeft", "bottomRight" ],
+          "properties":
+          {
+             "type": { "type": "string", "enum": [ "Rectangle" ] },
+             "topLeft": { "$ref": "#/$defs/unitPoint" },
+             "bottomRight": { "$ref": "#/$defs/unitPoint" }
+          }
+         }
+       ]
+    },
+    "roundedRectangle": {
+       "allOf" : [
+         { "$ref": "#/$defs/closedShape" },
+         {
+          "type": "object",
+          "required": [ "type", "topLeft", "bottomRight" ],
+          "properties":
+          {
+             "type": { "type": "string", "enum": [ "RoundedRectangle" ] },
+             "topLeft": { "$ref": "#/$defs/unitPoint" },
+             "bottomRight": { "$ref": "#/$defs/unitPoint" },
+             "radii": {
+                "oneOf": [
+                   {
+                      "type": "array",
+                      "minItems": 2,
+                      "maxItems": 2,
+                      "items": { "$ref": "#/$defs/unitValue" }
+                   },
+                   {
+                      "type": "object",
+                      "properties":
+                      {
+                        "x": { "$ref": "#/$defs/unitValue" },
+                        "y": { "$ref": "#/$defs/unitValue" },
+                        "alter": { "type": "boolean" }
+                      }
+                   }
+                ]
+             }
+          }
+         }
+       ]
+    },
+    "abstractPath": {
+       "allOf": [
+         { "$ref": "#/$defs/abstractShape" },
+         {
+          "type": "object",
+          "required": [ "nodes" ],
+          "properties":
+          {
+             "nodes": { "$ref": "#/$defs/pathNodes" }
+          }
+         }
+       ]
+    },
+    "path": {
+       "allOf": [
+         { "$ref": "#/$defs/abstractPath" },
+         {
+            "type": "object",
+            "required": [ "type" ],
+            "properties":
+            {
+               "type": { "type": "string", "enum": [ "Path" ] }
+            }
+         }
+       ]
+    },
+    "closedPath": {
+       "allOf": [
+         { "$ref": "#/$defs/abstractPath" },
+         { "$ref": "#/$defs/closedShape" },
+         {
+          "type": "object",
+          "properties":
+          {
+             "type": { "type": "string", "enum": [ "ClosedPath" ] },
+             "innerNodes":
+             {
+                "anyOf": [
+                  { "$ref": "#/$defs/arrayExpression" },
+                  {
+                     "type": "array",
+                     "items": { "$ref": "#/$defs/pathNodes" }
+                  },
+                  {
+                     "type": "object",
+                     "required": [ "index", "value" ],
+                     "properties": {
+                        "index": { "type": "integer", "minimum": 0 },
+                        "value": { "$ref": "#/$defs/pathNodes" }
+                     }
+                  }
+                ]
+             }
+          }
+         }
+       ]
+    },
+    "pathNodes": {
+      "oneOf": [
+         { "$ref": "#/$defs/arrayExpression" },
+         {
+            "type": "array",
+            "minItems": 1,
+            "items": { "$ref": "#/$defs/unitPoint" }
+         },
+         {
+            "type": "object",
+            "required": [ "index", "value" ],
+            "properties": {
+               "index": { "type": "integer", "minimum": 0 },
+               "value": { "$ref": "#/$defs/unitPoint" }
+            }
+         }
+      ]
+    },
+    "resource": {
+       "type": "object",
+       "properties":
+       {
+          "alter": { "type": "boolean" },
+          "uri": { "$ref": "#/$defs/characterExpression" },
+          "path": { "$ref": "#/$defs/characterExpression" },
+          "id": { "$ref": "#/$defs/characterExpression" },
+          "type": { "$ref": "#/$defs/characterExpression" },
+          "ext": { "$ref": "#/$defs/characterExpression" },
+          "sprite": { "$ref": "#/$defs/characterExpression" }
+       }
+    },
+    "labelPlacement": {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         {
+            "type": "object",
+            "properties":
+            {
+               "alter": { "type": "boolean" },
+               "priority": { "$ref": "#/$defs/numericExpression" },
+               "minSpacing": { "$ref": "#/$defs/numericExpression" },
+               "maxSpacing": { "$ref": "#/$defs/numericExpression" }
+            }
+         }
+       ]
+    },
+    "strokeStyling":
+    {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         {
+            "type": "object",
+            "properties":
+            {
+               "alter": { "type": "boolean" },
+               "color": { "$ref": "#/$defs/color" },
+               "opacity": { "$ref": "#/$defs/zeroToOne" },
+               "width": { "$ref": "#/$defs/unitValue" }
+            }
+         }
+       ]
+    },
+    "angle":
+    {
+       "oneOf": [
+          { "$ref": "#/$defs/numericExpression" },
+          { "type": "object", "properties": { "deg": { "$ref": "#/$defs/numericExpression" } }, "required": [ "deg" ] },
+          { "type": "object", "properties": { "rad": { "$ref": "#/$defs/numericExpression" } }, "required": [ "rad" ] }
+       ]
+    },
+    "unitValue":
+    {
+       "oneOf": [
+          { "$ref": "#/$defs/numericExpression" },
+          { "type": "object", "properties": { "px": { "$ref": "#/$defs/numericExpression" } }, "required": [ "px" ] },
+          { "type": "object", "properties": { "mm": { "$ref": "#/$defs/numericExpression" } }, "required": [ "mm" ] },
+          { "type": "object", "properties": { "cm": { "$ref": "#/$defs/numericExpression" } }, "required": [ "cm" ] },
+          { "type": "object", "properties": { "in": { "$ref": "#/$defs/numericExpression" } }, "required": [ "in" ] },
+          { "type": "object", "properties": { "pt": { "$ref": "#/$defs/numericExpression" } }, "required": [ "pt" ] },
+          { "type": "object", "properties": { "em": { "$ref": "#/$defs/numericExpression" } }, "required": [ "em" ] },
+          { "type": "object", "properties": { "pc": { "$ref": "#/$defs/numericExpression" } }, "required": [ "pc" ] },
+          { "type": "object", "properties": { "m" : { "$ref": "#/$defs/numericExpression" } }, "required": [ "m"  ] },
+          { "type": "object", "properties": { "ft": { "$ref": "#/$defs/numericExpression" } }, "required": [ "ft" ] }
+       ]
+    },
+    "unitPoint":
+    {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 3,
+            "items": { "$ref": "#/$defs/unitValue" }
+         },
+         {
+            "type": "object",
+            "properties":
+            {
+               "x": { "$ref": "#/$defs/unitValue" },
+               "y": { "$ref": "#/$defs/unitValue" },
+               "z": { "$ref": "#/$defs/unitValue" },
+               "alter": { "type": "boolean" }
+            }
+         }
+       ]
+    },
+    "percent":
+    {
+       "anyOf": [
+          { "$ref": "#/$defs/numericExpression" },
+          { "type": "number", "minimum": 0.0, "maximum": 100.0 }
+       ]
+    },
+    "zeroToOne":
+    {
+       "anyOf": [
+          { "$ref": "#/$defs/numericExpression" },
+          { "type": "number", "minimum": 0, "maximum": 1 }
+       ]
+    },
+    "colorComponent0to255":
+    {
+       "anyOf": [
+         { "$ref": "#/$defs/numericExpression" },
+         { "type": "integer", "mininum": 0, "maximum": 255 }
+       ]
+    },
+    "webColorName":
+    {
+      "type": "string",
+      "enum": [
+         "black",
+         "dimGray",
+         "dimGrey",
+         "gray",
+         "grey",
+         "darkGray",
+         "darkGrey",
+         "silver",
+         "lightGray",
+         "lightGrey",
+         "gainsboro",
+         "whiteSmoke",
+         "white",
+         "rosyBrown",
+         "indianRed",
+         "brown",
+         "fireBrick",
+         "lightCoral",
+         "maroon",
+         "darkRed",
+         "red",
+         "snow",
+         "mistyRose",
+         "salmon",
+         "tomato",
+         "darkSalmon",
+         "coral",
+         "orangeRed",
+         "lightSalmon",
+         "sienna",
+         "seaShell",
+         "chocolate",
+         "saddleBrown",
+         "sandyBrown",
+         "peachPuff",
+         "peru",
+         "linen",
+         "bisque",
+         "darkOrange",
+         "burlyWood",
+         "tan",
+         "antiqueWhite",
+         "navajoWhite",
+         "blanchedAlmond",
+         "papayaWhip",
+         "moccasin",
+         "orange",
+         "wheat",
+         "oldLace",
+         "floralWhite",
+         "darkGoldenrod",
+         "goldenrod",
+         "cornsilk",
+         "gold",
+         "khaki",
+         "lemonChiffon",
+         "paleGoldenrod",
+         "darkKhaki",
+         "beige",
+         "lightGoldenRodYellow",
+         "olive",
+         "yellow",
+         "lightYellow",
+         "ivory",
+         "oliveDrab",
+         "yellowGreen",
+         "darkOliveGreen",
+         "greenYellow",
+         "chartreuse",
+         "lawnGreen",
+         "darkSeaGreen",
+         "forestGreen",
+         "limeGreen",
+         "lightGreen",
+         "paleGreen",
+         "darkGreen",
+         "green",
+         "lime",
+         "honeyDew",
+         "seaGreen",
+         "mediumSeaGreen",
+         "springGreen",
+         "mintCream",
+         "mediumSpringGreen",
+         "mediumAquaMarine",
+         "aquamarine",
+         "turquoise",
+         "lightSeaGreen",
+         "mediumTurquoise",
+         "darkSlateGray",
+         "darkSlateGrey",
+         "paleTurquoise",
+         "teal",
+         "darkCyan",
+         "aqua",
+         "cyan",
+         "lightCyan",
+         "azure",
+         "darkTurquoise",
+         "cadetBlue",
+         "powderBlue",
+         "lightBlue",
+         "deepSkyBlue",
+         "skyBlue",
+         "lightSkyBlue",
+         "steelBlue",
+         "aliceBlue",
+         "dodgerBlue",
+         "slateGray",
+         "slateGrey",
+         "lightSlateGray",
+         "lightSlateGrey",
+         "lightSteelBlue",
+         "cornflowerBlue",
+         "royalBlue",
+         "midnightBlue",
+         "lavender",
+         "navy",
+         "darkBlue",
+         "mediumBlue",
+         "blue",
+         "ghostWhite",
+         "slateBlue",
+         "darkSlateBlue",
+         "mediumSlateBlue",
+         "mediumPurple",
+         "blueViolet",
+         "indigo",
+         "darkOrchid",
+         "darkViolet",
+         "mediumOrchid",
+         "thistle",
+         "plum",
+         "violet",
+         "purple",
+         "darkMagenta",
+         "magenta",
+         "fuschia",
+         "orchid",
+         "mediumVioletRed",
+         "deepPink",
+         "hotPink",
+         "lavenderBlush",
+         "paleVioletRed",
+         "crimson",
+         "pink",
+         "lightPink"
+      ]
+    },
+    "color":
+    {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         {
+            "type": "object",
+            "properties":
+            {
+               "r": { "$ref": "#/$defs/colorComponent0to255" },
+               "g": { "$ref": "#/$defs/colorComponent0to255" },
+               "b": { "$ref": "#/$defs/colorComponent0to255" },
+               "alter": { "type": "boolean" }
+            }
+         },
+         {
+            "type": "array",
+            "items": { "$ref": "#/$defs/colorComponent0to255" },
+            "minItems": 3,
+            "maxItems": 3
+         },
+         { "$ref": "#/$defs/webColorName" }
+       ]
+    },
+    "color0to1":
+    {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         {
+            "type": "object",
+            "properties":
+            {
+               "r": { "$ref": "#/$defs/zeroToOne" },
+               "g": { "$ref": "#/$defs/zeroToOne" },
+               "b": { "$ref": "#/$defs/zeroToOne" },
+               "alter": { "type": "boolean" }
+            }
+         },
+         {
+            "type": "array",
+            "items": { "$ref": "#/$defs/zeroToOne" },
+            "minItems": 3,
+            "maxItems": 3
+         },
+         { "$ref": "#/$defs/webColorName" }
+       ]
+    },
+    "colorMap":
+    {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         {
+            "type": "array",
+            "items":
+            {
+               "type": "array",
+               "minItems": 2,
+               "maxItems": 3,
+               "prefixItems": [
+                  { "$ref": "#/$defs/numericExpression" },
+                  { "$ref": "#/$defs/color" },
+                  { "type": "string" }
+               ]
+            },
+            "minItems": 1
+         }
+       ]
+    },
+    "opacityMap":
+    {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         {
+            "type": "array",
+            "items":
+            {
+               "type": "array",
+               "minItems": 2,
+               "maxItems": 3,
+               "prefixItems": [
+                  { "$ref": "#/$defs/numericExpression" },
+                  { "$ref": "#/$defs/zeroToOne" },
+                  { "type": "string" }
+               ]
+            },
+            "minItems": 1
+         }
+       ]
+    },
+    "hillShading": {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         {
+             "type": "object",
+             "properties": {
+                "factor": { "$ref": "#/$defs/numericExpression" },
+                "sun": { "$ref": "#/$defs/azimuthElevation" },
+                "colorMap": { "$ref": "#/$defs/hsColorMap" },
+                "opacityMap": { "$ref": "#/$defs/hsOpacityMap" },
+                "alter": { "type": "boolean" }
+             }
+         }
+       ]
+    },
+    "azimuthElevation": {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         {
+             "type": "object",
+             "properties": {
+                "azimuth": { "$ref": "#/$defs/angle" },
+                "elevation": { "$ref": "#/$defs/angle" },
+                "alter": { "type": "boolean" }
+             }
+         }
+       ]
+    },
+    "hsColorMap":
+    {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         {
+            "type": "array",
+            "items":
+            {
+               "type": "array",
+               "minItems": 2,
+               "maxItems": 3,
+               "prefixItems": [
+                  { "$ref": "#/$defs/zeroToOne" },
+                  { "$ref": "#/$defs/color" },
+                  { "type": "string" }
+               ]
+            },
+            "minItems": 1
+         }
+       ]
+    },
+    "hsOpacityMap":
+    {
+       "oneOf": [
+         { "$ref": "#/$defs/idOrFnExpression" },
+         {
+            "type": "array",
+            "items":
+            {
+               "type": "array",
+               "minItems": 2,
+               "maxItems": 3,
+               "prefixItems": [
+                  { "$ref": "#/$defs/zeroToOne" },
+                  { "$ref": "#/$defs/zeroToOne" },
+                  { "type": "string" }
+               ]
+            },
+            "minItems": 1
+         }
+       ]
+    },
+    "idOrFnExpression": {
+       "anyOf": [
+          { "$ref": "#/$defs/systemIdentifier" },
+          { "$ref": "#/$defs/propertyRef" },
+          { "$ref": "#/$defs/functionCall" },
+          { "$ref": "#/$defs/conditionalExpression" }
+       ]
+    },
+    "anyExpression": {
+       "anyOf": [
+          { "$ref": "#/$defs/systemIdentifier" },
+          { "$ref": "#/$defs/scalarExpression" },
+          { "$ref": "#/$defs/geomExpression" },
+          { "$ref": "#/$defs/temporalExpression" },
+          { "$ref": "#/$defs/array" },
+          { "type": null }
+       ]
+    },
+    "systemIdentifier": {
+       "type": "object",
+       "required": [ "sysId" ],
+       "properties":
+       {
+          "sysId": {
+             "type": "string",
+             "enum": [
+               "dataLayer",
+               "dataLayer.id",
+               "dataLayer.type",
+               "dataLayer.features",
+               "dataLayer.featuresGeometry",
+               "dataLayer.featuresGeometryDimensions",
+               "feature",
+               "feature.id",
+               "feature.geometry",
+               "feature.geometryDimensions",
+               "vis",
+               "vis.sd",
+               "vis.date",
+               "vis.date.day",
+               "vis.date.month",
+               "vis.date.year",
+               "vis.dateTime",
+               "vis.dateTime.date",
+               "vis.dateTime.date.day",
+               "vis.dateTime.date.month",
+               "vis.dateTime.date.year",
+               "vis.dateTime.time",
+               "vis.dateTime.time.hour",
+               "vis.dateTime.time.minutes",
+               "vis.dateTime.time.seconds",
+               "vis.timeInterval",
+               "vis.timeInterval.start",
+               "vis.timeInterval.start.date",
+               "vis.timeInterval.start.date.day",
+               "vis.timeInterval.start.date.month",
+               "vis.timeInterval.start.date.year",
+               "vis.timeInterval.start.time",
+               "vis.timeInterval.start.time.hour",
+               "vis.timeInterval.start.time.minutes",
+               "vis.timeInterval.start.time.seconds",
+               "vis.timeInterval.end",
+               "vis.timeInterval.end.date",
+               "vis.timeInterval.end.date.day",
+               "vis.timeInterval.end.date.month",
+               "vis.timeInterval.end.date.year",
+               "vis.timeInterval.end.time",
+               "vis.timeInterval.end.time.hour",
+               "vis.timeInterval.end.time.minutes",
+               "vis.timeInterval.end.time.seconds",
+               "vis.timeOfDay",
+               "vis.timeOfDay.hour",
+               "vis.timeOfDay.minutes",
+               "vis.timeOfDay.seconds"
+             ]
+          }
+       }
+    },
+    "boolExpression": {
+        "$dynamicAnchor": "boolExpression",
+        "oneOf": [
+          { "$ref": "#/$defs/andOrExpression" },
+          { "$ref": "#/$defs/notExpression" },
+          { "$ref": "#/$defs/comparisonPredicate" },
+          { "$ref": "#/$defs/spatialPredicate" },
+          { "$ref": "#/$defs/temporalPredicate" },
+          { "$ref": "#/$defs/arrayPredicate" },
+          { "$ref": "#/$defs/functionCall" },
+          { "$ref": "#/$defs/conditionalExpression" },
+          { "type": "boolean" }
+        ]
+    },
+    "andOrExpression": {
+      "type": "object",
+      "required": [ "op", "args" ],
+      "properties": {
+        "op": {
+          "type": "string",
+          "enum": [ "and", "or" ]
+        },
+        "args": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "$dynamicRef": "#boolExpression"
+          }
+        }
+      }
+    },
+
+    "notExpression": {
+      "type": "object",
+      "required": [ "op", "args" ],
+      "properties": {
+        "op": {
+          "type": "string",
+          "enum": [ "not" ]
+        },
+        "args": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1,
+          "items": {
+            "$dynamicRef": "#boolExpression"
+          }
+        }
+      }
+    },
+
+    "comparisonPredicate": {
+      "oneOf": [
+        { "$ref": "#/$defs/binaryComparisonPredicate" },
+        { "$ref": "#/$defs/isLikePredicate" },
+        { "$ref": "#/$defs/textOpPredicate" },
+        { "$ref": "#/$defs/isBetweenPredicate" },
+        { "$ref": "#/$defs/isInListPredicate" },
+        { "$ref": "#/$defs/isNullPredicate" }
+      ]
+    },
+
+    "binaryComparisonPredicate": {
+      "type": "object",
+      "required": [ "op", "args" ],
+      "properties": {
+        "op": {
+          "type": "string",
+          "enum": [ "=", "<>", "<", ">", "<=", ">=" ]
+        },
+        "args": {
+          "$ref": "#/$defs/scalarOperands"
+        }
+      }
+    },
+    "scalarOperands": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "prefixItems": [
+        { "$ref": "#/$defs/scalarExpression" },
+        { "$ref": "#/$defs/scalarExpression" }
+      ]
+    },
+
+    "scalarExpression": {
+      "oneOf": [
+        { "$ref": "#/$defs/characterExpression" },
+        { "$ref": "#/$defs/numericExpression" },
+        { "$dynamicRef": "#boolExpression" },
+        { "$ref": "#/$defs/temporalInstantExpression" }
+      ]
+    },
+
+    "temporalInstantExpression": {
+      "oneOf": [
+        { "$ref": "#/$defs/instantInstance" },
+        { "$ref": "#/$defs/propertyRef" },
+        { "$ref": "#/$defs/systemIdentifier" },
+        { "$ref": "#/$defs/functionCall" },
+        { "$ref": "#/$defs/conditionalExpression" }
+      ]
+    },
+
+    "isLikePredicate": {
+      "type": "object",
+      "required": [ "op", "args" ],
+      "properties": {
+        "op": {
+          "type": "string",
+          "enum": [ "like" ]
+        },
+        "args": {
+          "$ref": "#/$defs/isLikeOperands"
+        }
+      }
+    },
+    "isLikeOperands": {
+          "type": "array",
+          "prefixItems": [
+            { "$ref": "#/$defs/characterExpression" },
+            { "$ref": "#/$defs/patternExpression" }
+          ],
+          "additionalItems": false
+    },
+    "textOpPredicate": {
+      "type": "object",
+      "required": [ "op", "args" ],
+      "properties": {
+        "op": {
+          "type": "string",
+          "enum": [ "contains", "startsWith", "endsWith" ]
+        },
+        "args": {
+          "type": "array",
+          "prefixItems": [
+            { "$ref": "#/$defs/characterExpression" },
+            { "$ref": "#/$defs/characterExpression" }
+          ],
+          "additionalItems": false
+        }
+      }
+    },
+    "patternExpression": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [ "op", "args" ],
+          "properties": {
+            "op": { "type": "string", "enum": [ "casei" ] },
+            "args": {
+               "type": "array",
+               "items": { "$ref": "#/$defs/patternExpression" },
+               "minItems": 1,
+               "maxItems": 1
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [ "op", "args" ],
+          "properties": {
+            "op": { "type": "string", "enum": [ "accenti" ] },
+            "args": {
+               "type": "array",
+               "items": { "$ref": "#/$defs/patternExpression" },
+               "minItems": 1,
+               "maxItems": 1
+            }
+          }
+        },
+        { "type": "string" }
+      ]
+    },
+    "isBetweenPredicate": {
+      "type": "object",
+      "required": [ "op", "args" ],
+      "properties": {
+        "op": { "type": "string", "enum": [ "between" ] },
+        "args": { "$ref": "#/$defs/isBetweenOperands" }
+      }
+    },
+    "isBetweenOperands": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "$ref": "#/$defs/numericExpression"
+      },
+      "additionalItems": false
+    },
+    "numericExpression": {
+      "oneOf": [
+        { "$ref": "#/$defs/arithmeticExpression" },
+        { "$ref": "#/$defs/bitwiseLogical" },
+        { "$ref": "#/$defs/bitwiseShift" },
+        { "$ref": "#/$defs/bitwiseNot" },
+        { "type": "number" },
+        { "$ref": "#/$defs/propertyRef" },
+        { "$ref": "#/$defs/systemIdentifier" },
+        { "$ref": "#/$defs/functionCall" },
+        { "$ref": "#/$defs/conditionalExpression" }
+      ]
+    },
+
+    "isInListPredicate": {
+      "type": "object",
+      "required": [ "op", "args" ],
+      "properties": {
+        "op": {
+          "type": "string",
+          "enum": [ "in" ]
+        },
+        "args": {
+          "$ref": "#/$defs/inListOperands"
+        }
+      }
+    },
+    "inListOperands": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "$ref": "#/$defs/scalarExpression"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/scalarExpression"
+          }
+        }
+      ],
+      "additionalItems": false
+    },
+
+    "isNullPredicate": {
+      "type": "object",
+      "required": [ "op", "args" ],
+      "properties": {
+        "op": {
+          "type": "string",
+          "enum": [ "isNull" ]
+        },
+        "args": {
+          "$ref": "#/$defs/isNullOperand"
+        }
+      }
+    },
+    "isNullOperand": {
+      "oneOf": [
+        { "$ref": "#/$defs/characterExpression" },
+        { "$ref": "#/$defs/numericExpression" },
+        { "$dynamicRef": "#boolExpression" },
+        { "$ref": "#/$defs/geomExpression" },
+        { "$ref": "#/$defs/temporalExpression" }
+      ]
+    },
+
+    "spatialPredicate": {
+      "type": "object",
+      "required": [ "op", "args" ],
+      "properties": {
+        "op": {
+          "type": "string",
+          "enum": [
+            "s_contains",
+            "s_crosses",
+            "s_disjoint",
+            "s_equals",
+            "s_intersects",
+            "s_overlaps",
+            "s_touches",
+            "s_within",
+            "s_covers",
+            "s_coveredBy"
+          ]
+        },
+        "args": { "$ref": "#/$defs/spatialOperands" }
+      }
+    },
+    "spatialOperands": {
+      "type": "array",
+      "prefixItems": [
+        { "$ref": "#/$defs/geomExpression" },
+        { "$ref": "#/$defs/geomExpression" }
+      ],
+      "additionalItems": false
+    },
+    "geomExpression": {
+      "oneOf": [
+        { "$ref": "#/$defs/spatialInstance" },
+        { "$ref": "#/$defs/propertyRef" },
+        { "$ref": "#/$defs/systemIdentifier" },
+        { "$ref": "#/$defs/functionCall" },
+        { "$ref": "#/$defs/conditionalExpression" }
+      ]
+    },
+
+    "temporalPredicate": {
+      "type": "object",
+      "required": [ "op", "args" ],
+      "properties": {
+        "op": {
+          "type": "string",
+          "enum": [
+            "t_after",
+            "t_before",
+            "t_contains",
+            "t_disjoint",
+            "t_during",
+            "t_equals",
+            "t_finishedBy",
+            "t_finishes",
+            "t_intersects",
+            "t_meets",
+            "t_metBy",
+            "t_overlappedBy",
+            "t_overlaps",
+            "t_startedBy",
+            "t_starts"
+          ]
+        },
+        "args": { "$ref": "#/$defs/temporalOperands" }
+      }
+    },
+    "temporalOperands": {
+      "type": "array",
+      "prefixItems": [
+        { "$ref": "#/$defs/temporalExpression" },
+        { "$ref": "#/$defs/temporalExpression" }
+      ],
+      "additionalItems": false
+    },
+    "temporalExpression": {
+      "oneOf": [
+        { "$ref": "#/$defs/temporalInstance" },
+        { "$ref": "#/$defs/propertyRef" },
+        { "$ref": "#/$defs/systemIdentifier" },
+        { "$ref": "#/$defs/functionCall" },
+        { "$ref": "#/$defs/conditionalExpression" }
+      ]
+    },
+
+    "arrayPredicate": {
+      "type": "object",
+      "required": [ "op", "args" ],
+      "properties": {
+        "op": {
+          "type": "string",
+          "enum": [
+            "a_containedBy",
+            "a_contains",
+            "a_equals",
+            "a_overlaps"
+          ]
+        },
+        "args": { "$ref": "#/$defs/arrayArguments" }
+      }
+    },
+    "arrayArguments": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "oneOf": [
+          { "$ref": "#/$defs/array" },
+          { "$ref": "#/$defs/propertyRef" },
+          { "$ref": "#/$defs/systemIdentifier" },
+          { "$ref": "#/$defs/functionCall" },
+          { "$ref": "#/$defs/conditionalExpression" }
+        ]
+      }
+    },
+    "arrayExpression": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          { "$ref": "#/$defs/array" },
+          { "$ref": "#/$defs/propertyRef" },
+          { "$ref": "#/$defs/systemIdentifier" },
+          { "$ref": "#/$defs/functionCall" },
+          { "$ref": "#/$defs/conditionalExpression" }
+        ]
+      }
+    },
+    "array": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          { "$ref": "#/$defs/characterExpression" },
+          { "$ref": "#/$defs/numericExpression" },
+          { "$dynamicRef": "#boolExpression" },
+          { "$ref": "#/$defs/geomExpression" },
+          { "$ref": "#/$defs/temporalExpression" },
+          { "$ref": "#/$defs/array" }
+        ]
+      }
+    },
+
+    "arithmeticExpression": {
+      "type": "object",
+      "required": [ "op", "args" ],
+      "properties": {
+        "op": {
+          "type": "string",
+          "enum": [ "+", "-", "*", "/", "^" ]
+        },
+        "args": {
+          "$ref": "#/$defs/arithmeticOperands"
+        }
+      }
+    },
+    "arithmeticOperands": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "oneOf": [
+          { "$ref": "#/$defs/arithmeticExpression" },
+          { "$ref": "#/$defs/bitwiseLogical" },
+          { "$ref": "#/$defs/bitwiseShift" },
+          { "$ref": "#/$defs/bitwiseNot" },
+          { "$ref": "#/$defs/propertyRef" },
+          { "$ref": "#/$defs/systemIdentifier" },
+          { "$ref": "#/$defs/functionCall" },
+          { "$ref": "#/$defs/conditionalExpression" },
+          { "type": "number" }
+        ]
+      }
+    },
+
+    "hexNumber": {
+       "type": "string",
+       "pattern": "^([a-fA-F0-9])+"
+    },
+    "bitwiseLogical": {
+      "type": "object",
+      "required": [ "op", "args" ],
+      "properties": {
+        "op": {
+          "type": "string",
+          "enum": [ "bitAnd", "bitOr", "bitXor" ]
+        },
+        "args": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "$ref": "#/$defs/bitwiseOperand"
+            }
+        }
+      }
+    },
+    "bitwiseNot": {
+      "type": "object",
+      "required": [ "op", "args" ],
+      "properties": {
+        "op": {
+          "type": "string",
+          "enum": [ "bitNot" ]
+        },
+        "args": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 1,
+            "items": {
+              "$ref": "#/$defs/bitwiseOperand"
+            }
+        }
+      }
+    },
+    "bitwiseShift": {
+      "type": "object",
+      "required": [ "op", "args" ],
+      "properties": {
+        "op": {
+          "type": "string",
+          "enum": [ "<<", ">>" ]
+        },
+        "args": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "$ref": "#/$defs/bitwiseOperand"
+            }
+        }
+      }
+    },
+    "bitwiseOperand": {
+        "oneOf": [
+          { "$ref": "#/$defs/arithmeticExpression" },
+          { "$ref": "#/$defs/bitwiseLogical" },
+          { "$ref": "#/$defs/bitwiseShift" },
+          { "$ref": "#/$defs/bitwiseNot" },
+          { "$ref": "#/$defs/propertyRef" },
+          { "$ref": "#/$defs/systemIdentifier" },
+          { "$ref": "#/$defs/functionCall" },
+          { "$ref": "#/$defs/conditionalExpression" },
+          { "type": "integer" },
+          { "$ref": "#/$defs/hexNumber" }
+        ]
+    },
+
+    "propertyRef": {
+      "type": "object",
+      "required": [ "property" ],
+      "properties": {
+        "property": { "type": "string" }
+      }
+    },
+
+    "casei": {
+      "type": "object",
+      "required": [ "op", "args" ],
+      "properties": {
+        "op": { "type": "string", "enum": [ "casei" ] },
+        "args": {
+           "type": "array",
+           "items": { "$ref": "#/$defs/characterExpression" },
+           "minItems": 1,
+           "maxItems": 1
+        }
+      }
+    },
+
+    "accenti": {
+      "type": "object",
+      "required": [ "op", "args" ],
+      "properties": {
+        "op": { "type": "string", "enum": [ "accenti" ] },
+        "args": {
+           "type": "array",
+           "items": { "$ref": "#/$defs/characterExpression" },
+           "minItems": 1,
+           "maxItems": 1
+        }
+      }
+    },
+
+    "lowerUpperCase": {
+      "type": "object",
+      "required": [ "op", "args" ],
+      "properties": {
+         "op": {
+           "type": "string",
+           "enum": [ "lowerCase", "upperCase" ]
+         },
+         "args": {
+           "type": "array",
+           "items": { "$ref": "#/$defs/characterExpression" },
+           "minItems": 1,
+           "maxItems": 1
+         }
+      }
+    },
+
+    "concatenate": {
+      "type": "object",
+      "required": [ "op", "args" ],
+      "properties":
+      {
+         "op": {
+           "type": "string",
+           "enum": [ "concatenate" ]
+         },
+         "args": {
+           "type": "array",
+           "items": { "$ref": "#/$defs/characterExpression" },
+           "minItems": 2
+         }
+      }
+    },
+
+    "substitute": {
+      "type": "object",
+      "required": [ "op", "args" ],
+      "properties":
+      {
+         "name": {
+           "type": "string",
+           "enum": [ "substitute" ]
+         },
+         "args": {
+           "type": "array",
+           "items": { "$ref": "#/$defs/characterExpression" },
+           "minItems": 3,
+           "maxItems": 3
+         }
+      }
+    },
+
+    "format": {
+      "type": "object",
+      "required": [ "op", "args" ],
+      "properties":
+      {
+         "name": {
+           "type": "string",
+           "enum": [ "format" ]
+         },
+         "args": {
+           "type": "array",
+           "items": {
+             "oneOf": [
+               { "$ref": "#/$defs/characterExpression" },
+               { "$ref": "#/$defs/numericExpression" },
+               { "$dynamicRef": "#boolExpression" },
+               { "$ref": "#/$defs/geomExpression" },
+               { "$ref": "#/$defs/temporalExpression" },
+               { "$ref": "#/$defs/array" }
+             ]
+           },
+           "prefixItems": [
+             { "$ref": "#/$defs/characterExpression" }
+           ],
+           "minItems": 1
+         }
+      }
+    },
+
+    "characterExpression": {
+      "oneOf": [
+        { "$ref": "#/$defs/casei" },
+        { "$ref": "#/$defs/accenti" },
+        { "$ref": "#/$defs/lowerUpperCase" },
+        { "$ref": "#/$defs/concatenate" },
+        { "$ref": "#/$defs/substitute" },
+        { "$ref": "#/$defs/format" },
+        { "type": "string" },
+        { "$ref": "#/$defs/propertyRef" },
+        { "$ref": "#/$defs/systemIdentifier" },
+        { "$ref": "#/$defs/functionCall" },
+        { "$ref": "#/$defs/conditionalExpression" }
+      ]
+    },
+
+    "geometryManipulationBinary": {
+      "type": "object",
+      "required": [ "op", "args" ],
+      "properties":
+      {
+         "name": {
+           "type": "string",
+           "enum": [ "s_intersection", "s_union", "s_difference", "s_symDifference" ]
+         },
+         "args": {
+           "type": "array",
+           "items": { "$ref": "#/$defs/spatialInstance" },
+           "minItems": 2,
+           "maxItems": 2
+         }
+      }
+    },
+
+    "geometryManipulationUnary": {
+      "type": "object",
+      "required": [ "op", "args" ],
+      "properties":
+      {
+         "name": {
+           "type": "string",
+           "enum": [ "s_convexHull", "s_envelope" ]
+         },
+         "args": {
+           "type": "array",
+           "items": { "$ref": "#/$defs/spatialInstance" },
+           "minItems": 1,
+           "maxItems": 1
+         }
+      }
+    },
+
+    "geometryBuffer": {
+      "type": "object",
+      "required": [ "op", "args" ],
+      "properties":
+      {
+         "name": {
+           "type": "string",
+           "enum": [ "s_buffer" ]
+         },
+         "args": {
+           "type": "array",
+           "prefixItems": [
+             { "$ref": "#/$defs/spatialInstance" },
+             { "$ref": "#/$defs/numericExpression" }
+           ],
+           "minItems": 2,
+           "maxItems": 2
+         }
+      }
+    },
+
+    "conditionalExpression": {
+      "type": "object",
+      "required": [ "op", "args" ],
+      "properties": {
+        "op": { "type": "string", "enum": [ "?:" ] },
+        "args": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "prefixItems": [
+             { "$dynamicRef": "#boolExpression" },
+             { "$ref": "anyExpression" },
+             { "$ref": "anyExpression" }
+          ]
+        }
+      }
+    },
+    "functionCall": {
+      "type": "object",
+      "required": [ "op", "args" ],
+      "properties": {
+        "op": { "type": "string" },
+        "args": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              { "$ref": "#/$defs/characterExpression" },
+              { "$ref": "#/$defs/numericExpression" },
+              { "$dynamicRef": "#boolExpression" },
+              { "$ref": "#/$defs/geomExpression" },
+              { "$ref": "#/$defs/temporalExpression" },
+              { "$ref": "#/$defs/array" }
+            ]
+          }
+        }
+      }
+    },
+
+    "scalarLiteral": {
+      "oneOf": [
+        { "type": "string" },
+        { "type": "number" },
+        { "type": "boolean" },
+        { "$ref": "#/$defs/instantInstance" }
+      ]
+    },
+
+    "spatialInstance": {
+      "oneOf": [
+        { "$ref": "#/$defs/geometryLiteral" },
+        { "$ref": "#/$defs/bboxLiteral" },
+        { "$ref": "#/$defs/geometryManipulationBinary" },
+        { "$ref": "#/$defs/geometryManipulationUnary" },
+        { "$ref": "#/$defs/geometryBuffer" }
+      ]
+    },
+    "geometryLiteral": {
+      "oneOf": [
+        { "$ref": "#/$defs/point" },
+        { "$ref": "#/$defs/linestring" },
+        { "$ref": "#/$defs/polygon" },
+        { "$ref": "#/$defs/multipoint" },
+        { "$ref": "#/$defs/multilinestring" },
+        { "$ref": "#/$defs/multipolygon" }
+      ]
+    },
+    "point": {
+      "title": "GeoJSON Point",
+      "type": "object",
+      "required": [ "type", "coordinates" ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [ "Point" ]
+        },
+        "coordinates": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "number"
+          }
+        },
+        "bbox": {
+          "type": "array",
+          "minItems": 4,
+          "items": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "linestring": {
+      "title": "GeoJSON LineString",
+      "type": "object",
+      "required": [ "type", "coordinates" ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [ "LineString" ]
+        },
+        "coordinates": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": "number"
+            }
+          }
+        },
+        "bbox": {
+          "type": "array",
+          "minItems": 4,
+          "items": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "polygon": {
+      "title": "GeoJSON Polygon",
+      "type": "object",
+      "required": [ "type", "coordinates" ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [ "Polygon" ]
+        },
+        "coordinates": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "minItems": 4,
+            "items": {
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "bbox": {
+          "type": "array",
+          "minItems": 4,
+          "items": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "multipoint": {
+      "title": "GeoJSON MultiPoint",
+      "type": "object",
+      "required": [ "type", "coordinates" ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [ "MultiPoint" ]
+        },
+        "coordinates": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": "number"
+            }
+          }
+        },
+        "bbox": {
+          "type": "array",
+          "minItems": 4,
+          "items": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "multilinestring": {
+      "title": "GeoJSON MultiLineString",
+      "type": "object",
+      "required": [ "type", "coordinates" ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [ "MultiLineString" ]
+        },
+        "coordinates": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "bbox": {
+          "type": "array",
+          "minItems": 4,
+          "items": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "multipolygon": {
+      "title": "GeoJSON MultiPolygon",
+      "type": "object",
+      "required": [ "type", "coordinates" ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [ "MultiPolygon" ]
+        },
+        "coordinates": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "minItems": 4,
+              "items": {
+                "type": "array",
+                "minItems": 2,
+                "items": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        },
+        "bbox": {
+          "type": "array",
+          "minItems": 4,
+          "items": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "bboxLiteral": {
+      "type": "object",
+      "required": [
+        "bbox"
+      ],
+      "properties": {
+        "bbox": {
+          "$ref": "#/$defs/bbox"
+        }
+      }
+    },
+    "bbox": {
+      "type": "array",
+      "oneOf": [
+        { "minItems": 4, "maxItems": 4 },
+        { "minItems": 6, "maxItems": 6 }
+      ],
+      "items": { "type": "number" }
+    },
+
+    "temporalInstance": {
+      "oneOf": [
+        { "$ref": "#/$defs/instantInstance" },
+        { "$ref": "#/$defs/intervalInstance" }
+      ]
+    },
+    "instantInstance": {
+      "oneOf": [
+        { "$ref": "#/$defs/dateInstant" },
+        { "$ref": "#/$defs/timestampInstant" }
+      ]
+    },
+    "dateInstant": {
+      "type": "object",
+      "required": [ "date" ],
+      "properties": {
+        "date": { "$ref": "#/$defs/dateString" }
+      }
+    },
+    "timestampInstant": {
+      "type": "object",
+      "required": [ "timestamp" ],
+      "properties": {
+        "timestamp": { "$ref": "#/$defs/timestampString" }
+      }
+    },
+    "instantString": {
+      "oneOf": [
+        { "$ref": "#/$defs/dateString" },
+        { "$ref": "#/$defs/timestampString" }
+      ]
+    },
+    "dateString": {
+      "type": "string",
+      "format": "date"
+    },
+    "timestampString": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "intervalInstance": {
+      "type": "object",
+      "required": [ "interval" ],
+      "properties": {
+        "interval": { "$ref": "#/$defs/intervalArray" }
+      }
+    },
+    "intervalArray": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "oneOf": [
+          { "$ref": "#/$defs/instantString" },
+          { "type": "string", "enum": [ ".." ] },
+          { "$ref": "#/$defs/propertyRef" },
+          { "$ref": "#/$defs/systemIdentifier" },
+          { "$ref": "#/$defs/functionCall" },
+          { "$ref": "#/$defs/conditionalExpression" }
+        ]
+      }
+    }
+  }
+}

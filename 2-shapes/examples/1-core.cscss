@@ -1,0 +1,14 @@
+.title 'Styling a land use layer'
+.abstract 'Styling land use data with Style & Symbology Core'
+
+Landuse[dataLayer.type = vector]
+{
+   visibility: false;
+
+   [viz.sd < 200000 and viz.date > DATE('2020-01-01')]
+   {
+      visibility: true;
+      opacity: 0.5;
+      zOrder: 1;
+   }
+}

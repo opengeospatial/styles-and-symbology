@@ -1,0 +1,695 @@
+== Requirements Classes for Functions
+
+[[rc-functions]]
+=== Requirements Class "Function Expressions"
+==== Overview
+
+This requirements class adds support for function call expressions.
+
+===== Function call expressions
+
+[#img-uml-class-functions]
+.Functions UML Class Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+abstract class Expression
+
+FunctionCallExpression --|> Expression
+FunctionCallExpression : function: Function
+FunctionCallExpression : arguments: Expression[0..*]
+FunctionCallExpression *-- Function
+FunctionCallExpression *-- Expression
+
+Function : name: string
+Function : parameters: map < string, type >
+Function : returnType: type
+....
+
+.FunctionCallExpression class
+[width="90%",options="header"]
+|===
+| Name      | Type       | Definition                 | multiplicity
+| function  | Function   | Function to be called      | 1
+| arguments | Expression | Arguments to the function  | 0..*
+|===
+
+.Function class
+[width="90%",options="header"]
+|===
+| Name         | Type                 | Definition                 | multiplicity
+| name         | string               | Name                       | 1
+| parameters   | map < string, type > | Parameters                 | 1
+| returnType   | type                 | Return type                | 1
+|===
+
+===== Standard functions
+
+A standard function is a Function with a pre-determined set of parameters, return value and behavior that may be registered with a URI.
+Requirements class in this section defines standard functions.
+
+.Standard functions URI mapping
+[width="90%",options="header"]
+|===
+| Key   | Value      | Definition
+| uri   | Function   | A URI allows to identify standard functiona, even if identical function names are used in different encoding, extension or implementations for different behaviors.
+|===
+
+==== Requirements
+
+include::../requirements/rc-functions.adoc[]
+
+[[rc-math]]
+=== Requirements Class "Math Functions"
+==== Overview
+
+[#img-uml-class-math-functions]
+.Math Functions UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+interface MathFunctions
+MathFunctions --|> Function : standard functions
+MathFunctions : abs(x : double) double
+MathFunctions : acos(x : double) double
+MathFunctions : asin(x : double) double
+MathFunctions : atan(x : double) double
+MathFunctions : atan2(y : double, x : double) double
+MathFunctions : ceil(x : double) double
+MathFunctions : cos(x : double) double
+MathFunctions : cosh(x : double) double
+MathFunctions : exp(x : double) double
+MathFunctions : floor(x : double) double
+MathFunctions : log(x : double) double
+MathFunctions : log10(x : double) double
+MathFunctions : max(x : double, y : double) double
+MathFunctions : min(x : double, y : double) double
+MathFunctions : pow(x : double, y : double) double
+MathFunctions : random() double
+MathFunctions : rint(x : double) double
+MathFunctions : round(x : double) long
+MathFunctions : sin(x : double) double
+MathFunctions : sinh(x : double) double
+MathFunctions : sqrt(x : double) double
+MathFunctions : tan(x : double) double
+MathFunctions : tanh(x : double) double
+....
+
+==== Requirements
+include::../requirements/rc-math-functions.adoc[]
+
+[[rc-spatial]]
+=== Requirements Class "Spatial Relation Functions"
+==== Overview
+
+[#img-uml-class-spatial-relation-functions]
+.Spatial Relation Functions UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+interface SpatialRelationFunctions
+SpatialRelationFunctions --|> Function : standard functions
+SpatialRelationFunctions : s_intersects(Geometry a, Geometry b) bool
+SpatialRelationFunctions : s_contains(Geometry a, Geometry b) bool
+SpatialRelationFunctions : s_crosses(Geometry a, Geometry b) bool
+SpatialRelationFunctions : s_disjoint(Geometry a, Geometry b) bool
+SpatialRelationFunctions : s_equals(Geometry a, Geometry b) bool
+SpatialRelationFunctions : s_overlaps(Geometry a, Geometry b) bool
+SpatialRelationFunctions : s_touches(Geometry a, Geometry b) bool
+SpatialRelationFunctions : s_within(Geometry a, Geometry b) bool
+SpatialRelationFunctions : s_covers(Geometry a, Geometry b) bool
+SpatialRelationFunctions : s_coveredBy(Geometry a, Geometry b) bool
+SpatialRelationFunctions --> Geometry
+....
+
+// Do we need to name the functions with the prefix "s_"?
+// If it is not the case, don't forget to update the following files:
+// - core\UML\PlantUML\adoc\standardFunctions.adoc
+// - core\UML\PlantUML\pu\standardFunctions.pu
+
+.Spatial relation functions
+[width="90%",options="header"]
+|===
+| Name         | Parameters                          | Return type | Definition
+| s_intersects | s_intersects(Geometry a, Geometry b)| bool        |
+| s_contains   | s_contains(Geometry a, Geometry b)  | bool        |
+| s_crosses    | s_crosses(Geometry a, Geometry b)   | bool        |
+| s_disjoint   | s_disjoint(Geometry a, Geometry b)  | bool        |
+| s_equals     | s_equals(Geometry a, Geometry b)    | bool        |
+| s_overlaps   | s_overlaps(Geometry a, Geometry b)  | bool        |
+| s_touches    | s_touches(Geometry a, Geometry b)   | bool        |
+| s_within     | s_within(Geometry a, Geometry b)    | bool        |
+| s_covers     | s_covers(Geometry a, Geometry b)    | bool        |
+| s_coveredBy  | s_coveredBy(Geometry a, Geometry b) | bool        |
+|===
+
+NOTE: Although _s_covers()_ and _s_coveredBy()_ are not defined in _Simple Features Access (SFA)_, they are part of the _Dimensionally Extended-9 Intersection Model (DE-9IM)_.
+_covers()_ is a more inclusive relation than _contains()_ that does not distinguish between points in the boundary vs. in the interior of geometries, and for most situations is the correct relation to use.
+_coveredBy()_ is a more inclusive relation than _within()_, and similarly is the correct relation to use for most situations.
+These relations are already implemented in several backends, but they can also be implemented using the _relate()_ method defined in SFA using the following masks:
+
+```
+covers(a, b):
+   relate(a, b, T*****FF*) or
+   relate(a, b, *T****FF*) or
+   relate(a, b, ***T**FF*) or
+   relate(a, b, ****T*FF*)
+
+coveredBy(a, b):
+   relate(a, b, T*F**F***) or
+   relate(a, b, *TF**F***) or
+   relate(a, b, **FT*F***) or
+   relate(a, b, **F*TF***)
+```
+
+===== Geometry System Identifiers
+
+[#img-uml-class-spatialrelation-systemIDs]
+.Geometry System Identifiers UML Class Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+class Feature
+
+Feature : geometry: Geometry
+
+DataLayer : features: Feature[*]
+DataLayer : featuresGeometry: Geometry[*]
+
+SystemIdentifierExpression : feature.geometry
+SystemIdentifierExpression : dataLayer.featuresGeometry
+
+SystemIdentifierExpression --> Feature
+DataLayer *-- Geometry
+DataLayer *-- Feature
+DataLayer --o Geometry
+Feature *-- Geometry
+....
+
+SpatialRelationFunctions are defined in the https://portal.ogc.org/files/?artifact_id=25355[OGC Simple Feature Access - Part 1: Common Architecture] specification and listed in the following table. They involve operations on geometries.
+
+===== Geometry
+
+// The bounding box parameter shouldn't be included in the geometry class.
+
+[#img-uml-class-geometry]
+.Geometry Classes UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+abstract class Geometry
+
+Point : coordinates: double[2..*]
+Point --|> Geometry
+
+MultiPoint --|> Geometry
+MultiPoint : points: Point[1..*]
+MultiPoint *-- Point
+
+LineString --|> Geometry
+LineString : points: Point[2..*]
+LineString *-- Point
+
+MultiLineString --|> Geometry
+MultiLineString : lineStrings: LineString[1..*]
+MultiLineString *-- LineString
+
+LinearRing : points: Point[3..*]
+LinearRing *-- Point
+
+Polygon --|> Geometry
+Polygon : exteriorRing:  LinearRing
+Polygon : interiorRings: LinearRing[0..*]
+Polygon *-- LinearRing
+
+MultiPolygon --|> Geometry
+MultiPolygon : polygons: Polygon[1..*]
+MultiPolygon *-- Polygon
+
+GeometryCollection --|> Geometry
+GeometryCollection : geometries : Geometry[1..*]
+GeometryCollection *-- Geometry
+
+BoundingBox --|> Geometry
+BoundingBox : lowerBound: Point
+BoundingBox : upperBound: Point
+BoundingBox *-- Point
+....
+
+====== Bounding boxes
+
+Although not a feature geometry per se, a bounding box is a valid Geometry argument for the spatial relation and geometry manipulation functions,
+and can describe the envelope of a Geometry.
+
+.BoundingBox class
+[width="90%",options="header"]
+|===
+| Name          | Definition                                    | Type     | Multiplicity
+| lowerBound    | Point with smallest value for each coordinate | Point    | 1
+| upperBound    | Point with greatest value for each coordinate | Point    | 1
+|===
+
+====== Points
+
+// Reference: https://portal.ogc.org/files/?artifact_id=25355[OGC Simple Feature Access - Part 1: Common Architecture]section 6.1.4 Point
+
+A Point is a 0-dimensional geometric object and represents a single location in coordinate space.
+A Point has an x-coordinate value, a y-coordinate value. If called for by the associated Spatial Reference System, it may also have coordinate values for z and m.
+
+.Point class
+[width="90%",options="header"]
+|===
+| Name          | Definition       | Type     | Multiplicity
+| coordinates   | coordinates      | double   | 2..*
+|===
+
+The boundary of a Point is the empty set.
+
+// Reference: https://portal.ogc.org/files/?artifact_id=25355[OGC Simple Feature Access - Part 1: Common Architecture]section 6.1.5 MultiPoint
+
+A MultiPoint is a geometry made of one or more Points.
+
+The elements of a MultiPoint are restricted to Points. The Points are not connected or ordered in any semantically important way (see the discussion at GeometryCollection).
+A MultiPoint is simple if no two Points in the MultiPoint are equal (have identical coordinate values in X and Y).
+Every MultiPoint is spatially equal to a simple Multipoint.
+The boundary of a MultiPoint is the empty set.
+
+.MultiPoint class
+[width="90%",options="header"]
+|===
+| Name          | Definition      | Type      | Multiplicity
+| points        | points          | Point     | 2..*
+|===
+
+====== Lines
+
+// Reference: https://portal.ogc.org/files/?artifact_id=25355[OGC Simple Feature Access - Part 1: Common Architecture]section 6.1.7 LineString, Line, LinearRing
+
+A LineString is a curve with linear interpolation between Points. Each consecutive pair of Points defines a line segment.
+
+// Should we include a figure with the associated description as figure the figure 6 in the section 6.1.7 of the OGC Simple Feature Access - Part 1: Common Architecture document?
+
+.LineString class
+[width="90%",options="header"]
+|===
+| Name        | Definition                                   | Type    | Multiplicity
+| points      | Points in this LineString                    | Point   | 2..*
+|===
+
+// MultiLineString
+
+// Reference: https://portal.ogc.org/files/?artifact_id=25355[OGC Simple Feature Access - Part 1: Common Architecture]section 6.1.9 MultiLineString
+
+A MultiLineString is a geometry made up of one or more LineStrings.
+
+.MultiLineString class
+[width="90%",options="header"]
+|===
+| Name            | Definition                                       | Type         | Multiplicity
+| lineStrings     | Line strings in this MultiLineString             | LineString   | 1..*
+|===
+
+// Should we include a figure?
+// Table to be discussed & added
+
+====== Polygons
+
+// Reference: https://portal.ogc.org/files/?artifact_id=25355[OGC Simple Feature Access - Part 1: Common Architecture] 6.1.11 Polygon, Triangle
+
+A Polygon is a planar surface defined by 1 exterior boundary and 0 or more interior boundaries.
+
+Each interior boundary defines a hole in the Polygon.
+
+.Polygon class
+[width="90%",options="header"]
+|===
+| Name           | Definition                                       | Type        | Multiplicity
+| exteriorRing   | Exterior ring of the polygon                     | LinearRing  | 1
+| interiorRings  | Interior rings of the polygon                    | LinearRing  | 0..*
+|===
+
+The exterior boundary LinearRing defines the "top" of the surface which is the side of the surface from which the exterior boundary appears to traverse the boundary in a counter clockwise direction.
+The interior LinearRings will have the opposite orientation, and appear as clockwise when viewed from the "top".
+
+The assertions for Polygons (the rules that define valid Polygons) are as follows:
+
+* **a)** Polygons are topologically closed;
+* **b)** The boundary of a Polygon consists of a set of LinearRings that make up its exterior and interior boundaries;
+* **c)** No two Rings in the boundary cross and the Rings in the boundary of a Polygon may intersect at a Point but only as a tangent i.e.,
+
+```
+∀ P ∈ Polygon, ∀ c1,c2 ∈ P.Boundary(), c1≠c2,
+∀ p, q ∈ Point, p, q ∈ c1, p ≠ q ,
+[p ∈ c2] ⇒ [ ∃ δ > 0 ∋ [|p-q|<δ] ⇒ [q ∉ c2] ];
+```
+
+NOTE: This last condition says that at a point common to the two curves, nearby points cannot be common. This forces each common point to be a point of tangency.
+
+* **d)** A Polygon may not have cut lines, spikes or punctures i.e.,
+
+```
+∀ P ∈ Polygon, P = P.Interior.Closure;
+```
+* **e)** The interior of every Polygon is a connected point set;
+* **f)** The exterior of a Polygon with 1 or more holes is not connected. Each hole defines a connected component of the exterior.
+
+In the above assertions, interior, closure and exterior have the standard topological definitions. The combination of (a) and (c) makes a Polygon a regular closed Point set. Polygons are simple geometric objects.
+
+// Should we include figure 11 & 12 of the section 6.1.11 of the OGC Simple Feature Access - Part 1: Common Architecture document and the associated description?
+
+A Polygon is made of an exterior ring and zero or more interior rings.
+
+// to be completed
+
+// MultiPolygons
+
+A MultiPolygon is a Geometry made up of one or more Polygons.
+
+.MultiPolygon class
+[width="90%",options="header"]
+|===
+| Name           | Definition                                       | Type        | Multiplicity
+| polygons       | Polygons of the multipolygon                     | Polygon     | 1..*
+|===
+
+// Reference: https://portal.ogc.org/files/?artifact_id=25355[OGC Simple Feature Access - Part 1: Common Architecture]section 6.1.14 MultiPolygon
+
+The assertions for MultiPolygons are as follows.
+
+* **a)** The interiors of 2 Polygons that are elements of a MultiPolygon may not intersect.
+
+```
+∀ M ∈ MultiPolygon, ∀ Pi, Pj ∈ M.Geometries(),i ≠ j,
+Interior(Pi) ∩ Interior(Pj) = ∅;
+```
+* **b)** The boundaries of any 2 Polygons that are elements of a MultiPolygon may not "cross" and may touch at only
+a finite number of Points.
+
+```
+∀ M ∈ MultiPolygon, ∀ Pi, Pj ∈ M.Geometries(),
+∀ ci, cj ∈ Curve ci ∈ Pi.Boundaries(), c j ∈ Pj.Boundaries()
+∃ k ∈ Integer ∋ ci ∩ cj = { p1, ..., pk | pm ∈ Point, 0 < m < k };
+```
+
+__Note:__ Crossing is prevented by assertion (a) above.
+
+* **c)** A MultiPolygon is defined as topologically closed.
+* **d)** A MultiPolygon may not have cut lines, spikes or punctures, a MultiPolygon is a regular closed Point set:
+
+```
+∀ M ∈ MultiPolygon, M = Closure(Interior(M))
+```
+* **e)** The interior of a MultiPolygon with more than 1 Polygon is not connected; the number of connected
+components of the interior of a MultiPolygon is equal to the number of Polygons in the MultiPolygon.
+
+The boundary of a MultiPolygon is a set of closed curves corresponding to the boundaries of its
+element Polygons. Each curve in the boundary of the MultiPolygon is in the boundary of exactly 1 element
+Polygon, and every curve in the boundary of an element Polygon is in the boundary of the MultiPolygon.
+
+// Should we add the reference to Worboys & Clementini et al. as in the OGC Simple Feature Access - Part 1: Common Architecture document?
+
+// Should we add the figure 17 & 18 of the OGC Simple Feature Access - Part 1: Common Architecture document?
+
+// Table to be discussed & added
+
+====== Geometry collections
+
+// Reference: https://portal.ogc.org/files/?artifact_id=25355[OGC Simple Feature Access - Part 1: Common Architecture]section 6.1.3 GeometryCollection
+
+A GeometryCollection is a geometric object that is a collection of some number of geometric objects.
+All the elements in a GeometryCollection shall be in the same Spatial Reference System (the Spatial Reference System for the GeometryCollection).
+
+.GeometryCollection class
+[width="90%",options="header"]
+|===
+| Name           | Definition                         | Type      | Multiplicity
+| geometries     | geometries in the collection       | Geometry  | 1..*
+|===
+
+==== Requirements
+
+include::../requirements/rc-spatial-relations.adoc[]
+
+[[rc-temporal]]
+=== Requirements Class "Temporal Relation Functions"
+==== Overview
+
+[#img-uml-class-temporal-relation-functions]
+.Temporal Relation Functions UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+interface TemporalRelationFunctions
+TemporalRelationFunctions --|> Function : standard functions
+TemporalRelationFunctions : t_after(TimeInstant a, TimeInstant b) bool
+TemporalRelationFunctions : t_before(TimeInstant a, TimeInstant b) bool
+TemporalRelationFunctions : t_disjoint(TimeInstant a, TimeInstant b) bool
+TemporalRelationFunctions : t_equals(TimeInstant a, TimeInstant b) bool
+TemporalRelationFunctions : t_intersects(TimeInstant a, TimeInstant b) bool
+TemporalRelationFunctions : t_after(TimeInterval a, TimeInterval b) bool
+TemporalRelationFunctions : t_before(TimeInterval a, TimeInterval b) bool
+TemporalRelationFunctions : t_disjoint(TimeInterval a, TimeInterval b) bool
+TemporalRelationFunctions : t_equals(TimeInterval a, TimeInterval b) bool
+TemporalRelationFunctions : t_intersects(TimeInterval a, TimeInterval b) bool
+TemporalRelationFunctions : t_contains(TimeInterval a, TimeInterval b) bool
+TemporalRelationFunctions : t_during(TimeInterval a, TimeInterval b) bool
+TemporalRelationFunctions : t_finishedBy(TimeInterval a, TimeInterval b) bool
+TemporalRelationFunctions : t_finishes(TimeInterval a, TimeInterval b) bool
+TemporalRelationFunctions : t_meets(TimeInterval a, TimeInterval b) bool
+TemporalRelationFunctions : t_meetBy(TimeInterval a, TimeInterval b) bool
+TemporalRelationFunctions : t_overlappedBy(TimeInterval a, TimeInterval b) bool
+TemporalRelationFunctions : t_overlaps(TimeInterval a, TimeInterval b) bool
+TemporalRelationFunctions : t_startedBy(TimeInterval a, TimeInterval b) bool
+TemporalRelationFunctions : t_starts(TimeInterval a, TimeInterval b) bool
+TemporalRelationFunctions --> TimeInstant
+TemporalRelationFunctions --> TimeInterval
+....
+
+.Temporal relation functions acting on time instants
+[width="90%",options="header"]
+|===
+| Name            | Parameters                        | Return type   | Definition
+| t_after         | (TimeInstant a, TimeInstant b)    | bool          |
+| t_before        | (TimeInstant a, TimeInstant b)    | bool          |
+| t_disjoint      | (TimeInstant a, TimeInstant b)    | bool          |
+| t_equals        | (TimeInstant a, TimeInstant b)    | bool          |
+| t_intersects    | (TimeInstant a, TimeInstant b)    | bool          |
+|===
+
+.Temporal relation functions acting on time intervals
+[width="90%",options="header"]
+|===
+| Name            | Parameters                        | Return type   | Definition
+| t_after         | (TimeInterval a, TimeInterval b)  | bool          |
+| t_before        | (TimeInterval a, TimeInterval b)  | bool          |
+| t_disjoint      | (TimeInterval a, TimeInterval b)  | bool          |
+| t_equals        | (TimeInterval a, TimeInterval b)  | bool          |
+| t_intersects    | (TimeInterval a, TimeInterval b)  | bool          |
+| t_contains      | (TimeInterval a, TimeInterval b)  | bool          |
+| t_during        | (TimeInterval a, TimeInterval b)  | bool          |
+| t_finishedBy    | (TimeInterval a, TimeInterval b)  | bool          |
+| t_finishes      | (TimeInterval a, TimeInterval b)  | bool          |
+| t_meets         | (TimeInterval a, TimeInterval b)  | bool          |
+| t_meetBy        | (TimeInterval a, TimeInterval b)  | bool          |
+| t_overlappedBy  | (TimeInterval a, TimeInterval b)  | bool          |
+| t_overlaps      | (TimeInterval a, TimeInterval b)  | bool          |
+| t_startedBy     | (TimeInterval a, TimeInterval b)  | bool          |
+| t_starts        | (TimeInterval a, TimeInterval b)  | bool          |
+|===
+
+==== Requirements
+
+include::../requirements/rc-temporal-relations.adoc[]
+
+[[rc-arrayrelations]]
+=== Requirements Class "Array Relation Functions"
+==== Overview
+
+[#img-uml-class-array-relation-functions]
+.Array Relation Functions UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+interface ArrayRelationFunctions
+ArrayRelationFunctions --|> Function : standard functions
+ArrayRelationFunctions : a_containedBy(array a, array b) bool
+ArrayRelationFunctions : a_contains(array a, array b) bool
+ArrayRelationFunctions : a_equals(array a, array b) bool
+ArrayRelationFunctions : a_overlaps(array a, array b) bool
+ArrayRelationFunctions --> ArrayExpression
+....
+
+.Array relation functions
+[width="90%",options="header"]
+|===
+| Name            | Parameters         | Return type  | Definition
+| a_containedBy   | (array a, array b) | bool         |
+| a_contains      | (array a, array b) | bool         |
+| a_equals        | (array a, array b) | bool         |
+| a_overlaps      | (array a, array b) | bool         |
+|===
+
+==== Requirements
+
+include::../requirements/rc-array-relations.adoc[]
+
+[[rc-textmanipulation]]
+=== Requirements Class "Text Manipulation Functions"
+==== Overview
+
+[#img-uml-class-text-manipulation-functions]
+.Text Manipulation Functions UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+interface TextManipulationFunctions
+TextManipulationFunctions --|> Function : standard functions
+TextManipulationFunctions : caseInsensitize(string s) string
+TextManipulationFunctions : accentInsensitize(string s) string
+TextManipulationFunctions : lowerCase(string s) string
+TextManipulationFunctions : upperCase(string s) string
+TextManipulationFunctions : concatenate(string a, string b) string
+TextManipulationFunctions : substitute(string s, string a, string b) string
+TextManipulationFunctions : format(string f, ...) string
+....
+
+.Text manipulation functions
+[width="90%",options="header"]
+|===
+| Name               | Parameters                     | Return type  | Definition
+| caseInsensitize    | (string s)                     | string       |
+| accentInsensitize  | (string s)                     | string       |
+| lowerCase          | (string s)                     | string       |
+| upperCase          | (string s)                     | string       |
+| concatenate        | (string a, string b)           | string       |
+| substitute         | (string s, string a, string b) | string       |
+| format             | (string f, ...)                | string       |
+|===
+
+==== Requirements
+
+include::../requirements/rc-text-manipulation.adoc[]
+
+[[rc-geometrymanipulation]]
+=== Requirements Class "Geometry Manipulation Functions"
+==== Overview
+
+[#img-uml-class-geometry-manipulation-functions]
+.Geometry Manipulation Functions UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+interface GeometryManipulationFunctions
+GeometryManipulationFunctions --|> Function : standard functions
+GeometryManipulationFunctions : s_intersection(Geometry a, Geometry b) Geometry
+GeometryManipulationFunctions : s_union(Geometry a, Geometry b) Geometry
+GeometryManipulationFunctions : s_difference(Geometry a, Geometry b) Geometry
+GeometryManipulationFunctions : s_symDifference(Geometry a, Geometry b) Geometry
+GeometryManipulationFunctions : s_buffer(Geometry a, double d) Geometry
+GeometryManipulationFunctions : s_convexHull(Geometry a) Geometry
+GeometryManipulationFunctions : s_envelope(Geometry a) BoundingBox
+GeometryManipulationFunctions : s_centroid(Geometry a) Point
+GeometryManipulationFunctions : s_offsetCurve(Geometry a, double d) Geometry
+GeometryManipulationFunctions : s_voronoiLines(Geometry a) Geometry
+GeometryManipulationFunctions : s_voronoiPolygons(Geometry a) Geometry
+GeometryManipulationFunctions : s_delaunayTriangles(Geometry a) Geometry
+GeometryManipulationFunctions --> Geometry
+....
+
+.Geometry manipulation functions
+[width="90%",options="header"]
+|===
+| Name            | Parameters               | Return type  | Definition
+| s_intersection  | (Geometry a, Geometry b) | Geometry     |
+| s_union         | (Geometry a, Geometry b) | Geometry     |
+| s_difference    | (Geometry a, Geometry b) | Geometry     |
+| s_symDifference | (Geometry a, Geometry b) | Geometry     |
+| s_convexHull    | (Geometry a)             | Geometry     |
+| s_buffer        | (Geometry a, double d)   | Geometry     |
+| s_envelope      | (Geometry a)             | BoundingBox  |
+| s_centroid      | (Geometry a)             | Point        |
+| s_offsetCurve   | (Geometry a, double d)   | Geometry     |
+| s_voronoiLines  | (Geometry a)             | Geometry     |
+| s_voronoiPolygons | (Geometry a)           | Geometry     |
+| s_delaunayTriangles | (Geometry a)          | Geometry     |
+|===
+
+==== Requirements
+
+include::../requirements/rc-geometry-manipulation.adoc[]
+
+=== Requirements Class "Recoding Function"
+
+==== Overview
+
+[#img-uml-class-recoding-functions]
+.Recoding Functions UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+interface RecodingFunctions
+RecodingFunctions --|> Function : standard functions
+RecodingFunctions : recode(string s, map < string, string > m) string
+....
+
+.Recoding functions
+[width="90%",options="header"]
+|===
+| Name            | Parameters               | Return type  | Definition
+| recode          | (string s, map < string, string > m) | string |
+|===
+
+==== Requirements
+
+include::../requirements/rc-recoding.adoc[]
+
+[[rc-aggregation]]
+=== Requirements Class "Aggregation"
+
+==== Overview
+
+Aggregate(expression to aggregate, aggregation method, array of dimensions to aggregate upon).
+
+The following aggregation methods are supported: min, max, average, sum, first, last, median, stdDev. 
+
+Basic example use of aggregate function to compute the minimum NDVI over time dimension:
+
+`Aggregate((B08-B04)/(B08+B04), 'min', ['time'])`
+
+Example use in CartoSym-CSS of to compute a minimum EVI over time dimension:
+
+```
+.title 'EVI Sentinel-2 Style'
+.abstract 'Applying a color map to an aggregated minimal Enhanced Vegetation Index (EVI)_ of sentinel-2 data'
+{
+   singleChannel: Aggregate(2.5 * (B08/10000 - B04/10000) / (1 + B08/10000 + 6 * B04/10000 + -7.5 * B02/10000), 'min', ['time']);
+   colorMap:
+   [
+      { -2.0, black }, { -1.1, #BFBFBF }, { -0.2, #DBDBDB },
+      { -0.1, #FFFFE0 }, {  0.0, #FFFACC }, { 0.025, #EDE8B5 },
+      { 0.05, #DED99C }, { 0.075, #CCC782 }, { 0.1, #BFB86B },
+      { 0.125, #B0C261 }, { 0.15, #A3CC59 }, { 0.175, #91BF52 },
+      { 0.2, #80B347 }, { 0.25, #70A340 }, { 0.3, #619636 },
+      { 0.35, #4F8A2E }, { 0.4, #407D24 }, { 0.45, #306E1C },
+      { 0.5, #216112 }, { 0.55, #F540A }, { 0.6, #004500 }
+   ];
+}
+```
+
+Example use in CartoSym-CSS of to use average of RGB bands over time dimension:
+
+```
+.title 'Average Sentinel-2 imagery over time'
+.abstract ''
+{
+   colorChannels.r: Aggregate(B04, 'average', ['time']);
+   colorChannels.g: Aggregate(B03, 'average', ['time']);
+   colorChannels.b: Aggregate(B02, 'average', ['time']);
+}
+```
+
+Example use in CartoSym-CSS of to use latest RGB bands over time dimension:
+
+```
+.title 'Use the latest Sentinel-2 imagery'
+.abstract ''
+{
+   colorChannels.r: Aggregate(B04, 'last', ['time']);
+   colorChannels.g: Aggregate(B03, 'last', ['time']);
+   colorChannels.b: Aggregate(B02, 'last', ['time']);
+}
+```
+
+==== Requirements
+
+include::../requirements/rc-aggregation.adoc[]

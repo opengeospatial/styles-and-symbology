@@ -1,0 +1,129 @@
+== Requirements Classes for Labeling
+
+[[rc-labels]]
+=== Requirements Class "Basic Labeling"
+==== Overview
+
+[#img-uml-class-labeling]
+.Label Class UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+class Symbolizer <<extended>>
+Symbolizer : label: Label [0..1]
+Symbolizer *-- Label
+
+Label --|> MultiGraphic
+Label : placement: LabelPlacement
+Label *-- LabelPlacement
+
+LabelPlacement : priority: float
+LabelPlacement : minSpacing: float
+LabelPlacement : maxSpacing: float
+....
+
+This requirements class adds support for labels that are placed using using a placement algorithm (and may not always be placed)
+drawn as a separate pass on top of styled vector features and coverages.
+Like Markers, Labels inherit from the MultiGraphic class and may contain multiple graphical elements.
+
+.Extended Symbolizer Class
+[width="90%",options="header"]
+|===
+| Name   | Definition                  | Type    | Multiplicity
+| label  | Graphic placed and drawns   | Label   | 0..1
+|===
+
+////
+LabelClass defines the graphical symbolizing properties for drawing a text label.
+As an abstract class and part of the base of the core graphical concepts,
+LabelClass is a point of extension to specify concrete ways to draw text label according to placement behaviors (e.g., a PointLabel or LineLabel).
+
+LabelClass properties are documented in the following table.
+
+.LabelClass
+[width="90%",options="header"]
+|===
+| Name   | Definition   | Data type and value   | Multiplicity
+| uom   | Unit of measure to apply to the affected graphical properties within a Label   | uom code   | zero or one
+| labelText   | Text-label content to draw   | ParameterValue data type String   | one
+| font   | Font definition to draw the text-label content   | Font data type Default value: system-dependent   | zero or one
+| fill   | Filling style to draw the glyphs   | Fill data type   | zero or one
+| extension   | Any encoding should allow to extend a Label with custom items   | Any type   | zero or more
+|===
+////
+
+==== Requirements
+
+include::../requirements/rc-labeling.adoc[]
+
+[[rc-fontoutlines]]
+=== Requirements Class "Font Outlines"
+==== Overview
+
+[#img-uml-class-fontoutlines]
+.Font outlines UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+Font *-- FontOutline
+Font : outline: FontOutline
+
+FontOutline : size: float
+FontOutline : opacity: float
+FontOutline : color: Color
+FontOutline *-- Color
+....
+
+This requirements class adds support for Text font outlines to improve readability on any background.
+
+===== Font Outlines
+
+.Extended Text Class
+[width="90%",options="header"]
+|===
+| Name     | Definition             | Type         | Multiplicity
+| outline  | Outline for the text   | FontOutline  | 0..1
+|===
+
+.FontOutline class
+[width="90%",options="header"]
+|===
+| Name      | Definition               | Data type and value   | Multiplicity
+| size      | Size of the outline      | float                 | 0..1
+| opacity   | Opacity of the outline   | float                 | 0..1
+| color     | Color of the outline     | Color                 | 0..1
+|===
+
+==== Requirements
+
+include::../requirements/rc-font-outlines.adoc[]
+
+=== Requirements Class "Image Outlines"
+
+==== Image Outlines
+
+[#img-uml-class-imageoutline]
+.ImageOutline UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+Image *-- ImageOutline
+Image : outline: ImageOutline
+
+ImageOutline : size: float
+ImageOutline : opacity: float
+ImageOutline : color: Color
+ImageOutline *-- Color
+....
+
+This requirements class adds support for Image outlines to improve readability on any background.
+
+.ImageOutline class
+[width="90%",options="header"]
+|===
+| Name      | Definition               | Data type and value   | Multiplicity
+| size      | Size of the outline      | float                 | 0..1
+| opacity   | Opacity of the outline   | float                 | 0..1
+| color     | Color of the outline     | Color                 | 0..1
+|===
+
+==== Requirements
+
+//TODO: include::../requirements/rc-image-outlines.adoc[]

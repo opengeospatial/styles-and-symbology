@@ -1,0 +1,26 @@
+=== Conformance Class "Basic Coverage Styling"
+
+[conformance_class]
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/symbology-1/2.0/conf/coverage
+subject:: <<rc-core,Requirements Class "Basic Coverage Styling">>
+classification:: Target Type:Encoding,Rendering engine
+====
+
+[abstract_test]
+====
+[%metadata]
+identifier:: /conf/coverage/color-channels
+target:: /req/coverage/color-channels
+test-purpose:: Validate the encoding of a symbolizer `colorChannels`
+test-method::
++
+--
+Given:
+
+When:
+
+Then:
+--
+====

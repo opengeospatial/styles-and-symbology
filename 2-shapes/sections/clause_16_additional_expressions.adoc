@@ -1,0 +1,74 @@
+== Requirements Classes for Additional expressions
+
+[[rc-righthand]]
+=== Requirements Class "Any right-hand operands"
+==== Overview
+
+This requirements class removes the restriction that right-hand side operands of RelationExpressions are limited to LiteralExpressions.
+For expressions encoded using CQL2, it is analogous to the _CQL2 Property-Property comparison_ requirements class.
+
+==== Requirements
+
+include::../requirements/rc-righthand.adoc[]
+
+[[rc-conditional]]
+=== Requirements Class "Conditional Expressions"
+==== Overview
+
+==== Conditional expressions
+
+[#img-uml-class-conditional-expression]
+.Conditional Expressions UML Class Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+abstract class Expression
+ConditionalExpression --|> Expression
+ConditionalExpression : condition: Expression
+ConditionalExpression : thenExp: Expression
+ConditionalExpression : elseExp: Expression
+ConditionalExpression *-- Expression
+....
+
+.ConditionalExpression class
+[width="90%",options="header"]
+|===
+| Name        | Definition                                     | Type          | Multiplicity
+| condition   | Condition                                      | Expression    | 1
+| thenExp     | Expression resolving to when condition is true | Expession     | 1
+| elseExp     | Expression resolving to when condition is false| Expession     | 1
+|===
+
+==== Requirements
+
+include::../requirements/rc-conditional.adoc[]
+
+[[rc-variables]]
+=== Requirements Class "Variables"
+==== Overview
+
+[#img-uml-class-variable-expression]
+.Variable Expressions UML Class Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+abstract class Expression
+VariableExpression --|> Expression
+VariableExpression : name: string
+....
+
+This requirements class adds support for defining variables that can be used
+to facilitate re-use of definitions in encodings, as well as to provide configurable
+elements that can be associated with application control such as a slider or drop-down control.
+
+===== Variable expressions
+.VariableExpression class
+[width="90%",options="header"]
+|===
+| Name        | Definition                                     | Type          | Multiplicity
+| name        | Name of the variable                           | string        | 1
+|===
+
+// __NOTE:__ Consider adding a member and array element access expression
+
+==== Requirements
+
+include::../requirements/rc-variables.adoc[]

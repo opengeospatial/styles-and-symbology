@@ -1,0 +1,13 @@
+== Scope
+
+This Standard presents the requirements that define version 2.0 of the _Styles and Symbology Model and Encodings - Part 1: Core_ (_"SymCore 2.0"_).
+A Model for the portrayal of geographic data is defined at both the conceptual and logical levels, in a modular manner through the use of separate requirements classes and specific extension points.
+The requirements classes defined by this first part cover the most common use cases for portraying geospatial vector features and coverages.
+Several scenarios of varying complexity and the associated requirements classes enabling them are illustrated in an annex.
+Two encodings are defined by this Standard: one based on JSON which can be readily parsed with a JSON parser, and another more expressive encoding inspired from Web Cascading Style Sheets (CSS)
+better suited for hand-editing style sheets. Future parts to this Standard may further extend the portrayal capabilities by defining additional requirements classes.
+
+The _Styles and Symbology Model_ is a new approach (Bocher E., Ertz O., 2018, see <<annex-bibliography,bibliography>>):
+
+- to provide the flexibility required to achieve adequate cartographic styling and fill the needs of a variety of information communities; e.g., aviation symbols, weather symbols, thematic maps, etc.; and
+- to achieve high level styling interoperability without encoding dependencies.

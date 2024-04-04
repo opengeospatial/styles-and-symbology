@@ -1,0 +1,63 @@
+
+[[rc_table-hillshading]]
+
+[requirements_class]
+.Hill Shading
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/symbology-1/2.0/req/hillshading
+inherit:: http://www.opengis.net/spec/symbology-1/2.0/req/coverage
+subject:: Style encodings and Renderers
+====
+
+===== Symbolizer `hillShading` property
+
+[[req-hillshading-hillshading]]
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/hillshading/hillshading
+part:: An Encoding SHALL support defining a `hillshading` Symbolizer property as an object including `factor`, `sun`, `colorMap` and `opacityMap` properties.
+part:: A Renderer SHALL support ...
+====
+
+===== HillShading `factor` property
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/hillshading/factor
+part:: An Encoding SHALL support defining a `factor` HillShading property as a float.
+part:: A Renderer SHALL support ...
+====
+
+===== HillShading `sun` property
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/hillshading/sun
+part:: An Encoding SHALL support defining a `sun` HillShading property as an object consisting of `azimuth` and `elevation` angle members representing the orientation of the sun relative to the terrain.
+part:: A Renderer SHALL support ...
+====
+
+===== HillShading `colorMap` property
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/hillshading/color-map
+part:: An Encoding SHALL support defining a `colorMap` HillShading property as an array of `value` (float) and `color` (Color) pairs.
+part:: A Renderer SHALL support ...
+====
+
+===== HillShading `opacityMap` property
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/hillshading/opacity-map
+part:: An Encoding SHALL support defining a `opacityMap` HillShading property as an array of `value` (float) and `opacity` (float) pairs.
+part:: A Renderer SHALL support ...
+====
