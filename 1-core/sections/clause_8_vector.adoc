@@ -144,7 +144,7 @@ StrokeStyling *-- Color
 StrokeStyling *-- GraphicalUnit
 ....
 
-A Stroke defines the graphical symbolizing parameters for drawing an outline (e.g., for linear geometries or the exterior of a polygon geometry). As an abstract class and part of the base of the core graphical concepts, StrokeClass is a global point of extension to specify concrete ways to draw outlines (e.g., the PenStroke and GraphicStroke extensions). The StrokeClass properties are documented in the following table.
+A Stroke defines the graphical symbolizing parameters for drawing an outline (e.g., for linear geometries or the exterior of a polygon geometry). As an abstract class and part of the base of the core graphical concepts, StrokeClass is a global point of extension to specify concrete ways to draw outlines. The StrokeClass properties are documented in the following table. By default the end of open subpaths are butt caped and at the corners of paths are miter joined when they are stroked.
 
 A Stroke object inherits from a base _StrokeStyling_ class, which is re-used in a separate requirements class for defining more complex strokes:
 

@@ -1,4 +1,4 @@
-= OGC Styles and Symbology Model and Encodings - Part 1: Core
+= OGC Cartographic Symbology - Part 1: Core Model & Encodings (aka SymCore2)
 :doctype: standard
 :docsubtype: implementation
 :status: swg-draft
@@ -6,7 +6,7 @@
 :lang: en
 :committee: technical
 :draft: 2.0
-:abbrev: symbology
+:abbrev: cartosym
 :edition: 2.0
 :external-id: http://www.opengis.net/doc/IS/{abbrev}-1/{edition}
 :docnumber: 18-067r4
@@ -53,8 +53,6 @@ include::sections/clause_9_coverage.adoc[]
 
 include::sections/clause_10_labeling.adoc[]
 
-include::sections/clause_11_shapes.adoc[]
-
 include::sections/clause_12_graphical_hierarchy.adoc[]
 
 include::sections/clause_13_advanced_strokes.adoc[]
@@ -68,8 +66,6 @@ include::sections/clause_16_additional_expressions.adoc[]
 include::sections/clause_17_operations.adoc[]
 
 include::sections/clause_18_functions.adoc[]
-
-include::sections/clause_19_3D.adoc[]
 
 include::sections/clause_20_json.adoc[]
 

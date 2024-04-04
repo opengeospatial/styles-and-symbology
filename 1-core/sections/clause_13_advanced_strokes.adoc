@@ -1,62 +1,5 @@
 == Requirements Classes for Advanced strokes
 
-[[rc-joinscaps]]
-=== Requirements Class "Joins and Caps"
-==== Overview
-
-[#img-uml-class-joins-caps]
-.Joins and Caps classes UML diagram
-[plantuml, target=diagram-classes, format=png]
-....
-class Stroke <<extended>>
-Stroke : join: StrokeJoin [0..1]
-Stroke : cap: StrokeCap [0..1]
-Stroke *-- StrokeJoin
-Stroke *-- StrokeCap
-
-enum StrokeJoin
-StrokeJoin : miter
-StrokeJoin : round
-StrokeJoin : bevel
-
-enum StrokeCap
-StrokeCap : butt
-StrokeCap : round
-StrokeCap : square
-....
-
-This requirements class adds support for Strokes rendered with additional join and cap types.
-
-.Extended Stroke class
-[width="90%",options="header"]
-|===
-| Name      | Definition         | Type         | Multiplicity
-| join      | Join               | StrokeJoin   | 0..1
-| cap       | Cap                | StrokeCap    | 0..1
-|===
-
-.StrokeJoin enumeration
-[width="90%",options="header"]
-|===
-| Name       | Definition
-| miter      | Miter join
-| round      | Round join
-| bevel      | Bevel join
-|===
-
-.StrokeCap enumeration
-[width="90%",options="header"]
-|===
-| Name       | Definition
-| butt       | Butt cap
-| round      | Round cap
-| square     | Square cap
-|===
-
-==== Requirements
-
-include::../requirements/rc-joins-caps.adoc[]
-
 [[rc-dashes]]
 === Requirements Class "Dashes"
 ==== Overview
@@ -110,33 +53,3 @@ This requirements class adds support for Strokes with a casing and centerline.
 ==== Requirements
 
 include::../requirements/rc-casing-centerline.adoc[]
-
-[[rc-patternstrokes]]
-=== Requirements Class "Pattern Strokes"
-==== Overview
-
-[#img-uml-class-pattern]
-.Pattern strokes class UML Diagram
-[plantuml, target=diagram-classes, format=png]
-....
-class Stroke <<extended>>
-Stroke : pattern: Graphic [0..1]
-Stroke : patternGap: float [0..1]
-Stroke : patternInitialGap: float [0..1]
-Stroke *-- Graphic
-....
-
-This requirements class adds support for Strokes with a pattern defined by a Graphic.
-
-.Extended Stroke class
-[width="90%",options="header"]
-|===
-| Name               | Definition                                 | Type         | Multiplicity
-| pattern            | Pattern graphic                            | Graphic      | 0..1
-| patternGap         | Gap between instances of pattern graphic   | float        | 0..1
-| patternInitialGap  | Initial gap before first pattern graphic   | float        | 0..1
-|===
-
-==== Requirements
-
-include::../requirements/rc-pattern-strokes.adoc[]

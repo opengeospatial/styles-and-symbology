@@ -1,31 +1,5 @@
 == Requirements Classes for Advanced fills
 
-[[rc-patternfills]]
-=== Requirements Class "Pattern Fills"
-==== Overview
-
-[#img-uml-pattern-fill]
-.Pattern Fill UML Diagram
-[plantuml, target=diagram-classes, format=png]
-....
-class Fill <<extended>>
-Fill : pattern: Graphic [0..1]
-Fill *-- Graphic
-....
-
-This requirements class adds support for defining how to fill a shape with a pattern.
-
-.Extended Fill class
-[width="90%",options="header"]
-|===
-| Name           | Definition                    | Type         | Multiplicity
-| pattern        | Graphic to repeat in pattern  | Graphic      | 0..1
-|===
-
-==== Requirements
-
-include::../requirements/rc-pattern-fills.adoc[]
-
 [[rc-hatchesgradientsstipples]]
 === Requirements Class "Hatches and Gradients, Stipples"
 ==== Overview

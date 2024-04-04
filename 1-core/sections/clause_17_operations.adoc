@@ -38,43 +38,6 @@ ArithmeticOperator : pow
 
 include::../requirements/rc-arithmetic.adoc[]
 
-[[rc-bitwise]]
-=== Requirements Class "Bitwise Operators"
-==== Overview
-
-This requirements class adds support for operations on individual bits.
-
-[#img-uml-class-bitwise]
-.Bitwise Operators UML Diagram
-[plantuml, target=diagram-classes, format=png]
-....
-enum BitwiseOperator
-BitwiseOperator --|> Operator
-BitwiseOperator : bitAnd
-BitwiseOperator : bitOr
-BitwiseOperator : bitNot -- unary
-BitwiseOperator : bitXor
-BitwiseOperator : leftShift
-BitwiseOperator : rightShift
-....
-
-.bitwise
-[width="90%",options="header"]
-|===
-| Name       | Definition      | Data type and value  | Multiplicity
-| bitAnd     | Bitwise AND     | Integer              | 1..1
-| bitOr      | Bitwise OR      | Integer              | 1..1
-| bitNot     | Bitwise NOT     | Integer              | 1..1
-| bitXor     |  Bitwise XOR    | Integer              | 1..1
-| leftShift  | Left Shift      | Integer              | 1..1
-| rightShift | Right Shift     | Integer              | 1..1
-|===
-
-==== Requirements
-
-include::../requirements/rc-bitwise.adoc[]
-
-
 [[rc-textrelation]]
 === Requirements Class "Text Relation Operators"
 ==== Overview

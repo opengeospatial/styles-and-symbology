@@ -95,35 +95,3 @@ This requirements class adds support for Text font outlines to improve readabili
 ==== Requirements
 
 include::../requirements/rc-font-outlines.adoc[]
-
-=== Requirements Class "Image Outlines"
-
-==== Image Outlines
-
-[#img-uml-class-imageoutline]
-.ImageOutline UML Diagram
-[plantuml, target=diagram-classes, format=png]
-....
-Image *-- ImageOutline
-Image : outline: ImageOutline
-
-ImageOutline : size: float
-ImageOutline : opacity: float
-ImageOutline : color: Color
-ImageOutline *-- Color
-....
-
-This requirements class adds support for Image outlines to improve readability on any background.
-
-.ImageOutline class
-[width="90%",options="header"]
-|===
-| Name      | Definition               | Data type and value   | Multiplicity
-| size      | Size of the outline      | float                 | 0..1
-| opacity   | Opacity of the outline   | float                 | 0..1
-| color     | Color of the outline     | Color                 | 0..1
-|===
-
-==== Requirements
-
-//TODO: include::../requirements/rc-image-outlines.adoc[]
