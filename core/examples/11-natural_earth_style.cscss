@@ -278,14 +278,6 @@ ne_10m_glaciated_areas
    zOrder: 65;
 }
 
-ne_10m_geographic_lines
-{
-   visibility: true;
-   stroke: { color: lavenderBlush };
-   label: { elements: [ Text { text: name, font: { face: 'Tahoma', size: 12, outline: { size: 3, opacity: 0.75, color: white } } } ] };
-   zOrder: 85;
-}
-
 ne_10m_geography_marine_polys
 {
    visibility: true;
