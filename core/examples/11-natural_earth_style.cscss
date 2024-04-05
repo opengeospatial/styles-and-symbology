@@ -6,8 +6,14 @@ ne_10m_admin_0_countries
    zOrder: 1;
    opacity: 0.3686275;
 
-   label: { elements: [ Text { text: name, font: { face: 'Tahoma', size: 14, outline: { size: 3, opacity: 0.75, color: white } } } ] };
-   
+   label: { elements: [ Text { text: name,
+                               font: { face: 'Tahoma',
+                                       size: 14,
+                                       outline: { size: 3,
+                                                  opacity: 0.75,
+                                                  color: white }
+                                      }
+                               } ] };
 
    [CONTINENT = 'Africa']
    {
@@ -48,7 +54,7 @@ ne_10m_admin_0_countries
 ne_10m_urban_areas
 {
    visibility: true;
-   fill: { opacity: 0.8, color: 0xffe469 };
+   fill: { opacity: 0.8, color: #ffe469 };
    stroke: { color: yellow, width: 0 };
    zOrder: 31;
 }
@@ -77,7 +83,15 @@ ne_10m_populated_places
       label: { elements: [
          Dot { color: white, size: 10 },
          Dot { color: darkOrange, size: 6 },
-         Text { text: NAME, position2D = { 10, -4 }, font: { face: 'Tahoma', size: 12, outline: { color: white, size: 3.5, opacity: 0.75 } }, alignment: { left, middle } }
+         Text { text: NAME,
+                position2D : { 10, -4 },
+                font: { face: 'Tahoma',
+                        size: 12,
+                        outline: { color: white,
+                                   size: 3.5,
+                                   opacity: 0.75 }
+                       },
+                alignment: { left, middle } }
       ] };
    }
 }
@@ -89,10 +103,17 @@ ne_10m_geography_regions_polys
    stroke: { width: 0 };
    label: { elements: [ Text {
                   text: name,
-                  font: { face: 'Times New Roman', size: 12, italic: true, color: papayaWhip, outline: { size: 3, color: black, opacity: 0.35 } },
+                  font: { face: 'Times New Roman',
+                  size: 12,
+                  italic: true,
+                  color: papayaWhip,
+                  outline: { size: 3,
+                             color: black,
+                             opacity: 0.35 }
+                         },
                   alignment: { center, middle }
-               }
-            ] };
+                               }
+                      ] };
    zOrder: 64;
 }
 
@@ -234,7 +255,7 @@ ne_10m_rivers_europe
 ne_10m_reefs
 {
    visibility: true;
-   stroke: { color: 0x00af7a };
+   stroke: { color: #00af7a };
    zOrder: 35;
 }
 
@@ -286,7 +307,16 @@ ne_10m_geography_marine_polys
    zOrder: 87;
    [SCALERANK = 0]
    {
-      label: { elements: [ Text { text: name, font: { face: 'Tahoma', size: 12, color: dodgerBlue, italic: true, outline: { size: 3, opacity: 0.75, color: #10508b } } } ] };
+      label: { elements: [ Text { text: name,
+                                  font: { face: 'Tahoma',
+                                          size: 12,
+                                          color: dodgerBlue,
+                                          italic: true,
+                                          outline: { size: 3,
+                                                     opacity: 0.75,
+                                                     color: #10508b
+                                                    }
+                                         } } ] };
    }
 }
 
