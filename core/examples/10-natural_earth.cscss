@@ -17,13 +17,12 @@ ne_10m_admin_0_countries[dataLayer.type = vector]
              size:8,
              color:black
              }
-                }
-             ]
+                }]
             };
 
    [ECONOMY = '1. Developed region: G7']
    {
-   fill.color : #707e70;
+    fill.color : #707e70;
    }
    [ECONOMY = '2. Developed region: nonG7']
    {
