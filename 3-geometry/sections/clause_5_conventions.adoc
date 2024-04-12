@@ -1,0 +1,11 @@
+== Conventions
+
+This sections provides details and examples for any conventions used in the document. Examples of conventions are symbols, abbreviations, use of XML schema, or special notes regarding how to read the document.
+
+=== Abbreviated terms
+The abbreviated terms clause gives a list of the abbreviated terms necessary for understanding this document.
+
+IETF::	Internet Engineering Task Force, https://ietf.org/
+ISO::	International Organization for Standardization, https://www.iso.org
+OGC::	Open Geospatial Consortium, www.opengeospatial.org
+UML::	Unified Modeling Language, http://www.uml.org/

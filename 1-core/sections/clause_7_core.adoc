@@ -96,7 +96,7 @@ The selector (also sometimes called a _filter_), for the rule is defined as a pr
 
 .Example showcasing a Style made of StylingRules using CCSSS encoding
 ====
-[source,ccsss]
+[source,cscss]
 ----
 Landuse    // Selector for this first rule
 {
@@ -145,7 +145,7 @@ Separate requirements classes and later parts will extend this Symbolizer class 
 
 .CCSSS Example showcasing the limited symbolization possible with this Core requirements class
 ====
-[source,ccsss]
+[source,cscss]
 ----
 {
    visibility: false;
@@ -339,7 +339,7 @@ TOCHECK: How to handle parent objects ? e.g.,  visualization, dataLayer, feature
 
 .CCSSS Example showcasing scale-dependent selector using system identifiers
 ====
-[source,ccsss]
+[source,cscss]
 ----
 Roads
 {
@@ -442,7 +442,7 @@ with different symbolizers before rendering the next feature.
 
 .CCSSS Example showcasing visualization time-dependent selector using system identifiers
 ====
-[source,ccsss]
+[source,cscss]
 ----
 Landuse
 {
@@ -467,7 +467,7 @@ Landuse
 
 .CCSSS Example showcasing selectors depending on layer identifiers and data type using system identifiers
 ====
-[source,ccsss]
+[source,cscss]
 ----
 [dataLayer.type = vector]
 {
@@ -629,7 +629,7 @@ This requirements class defines the following Relational Operators:
 
 .CCSSS Example showcasing the use of logical and relational operators in a selector
 ====
-[source,ccsss]
+[source,cscss]
 ----
 Roads
 {
@@ -674,7 +674,7 @@ This capability is particularly useful when using nested StylingRules, where a n
 
 .CCSSS Example showcasing the use of logical and relational operators in a selector
 ====
-[source,ccsss]
+[source,cscss]
 ----
 Roads
 {
@@ -694,7 +694,7 @@ Roads
 
 // TODO: Insert pretty picture here
 
-[[ccsss-default-values]]
+[[cscss-default-values]]
 ==== Default class member values
 
 The following default values are defined by this encoding.

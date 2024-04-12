@@ -1,0 +1,24 @@
+[[rc-geometry-properties]]
+== Requirements Class "Vector Geometry Properties"
+=== Overview
+
+////
+[plantuml, target=diagram-classes, format=png]
+....
+
+....
+////
+
+This requirements class adds Area, Length, Perimeter, Envelope, pointOnSurface, Centroid as properties of feature geometry.
+
+.Extended class
+[width="90%",options="header"]
+|===
+| Name       | Definition          | Type        | Multiplicity
+|            |                     |             | 0..1
+|===
+
+
+=== Requirements
+
+// TODO: include::../requirements/rc-vector-geometry-properties.adoc[]

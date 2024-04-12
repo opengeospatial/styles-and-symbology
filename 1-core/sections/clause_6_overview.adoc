@@ -8,18 +8,14 @@ This Standard defines conformance classes for:
    ** basic portrayal capabilities of vector features (<<rc-vector,Section 8>>),
    ** portrayal capabilities of coverage data (<<rc-coverage,Section 9>>),
    ** label placement and font outlines capabilities (<<rc-labels,Section 10>>),
-   ** shape graphics capabilities including circles, ellipses, arcs, rectangles (including rounded rectangles) and paths (polylines and polygons), with the ability to use outlines (<<rc-shapes,Section 11>>),
-   ** vector graphic hierarchy capabilities, including full 2D transforms (<<rc-multigraphics,Section 12>>),
-   ** advanced strokes capabilities, including specific joins and caps, dashed lines, casing and centerlines, and graphic patterns (<<rc-joinscaps,Section 13>>),
-   ** advanced fill capabilities, including graphic patterns, hatches, gradients and stipples (<<rc-hatchesgradientsstipples,Section 14>>),
-   ** using expressions as parameter values for any symbolizer properties (<<rc-parametervalues,Section 15>>),
-   ** using identifiers in the right side of operation expressions, conditional expressions and variables (<<rc-righthand,Section 16>>),
-   ** arithmetic, bitwise and text relation operators (<<rc-arithmetic,Section 17>>),
-   ** function call expressions and standardized functions for spatial, temporal and array relations, as well as text and geometry manipulation (<<rc-functions,Section 18>>), and
-   ** using 3D model graphics and 3D transforms (<<rc-righthand,Section 19>>),
+   ** advanced strokes capabilities, including dashed lines, casing and centerlines (<<rc-dashes,Section 11>>),
+   ** advanced fill capabilities, including hatches and stipples (<<rc-hatches,Section 12>>),
+   ** using expressions as parameter values for any symbolizer properties, using identifiers in the right side of operation expressions, conditional expressions and variables (<<rc-parametervalues,Section 13>>),
+   ** arithmetic and text relation operators (<<rc-arithmetic,Section 14>>),
+   ** function call expressions and standardized functions mathematics, temporal and array relations, as well as text manipulation (<<rc-functions,Section 15>>), and
 * two encodings for the logical and conceptual model covering all of these conformance classes:
-   ** an encoding based on JSON that can be readily parsed by JSON parser (<<rc-json,Section 20>>), and
-   ** a more expressive encoding based on Web CSS which is better suited to hand-edit styles (<<rc-ccsss,Section 21>>).
+   ** an encoding based on JSON that can be readily parsed by JSON parser (<<rc-json,Section 16>>), and
+   ** a more expressive encoding based on Web CSS which is better suited to hand-edit styles (<<rc-cscss,Section 17>>).
 
 In addition, the following annexes are included:
 

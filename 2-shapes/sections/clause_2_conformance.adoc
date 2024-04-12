@@ -1,12 +1,11 @@
 == Conformance
 
-The OGC Styles and Symbology Model and Encodings defines multiple requirements classes and their associated conformance classes.
+The OGC Cartographic Symbology - Part 2 - Model extension for graphical shapes and transmformations defines multiple requirements classes and their associated conformance classes, extending the core model
+defined in Part 1. The encodings defined in Part 1 can be also used to encode the capabilities defined in this extension.
 
-The standardization target for all conformance classes except the conformance classes defining encodings are both Encodings and Rendering engines.
-The standardization target for encodings are Rendering Engines and other applications accepting styles as input, as well as applications generating styles (e.g., style editors or converters).
+The standardization target for all conformance classes are both Encodings and Rendering engines.
 
-The conformance of all Rendering engines with all conformance classes except the conformance classes defining encodings is with the conceptual model that will result in the expected visual output.
-The conformance of all Encodings with the conformance classes targeting them can be either at a conceptual level or at a logical level.
+The conformance of all Rendering engines with all conformance classes is with the conceptual model that will result in the expected visual output.
 Conformance at the logical level implies conformance at the conceptual level as well.
 An Encoding conforms to the logical model if a Style can be encoded using the classes and property names defined in this Standard with only a simple consistent set of rules mapping them to the encoding.
 An Encoding can conform to the conceptual model of any conformance class either partially (if it can only preserve some of the information) or fully (if it losslessly preserves all information).
@@ -16,158 +15,54 @@ to the logical and/or conceptual model defined in this Standard. The granularity
 are interoperable with other encodings or rendering engines implementing this Standard.
 Most Encodings and Rendering engines are expected to easily conform to the requirements classes for basic portrayal.
 
-This document establishes a core requirements class with a URI of http://www.opengis.net/spec/symbology-1/2.0/req/core.
-
-Requirements and conformance test URIs defined in this document are relative to http://www.opengis.net/spec/symbology-1/2.0.
-
-=== Requirements classes for basic portrayal
-
-*<<rc-core,Requirements Class "Core">>* (http://www.opengis.net/spec/symbology-1/2.0/req/core)
-
-The Core Requirements Class specifies requirements that all encodings and rendering engines must support if claiming conformance with this Standard.
-The Core class defines how a Style is defined as a list of StylingRules consisting of a Symbolizer and an optional Selector expression,
-as well as a minimal set Symbolizer properties applicable to all types of geospatial data.
-
-*<<rc-vector,Requirements Class "Basic Vector Features Styling">>* (http://www.opengis.net/spec/symbology-1/2.0/req/vector)
-
-The Basic Vector Features Styling Requirements Class specifies requirements for styling vector features data, including referencing feature properties,
-specifying a fill and stroke to style vector geometry, as well as defining image, text or dot markers to symbolize points.
-
-*<<rc-coverage,Requirements Class "Basic Coverage Styling">>* (http://www.opengis.net/spec/symbology-1/2.0/req/coverage)
-
-The Basic Coverage Styling Requirements Class specifies requirements for styling coverage data, including referencing coverage range values (e.g., bands),
-mapping them to color channels as well as defining colormaps.
-
-*<<rc-labels,Requirements Class "Basic Labeling">>* (http://www.opengis.net/spec/symbology-1/2.0/req/labels)
-
-The Basic Labeling Requirements Class specifies requirements for defining labels to be managed by a placement engine and rendered as a final pass on top of the map.
+Requirements and conformance test URIs defined in this document are relative to http://www.opengis.net/spec/symbology-2/1.0.
 
 === Requirements classes for common portrayal capabilities
 
-*<<rc-hillshading,Requirements Class "Hill Shading">>* (http://www.opengis.net/spec/symbology-1/2.0/req/hillshading)
+*<<rc-gradients,Requirements Class "Gradient Fills">>* (http://www.opengis.net/spec/symbology-1/1.0/req/gradients)
 
-The Hill Shading Requirements Class specifies requirements for styling elevation coverage data with a hill-shaded style.
+The Gradient Fills Requirements Class specifies requirements for defining fils using gradients.
 
-*<<rc-fontoutlines,Requirements Class "Font Outlines">>* (http://www.opengis.net/spec/symbology-1/2.0/req/fontoutlines)
-
-The Font Outlines Requirements Class specifies requirements for displaying fonts with outlines so that text can be legible on any background.
-
-*<<rc-hatchesgradientsstipples,Requirements Class "Hatches, Gradients and Stipples">>* (http://www.opengis.net/spec/symbology-1/2.0/req/hatchesgradientsstipples)
-
-The Hatches, Gradients and Stipples Requirements Class specifies requirements for defining fils using hatches, gradients or stipples
-
-*<<rc-shapegraphics,Requirements Class "Shape Graphics">>* (http://www.opengis.net/spec/symbology-1/2.0/req/shapegraphics)
+*<<rc-shapegraphics,Requirements Class "Shape Graphics">>* (http://www.opengis.net/spec/symbology-1/1.0/req/shapegraphics)
 
 The Shape Graphics Requirements Class specifies requirements for defining geometric shapes which can be used for markers, labels (with Basic Labeling),
 or as patterns for stroke (with Pattern Strokes) or for fills (with Pattern Fills).
 
-*<<rc-dashes,Requirements Class "Dashes">>* (http://www.opengis.net/spec/symbology-1/2.0/req/dashes)
+*<<rc-vector-geometry,Requirements Class "Vector Geometry Properties">>* (http://www.opengis.net/spec/symbology-1/1.0/req/geometryproperties)
 
-The Dashes Requirements Class specifies requirements for defining dashed strokes.
-
-*<<rc-casing,Requirements Class "Casing and Centerline">>* (http://www.opengis.net/spec/symbology-1/2.0/req/casing)
-
-The Casing and Centerline Requirements Class specifies requirements for defining strokes with built-in casing and centerline.
-
-////
-TODO: Clarify how this differs to using a Stroke with a casing on the Shape, and whether this should also be supported for vector geometry?
-////
-
-=== Requirements classes for additional expression capabilities
-
-*<<rc-parametervalues,Requirements Class "Parameter Values">>* (http://www.opengis.net/spec/symbology-1/2.0/req/parametervalues)
-
-The Parameter Values Requirements Class specifies requirements for using an Expression to define any property of a Symbolizer.
-
-*<<rc-righthand,Requirements Class "Right-hand Identifiers">>* (http://www.opengis.net/spec/symbology-1/2.0/req/righthand)
-
-The Right-hand Identifiers Requirements Class specifies requirements for defining operation expressions with identifiers on the right-hand side.
-
-*<<rc-conditional,Requirements Class "Conditional Expressions">>* (http://www.opengis.net/spec/symbology-1/2.0/req/conditional)
-
-The Conditional Expressions Requirements Class specifies requirements for defining conditional operation using a ternary `[if] ? [then] : [else]` structure.
-
-*<<rc-variables,Requirements Class "Variables">>* (http://www.opengis.net/spec/symbology-1/2.0/req/variables)
-
-The Variables Requirements Class specifies requirements for defining variables which can be mapped to a dynamic value controlled by an application, or used to facilitate customizing a style.
-
-*<<rc-arithmetic,Requirements Class "Arithmetic Operators">>* (http://www.opengis.net/spec/symbology-1/2.0/req/arithmetic)
-
-The Arithmetic Operators Requirements Class specifies requirements for defining arithmetic operation expressions.
-
-*<<rc-bitwise,Requirements Class "Bitwise Operators">>* (http://www.opengis.net/spec/symbology-1/2.0/req/bitwise)
-
-The Bitwise Operators Requirements Class specifies requirements for defining bitwise operation expressions.
-
-*<<rc-textrelation,Requirements Class "Text Relation Operators">>* (http://www.opengis.net/spec/symbology-1/2.0/req/textrelation)
-
-The Text Relation Operators Requirements Class specifies requirements for defining text relation operation expressions.
-
-*<<rc-functions,Requirements Class "Function Expressions">>* (http://www.opengis.net/spec/symbology-1/2.0/req/functions)
-
-The Functions Requirements Class specifies requirements for defining function call expressions.
-
-**<<rc-math,Requirements Class "Math Functions">>** (http://www.opengis.net/spec/symbology-1/2.0/conf/rc-math)
-
-The Math Functions Requirements Class specifies requirements for defining math functions to be used with numeric properties.
-
-*<<rc-spatial,Requirements Class "Spatial Relation Functions">>* (http://www.opengis.net/spec/symbology-1/2.0/req/spatial)
-
-The Spatial Relation Requirements Class specifies requirements for standardized spatial relation functions to be used with feature geometry.
-
-*<<rc-temporal,Requirements Class "Temporal Relation Functions">>* (http://www.opengis.net/spec/symbology-1/2.0/req/temporal)
-
-The Temporal Relation Requirements Class specifies requirements for standardized temporal relation functions to be used with temporal properties.
-
-*<<rc-arrayrelations,Requirements Class "Array Relation Functions">>* (http://www.opengis.net/spec/symbology-1/2.0/req/arrayrelations)
-
-The Array Relation Requirements Class specifies requirements for standardized array relation functions to be used with array properties.
-
-*<<rc-textmanipulation,Requirements Class "Text Manipulation Functions">>* (http://www.opengis.net/spec/symbology-1/2.0/req/textmanipulation)
-
-The Text Manipulation Requirements Class specifies requirements for standardized text manipulation functions to be used with text properties.
-
-*<<rc-geometrymanipulation,Requirements Class "Geometry Manipulation Functions">>* (http://www.opengis.net/spec/symbology-1/2.0/req/geometrymanipulation)
-
-The Geometry Manipulation Requirements Class specifies requirements for standardized geometry manipulation functions to be used with feature geometry.
-
-*<<rc-aggregation,Requirements Class Aggregation>>* (http://www.opengis.net/spec/symbology-1/2.0/conf/rc-aggregation)
-
-The Aggregation Requirements Class specifies requirements for defining aggregation functions to be used with numeric properties.
+The Vector Geometry Properties Requirements Class specifies requirements for using system identifiers to query the area and perimeter of vector geometry.
 
 === Requirements classes for advanced stroke and fills
 
-*<<rc-joinscaps,Requirements Class "Joins and Caps">>* (http://www.opengis.net/spec/symbology-1/2.0/req/joinscaps)
+*<<rc-joinscaps,Requirements Class "Joins and Caps">>* (http://www.opengis.net/spec/symbology-1/1.0/req/joinscaps)
 
 The Joins and Caps Requirements Class specifies requirements for defining  a particular type of join and/or cap on strokes.
 
-*<<rc-patternstrokes,Requirements Class "Pattern Strokes">>* (http://www.opengis.net/spec/symbology-1/2.0/req/patternstrokes)
+*<<rc-patternstrokes,Requirements Class "Pattern Strokes">>* (http://www.opengis.net/spec/symbology-1/1.0/req/patternstrokes)
 
 The Pattern Strokes Requirements Class specifies requirements for defining patern strokes using Graphics.
 
-*<<rc-patternfills,Requirements Class "Pattern Fills">>* (http://www.opengis.net/spec/symbology-1/2.0/req/patternfills)
+*<<rc-patternfills,Requirements Class "Pattern Fills">>* (http://www.opengis.net/spec/symbology-1/1.0/req/patternfills)
 
 The Pattern Strokes Requirements Class specifies requirements for defining patern fills using Graphics.
 
 === Requirements classes for additional portrayal capabilities
 
-*<<rc-shapeoutlines,Requirements Class "Shape Outlines">>* (http://www.opengis.net/spec/symbology-1/2.0/req/shapeoutlines)
+*<<rc-shapeoutlines,Requirements Class "Shape Outlines">>* (http://www.opengis.net/spec/symbology-1/1.0/req/shapeoutlines)
 
 The Shape Outlines Requirements Class specifies requirements for displaying shapes with outlines so that they stand out on any background.
 
-*<<rc-transforms,Requirements Class "MultiGraphics and Transforms">>* (http://www.opengis.net/spec/symbology-1/2.0/req/transforms)
+*<<rc-transforms,Requirements Class "MultiGraphics and Transforms">>* (http://www.opengis.net/spec/symbology-1/1.0/req/transforms)
 
 The MultiGraphics and Transforms Requirements Class specifies requirements for building vector graphic hierarchy, including support for arbitrary transforms (translation, rotation and scaling).
 
-*<<rc-threedim,Requirements Class "3D Models and Transforms">>* (http://www.opengis.net/spec/symbology-1/2.0/req/threedim)
+*<<rc-imageoutlines,Requirements Class "Image Outlines">>* (http://www.opengis.net/spec/symbology-1/1.0/req/imageoutlines)
+
+The Image Outlines Requirements Class specifies requirements for displaying images with outlines so that they stand out on any background.
+
+*<<rc-threedim,Requirements Class "3D Models and Transforms">>* (http://www.opengis.net/spec/symbology-1/1.0/req/threedim)
 
 The 3D Models and Transforms Requirements Class specifies requirements for defining 3D model Graphics and 3D transformations.
-
-=== Requirements classes defining encodings
-
-*<<rc-json,Requirements Class "JSON Styles and Symbology">>* (http://www.opengis.net/spec/symbology-1/2.0/req/json)
-
-*<<rc-ccsss,Requirements Class "Cascading Cartographic Symbology Style Sheets">>* (http://www.opengis.net/spec/symbology-1/2.0/req/ccsss)
 
 === Declaration of conformance
 
@@ -190,37 +85,15 @@ is declared by appending `-partial-concept` to the conformance URI.
 [cols="30,70",options="header"]
 |===
 | Conformance class                                               |URI
-|<<rc-core,Core>>                                                 |http://www.opengis.net/spec/symbology-1/2.0/conf/core
-|<<rc-vector,Basic Vector Features Styling>>                      |http://www.opengis.net/spec/symbology-1/2.0/conf/vector
-|<<rc-coverage,Basic Coverage Styling>>                           |http://www.opengis.net/spec/symbology-1/2.0/conf/coverage
-|<<rc-labels,Basic Labeling>>                                     |http://www.opengis.net/spec/symbology-1/2.0/conf/labels
-|<<rc-hillshading,Hill Shading>>                                  |http://www.opengis.net/spec/symbology-1/2.0/conf/hillshading
-|<<rc-fontoutlines,Font Outlines>>                                |http://www.opengis.net/spec/symbology-1/2.0/conf/fontoutlines
-|<<rc-hatchesgradientsstipples,Hatches and Gradients, Stipples>>  |http://www.opengis.net/spec/symbology-1/2.0/conf/hatchesgradientsstipples
-|<<rc-shapegraphics,Shape Graphics>>                              |http://www.opengis.net/spec/symbology-1/2.0/conf/shapegraphics
-|<<rc-dashes,Dashes>>                                             |http://www.opengis.net/spec/symbology-1/2.0/conf/dashes
-|<<rc-casing,Casing and Centerline>>                              |http://www.opengis.net/spec/symbology-1/2.0/conf/casing
-|<<rc-parametervalues,Parameter Values>>                          |http://www.opengis.net/spec/symbology-1/2.0/conf/parametervalues
-|<<rc-functions,Function Expressions>>                            |http://www.opengis.net/spec/symbology-1/2.0/conf/functions
-|<<rc-math,Math Functions>>                                       |http://www.opengis.net/spec/symbology-1/2.0/conf/rc-math
-|<<rc-spatial,Spatial Relation Functions>>                        |http://www.opengis.net/spec/symbology-1/2.0/conf/spatial
-|<<rc-temporal,Temporal Relation Functions>>                      |http://www.opengis.net/spec/symbology-1/2.0/conf/temporal
-|<<rc-arrayrelations,Array Relation Functions>>                   |http://www.opengis.net/spec/symbology-1/2.0/conf/arrayrelations
-|<<rc-textmanipulation,Text Manipulation Functions>>              |http://www.opengis.net/spec/symbology-1/2.0/conf/textmanipulation
-|<<rc-geometrymanipulation,Geometry Manipulation Functions>>      |http://www.opengis.net/spec/symbology-1/2.0/conf/geometrymanipulation
-|<<rc-aggregation,Aggregation>>                                   |http://www.opengis.net/spec/symbology-1/2.0/conf/rc-aggregation
-|<<rc-arithmetic,Arithmetic Operators>>                           |http://www.opengis.net/spec/symbology-1/2.0/conf/arithmetic
-|<<rc-bitwise,Bitwise Operators>>                                 |http://www.opengis.net/spec/symbology-1/2.0/conf/bitwise
-|<<rc-textrelation,Text Relation Operators>>                      |http://www.opengis.net/spec/symbology-1/2.0/conf/textrelation
-|<<rc-righthand,Any right-hand operands>>                         |http://www.opengis.net/spec/symbology-1/2.0/conf/righthand
-|<<rc-conditional,Conditional Expressions>>                       |http://www.opengis.net/spec/symbology-1/2.0/conf/conditional
-|<<rc-variables,Variables>>                                       |http://www.opengis.net/spec/symbology-1/2.0/conf/variables
-|<<rc-joinscaps,Joins and Caps>>                                  |http://www.opengis.net/spec/symbology-1/2.0/conf/joinscaps
-|<<rc-patternstrokes,Pattern Strokes>>                            |http://www.opengis.net/spec/symbology-1/2.0/conf/patternstrokes
-|<<rc-patternfills,Pattern Fills>>                                |http://www.opengis.net/spec/symbology-1/2.0/conf/patternfills
-|<<rc-shapeoutlines,Shape Outlines>>                              |http://www.opengis.net/spec/symbology-1/2.0/conf/shapeoutlines
-|<<rc-transforms,Multi Graphics and Transforms>>                  |http://www.opengis.net/spec/symbology-1/2.0/conf/transforms
-|<<rc-threedim,3D Graphics, Models and Transforms>>               |http://www.opengis.net/spec/symbology-1/2.0/conf/threedim
-|<<rc-json,JSON Styles and Symbology>>                            |http://www.opengis.net/spec/symbology-1/2.0/conf/json
-|<<rc-ccsss,Cascading Cartographic Symbology Style Sheets>>       |http://www.opengis.net/spec/symbology-1/2.0/conf/ccsss
+|<<rc-gradients,Gradients, Dills>>                                |http://www.opengis.net/spec/symbology-1/1.0/conf/gradients
+|<<rc-arithmetic,Arithmetic Operators>>                           |http://www.opengis.net/spec/symbology-1/1.0/conf/arithmetic
+|<<rc-joinscaps,Joins and Caps>>                                  |http://www.opengis.net/spec/symbology-1/1.0/conf/joinscaps
+|<<rc-patternstrokes,Pattern Strokes>>                            |http://www.opengis.net/spec/symbology-1/1.0/conf/patternstrokes
+|<<rc-patternfills,Pattern Fills>>                                |http://www.opengis.net/spec/symbology-1/1.0/conf/patternfills
+|<<rc-shapeoutlines,Shape Outlines>>                              |http://www.opengis.net/spec/symbology-1/1.0/conf/shapeoutlines
+|<<rc-imageoutlines,Image Outlines>>                              |http://www.opengis.net/spec/symbology-1/1.0/conf/imageoutlines
+|<<rc-transforms,Multi Graphics and Transforms>>                  |http://www.opengis.net/spec/symbology-1/1.0/conf/transforms
+|<<rc-threedim,3D Graphics, Models and Transforms>>               |http://www.opengis.net/spec/symbology-1/1.0/conf/threedim
+|<<rc-geometryproperties,Vector Geometry Properties>>             |http://www.opengis.net/spec/symbology-1/1.0/conf/geometryproperties
 |===
+s

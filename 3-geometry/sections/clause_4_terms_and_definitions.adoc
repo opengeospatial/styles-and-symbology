@@ -1,0 +1,24 @@
+== Terms and definitions
+
+For the purposes of this document, the following terms and definitions apply.
+
+This document used the terms defined in Policy Directive 492, which is based on the ISO/IEC Directives, Part 2, Rules for the structure and drafting of International Standards. In particular, the word “shall” (not “must”) is the verb form used to indicate a requirement to be strictly followed to conform to this standard and OGC documents do not use the equivalent phrases in the ISO/IEC Directives, Part 2.
+
+This document also uses terms defined in the OGC Standard for Modular specifications (OGC 08-131r3), also known as the ‘ModSpec’. The definitions of terms such as standard, specification, requirement, and conformance test are provided in the ModSpec.
+
+For the purposes of this document, the following additional terms and definitions apply.
+
+=== Portrayal
+Presentation of information to humans (Note 1 to entry: Within the scope of this International Standard, portrayal is restricted to the portrayal of geographic information). [SOURCE: ISO 19117:2012, 4.20]
+
+=== Layer
+Abstraction of reality specified by a geographic data model (feature, coverage…​). A layer may be represented using a set of symbols (Style). A layer contributes to a single geographic subject and may be a theme.
+
+=== Style
+A sequence of rules of symbolizing instructions to be applied by a rendering engine on one or more features and/or coverages.
+
+=== Rendering engine
+Automated process that produces graphics using a pipeline of layers and styles as inputs.
+
+=== Render
+Conversion of digital graphics data into visual form (EXAMPLE Generation of an image on a video display) [SOURCE: ISO 19117:2012, 4.27]

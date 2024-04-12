@@ -4,13 +4,8 @@
 This Standard defines conformance classes for:
 
 * additional conformance classes extending the core Cartographic Symbology model with:
-   ** shape graphics capabilities including circles, ellipses, arcs, rectangles (including rounded rectangles) and paths (polylines and polygons), with the ability to use outlines (<<rc-shapes,Section 7>>),
-   ** vector graphic hierarchy capabilities, including full 2D transforms (<<rc-multigraphics,Section 8>>),
-   ** advanced strokes capabilities, including specific joins and caps and graphic patterns (<<rc-joinscaps,Section 9>>),
-   ** advanced fill capabilities, including graphic patterns and gradients (<<rc-gradients,Section 10>>),
-   ** support for images outlines (<<rc-imageoutlines,Section 11>>),
-   ** using 3D model graphics and 3D transforms (<<rc-threedim,Section 12>>),
-   ** support for querying vector geometry properties such as the area and centroid (<<rc-geometryproperties,Section 13>>).
+   ** the ability to select a particular geometry to render in a symbolizer (<<rc-symbolizer-geometry,Section 7>>),
+   ** standardized functions for spatial and temporal relations, as well as geometry manipulation (<<rc-spatial,Section 8>>).
 
 ////
 In addition, the following annexes are included:

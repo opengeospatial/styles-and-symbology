@@ -1,15 +1,15 @@
-= OGC Cartographic Symbology - Part 1: Core Model & Encodings
+= OGC Cartographic Symbology - Part 4: Model extension for additional coverage symbolization
 :doctype: standard
 :docsubtype: implementation
 :status: swg-draft
 :encoding: utf-8
 :lang: en
 :committee: technical
-:draft: 2.0
-:abbrev: cartosym
-:edition: 2.0
+:draft: 1.0
+:abbrev: symbology
+:edition: 1.0
 :external-id: http://www.opengis.net/doc/IS/{abbrev}-1/{edition}
-:docnumber: 18-067r4
+:docnumber: 24-XXXX
 :received-date: 2029-01-01
 :issued-date: 2029-01-01
 :published-date: 2029-01-01
@@ -24,9 +24,9 @@
 :mn-output-extensions: html,doc,xml,pdf,rxl
 :local-cache-only:
 :data-uri-image:
-:pdf-uri: ./18-067r4.pdf
-:xml-uri: ./18-067r4.xml
-:doc-uri: ./18-067r4.doc
+:pdf-uri: ./24-XXXX.pdf
+:xml-uri: ./24-XXXX.xml
+:doc-uri: ./24-XXXX.doc
 
 ////
 Make sure to complete each included document
@@ -45,36 +45,21 @@ include::sections/clause_5_conventions.adoc[]
 
 include::sections/clause_6_overview.adoc[]
 
-include::sections/clause_7_core.adoc[]
+include::sections/clause_7_coverage.adoc[]
 
-include::sections/clause_8_vector.adoc[]
+include::sections/clause_8_aggregation.adoc[]
 
-include::sections/clause_9_coverage.adoc[]
-
-include::sections/clause_10_labeling.adoc[]
-
-include::sections/clause_11_advanced_strokes.adoc[]
-
-include::sections/clause_12_advanced_fills.adoc[]
-
-include::sections/clause_13_additional_expressions.adoc[]
-
-include::sections/clause_14_operations.adoc[]
-
-include::sections/clause_15_functions.adoc[]
-
-include::sections/clause_16_json.adoc[]
-
-include::sections/clause_17_cscss.adoc[]
+include::sections/clause_9_bitwise.adoc[]
 
 ////
 add or remove annexes after "A" as necessary
 ////
-include::sections/annex_a_ats.adoc[]
 
-include::sections/annex_b_sld_se_mapping.adoc[]
+// include::sections/annex_a_ats.adoc[]
 
-include::sections/annex_c_portrayal_use_cases_gallery.adoc[]
+// include::sections/annex_b_sld_se_mapping.adoc[]
+
+// include::sections/annex_c_portrayal_use_cases_gallery.adoc[]
 
 // Do we still want to include this SymCore redesign abstract
 // in version 2.0, given that there are significant changes to the design?
@@ -88,6 +73,7 @@ include::sections/annex_c_portrayal_use_cases_gallery.adoc[]
 Revision History should be the last annex before the Bibliography
 Bibliography should be the last annex
 ////
-include::sections/annex_d_history.adoc[]
 
-include::sections/annex_bibliography.adoc[]
+// include::sections/annex_d_history.adoc[]
+
+// include::sections/annex_bibliography.adoc[]

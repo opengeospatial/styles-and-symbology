@@ -192,9 +192,9 @@ Standard.
 
 ===== Arithmetic Operations (with Basic Coverage Styling)
 
-.CCSSS Example encoding style rendering NDVI with color map using "Basic Coverage Styling" requirements class
+.CartoSym-CSS Example encoding style rendering NDVI with color map using "Basic Coverage Styling" requirements class
 ====
-[source,ccsss]
+[source,cscss]
 ----
 .title "sentinel-2 natural color"
 .abstract "Styling a Sentinel-2A coverage with Style & Symbology Basic Coverage Styling"

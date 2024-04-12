@@ -1,0 +1,105 @@
+== Requirements Classes for Advanced fills
+
+[[rc-patternfills]]
+=== Requirements Class "Pattern Fills"
+==== Overview
+
+[#img-uml-pattern-fill]
+.Pattern Fill UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+class Fill <<extended>>
+Fill : pattern: Graphic [0..1]
+Fill *-- Graphic
+....
+
+This requirements class adds support for defining how to fill a shape with a pattern.
+
+.Extended Fill class
+[width="90%",options="header"]
+|===
+| Name           | Definition                    | Type         | Multiplicity
+| pattern        | Graphic to repeat in pattern  | Graphic      | 0..1
+|===
+
+==== Requirements
+
+include::../requirements/rc-pattern-fills.adoc[]
+
+[[rc-gradients]]
+=== Requirements Class "Gradient Fills"
+==== Overview
+
+[#img-uml-gradients]
+.Gradients Fills UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+class Fill <<extended>>
+Fill : gradient: Gradient
+Fill *-- Gradient
+Fill *-- ColorKey
+
+ColorKey : color: Color
+ColorKey : opacity: float
+ColorKey : percent: float
+ColorKey *-- Color
+
+Gradient : type
+Gradient : angle
+Gradient : position
+Gradient : keys
+Gradient : size
+Gradient *-- GradientType
+
+enum GradientType
+GradientType : linear
+GradientType : radial
+GradientType : repeating
+GradientType : conic
+
+....
+
+This requirements class adds support for gradient fills. A gradient fill is a gradual transition between two or more colors.
+
+.Extended Fill class for gradients
+[width="90%",options="header"]
+|===
+| Name           | Definition       | Type         | Multiplicity
+| gradient       | Gradient         | Gradient     | 0..*
+|===
+
+====== Gradients
+
+.ColorKey class
+[width="90%",options="header"]
+|===
+| Name      | Definition       | Data type and value   | Multiplicity
+| color     | Color            | Color                 | 1
+| opacity   | Opacity          | float                 | 0..1
+| percent   | Percent          | float                 | 0..1
+|===
+
+.GradientType enum
+[width="90%",options="header"]
+|===
+| Name      | Definition
+| linear    | Linear gradient
+| radial    | Radial gradient
+| repeating | Repeating gradient
+| conic     | Conic gradient
+|===
+
+.Gradient class
+[width="90%",options="header"]
+|===
+| Name         | Definition              | Type            | Multiplicity
+| type         | Type of gradient        | GradientType    | 1
+| angle        | Angle of gradient       | float           | 1
+| position     | Position of gradient    | Position        | 1
+| keys         | Percent                 | ColorKey        | 0..*
+| size         | Size of gradient        | Size            | 1
+|===
+
+==== Requirements
+
+include::../requirements/rc-gradients.adoc[]

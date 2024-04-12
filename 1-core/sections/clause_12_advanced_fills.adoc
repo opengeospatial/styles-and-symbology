@@ -1,0 +1,91 @@
+== Requirements Classes for Advanced fills
+
+[[rc-hatches]]
+=== Requirements Class "Hatches"
+==== Overview
+
+#TODO: Change the model to allow a full definition with 1 or 2 hatching line direction, spacing and thickness. However, define specific values corresponding to the current enums (and to classic legacy system capabilities) that should be used for maximum interoperability and would be tested by the ATS/ETS. #
+
+[#img-uml-hatches]
+.Hatches Fills UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+class Fill <<extended>>
+Fill : hatchStyle: HatchStyle
+Fill *-- HatchStyle
+
+enum HatchStyle
+HatchStyle : forward
+HatchStyle : backward
+HatchStyle : xCross
+HatchStyle : cross
+....
+
+This requirements class adds support for hatch fills. A hatch fill is a pattern of lines.
+
+.Fill class extended for hatches
+[width="90%",options="header"]
+|===
+| Name           | Definition       | Type         | Multiplicity
+| hatchStyle     | Hatch style      | HatchStyle   | 0..1
+|===
+
+====== Hatches
+
+.HatchStyle class
+[width="90%",options="header"]
+|===
+| Name      | Definition       | Data type and value   | Multiplicity
+| forward   | Forward          | float                 | 1
+| backward  | Backward         | float                 | 1
+| xCross    | X-Cross          | float                 | 1
+| cross     | Cross            | float                 | 1
+|===
+
+==== Requirements
+
+include::../requirements/rc-hatches-adoc[]
+
+[[rcstipples]]
+=== Requirements Class "Stipple fills"
+==== Overview
+
+#TODO: Change the model to allow a full definition with an arbitrary stipple density (and dot size?). However, define specific values corresponding to the current enums (and to classic legacy system capabilities) that should be used for maximum interoperability and would be tested by the ATS/ETS. #
+
+[#img-uml-stipples]
+.Stipple Fills UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+class Fill <<extended>>
+Fill : stippleStyle: StippleStyle
+Fill *-- StippleStyle
+
+enum StippleStyle
+StippleStyle : light
+StippleStyle : medium
+StippleStyle : heavy
+....
+
+This requirements class adds support for stipple fills. A stipple fill is a pattern of dots.
+
+.Fill class extended for stipples
+[width="90%",options="header"]
+|===
+| Name           | Definition       | Type         | Multiplicity
+| stippleStyle   | Stipple style    | StippleStyle | 0..1
+|===
+
+====== Stipples
+
+.StippleStyle class
+[width="90%",options="header"]
+|===
+| Name       | Definition      | Data type and value   | Multiplicity
+| light      | Light           | float                 | 1
+| medium     | Medium          | float                 | 1
+| heavy      | Heavy           | float                 | 1
+|===
+
+==== Requirements
+
+include::../requirements/rc-stipples.adoc[]

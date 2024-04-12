@@ -1,0 +1,73 @@
+== Conformance
+
+The OGC Cartographic Symbology - Part 4 - Model extension for additional coverage symbolization defines multiple requirements classes and their associated conformance classes, extending the core model
+defined in Part 1. The encodings defined in Part 1 can be also used to encode the capabilities defined in this extension.
+
+The standardization target for all conformance classes are both Encodings and Rendering engines.
+
+The conformance of all Rendering engines with all conformance classes is with the conceptual model that will result in the expected visual output.
+Conformance at the logical level implies conformance at the conceptual level as well.
+An Encoding conforms to the logical model if a Style can be encoded using the classes and property names defined in this Standard with only a simple consistent set of rules mapping them to the encoding.
+An Encoding can conform to the conceptual model of any conformance class either partially (if it can only preserve some of the information) or fully (if it losslessly preserves all information).
+
+The goal is to allow different encodings to have equivalent content and semantics so that they can be interoperable, by establishing a clear mapping from an encoding
+to the logical and/or conceptual model defined in this Standard. The granularity of conformance classes provides a mechanism to clearly indicate which portrayal capabilities
+are interoperable with other encodings or rendering engines implementing this Standard.
+Most Encodings and Rendering engines are expected to easily conform to the requirements classes for basic portrayal.
+
+Requirements and conformance test URIs defined in this document are relative to http://www.opengis.net/spec/symbology-4/1.0.
+
+=== Requirements Classes for additional coverage styling capabilities
+
+*<<rc-coverage-as-points,Requirements Class "Coverage as points">>* (http://www.opengis.net/spec/symbology-4/1.0/conf/coverageaspoints)
+
+The Coverage as points Requirements Class specifies requirements for portraiing a coverage as point geometry.
+
+*<<rc-coverage-as-contours,Requirements Class "Coverage as contours">>* (http://www.opengis.net/spec/symbology-4/1.0/conf/coverageascontours)
+
+The Coverage as contours Requirements Class specifies requirements for portraying a coverage as contour lines.
+
+*<<rc-contrast-enhancement,Requirements Class "Contrast Enhancement">>* (http://www.opengis.net/spec/symbology-4/1.0/conf/contrastenhancement)
+
+The Contrast Enhancement Requirements Class specifies requirements for allowing to enhance to contrast of a converage.
+
+*<<rc-hsv-modifier,Requirements Class "Hue, Saturation, Value Modifier">>* (http://www.opengis.net/spec/symbology-4/1.0/conf/hsvmodifier)
+
+The Hue, Saturation, Value Modifier Requirements Class specifies requirements for allowing to apply a modifier on the hue, saturation and/or value of a converage.
+
+*<<rc-aggregation,Requirements Class "Aggregation">>* (http://www.opengis.net/spec/symbology-4/1.0/conf/aggregation)
+
+The Aggregation Requirements Class specifies requirements for defining aggregation functions to be used with numeric properties.
+
+*<<rc-bitwise,Requirements Class "Bitwise Operators">>* (http://www.opengis.net/spec/symbology-4/1.0/req/bitwise)
+
+The Bitwise Operators Requirements Class specifies requirements for defining bitwise operation expressions.
+
+=== Declaration of conformance
+
+Conformance with this Standard shall be checked using all the relevant tests specified in Annex A (normative) of this document conformance to the respective conformance class is declared using the URIs listed
+in <<table_conformance_urls>>. A rendering engine accessible as an Web API can declare conformance to this Standard in its Conformance Declaration response.
+
+The framework, concepts, and methodology for testing, and the criteria to be achieved to claim conformance are specified in the
+OGC Compliance Testing Policies and Procedures (https://docs.ogc.org/pol/08-134r11.html[OGC 08-134r11]) and the https://www.ogc.org/compliance[OGC Compliance Testing website].
+
+All requirements-classes and conformance-classes described in this document are owned by the standard(s) identified.
+
+Full conformance at the conceptual level but not at the logical level, which can losslessly preserve all information of the conceptual model defined in a particular requirements class
+but necessitates defining a custom mapping and cannot be automated from a simple consistent set of encoding rules, is declared by appending `-concept` to the conformance URI.
+
+Partial conformance at the conceptual level which can preserve some but not all information of the conceptual model defined in a particular requirements class
+is declared by appending `-partial-concept` to the conformance URI.
+
+[#table_conformance_urls,reftext='{table-caption} {counter:table-num}']
+.Conformance class URIs
+[cols="30,70",options="header"]
+|===
+| Conformance class                                               |URI
+|<<rc-coverage-as-points,Coverage as points>>                     |http://www.opengis.net/spec/symbology-4/1.0/conf/coverageaspoints
+|<<rc-coverage-as-contours,Coverage as contours>>                 |http://www.opengis.net/spec/symbology-4/1.0/conf/coverageascontours
+|<<rc-contrast-enhancement,Contrast Enhancement>>                 |http://www.opengis.net/spec/symbology-4/1.0/conf/contrastenhancement
+|<<rc-hsv-modifier,Hue, Saturation, Value Modifier>>              |http://www.opengis.net/spec/symbology-4/1.0/conf/hsvmodifier
+|<<rc-aggregation,Aggregation>>                                   |http://www.opengis.net/spec/symbology-4/1.0/conf/aggregation
+|<<rc-bitwise,Bitwise Operators>>                                 |http://www.opengis.net/spec/symbology-4/1.0/conf/bitwise
+|===

@@ -19,9 +19,9 @@ Data sources used
 
 - A rectangular grid of the fraction of high vegetation.
 
-.Style encoded using CCSSS encoding
+.Style encoded using CartoSym-CSS encoding
 ====
-[source,ccsss]
+[source,cscss]
 ----
 {
   // Note: The following line is optional as 1 pixel black stroke is the default
@@ -49,9 +49,9 @@ Data sources used
 
 Citation: Olefeldt, D., Goswami, S., Grosse, G., Hayes, D., Hugelius, G., Kuhry, P., McGuire, A.D, Romanovsky, V.E, Sannel, A.B.K., Schuur, E.A.G., Turetsky, M.R: Circumpolar distribution and carbon storage of thermokarst landscapes. Nature Communications, 7, 13043. Available at: https://www.nature.com/articles/ncomms13043#f3 (2016)
 
-.Style encoded using CCSSS encoding
+.Style encoded using CartoSym-CSS encoding
 ====
-[source,ccsss]
+[source,cscss]
 ----
 #Thermokarst
 {
@@ -90,9 +90,9 @@ image::figures/roads-group.png[]
 
 // TODO: Set up our own example
 
-.CCSSS Example showcasing use of viz.pass for both casing and ordering based on `z_order` attribute
+.CartoSym-CSS Example showcasing use of viz.pass for both casing and ordering based on `z_order` attribute
 ====
-[source,ccsss]
+[source,cscss]
 ----
 {
    [viz.pass = 4 * z_order + 0]
@@ -126,9 +126,9 @@ image::figures/roads-group.png[]
 
 === Z-ordering and feature rendering passes
 
-.CCSSS Example using built-in casing
+.CartoSym-CSS Example using built-in casing
 ====
-[source,ccsss]
+[source,cscss]
 ----
 {
    zOrder: z_order;

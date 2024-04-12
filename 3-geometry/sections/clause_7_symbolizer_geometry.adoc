@@ -1,0 +1,9 @@
+[[rc-symbolizer-geometry]]
+== Requirements Class "Symbolizer Geometry"
+=== Overview
+
+This requirement class extends the Symbolizer class with a property to select the geometry to render.
+
+=== Requirements
+
+include::../requirements/rc-symbolizer-geometry.adoc[]

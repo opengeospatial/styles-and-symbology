@@ -1,0 +1,86 @@
+.Preface
+
+[example%unnumbered]
+====
+This Standard is intended as a successor to the Symbology Encoding standard (SE 1.1) and the OGC Symbology Core Conceptual Model ("SymCore" 1.0).
+This Standard focuses primarily on describing symbology rules to be applied by a rendering engine to symbolize geospatial data.
+It also features a rich and extensible selector expression system which determines whether a particular symbology rule is to be applied or not by the rendering engine.
+In particular, it introduces a "system identifier" which can be mapped to concepts such as a particular layer, feature type or collection.
+Such concepts are used in OGC Web Services (including the Web Mapping Service (WMS) Style Layer Descriptor profile (SLD)), Web API Standards such as _OGC API - Maps_ to render the data,
+and _OGC API - Styles_ to provide styles, as well as data stores such as OGC GeoPackage (in which styles could also be stored using a portrayal extension).
+This Standard therefore follows the same motivation that split up SLD 1.0 (SLD 1.1 and SE 1.1) and defines requirements are not specific to any service (e.g., Web Map Service), are independent,
+and allow the concepts to be reused by other Standards willing to address aspects related to cartography.
+A general and portable symbology model is defined for use across the broad OGC Standards baseline, to be applied to geospatial datasets as well as online geospatial data and mapping services.
+
+An important goal of this Standard is to enable richer symbology capabilities.
+This can be achieved through modularity which comes with extensibility.
+SE 1.1 is not modular per se, while this Standard is designed to be so by defining multiple requirements classes and the ability to conform with them
+at either the conceptual level or at the logical model. It also defines requirements classes for two encodings conforming to both the logical model and the conceptual model.
+The core coformance class covers the basic mechanics of defining a Style with StylingRules applying a Symbolizer, as well as how Expressions can be used to select whether a rule should be applied or not (Selectors).
+This provides two extension mechanisms that can be used by the additional requirements classes defined in this Standard as well by those introduced in future extension parts:
+new properties can be added to the Symbolizer class while defining their associated behavior, while new types of Expressions or System Identifiers can also be defined to be used within
+a Selector Expression or a ParameterValue Expression.
+
+In contrast to the OGC Symbology Core Conceptual Model version 1.0, this version is clarified to not only be defining
+a conceptual model, but also a specific logical model. This newer version also defines a conceptual and logical model
+for expressions, which provides one specific mechanism for extension. This Standard clarifies that requirements classes
+extending this Standard can define additional properties for the Symbolizer class, providing the second extension mechanism.
+This Standard also includes symbology requirements classes covering the most common use cases for portraying both vector feature data as well as coverage data.
+Finally, this Standard defines two encodings conforming to the logical model.
+The more concrete nature of this standard better reflects the fact that it is an OGC Implementation Standard,
+and recognizes that for rendering engines to implement this Standard and for new or existing encodings to be mapped to the conceptual model
+of this Standard, the Standard needs to at least cover the essential portrayal use cases. This is demonstrated in a map gallery annex illustrating
+the various requirements classes coming into play for different use cases of varying complexity.
+The included encodings for the logical model readily allow to express all of the symbology capabilities defined in this Standard and should greatly facilitate
+interoperability and encourage implementation.
+
+In summary, this Standard offers a consistent approach to:
+
+* provide the flexibility required to achieve adequate symbology rules for a variety of information communities; e.g., aviation symbols, weather symbols, thematic maps, etc.; and
+* achieve high-level styling interoperability without encoding dependencies, by allowing to define multiple encodings of the same logical model, as well as providing a framework
+  to map the logical models used by other encodings to the one defined in this Standard through the conceptual model that this Standard also defines.
+
+Potential implementations of SymCore are expected to enhance OGC Standards such as the OGC API family of Standards, GeoPackage, the Web Map Service (WMS), Web Feature Service (WFS), and others.
+By sharing a common core, and using an extension mechanism, integration of these Standards for the purposes of cartographic representation can be greatly simplified.
+====
+
+////
+*OGC Declaration*
+////
+
+Attention is drawn to the possibility that some of the elements of this document may be the subject of patent rights. The Open Geospatial Consortium shall not be held responsible for identifying any or all such patent rights.
+
+Recipients of this document are requested to submit, with their comments, notification of any relevant patent claims or other intellectual property rights of which they may be aware that might be infringed by any implementation of the standard set forth in this document, and to provide supporting documentation.
+
+[abstract]
+== Abstract
+
+This _OGC Styles and Symbology_ Standard defines a Conceptual Model, a Logical Model and Encodings for describing symbology rules for the portrayal of geographical data.
+The targets of this Standard are symbology encodings and cartographic rendering engines.
+
+The Standard is modularized into multiple requirements classes, with a minimal core describing an extensible framework, with clear extension points, for defining styles consisting of
+styling rules selected through expressions and applying symbolizers configured using properties.
+
+The Standard defines a number of additional conformance classes covering a large number of essential portrayal use cases for symbolizing both vector data and coverage data.
+
+Finally, the Standard defines two encodings for the logical model:
+one based on JSON which can be readily parsed by JSON parsers, as well as a more expressive encoding better suited for hand-editing inspired from Web Cartographic Styled Sheets (CSS) and related cartographic symbology encodings.
+
+Additional encodings can be defined that can conform to the logical model, and existing encodings can be mapped fully or partially to the conceptual model defined in this Standard.
+
+The granularity of the requirements classes facilitates conformance for encodings and rendering engines based on their supported capabilities.
+
+Future parts may extend this Standard by defining additional symbolizer properties, system identifiers, or new types of expressions.
+
+== Submitters
+
+All questions regarding this submission should be directed to the editors or the submitters:
+
+[%unnumbered]
+|===
+| *Name*                                  | *Affiliation*
+| Olivier Ertz (editor)                   | Haute École d'Ingénierie et de Gestion du Canton de Vaud (HEIG-VD)
+| Erwan Bocher (editor)                   | Laboratoire des Sciences et Techniques de l'information de la Communication et de la Connaissance / Centre national de la recherche scientifique (Lab-STICC CNRS)
+| Jérôme Jacovella-St-Louis (editor)      | Ecere Corporation
+| Maxime Collombin (editor)               | Haute École d'Ingénierie et de Gestion du Canton de Vaud (HEIG-VD)
+|===
