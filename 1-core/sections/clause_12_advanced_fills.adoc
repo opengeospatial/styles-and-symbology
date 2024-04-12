@@ -4,7 +4,7 @@
 === Requirements Class "Hatches"
 ==== Overview
 
-#TODO: Change the model to allow a full definition with 1 or 2 hatching line direction, spacing and thickness. However, define specific values corresponding to the current enums (and to classic legacy system capabilities) that should be used for maximum interoperability and would be tested by the ATS/ETS. #
+#TODO: Change the model to allow a full definition with 1 or 2 hatching line direction, spacing and thickness. However, define specific values corresponding to the current enums (and to classic legacy system capabilities) that should be used for maximum interoperability and would be tested by the ATS/ETS.#
 
 [#img-uml-hatches]
 .Hatches Fills UML Diagram
@@ -44,13 +44,13 @@ This requirements class adds support for hatch fills. A hatch fill is a pattern 
 
 ==== Requirements
 
-include::../requirements/rc-hatches-adoc[]
+include::../requirements/rc-hatches.adoc[]
 
 [[rcstipples]]
 === Requirements Class "Stipple fills"
 ==== Overview
 
-#TODO: Change the model to allow a full definition with an arbitrary stipple density (and dot size?). However, define specific values corresponding to the current enums (and to classic legacy system capabilities) that should be used for maximum interoperability and would be tested by the ATS/ETS. #
+#TODO: Change the model to allow a full definition with an arbitrary stipple density (and dot size?). However, define specific values corresponding to the current enums (and to classic legacy system capabilities) that should be used for maximum interoperability and would be tested by the ATS/ETS.#
 
 [#img-uml-stipples]
 .Stipple Fills UML Diagram
