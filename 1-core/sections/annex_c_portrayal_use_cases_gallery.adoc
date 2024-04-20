@@ -80,7 +80,7 @@ Citation: Olefeldt, D., Goswami, S., Grosse, G., Hayes, D., Hugelius, G., Kuhry,
 ====
 
 .Example rendering of the thermokarst landscapes
-image::figures/gallery-thermokarst1.png[]
+image::figures/gallery-thermokarst1.jpg[]
 
 === Visualization passes
 
