@@ -15,8 +15,8 @@ It does so by featuring:
 - a basic [**Vector Styling**](https://docs.ogc.org/DRAFTS/18-067r4.html#toc23) requirements class,
 - a basic [**Coverage Styling**](https://docs.ogc.org/DRAFTS/18-067r4.html#toc26) requirements class,
 - requirements classes providing additional styling functionality,
-- a [**JSON encoding**](https://docs.ogc.org/DRAFTS/18-067r4.html) of the conceptual and logical model facilitating machine readability,
-- a [**CSS-inspired encoding**](https://docs.ogc.org/DRAFTS/18-067r4.html) of the conceptual and logical model facilitating hand-editing.
+- [**CartoSym-JSON, a JSON encoding**](https://docs.ogc.org/DRAFTS/18-067r4.html) of the conceptual and logical model facilitating machine readability,
+- [**CartoSym-CSS, a CSS-inspired encoding**](https://docs.ogc.org/DRAFTS/18-067r4.html) of the conceptual and logical model facilitating hand-editing.
 
 _The current **published** version of OGC Symbology Conceptual Model: Core Part (SymCore) **1.0** is available in [HTML](https://docs.ogc.org/is/18-067r3/18-067r3.html) or [PDF](https://docs.ogc.org/is/18-067r3/18-067r3.pdf)._
 
