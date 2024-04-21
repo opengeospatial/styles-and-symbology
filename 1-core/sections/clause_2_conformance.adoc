@@ -118,7 +118,7 @@ The Text Manipulation Requirements Class specifies requirements for standardized
 
 *<<rc-json,Requirements Class "JSON Styles and Symbology">>* (http://www.opengis.net/spec/symbology-1/2.0/req/json)
 
-*<<rc-cscss,Requirements Class "Cascading Cartographic Symbology Style Sheets">>* (http://www.opengis.net/spec/symbology-1/2.0/req/cscss)
+*<<rc-cscss,Requirements Class "Cartographic Symbology Cascading Style Sheets">>* (http://www.opengis.net/spec/symbology-1/2.0/req/cscss)
 
 === Declaration of conformance
 
@@ -162,5 +162,5 @@ is declared by appending `-partial-concept` to the conformance URI.
 |<<rc-conditional,Conditional Expressions>>                       |http://www.opengis.net/spec/symbology-1/2.0/conf/conditional
 |<<rc-variables,Variables>>                                       |http://www.opengis.net/spec/symbology-1/2.0/conf/variables
 |<<rc-json,JSON Styles and Symbology>>                            |http://www.opengis.net/spec/symbology-1/2.0/conf/json
-|<<rc-cscss,Cascading Cartographic Symbology Style Sheets>>       |http://www.opengis.net/spec/symbology-1/2.0/conf/cscss
+|<<rc-cscss,Cartographic Symbology Cascading Style Sheets>>       |http://www.opengis.net/spec/symbology-1/2.0/conf/cscss
 |===

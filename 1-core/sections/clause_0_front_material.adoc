@@ -55,7 +55,7 @@ Recipients of this document are requested to submit, with their comments, notifi
 [abstract]
 == Abstract
 
-This _OGC Styles and Symbology_ Standard defines a Conceptual Model, a Logical Model and Encodings for describing symbology rules for the portrayal of geographical data.
+This _OGC Cartographic Symbology_ Standard defines a Conceptual Model, a Logical Model and Encodings for describing symbology rules for the portrayal of geographical data.
 The targets of this Standard are symbology encodings and cartographic rendering engines.
 
 The Standard is modularized into multiple requirements classes, with a minimal core describing an extensible framework, with clear extension points, for defining styles consisting of

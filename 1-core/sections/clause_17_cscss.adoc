@@ -1,5 +1,5 @@
 [[rc-cscss]]
-== Requirements Class "Cascading Cartographic Symbology Style Sheets"
+== Requirements Class "Cartographic Symbology Cascading Style Sheets"
 
 === Overview
 

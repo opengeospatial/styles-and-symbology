@@ -1,6 +1,6 @@
 # OGC Styles & Symbology
 
-This repository hosts the working draft documents for the multi-part OGC Cartographic Symbology Standard. The core **Part 1: Core model and encodings** is available as [HTML](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html) or [PDF](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.pdf) and corresponds to the version **2.0** of SymCore.
+This repository hosts the working draft documents for the multi-part OGC Cartographic Symbology Standard. The core **Part 1: Core model and encodings** is available as [HTML](https://docs.ogc.org/DRAFTS/18-067r4.html) or [PDF](https://docs.ogc.org/DRAFTS/18-067r4.pdf) and corresponds to the version **2.0** of SymCore.
 The following extensions are also planned:
 
 - Part 2: Model extension for graphical shapes and transformations
@@ -10,49 +10,49 @@ The following extensions are also planned:
 In comparison to the current _OGC Symbology Conceptual Model: Core Part ("SymCore")_ version 1.0, the new draft candidate Standard aims to better reflect its classification as an OGC Implementation Standard by including the requirements classes needed to enable the implementation of interoperable ***encodings***, ***renderers*** (e.g., [_OGC API - Maps_](https://github.com/opengeospatial/ogcapi-maps/) / [_OGC API - Tiles_](https://github.com/opengeospatial/ogcapi-tiles)) and systems ***parsing*** and/or ***generating*** style definitions (e.g., [_OGC API - Styles_](https://github.com/opengeospatial/ogcapi-styles/), visual style editors, style transcoders).
 
 It does so by featuring:
-- A **modular logical and conceptual model** for styling capabilities,  
-- A [**minimal Core**](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc20) requirements class including clear extension mechanisms, through the definition of abstract _Selectors_, _Symbolizers_, and _Expressions_,
-- a basic [**Vector Styling**](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc23) requirements class,
-- a basic [**Coverage Styling**](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc26) requirements class,
+- A **modular logical and conceptual model** for styling capabilities,
+- A [**minimal Core**](https://docs.ogc.org/DRAFTS/18-067r4.html#toc20) requirements class including clear extension mechanisms, through the definition of abstract _Selectors_, _Symbolizers_, and _Expressions_,
+- a basic [**Vector Styling**](https://docs.ogc.org/DRAFTS/18-067r4.html#toc23) requirements class,
+- a basic [**Coverage Styling**](https://docs.ogc.org/DRAFTS/18-067r4.html#toc26) requirements class,
 - requirements classes providing additional styling functionality,
-- a [**JSON encoding**](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html) of the conceptual and logical model facilitating machine readability,
-- a [**CSS-inspired encoding**](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html) of the conceptual and logical model facilitating hand-editing.
+- a [**JSON encoding**](https://docs.ogc.org/DRAFTS/18-067r4.html) of the conceptual and logical model facilitating machine readability,
+- a [**CSS-inspired encoding**](https://docs.ogc.org/DRAFTS/18-067r4.html) of the conceptual and logical model facilitating hand-editing.
 
 _The current **published** version of OGC Symbology Conceptual Model: Core Part (SymCore) **1.0** is available in [HTML](https://docs.ogc.org/is/18-067r3/18-067r3.html) or [PDF](https://docs.ogc.org/is/18-067r3/18-067r3.pdf)._
 
 ## Part 1 Requirements classes
 
 ### Basic portrayal capabilities
-- a [core symbology conceptual and logical model](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc20) based on Styles as a list of Styling Rules consisting of a Symbolizer and optional Selector Expression,
-- basic [vector styling](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc23),
-- basic [coverage styling](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html#toc26),
-- basic [labeling](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html)
+- a [core symbology conceptual and logical model](https://docs.ogc.org/DRAFTS/18-067r4.html#toc20) based on Styles as a list of Styling Rules consisting of a Symbolizer and optional Selector Expression,
+- basic [vector styling](https://docs.ogc.org/DRAFTS/18-067r4.html#toc23),
+- basic [coverage styling](https://docs.ogc.org/DRAFTS/18-067r4.html#toc26),
+- basic [labeling](https://docs.ogc.org/DRAFTS/18-067r4.html)
 
 ### Common portrayal capabilities
 
-- [hill shading](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html),
-- [font outlines](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html),
-- [dashed strokes](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html),
-- [casing and center lines](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html),
-- [hatches](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html),
-- [stipples](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html)
+- [hill shading](https://docs.ogc.org/DRAFTS/18-067r4.html),
+- [font outlines](https://docs.ogc.org/DRAFTS/18-067r4.html),
+- [dashed strokes](https://docs.ogc.org/DRAFTS/18-067r4.html),
+- [stroke casing and center lines](https://docs.ogc.org/DRAFTS/18-067r4.html),
+- [hatch fills](https://docs.ogc.org/DRAFTS/18-067r4.html),
+- [stipple fills](https://docs.ogc.org/DRAFTS/18-067r4.html)
 
 ### Additional Expression capabilities
 
-- [expressions as parameter values](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html) for any symbolizer properties,
-- using [identifiers in the right side](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html) of operation expressions,
-- [conditional expressions](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html),
-- [variables](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html),
-- [arithmetic operators](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html),
-- [text relation operators](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html),
-- [function call expressions](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html),
-- [array relations](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html) standard functions,
-- [text manipulation](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html) standard functions,
+- [expressions as parameter values](https://docs.ogc.org/DRAFTS/18-067r4.html) for any symbolizer properties,
+- using [identifiers on the right side](https://docs.ogc.org/DRAFTS/18-067r4.html) of operation expressions,
+- [conditional expressions](https://docs.ogc.org/DRAFTS/18-067r4.html),
+- [variables](https://docs.ogc.org/DRAFTS/18-067r4.html),
+- [arithmetic operators](https://docs.ogc.org/DRAFTS/18-067r4.html),
+- [text relation operators](https://docs.ogc.org/DRAFTS/18-067r4.html),
+- [function call expressions](https://docs.ogc.org/DRAFTS/18-067r4.html),
+- [array relations](https://docs.ogc.org/DRAFTS/18-067r4.html) standard functions,
+- [text manipulation](https://docs.ogc.org/DRAFTS/18-067r4.html) standard functions,
 
 ### Encodings
 
-- [JSON encoding](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html) that can be readily parsed by a generic JSON parser,
-- [Cascading Cartographic Symbology Style Sheets](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html), a more expressive encoding inspired from Web CSS and other cartographic CSS-like (e.g., GeoCSS, CartoCSS, MapCSS, GNOSIS CMSS) which is better suited to hand-edit styles.
+- [JSON encoding](https://docs.ogc.org/DRAFTS/18-067r4.html) that can be readily parsed by a generic JSON parser,
+- [Cascading Cartographic Symbology Style Sheets](https://docs.ogc.org/DRAFTS/18-067r4.html), a more expressive encoding inspired from Web CSS and other cartographic CSS-like (e.g., GeoCSS, CartoCSS, MapCSS, GNOSIS CMSS) which is better suited to hand-edit styles.
 
 The following requirements classes are planned for the next parts of the standard:
 
@@ -60,38 +60,38 @@ The following requirements classes are planned for the next parts of the standar
 
 ### Advanced Stroke and Fills
 
-- specific [joins and caps](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html) for Strokes
-- [Graphic pattern Strokes](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html),
-- [Graphic pattern Fills](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html),
-- [gradient fills](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html)
+- specific [joins and caps](https://docs.ogc.org/DRAFTS/18-067r4.html) for Strokes
+- [Graphic pattern Strokes](https://docs.ogc.org/DRAFTS/18-067r4.html),
+- [Graphic pattern Fills](https://docs.ogc.org/DRAFTS/18-067r4.html),
+- [gradient fills](https://docs.ogc.org/DRAFTS/18-067r4.html)
 
 ### Additional portrayal capabilities
 
-- [shape graphics](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html) including circles, ellipses, arcs, rectangles (rounded or not) and paths (polylines and polygons),
-- [shape outlines](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html),
-- [vector graphic hierarchy](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html), including full 2D transforms,
-- [3D model graphics and 3D transforms](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html),
-- [image outline](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html)
+- [shape graphics](https://docs.ogc.org/DRAFTS/18-067r4.html) including circles, ellipses, arcs, rectangles (rounded or not) and paths (polylines and polygons),
+- [shape outlines](https://docs.ogc.org/DRAFTS/18-067r4.html),
+- [vector graphic hierarchy](https://docs.ogc.org/DRAFTS/18-067r4.html), including full 2D transforms,
+- [3D model graphics and 3D transforms](https://docs.ogc.org/DRAFTS/18-067r4.html),
+- [image outlines](https://docs.ogc.org/DRAFTS/18-067r4.html)
 
 ## Part 3 Requirements classes
 
 ### Additional Expression capabilities
 
-- [spatial relation](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html) standard functions,
-- [temporal relation](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html) standard fuctions,
-- [geometry manipulation](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html) standard functions,
-- [symbolizer geometry](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html)
+- [spatial relation](https://docs.ogc.org/DRAFTS/18-067r4.html) standard functions,
+- [temporal relation](https://docs.ogc.org/DRAFTS/18-067r4.html) standard fuctions,
+- [geometry manipulation](https://docs.ogc.org/DRAFTS/18-067r4.html) standard functions,
+- [symbolizer geometry](https://docs.ogc.org/DRAFTS/18-067r4.html)
 
 ## Part 4 Requirements classes
 
 ### Advanced Coverage Styling
 
-- [bitwise operators](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html),
-- [coverage as points](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html),
-- [coverage as contours](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html),
-- [contrast enhancement](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html),
-- [hue, saturation, value modifier](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html),
-- [aggregation functions](https://opengeospatial.github.io/ogcna-auto-review/18-067r4.html)
+- [bitwise operators](https://docs.ogc.org/DRAFTS/18-067r4.html),
+- [coverage as points](https://docs.ogc.org/DRAFTS/18-067r4.html),
+- [coverage as contours](https://docs.ogc.org/DRAFTS/18-067r4.html),
+- [contrast enhancement](https://docs.ogc.org/DRAFTS/18-067r4.html),
+- [hue, saturation, value modifier](https://docs.ogc.org/DRAFTS/18-067r4.html),
+- [aggregation functions](https://docs.ogc.org/DRAFTS/18-067r4.html)
 
 ## Communication
 

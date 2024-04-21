@@ -21,7 +21,7 @@ In addition, the following annexes are included:
 
 * a normative Abstract Test Suite for the conformance classes (<<annex-ats,Annex A>>),
 * an informative mapping of SLD/SE and notable vendor extensions to the conceptual model and requirements classes (<<annex-sldse,Annex B>>),
-* an informative map gallery of practical use cases alongside the styles used to generate the maps encoded in the _Cascading Cartographic and Symbology Style Sheets_ encoding (<<annex-mapgallery,Annex C>>), and
+* an informative map gallery of practical use cases alongside the styles used to generate the maps encoded in the _Cartographic Symbology Cascading Style Sheets_ encoding (<<annex-mapgallery,Annex C>>), and
 * an informative revision history (<<annex-revisions,Annex D>>).
 
 ////
