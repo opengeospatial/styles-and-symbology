@@ -1,7 +1,7 @@
 == Requirements Classes for Advanced fills
 
 [[rc-hatches]]
-=== Requirements Class "Hatches"
+=== Requirements Class "Hatch fills"
 ==== Overview
 
 #TODO: Change the model to allow a full definition with 1 or 2 hatching line direction, spacing and thickness. However, define specific values corresponding to the current enums (and to classic legacy system capabilities) that should be used for maximum interoperability and would be tested by the ATS/ETS.#
