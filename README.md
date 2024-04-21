@@ -56,42 +56,42 @@ _The current **published** version of OGC Symbology Conceptual Model: Core Part 
 
 The following requirements classes are planned for the next parts of the standard:
 
-## Part 2 Requirements classes
+## [Part 2](https://github.com/opengeospatial/styles-and-symbology/tree/main/2-shapes) Requirements classes
 
 ### Advanced Stroke and Fills
 
-- specific [joins and caps](https://docs.ogc.org/DRAFTS/18-067r4.html) for Strokes
-- [Graphic pattern Strokes](https://docs.ogc.org/DRAFTS/18-067r4.html),
-- [Graphic pattern Fills](https://docs.ogc.org/DRAFTS/18-067r4.html),
-- [gradient fills](https://docs.ogc.org/DRAFTS/18-067r4.html)
+- specific joins and caps for Strokes
+- Graphic pattern Strokes,
+- Graphic pattern Fills,
+- gradient fills
 
 ### Additional portrayal capabilities
 
-- [shape graphics](https://docs.ogc.org/DRAFTS/18-067r4.html) including circles, ellipses, arcs, rectangles (rounded or not) and paths (polylines and polygons),
-- [shape outlines](https://docs.ogc.org/DRAFTS/18-067r4.html),
-- [vector graphic hierarchy](https://docs.ogc.org/DRAFTS/18-067r4.html), including full 2D transforms,
-- [3D model graphics and 3D transforms](https://docs.ogc.org/DRAFTS/18-067r4.html),
-- [image outlines](https://docs.ogc.org/DRAFTS/18-067r4.html)
+- shape graphics including circles, ellipses, arcs, rectangles (rounded or not) and paths (polylines and polygons),
+- shape outlines,
+- vector graphic hierarchy, including full 2D transforms,
+- 3D model graphics and 3D transforms,
+- image outlines
 
-## Part 3 Requirements classes
+## [Part 3](https://github.com/opengeospatial/styles-and-symbology/tree/main/3-geometry) Requirements classes
 
 ### Additional Expression capabilities
 
-- [spatial relation](https://docs.ogc.org/DRAFTS/18-067r4.html) standard functions,
-- [temporal relation](https://docs.ogc.org/DRAFTS/18-067r4.html) standard fuctions,
-- [geometry manipulation](https://docs.ogc.org/DRAFTS/18-067r4.html) standard functions,
-- [symbolizer geometry](https://docs.ogc.org/DRAFTS/18-067r4.html)
+- spatial relation standard functions,
+- temporal relation standard fuctions,
+- geometry manipulation standard functions,
+- symbolizer geometry
 
-## Part 4 Requirements classes
+## [Part 4](https://github.com/opengeospatial/styles-and-symbology/tree/main/4-coverageplus) Requirements classes
 
 ### Advanced Coverage Styling
 
-- [bitwise operators](https://docs.ogc.org/DRAFTS/18-067r4.html),
-- [coverage as points](https://docs.ogc.org/DRAFTS/18-067r4.html),
-- [coverage as contours](https://docs.ogc.org/DRAFTS/18-067r4.html),
-- [contrast enhancement](https://docs.ogc.org/DRAFTS/18-067r4.html),
-- [hue, saturation, value modifier](https://docs.ogc.org/DRAFTS/18-067r4.html),
-- [aggregation functions](https://docs.ogc.org/DRAFTS/18-067r4.html)
+- bitwise operators,
+- coverage as points,
+- coverage as contours,
+- contrast enhancement,
+- hue, saturation, value modifier,
+- aggregation functions
 
 ## Communication
 
