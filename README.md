@@ -24,9 +24,9 @@ _The current **published** version of OGC Symbology Conceptual Model: Core Part 
 
 ### Basic portrayal capabilities
 - a [core symbology conceptual and logical model](https://docs.ogc.org/DRAFTS/18-067r4.html#toc20) based on Styles as a list of Styling Rules consisting of a Symbolizer and optional Selector Expression,
-- basic [vector styling](https://docs.ogc.org/DRAFTS/18-067r4.html#toc23),
-- basic [coverage styling](https://docs.ogc.org/DRAFTS/18-067r4.html#toc26),
-- basic [labeling](https://docs.ogc.org/DRAFTS/18-067r4.html)
+- basic [vector styling](https://docs.ogc.org/DRAFTS/18-067r4.html#toc23) (including fills, strokes, and markers supporting text, image or dot graphics)
+- basic [coverage styling](https://docs.ogc.org/DRAFTS/18-067r4.html#toc26) (including mapping fields to a color, alpha or single channel and applying a colormap),
+- basic [labeling](https://docs.ogc.org/DRAFTS/18-067r4.html) (placement of labels supporting text, image or dot graphics)
 
 ### Common portrayal capabilities
 
