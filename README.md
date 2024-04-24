@@ -1,6 +1,6 @@
 # OGC Styles & Symbology
 
-This repository hosts the working draft documents for the multi-part OGC Cartographic Symbology Standard. The core **Part 1: Core model and encodings** is available as [HTML](https://docs.ogc.org/DRAFTS/18-067r4.html) or [PDF](https://docs.ogc.org/DRAFTS/18-067r4.pdf) and corresponds to the version **2.0** of SymCore.
+This repository hosts the working draft documents for the multi-part OGC Cartographic Symbology Standard. **Part 1: Core model and encodings** is available as [HTML](https://docs.ogc.org/DRAFTS/18-067r4.html) or [PDF](https://docs.ogc.org/DRAFTS/18-067r4.pdf) and is to be considered version **2.0** of "SymCore".
 The following extensions are also planned:
 
 - Part 2: Model extension for graphical shapes and transformations
