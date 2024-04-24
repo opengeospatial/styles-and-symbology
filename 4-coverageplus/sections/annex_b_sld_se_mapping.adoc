@@ -1,0 +1,216 @@
+[appendix,obligation="informative"]
+[[annex-sldse]]
+== Mapping of SLD/SE and notable vendor extensions to the Conceptual Model
+
+This annex maps constructs of the OGC Styled Layer Descriptor (SLD) and Symbology Encoding (SE) 1.1
+to the conceptual model and requirements classes defined in the Part 4 of this Standard, with the goal of facilitating
+conformance to this Standard for Rendering engines based on SLD/SE and writing conversion tools
+that can convert in either or both direction between SLD/SE and the two encodings defined in this
+Standard.
+
+=== Requirements Class "Coverage as points"
+
+This requirements class is not supported by SLD/SE.
+
+=== Requirements Class "Coverage as contours"
+
+This requirements class is not supported by SLD/SE.
+
+=== Requirements Class "Contrast Enhancement"
+
+.Mapping of the "Contrast Enhancement" requirements class to SLD/SE constructs
+[width="90%",options="header"]
+|===
+| Construct                    | SE Equivalent
+| contrastEnhancement          | `<ContrastEnhancement>`
+| normalize                    | `<Normalize>`
+| histogram                    | `<Histogram>`
+|===
+
+.SLD Example encoding style rendering DEM with the "Contrast Enhancement" requirements class
+====
+[source,sld]
+----
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<StyledLayerDescriptor version="1.1.0" xsi:schemaLocation="http://www.opengis.net/sld StyledLayerDescriptor.xsd" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:se="http://www.opengis.net/se">
+   <NamedLayer>
+      <Name>Elevation</Name>
+      <UserStyle>
+         <Name>DEM with Contrast Enhancement</Name>
+         <Abstract>DEM with Contrast Enhancement</Abstract>
+         <CoverageStyle>
+            <Rule>
+               <Name>DEM with Contrast Enhancement</Name>
+               <Title>DEM with Contrast Enhancement</Title>
+               <MaxScaleDenominator>200000</MaxScaleDenominator>
+               <RasterSymbolizer>
+                  <Opacity>1.0</Opacity>
+                  <ChannelSelection>
+                     <RedChannel>
+                        <SourceChannelName>1</SourceChannelName>
+                        <ContrastEnhancement>
+                           <Histogram/>
+                        </ContrastEnhancement>
+                     </RedChannel>
+                     <GreenChannel>
+                        <SourceChannelName>2</SourceChannelName>
+                        <ContrastEnhancement>
+                           <GammaValue>2.5</GammaValue>
+                        </ContrastEnhancement>
+                     </GreenChannel>
+                     <BlueChannel>
+                        <SourceChannelName>3</SourceChannelName>
+                        <ContrastEnhancement>
+                           <Normalize/>
+                        </ContrastEnhancement>
+                     </BlueChannel>
+                  </ChannelSelection>
+                  <OverlapBehavior>LATEST_ON_TOP</OverlapBehavior>
+                  <ColorMap>
+                     <Interpolate>
+                        <LookupValue>Rasterdata</LookupValue>
+                        <InterpolationPoint>
+                           <Data>0</Data>
+                           <Value>#000000</Value>
+                        </InterpolationPoint>
+                        <InterpolationPoint>
+                           <Data>255</Data>
+                           <Value>#ffffff</Value>
+                        </InterpolationPoint>
+                     </Interpolate>
+                  </ColorMap>
+                  <ContrastEnhancement>
+                     <GammaValue>1.0</GammaValue>
+                  </ContrastEnhancement>
+               </RasterSymbolizer>
+            </Rule>
+         </CoverageStyle>
+      </UserStyle>
+   </NamedLayer>
+</StyledLayerDescriptor>
+----
+====
+
+=== Requirements Class "Hue, Saturation, Value Modifier"
+
+This requirements class is not supported by SLD/SE.
+
+=== Requirements Class "Aggregation"
+
+This requirements class is not supported by SLD/SE.
+
+=== Requirements Class "Bitwise Operators"
+
+.Mapping of the "Bitwise Operators" requirements class to SLD/SE constructs
+[width="90%",options="header"]
+|===
+| Construct                    | SE Equivalent
+| BitwiseOperator              | `<ogc:Function>`
+| bitAnd                       | `<ogc:Function>`
+| bitOr                        | `<ogc:Function>`
+| bitNot                       | `<ogc:Function>`
+| bitXor                       | N/A
+| leftShift                    | N/A
+| rightShift                   | N/A
+|===
+
+.SLD Example encoding style using "Bitwise Operators" requirements class
+====
+[source,sld]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<StyledLayerDescriptor version="1.1.0" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:ogr="http://www.opengis.net/ogr"
+    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/StyledLayerDescriptor.xsd">
+   <NamedLayer>
+      <Name>Landuse</Name>
+      <UserStyle>
+         <Name>Styling a land use layer</Name>
+         <Abstract>Styling land use data with Style &amp; Symbology Bitwise Operators</Abstract>
+         <FeatureTypeStyle>
+            <Rule>
+               <Name>parking</Name>
+               <Title>parking</Title>
+               <PolygonSymbolizer>
+                  <Fill>
+                     <CssParameter name="fill">
+                        <ogc:Function name="bitAnd">
+                           <ogc:PropertyName>landuse</ogc:PropertyName>
+                           <ogc:Literal>parking</ogc:Literal>
+                        </ogc:Function>
+                     </CssParameter>
+                     <CssParameter name="fill-opacity">0.5</CssParameter>
+                  </Fill>
+               </PolygonSymbolizer>
+            </Rule>
+         </FeatureTypeStyle>
+      </UserStyle>
+   </NamedLayer>
+</StyledLayerDescriptor>
+----
+====
+
+=== Requirements Class "Recoding Function"
+
+.Mapping of the "Recoding Function" requirements class to SLD/SE constructs
+[width="90%",options="header"]
+|===
+| Construct                    | SE Equivalent
+| recode                       | `<ogc:Function>`
+|===
+
+.SLD Example encoding style using "Recoding Function" requirements class
+====
+[source,sld]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<StyledLayerDescriptor version="1.1.0" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:ogr="http://www.opengis.net/ogr"
+    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/StyledLayerDescriptor.xsd">
+   <NamedLayer>
+      <Name>Landuse</Name>
+      <UserStyle>
+         <Name>Styling a land use layer</Name>
+         <Abstract>Styling land use data with Style &amp; Symbology Recoding Function</Abstract>
+         <FeatureTypeStyle>
+            <Rule>
+               <Name>parking</Name>
+               <Title>parking</Title>
+               <PolygonSymbolizer>
+                  <Fill>
+                    <CssParameter name="fill">
+                      <ogc:Function name="Recode">
+                        <!-- Value to transform -->
+                        <ogc:Function name="strTrim">
+                          <ogc:PropertyName>SUB_REGION</ogc:PropertyName>
+                        </ogc:Function>
+                        <!-- Map of input to output values -->
+                        <ogc:Literal>N Eng</ogc:Literal>
+                        <ogc:Literal>#6495ED</ogc:Literal>
+                        <ogc:Literal>Mid Atl</ogc:Literal>
+                        <ogc:Literal>#B0C4DE</ogc:Literal>
+                        <ogc:Literal>S Atl</ogc:Literal>
+                        <ogc:Literal>#00FFFF</ogc:Literal>
+                        <ogc:Literal>E N Cen</ogc:Literal>
+                        <ogc:Literal>#9ACD32</ogc:Literal>
+                        <ogc:Literal>E S Cen</ogc:Literal>
+                        <ogc:Literal>#00FA9A</ogc:Literal>
+                        <ogc:Literal>W N Cen</ogc:Literal>
+                        <ogc:Literal>#FFF8DC</ogc:Literal>
+                        <ogc:Literal>W S Cen</ogc:Literal>
+                        <ogc:Literal>#F5DEB3</ogc:Literal>
+                        <ogc:Literal>Mtn</ogc:Literal>
+                        <ogc:Literal>#F4A460</ogc:Literal>
+                        <ogc:Literal>Pacific</ogc:Literal>
+                        <ogc:Literal>#87CEEB</ogc:Literal>
+                      </ogc:Function>
+                    </CssParameter>
+                  </Fill>
+               </PolygonSymbolizer>
+            </Rule>
+         </FeatureTypeStyle>
+      </UserStyle>
+   </NamedLayer>
+</StyledLayerDescriptor>
+----
+====

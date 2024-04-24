@@ -1,0 +1,260 @@
+[appendix,obligation="informative"]
+[[annex-sldse]]
+== Mapping of SLD/SE and notable vendor extensions to the Conceptual Model
+
+This annex maps constructs of the OGC Styled Layer Descriptor (SLD) and Symbology Encoding (SE) 1.1
+to the conceptual model and requirements classes defined in the Part 2 of this Standard, with the goal of facilitating
+conformance to this Standard for Rendering engines based on SLD/SE and writing conversion tools
+that can convert in either or both direction between SLD/SE and the two encodings defined in this
+Standard.
+
+=== Requirements Class "Shape Graphics"
+
+.Mapping of the "Shape Graphics" requirements class to SLD/SE constructs
+[width="90%",options="header"]
+|===
+| Construct                    | SE Equivalent
+| Shape                        | `<Graphic>` with `<Mark>`, `<OnlineResource>` and `<MarkIndex>`
+| Line                         | `<Graphic>` with `<Mark>`, `<OnlineResource>` and `<MarkIndex>`
+| Polyline                     | `<Graphic>` with `<Mark>`, `<OnlineResource>` and `<MarkIndex>`
+| Polygon                      | `<Graphic>` with `<Mark>`, `<OnlineResource>` and `<MarkIndex>`
+| Rectangle                    | `<Graphic>` with `<Mark>`, `<OnlineResource>` and `<MarkIndex>`
+| RoundedRectangle             | `<Graphic>` with `<Mark>`, `<OnlineResource>` and `<MarkIndex>`
+| Circle                       | `<Graphic>` with `<Mark>` and `<WellKnownName>`
+| Ellipse                      | `<Graphic>` with `<Mark>`, `<OnlineResource>` and `<MarkIndex>`
+| Arc                          | `<Graphic>` with `<Mark>`, `<OnlineResource>` and `<MarkIndex>`
+| SectorArc                    | `<Graphic>` with `<Mark>`, `<OnlineResource>` and `<MarkIndex>`
+| ChordArc                     | `<Graphic>` with `<Mark>`, `<OnlineResource>` and `<MarkIndex>`
+| Path                         | `<Graphic>` with `<Mark>`, `<OnlineResource>` and `<MarkIndex>`
+| ClosedPath                   | `<Graphic>` with `<Mark>`, `<OnlineResource>` and `<MarkIndex>`
+|===
+
+.SLD Example encoding style using "Shape Graphics" requirements class
+====
+[source,sld]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<StyledLayerDescriptor version="1.1.0" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:ogr="http://www.opengis.net/ogr"
+    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/StyledLayerDescriptor.xsd">
+   <NamedLayer>
+      <Name>Landuse</Name>
+      <UserStyle>
+         <Name>Styling a land use layer</Name>
+         <Abstract>Styling land use data with Style &amp; Symbology Shape Graphics</Abstract>
+         <FeatureTypeStyle>
+            <Rule>
+               <Name>parking</Name>
+               <Title>parking</Title>
+               <PointSymbolizer>
+                  <Graphic>
+                     <Mark>
+                        <WellKnownName>circle</WellKnownName>
+                        <Fill>
+                           <CssParameter name="fill">#FFA500</CssParameter>
+                        </Fill>
+                     </Mark>
+                  </Graphic>
+               </PointSymbolizer>
+            </Rule>
+         </FeatureTypeStyle>
+      </UserStyle>
+   </NamedLayer>
+</StyledLayerDescriptor>
+----
+====
+
+=== Requirements Class "Shape Outlines"
+
+.Mapping of the "Shape Outlines" requirements class to SLD/SE constructs
+[width="90%",options="header"]
+|===
+| Construct                    | SE Equivalent
+| thickness                    | `<Stroke>` with `<CssParameter>` (stroke-width) 
+|===
+
+.SLD Example encoding style using "Shape Outlines" requirements class
+====
+[source,sld]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<StyledLayerDescriptor version="1.1.0" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:ogr="http://www.opengis.net/ogr"
+    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/StyledLayerDescriptor.xsd">
+   <NamedLayer>
+      <Name>Landuse</Name>
+      <UserStyle>
+         <Name>Styling a land use layer</Name>
+         <Abstract>Styling land use data with Style &amp; Symbology Shape Outlines</Abstract>
+         <FeatureTypeStyle>
+            <Rule>
+               <Name>parking</Name>
+               <Title>parking</Title>
+               <PolygonSymbolizer>
+                  <Stroke>
+                     <CssParameter name="stroke">#000000</CssParameter>
+                     <CssParameter name="stroke-width">1</CssParameter>
+                  </Stroke>
+               </PolygonSymbolizer>
+            </Rule>
+         </FeatureTypeStyle>
+      </UserStyle>
+   </NamedLayer>
+</StyledLayerDescriptor>
+----
+====
+
+=== Requirements Class "Multi Graphics and Transforms"
+
+.Mapping of the "Multi Graphics and Transforms" requirements class to SLD/SE constructs
+[width="90%",options="header"]
+|===
+| Construct                    | SE Equivalent
+| *Transform2D*                | 
+| orientation                  | `<Graphic>` with `<Mark>` and `<Rotation>`
+| scaling                      | `<Graphic>` with `<Mark>` and `<Size>`
+| translation                  | N/A
+| *GraphicInstance*            |
+| element                      | N/A
+|===
+
+.SLD Example encoding style using "Multi Graphics and Transforms" requirements class
+====
+[source,sld]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<StyledLayerDescriptor version="1.1.0" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:ogr="http://www.opengis.net/ogr"
+    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/StyledLayerDescriptor.xsd">
+   <NamedLayer>
+      <Name>Landuse</Name>
+      <UserStyle>
+         <Name>Styling a land use layer</Name>
+         <Abstract>Styling land use data with Style &amp; Symbology Multi Graphics and Transforms</Abstract>
+         <FeatureTypeStyle>
+            <Rule>
+               <Name>parking</Name>
+               <Title>parking</Title>
+               <PointSymbolizer>
+                  <Graphic>
+                     <Mark>
+                        <WellKnownName>circle</WellKnownName>
+                        <Fill>
+                           <CssParameter name="fill">#FFA500</CssParameter>
+                        </Fill>
+                     </Mark>
+                     <Size>12</Size>
+                     <Rotation>45</Rotation>
+                  </Graphic>
+               </PointSymbolizer>
+            </Rule>
+         </FeatureTypeStyle>
+      </UserStyle>
+   </NamedLayer>
+</StyledLayerDescriptor>
+----
+====
+
+=== Requirements Class "Joins and Caps"
+
+.Mapping of the "Joins and Caps" requirements class to SLD/SE constructs
+[width="90%",options="header"]
+|===
+| Construct                    | SE Equivalent
+| join                         | `<Stroke>` with `<CssParameter>` (stroke-linejoin)
+| cap                          | `<Stroke>` with `<CssParameter>` (stroke-linecap)
+|===
+
+.SLD Example encoding style using "Joins and Caps" requirements class
+====
+[source,sld]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<StyledLayerDescriptor version="1.1.0" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:ogr="http://www.opengis.net/ogr"
+    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/StyledLayerDescriptor.xsd">
+   <NamedLayer>
+      <Name>Landuse</Name>
+      <UserStyle>
+         <Name>Styling a land use layer</Name>
+         <Abstract>Styling land use data with Style &amp; Symbology Joins and Caps</Abstract>
+         <FeatureTypeStyle>
+            <Rule>
+               <Name>parking</Name>
+               <Title>parking</Title>
+               <LineSymbolizer>
+                  <Stroke>
+                     <CssParameter name="stroke">#000000</CssParameter>
+                     <CssParameter name="stroke-width">1</CssParameter>
+                     <CssParameter name="stroke-linejoin">round</CssParameter>
+                     <CssParameter name="stroke-linecap">round</CssParameter>
+                  </Stroke>
+               </LineSymbolizer>
+            </Rule>
+         </FeatureTypeStyle>
+      </UserStyle>
+   </NamedLayer>
+</StyledLayerDescriptor>
+----
+====
+
+=== Requirements Class "Pattern Strokes"
+
+.Mapping of the "Pattern Strokes" requirements class to SLD/SE constructs
+[width="90%",options="header"]
+|===
+| Construct                    | SE Equivalent
+| pattern                      | `<Stroke>` with '<GraphicStroke>', `<Graphic>`, `<Mark>` and `<WellKnownName>` or `<Stroke>` with '<GraphicStroke>', `<Graphic>`, `<Mark>`, `<OnlineResource>` and `<MarkIndex>`
+| patternGap                   | `<Stroke>` with `<CssParameter>` (stroke-dasharray)
+| patternInitialGap            | `<Stroke>` with `<CssParameter>` (stroke-dashoffset)
+|===
+
+.SLD Example encoding style using "Pattern Strokes" requirements class
+====
+[source,sld]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<StyledLayerDescriptor xmlns="http://www.opengis.net/sld" xmlns:sld="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:gml="http://www.opengis.net/gml" version="1.0.0">
+  <NamedLayer>
+    <UserStyle>
+      <Name>Trails</Name>
+      <Title/>
+      <FeatureTypeStyle>
+        <Rule>
+          <MaxScaleDenominator>75000</MaxScaleDenominator>
+          <LineSymbolizer>
+            <Stroke>
+              <GraphicStroke>
+                <Graphic>
+                  <Mark>
+                    <WellKnownName>circle</WellKnownName>
+                    <Fill>
+                      <CssParameter name="fill">#AA0000</CssParameter>
+                    </Fill>
+                  </Mark>
+                  <Size>
+                    <ogc:Literal>6</ogc:Literal>
+                  </Size>
+                </Graphic>
+              </GraphicStroke>
+              <CssParameter name="stroke-dasharray">6 18</CssParameter>
+            </Stroke>
+          </LineSymbolizer>
+          <LineSymbolizer>
+            <Stroke>
+              <CssParameter name="stroke">#AA0000</CssParameter>
+              <CssParameter name="stroke-dasharray">10 14</CssParameter>
+              <CssParameter name="stroke-dashoffset">14</CssParameter>
+            </Stroke>
+          </LineSymbolizer>
+        </Rule>
+      </FeatureTypeStyle>
+    </UserStyle>
+  </NamedLayer>
+</StyledLayerDescriptor>
+----
+====
+
+=== Requirements Class "3D Graphics, Models and Transforms"
+
+This requirements class is not supported by SLD/SE.

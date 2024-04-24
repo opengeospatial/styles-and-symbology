@@ -1,0 +1,183 @@
+[appendix,obligation="informative"]
+[[annex-sldse]]
+== Mapping of SLD/SE and notable vendor extensions to the Conceptual Model
+
+This annex maps constructs of the OGC Styled Layer Descriptor (SLD) and Symbology Encoding (SE) 1.1
+to the conceptual model and requirements classes defined in the Part 3 of this Standard, with the goal of facilitating
+conformance to this Standard for Rendering engines based on SLD/SE and writing conversion tools
+that can convert in either or both direction between SLD/SE and the two encodings defined in this
+Standard.
+
+// == Requirements Class "Symbolizer Geometry"
+
+// This needs to be defined in the conceptual model.
+
+=== Requirements Class "Spatial Relation Functions"
+
+.Mapping of the "Spatial Relation Functions" requirements class to SLD/SE constructs
+[width="90%",options="header"]
+|===
+| Construct                    | SE Equivalent
+| SpatialRelationFunctions     | `<ogc:Function>`
+| s_intersects                 | `<ogc:Function>`
+| s_contains                   | `<ogc:Function>`
+| s_crosses                    | `<ogc:Function>`
+| s_disjoint                   | `<ogc:Function>`
+| s_equals                     | N/A
+| s_overlaps                   | `<ogc:Function>`
+| s_touches                    | `<ogc:Function>`
+| s_within                     | `<ogc:Function>`
+| s_covers                     | N/A
+| s_coveredBy                  | N/A
+|===
+
+.SLD Example encoding style using "Spatial Relation Functions" requirements class
+====
+[source,sld]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<StyledLayerDescriptor version="1.1.0" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:ogr="http://www.opengis.net/ogr"
+    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/StyledLayerDescriptor.xsd">
+   <NamedLayer>
+      <Name>Landuse</Name>
+      <UserStyle>
+         <Name>Styling a land use layer</Name>
+         <Abstract>Styling land use data with Style &amp; Symbology Spatial Relation Functions</Abstract>
+         <FeatureTypeStyle>
+            <Rule>
+               <Name>parking</Name>
+               <Title>parking</Title>
+               <PolygonSymbolizer>
+                  <Fill>
+                     <CssParameter name="fill">
+                        <ogc:Function name="intersects">
+                           <ogc:PropertyName>landuse</ogc:PropertyName>
+                           <ogc:Literal>parking</ogc:Literal>
+                        </ogc:Function>
+                     </CssParameter>
+                     <CssParameter name="fill-opacity">0.5</CssParameter>
+                  </Fill>
+               </PolygonSymbolizer>
+            </Rule>
+         </FeatureTypeStyle>
+      </UserStyle>
+   </NamedLayer>
+</StyledLayerDescriptor>
+----
+====
+
+=== Requirements Class "Temporal Relation Functions"
+
+.Mapping of the "Temporal Relation Functions" requirements class to SLD/SE constructs
+[width="90%",options="header"]
+|===
+| Construct                    | SE Equivalent
+| TemporalRelationFunctions    | `<ogc:Function>`
+| t_after                      | `<ogc:Function>`
+| t_before                     | `<ogc:Function>`
+| t_disjoint                   | `<ogc:Function>`
+| t_equals                     | `<ogc:Function>`
+| t_intersects                 | `<ogc:Function>`
+| t_contains                   | `<ogc:Function>`
+| t_during                     | `<ogc:Function>`
+| t_finishedBy                 | `<ogc:Function>`
+| t_finishes                   | `<ogc:Function>`
+| t_meets                      | `<ogc:Function>`
+| t_meetBy                     | `<ogc:Function>`
+| t_overlappedBy               | `<ogc:Function>`
+| t_overlaps                   | `<ogc:Function>`
+| t_startedBy                  | `<ogc:Function>`
+| t_starts                     | `<ogc:Function>`
+|===
+
+.SLD Example encoding style using "Temporal Relation Functions" requirements class
+====
+[source,sld]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<StyledLayerDescriptor version="1.1.0" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:ogr="http://www.opengis.net/ogr"
+    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/StyledLayerDescriptor.xsd">
+   <NamedLayer>
+      <Name>Landuse</Name>
+      <UserStyle>
+         <Name>Styling a land use layer</Name>
+         <Abstract>Styling land use data with Style &amp; Symbology Temporal Relation Functions</Abstract>
+         <FeatureTypeStyle>
+            <Rule>
+               <Name>parking</Name>
+               <Title>parking</Title>
+               <PolygonSymbolizer>
+                  <Fill>
+                     <CssParameter name="fill">
+                        <ogc:Function name="t_after">
+                           <ogc:PropertyName>date</ogc:PropertyName>
+                           <ogc:Literal>2019-01-01</ogc:Literal>
+                        </ogc:Function>
+                     </CssParameter>
+                     <CssParameter name="fill-opacity">0.5</CssParameter>
+                  </Fill>
+               </PolygonSymbolizer>
+            </Rule>
+         </FeatureTypeStyle>
+      </UserStyle>
+   </NamedLayer>
+</StyledLayerDescriptor>
+----
+====
+
+=== Requirements Class "Geometry Manipulation Functions"
+
+.Mapping of the "Geometry Manipulation Functions" requirements class to SLD/SE constructs
+[width="90%",options="header"]
+|===
+| Construct                     | SE Equivalent
+| GeometryManipulationFunctions | `<ogc:Function>`
+| s_difference                  | N/A
+| s_symDifference               | N/A
+| s_convexHull                  | N/A
+| s_buffer                      | N/A
+| s_envelope                    | N/A
+| s_centroid                    | N/A
+| s_offsetCurve                 | N/A
+| s_voronoiLines                | N/A
+| s_voronoiPolygons             | N/A
+| s_delaunayTriangles           | N/A
+|===
+
+.SLD Example encoding style using "Geometry Manipulation Functions" requirements class
+====
+[source,sld]
+----
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<StyledLayerDescriptor version="1.0.0" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc"
+  xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.0.0/StyledLayerDescriptor.xsd">
+  <NamedLayer>
+    <Name>Default Point</Name>
+    <UserStyle>
+      <FeatureTypeStyle>
+        <Rule>
+          <LineSymbolizer>
+            <Stroke/>
+          </LineSymbolizer>
+          <PointSymbolizer>
+            <Geometry><ogc:Function name="vertices"><ogc:PropertyName>the_geom</ogc:PropertyName></ogc:Function></Geometry>
+            <Graphic>
+              <Mark>
+                <WellKnownName>square</WellKnownName>
+                <Fill>
+                  <CssParameter name="fill">#FF0000</CssParameter>
+                </Fill>
+              </Mark>
+              <Size>6</Size>
+            </Graphic>
+          </PointSymbolizer>
+        </Rule>
+      </FeatureTypeStyle>
+    </UserStyle>
+  </NamedLayer>
+</StyledLayerDescriptor>
+----
+====

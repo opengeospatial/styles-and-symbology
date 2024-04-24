@@ -3,127 +3,238 @@
 == Mapping of SLD/SE and notable vendor extensions to the Conceptual Model
 
 This annex maps constructs of the OGC Styled Layer Descriptor (SLD) and Symbology Encoding (SE) 1.1
-to the conceptual model and requirements classes defined in this Standard, with the goal of facilitating
+to the conceptual model and requirements classes defined in the Part 1 of this Standard, with the goal of facilitating
 conformance to this Standard for Rendering engines based on SLD/SE and writing conversion tools
 that can convert in either or both direction between SLD/SE and the two encodings defined in this
 Standard.
 
-.Mapping of visual ordering constructs
+=== Requirements Class "Core"
+
+.Mapping of the "Core" requirements class to SLD/SE constructs
 [width="90%",options="header"]
 |===
-| Construct         | Construct type                     | GeoCSS Equivalent                     | SLD Equivalent
-| zOrder            | Symbolizer property                | sort-by                               | v-option: SortBy
-| viz.pass          | System identifier for selector     | z-index, sort-by (with sort-by-group) |  FeatureTypeStyle, v-option: SortBy + SortByGroup
-| feature.pass      | System identifier for selector     | Symbolizer order                      | Symbolizer order
+| Construct         | SE Equivalent
+| *Styling Rules*   | 
+| name              | `<UserStyle>` with <Name>
+| selector          | `<Rule>` with `<ogc:Filter>`
+| symbolizer        | `<PointSymbolizer>`, `<LineSymbolizer>`, `<PolygonSymbolizer>`, `<TextSymbolizer>`, `<RasterSymbolizer>`
+| Selector          | `ogc:Filter`, `ogc:Function`
+| nestedRules       | N/A
+
+| *Literal Expression* | 
+| LiteralExpression | Literal values (strings, numbers, booleans) within SLD expressions
+| TextLiteral       | `<ogc:Literal>`
+| BoolLiteral       | Boolean literals (`<ogc:Literal>` with value "true" or "false")
+| NullLiteral       | `<PropertyIsNull>`
+| IntegerLiteral    | `<ogc:Literal>` with integer value
+| RealLiteral       | Real (floating-point) literals (`<ogc:Literal>` with double value)
+| ArrayLiteral      | Array literals (constructed using `<ogc:Literal>` elements)
+| InstanceLiteral   | `<ogc:PropertyName>`
+
+| *Expression*         | 
+| Expression           | `<ogc:Filter>`, `<ogc:Function>`
+| IdentifierExpression | `<ogc:PropertyName>`, `<ogc:Literal>`
+| InstanceExpression   | `<ogc:Literal>`, `<ogc:PropertyName>`
+| ArrayExpression      | `<ogc:Literal>` elements within `<ogc:Function>` or `<ogc:Filter>`
+
+| *Core Logic and Relational Operators* | 
+| Operator          | Comparison operators (`<ogc:PropertyIsEqualTo>`, `<ogc:PropertyIsLessThan>`, etc.)
+| LogicOperator     | Logical operators (`<ogc:And>`, `<ogc:Or>`, `<ogc:Not>`)
 |===
 
 .SLD Example encoding style using "Core" requirements class
 ====
 [source,sld]
 ----
-<?xml version="1.0" encoding="UTF-8"?>
-<sld:StyledLayerDescriptor xmlns:sld="http://www.opengis.net/sld" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.1.0" xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/StyledLayerDescriptor.xsd">
-   <sld:NamedLayer>
-      <sld:Name>Landuse</sld:Name>
-      <sld:UserStyle>
-         <sld:Name>Styling a land use layer</sld:Name>
-         <sld:Abstract>Styling land use data with Style &amp; Symbology Core</sld:Abstract>
-         <sld:FeatureTypeStyle>
-            <sld:MinScaleDenominator>1</sld:MinScaleDenominator>
-            <sld:FeatureLayer>
-                <sld:Name>Landuse</sld:Name>
-                <sld:Visibility>true</sld:Visibility>
-            </sld:FeatureLayer>
-            <sld:Rule>
-               <sld:Name>Scaled visibility</sld:Name>
-               <sld:MaxScaleDenominator>200000</sld:MaxScaleDenominator>
-               <sld:Filter>
-                  <ogc:PropertyIsGreaterThanOrEqualTo>
-                     <ogc:PropertyName>date</ogc:PropertyName>
-                     <ogc:Literal>2020-01-01</ogc:Literal>
-                  </ogc:PropertyIsGreaterThanOrEqualTo>
-               </sld:Filter>
-               <sld:PolygonSymbolizer>
-                  <sld:Fill>
-                     <sld:CssParameter name="fill">#FF0000</sld:CssParameter>
-                     <sld:CssParameter name="fill-opacity">0.5</sld:CssParameter>
-                  </sld:Fill>
-               </sld:PolygonSymbolizer>
-            </sld:Rule>
-         </sld:FeatureTypeStyle>
-      </sld:UserStyle>
-   </sld:NamedLayer>
-</sld:StyledLayerDescriptor>
-----
-====
-
-===== Basic Vector Styling
-
-.SLD Example encoding style using "Basic Vector Styling" requirements class
-
-====
-[source,sld]
-----
-<?xml version="1.0" encoding="UTF-8"?>
-<StyledLayerDescriptor version="1.1.0" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc"
-    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/StyledLayerDescriptor.xsd">
-   <sld:NamedLayer>
-      <sld:Name>Landuse</sld:Name>
-      <sld:UserStyle>
-         <sld:Name>Styling a land use layer</sld:Name>
-         <sld:Abstract>Styling land use data with Style &amp; Symbology Basic Vector Styling</sld:Abstract>
-         <sld:FeatureTypeStyle>
-            <sld:Rule>
-               <sld:Name>parking</sld:Name>
-               <sld:Title>parking</sld:Title>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<StyledLayerDescriptor version="1.0.0" xsi:schemaLocation="http://www.opengis.net/sld StyledLayerDescriptor.xsd" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:se="http://www.opengis.net/se">
+   <NamedLayer>
+      <Name>Landuse</Name>
+      <UserStyle>
+         <Name>Styling a land use layer</Name>
+         <Abstract>Styling land use data with Style &amp; Symbology Core</Abstract>
+         <FeatureTypeStyle>
+            <Rule>
+               <Name>parking</Name>
+               <Title>parking</Title>
                <ogc:Filter>
                   <ogc:PropertyIsEqualTo>
                      <ogc:PropertyName>landuse</ogc:PropertyName>
                      <ogc:Literal>parking</ogc:Literal>
                   </ogc:PropertyIsEqualTo>
                </ogc:Filter>
-               <sld:MaxScaleDenominator>200000</sld:MaxScaleDenominator>
-               <sld:PolygonSymbolizer>
-                  <sld:Fill>
-                     <sld:CssParameter name="fill">#FF0000</sld:CssParameter>
-                     <sld:CssParameter name="fill-opacity">0.5</sld:CssParameter>
-                  </sld:Fill>
+               <PolygonSymbolizer>
+                  <Fill>
+                     <CssParameter name="fill">#FF0000</CssParameter>
+                     <CssParameter name="fill-opacity">0.5</CssParameter>
+                  </Fill>
                   <stroke>
                      <CssParameter name="stroke">#000000</CssParameter>
                      <CssParameter name="stroke-width">1</CssParameter>
                   </stroke>
-               </sld:PolygonSymbolizer>
-            </sld:Rule>
-            // other rules go here ...
-         </sld:FeatureTypeStyle>
-      </sld:UserStyle>
-   </sld:NamedLayer>
-   // styling for next layer goes here ...
+               </PolygonSymbolizer>
+            </Rule>
+         </FeatureTypeStyle>
+      </UserStyle>
+   </NamedLayer>
+<StyledLayerDescriptor>
+----
+====
+
+=== Requirements Class "Parameter Values"
+
+.Mapping of the "Parameter Values" requirements class to SLD/SE constructs
+[width="90%",options="header"]
+|===
+| Construct                      | SE Equivalent
+| visualization                  | N/A
+| dataLayer                      | N/A
+| visualization.scaleDenominator | `<MaxScaleDenominator>`, `<MinScaleDenominator>`
+| visualization.dateTime         | `<ogc:PropertyName>` with datetime (timestamp) value  and `<ogc:Literal>`
+| visualization.date             | `<ogc:PropertyName>` with date value and `<ogc:Literal>`
+| visualization.timeOfDay        | `<ogc:PropertyName>` with time value and `<ogc:Literal>`
+| visualization.pass             | N/A (drawing order)
+| dataLayer.identifier           | `<NamedLayer>` and `<Name>`
+| dataLayer.type                 | N/A
+|===
+
+.SLD Example encoding style using "Parameter Values" requirements class
+====
+[source,sld]
+----
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<StyledLayerDescriptor version="1.0.0" xsi:schemaLocation="http://www.opengis.net/sld StyledLayerDescriptor.xsd" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:se="http://www.opengis.net/se">
+  <NamedLayer>
+    <Name>Landuse</Name>
+    <UserStyle>
+      <Name>Styling a land use layer</Name>
+      <Title>Styling a land use layer</Title>
+      <Abstract>Styling land use data with Style &amp; Symbology Parameter Values</Abstract>
+      <FeatureTypeStyle>
+        <Rule>
+          <Name>parking</Name>
+          <Filter>
+            <PropertyIsEqualTo>
+              <PropertyName>landuse</PropertyName>
+              <Literal>parking</Literal>
+            </PropertyIsEqualTo>
+          </Filter>
+          <MaxScaleDenominator>200000</MaxScaleDenominator>
+          <PolygonSymbolizer>
+            <Fill>
+              <CssParameter name="fill">#ff0000</CssParameter>
+            </Fill>
+            <Stroke>
+              <CssParameter name="stroke">#000000</CssParameter>
+              <CssParameter name="stroke-width">1</CssParameter>
+            </Stroke>
+          </PolygonSymbolizer>
+        </Rule>
+      </FeatureTypeStyle>
+    </UserStyle>
+  </NamedLayer>
 </StyledLayerDescriptor>
 ----
 ====
 
-===== Basic Coverage Styling
+=== Requirements Class "Basic Vector Features Styling"
+
+.Mapping of the "Basic Vector Features Styling" requirements class to SLD/SE constructs
+[width="90%",options="header"]
+|===
+| Construct                   | SE Equivalent
+| Text                        | `<TextSymbolizer>`
+| Font                        | <Font>` with `<SvgParameter name="font-family">`, `<SvgParameter name="font-size">`, `<SvgParameter name="font-style">`, `<SvgParameter name="font-weight">`
+| TextAlignment               | `<TextSymbolizer>`
+| HAlignment                  | `<TextSymbolizer>`
+| VAlignment                  | `<TextSymbolizer>`
+| Image                       | `<Graphic>`
+| Dot                         | `<PointSymbolizer>`
+| Marker                      | `<Graphic>`
+| GraphicalUnit               | N/A
+| Stroke                      | `<Stroke>`
+| Fill                        | `<Fill>`
+| Color                       | `<CssParameter>`
+|===
+
+
+.SLD Example encoding style using "Basic Vector Features Styling" requirements class
+====
+[source,sld]
+----
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<StyledLayerDescriptor version="1.0.0" xsi:schemaLocation="http://www.opengis.net/sld StyledLayerDescriptor.xsd" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:se="http://www.opengis.net/se">
+  <NamedLayer>
+    <Name>Landuse</Name>
+    <UserStyle>
+      <Name>Styling a land use layer</Name>
+      <Title>Styling a land use layer</Title>
+      <Abstract>Styling land use data with Style &amp; Symbology Parameter Values</Abstract>
+      <FeatureTypeStyle>
+        <Rule>
+          <Name>parking</Name>
+          <Filter>
+            <PropertyIsEqualTo>
+              <PropertyName>landuse</PropertyName>
+              <Literal>parking</Literal>
+            </PropertyIsEqualTo>
+          </Filter>
+          <MaxScaleDenominator>200000</MaxScaleDenominator>
+          <PointSymbolizer>
+            <Graphic>
+              <ExternalGraphic>
+                <OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Parking_icon.svg/128px-Parking_icon.svg.png"/>
+              </ExternalGraphic>
+            </Graphic>
+          </PointSymbolizer>
+        </Rule>
+      </FeatureTypeStyle>
+    </UserStyle>
+  </NamedLayer>
+</StyledLayerDescriptor>
+----
+====
+
+=== Requirements Class "Basic Coverage Styling"
+
+.Mapping of the "Basic Coverage Styling" requirements class to SLD/SE constructs
+[width="90%",options="header"]
+|===
+| Construct                    | SE Equivalent
+| ColorChannels                | `<ChannelSelection>` with `<RedChannel>`, `<GreenChannel>`, `<BlueChannel>` or `<GrayChannel>`
+| AlphaChannel                 | N/A
+| SingleChannel                | `<ChannelSelection>` with `<RedChannel>`, `<GreenChannel>`, `<BlueChannel>` or `<GrayChannel>` 
+| ColorMap                     | `<ColorMap>`
+| OpacityMap                   | `<Opacity>`
+| ValueColor                   | `<ColorMapEntry>`
+| ValueOpacity                 | `<ColorMapEntry>`
+
+|*Hill Shading*                |
+| Construct                    | SE Equivalent
+| AzimuthElevation             | `<ogc:Function>` with <ogc:PropertyName> and `<ogc:Literal>`
+| HillShading                  | `<ogc:Function>` with <ogc:PropertyName> and `<ogc:Literal>`
+| Symbolizer                   | `<RasterSymbolizer>`
+
+|*Contrast Enhancement*        |
+| contrastEnhancement          | `<ContrastEnhancement>`
+|===
 
 .SLD Example encoding style rendering DEM with a color map using "Basic Coverage Styling" requirements class
 ====
 [source,sld]
 ----
-<?xml version="1.0" encoding="UTF-8"?>
-<StyledLayerDescriptor version="1.1.0" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc"
-    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/StyledLayerDescriptor.xsd">
-   <sld:NamedLayer>
-      <sld:Name>Elevation</sld:Name>
-      <sld:UserStyle>
-         <sld:Name>DEM with color map</sld:Name>
-         <sld:Abstract>Applying a color map to a Digital Elevation Model with Style &amp; Symbology Basic Coverage Styling</sld:Abstract>
-         <sld:FeatureTypeStyle>
-            <sld:Rule>
-               <sld:Name>DEM with color map</sld:Name>
-               <sld:Title>DEM with color map</sld:Title>
-               <sld:MaxScaleDenominator>200000</sld:MaxScaleDenominator>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<StyledLayerDescriptor version="1.1.0" xsi:schemaLocation="http://www.opengis.net/sld StyledLayerDescriptor.xsd" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:se="http://www.opengis.net/se">
+   <NamedLayer>
+      <Name>Elevation</Name>
+      <UserStyle>
+         <Name>DEM with color map</Name>
+         <Abstract>Applying a color map to a Digital Elevation Model with Style &amp; Symbology Basic Coverage Styling</Abstract>
+         <FeatureTypeStyle>
+            <Rule>
+               <Name>DEM with color map</Name>
+               <Title>DEM with color map</Title>
+               <MaxScaleDenominator>200000</MaxScaleDenominator>
                <sld:RasterSymbolizer>
                   <sld:Opacity>0.8</sld:Opacity>
                   <sld:ChannelSelection>
@@ -139,139 +250,697 @@ Standard.
                      <sld:ColorMapEntry color="#FAFAFA" quantity="2500" label="2500"/>
                   </sld:ColorMap>
                </sld:RasterSymbolizer>
-            </sld:Rule>
-         </sld:FeatureTypeStyle>
-      </sld:UserStyle>
-   </sld:NamedLayer>
+            </Rule>
+         </FeatureTypeStyle>
+      </UserStyle>
+   </NamedLayer>
 </StyledLayerDescriptor>
 ----
 ====
 
-.SLD Example encoding style rendering sentinel-2 in natural color from 3 bands using "Basic Coverage Styling" requirements class
+=== Requirements Class "Basic Labeling"
+
+.Mapping of the "Basic Labeling" & "Font Outlines" requirements class to SLD/SE constructs
+[width="90%",options="header"]
+|===
+| Construct                    | SLD Equivalent
+| Label                        | `<TextSymbolizer>` with `<Label>`
+| LabelPlacement               | `<LabelPlacement>`
+| ImageOutline                 | `<Graphic>`
+| Font                         | `<Font>` with `<SvgParameter name="font-family">`, `<SvgParameter name="font-size">`, `<SvgParameter name="font-style">`, `<SvgParameter name="font-weight">`
+| FontOutline                  | `<Halo>`
+|===
+
+.SLD Example encoding style using "Basic Labeling" requirements class
 ====
 [source,sld]
 ----
-<?xml version="1.0" encoding="UTF-8"?>
-<StyledLayerDescriptor version="1.1.0" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc"
-    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/StyledLayerDescriptor.xsd">
-   <sld:NamedLayer>
-      <sld:Name>sentinel-2 natural color</sld:Name>
-      <sld:UserStyle>
-         <sld:Name>sentinel-2 natural color</sld:Name>
-         <sld:Abstract>Styling a Sentinel-2A coverage with Style &amp; Symbology Basic Coverage Styling</sld:Abstract>
-         <sld:FeatureTypeStyle>
-            <sld:Rule>
-               <sld:Name>sentinel-2 natural color</sld:Name>
-               <sld:Title>sentinel-2 natural color</sld:Title>
-               <sld:MaxScaleDenominator>200000</sld:MaxScaleDenominator>
-               <sld:RasterSymbolizer>
-                  <sld:Opacity>0.8</sld:Opacity>
-                  <sld:ChannelSelection>
-                     <sld:RedChannel>
-                        <sld:SourceChannelName>B04</sld:SourceChannelName>
-                     </sld:RedChannel>
-                     <sld:GreenChannel>
-                        <sld:SourceChannelName>B03</sld:SourceChannelName>
-                     </sld:GreenChannel>
-                     <sld:BlueChannel>
-                        <sld:SourceChannelName>B02</sld:SourceChannelName>
-                     </sld:BlueChannel>
-                  </sld:ChannelSelection>
-                  <sld:ContrastEnhancement>
-                     <sld:Normalize/>
-                  </sld:ContrastEnhancement>
-               </sld:RasterSymbolizer>
-            </sld:Rule>
-         </sld:FeatureTypeStyle>
-      </sld:UserStyle>
-   </sld:NamedLayer>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<StyledLayerDescriptor version="1.1.0" xsi:schemaLocation="http://www.opengis.net/sld StyledLayerDescriptor.xsd" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:se="http://www.opengis.net/se">
+   <NamedLayer>
+      <Name>Landuse</Name>
+      <UserStyle>
+         <Name>Styling a land use layer</Name>
+         <Abstract>Styling land use data with Style &amp; Symbology Basic Labeling</Abstract>
+         <FeatureTypeStyle>
+            <Rule>
+               <Name>parking</Name>
+               <Title>parking</Title>
+               <TextSymbolizer>
+                <Label>
+                  <ogc:PropertyName>name</ogc:PropertyName>
+                </Label>
+                <Font>
+                  <CssParameter name="font-family">Arial</CssParameter>
+                  <CssParameter name="font-size">12</CssParameter>
+                  <CssParameter name="font-style">normal</CssParameter>
+                  <CssParameter name="font-weight">bold</CssParameter>
+                </Font>
+                <LabelPlacement>
+                  <PointPlacement>
+                    <AnchorPoint>
+                      <AnchorPointX>0.5</AnchorPointX>
+                      <AnchorPointY>0.0</AnchorPointY>
+                    </AnchorPoint>
+                    <Displacement>
+                      <DisplacementX>0</DisplacementX>
+                      <DisplacementY>25</DisplacementY>
+                    </Displacement>
+                    <Rotation>-45</Rotation>
+                  </PointPlacement>
+                </LabelPlacement>
+                <Fill>
+                  <CssParameter name="fill">#990099</CssParameter>
+                </Fill>
+               </TextSymbolizer>
+            </Rule>
+         </FeatureTypeStyle>
+      </UserStyle>
+   </NamedLayer>
 </StyledLayerDescriptor>
 ----
 ====
 
-===== Arithmetic Operations (with Basic Coverage Styling)
+=== Requirements Class "Dashes"
 
-.CartoSym-CSS Example encoding style rendering NDVI with color map using "Basic Coverage Styling" requirements class
-====
-[source,cscss]
-----
-.title "sentinel-2 natural color"
-.abstract "Styling a Sentinel-2A coverage with Style & Symbology Basic Coverage Styling"
+.Mapping of the "Dashes" requirements class to SLD/SE constructs
+[width="90%",options="header"]
+|===
+| Construct                    | SE Equivalent
+| dashPattern                  | GraphicStroke with GraphicStrokeType and Graphic
+| dashOffset                   | `<SvgParameter name="stroke-dashoffset">` with `<ogc:Literal>`
+|===
 
-#Sentinel2L2A[dataLayer.type = coverage]
-{
-   visibility: false;
-
-   [viz.sd < 200000]
-   {
-      visibility: true;
-      opacity: 0.8;
-      zOrder: 1;
-
-      singleChannel: (B08 - B04)/(B08 + B04);
-      alphaChannel: 1.0;
-      [SCL=8] { alphaChannel: 0.5; }   // Reduce alpha channel value for medium cloud proability
-      [SCL=9] { alphaChannel: 0.0; }   // Zero alpha channel value for high cloud proability
-      colorMap: ((-1.0 saddleBrown),(0.0 peru),(0.2 goldenrod),(0.5 olive),(0.6 yellowGreen),(0.8 greenYellow),(1.0 lime));
-   }
-}
-----
-====
-
-.SLD Example encoding style rendering NDVI with color map using "Basic Coverage Styling" requirements class
+.SLD Example encoding style using "Dashes" requirements class
 ====
 [source,sld]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
-<StyledLayerDescriptor version="1.1.0" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc"
+<StyledLayerDescriptor version="1.1.0" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:ogr="http://www.opengis.net/ogr"
     xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/StyledLayerDescriptor.xsd">
-   <sld:NamedLayer>
-      <sld:Name>NDVI</sld:Name>
-      <sld:UserStyle>
-         <sld:Name>NDVI</sld:Name>
-         <sld:Abstract>Styling a Sentinel-2A coverage with Style &amp; Symbology Basic Coverage Styling</sld:Abstract>
-         <sld:FeatureTypeStyle>
-            <sld:Rule>
-               <sld:Name>NDVI</sld:Name>
-               <sld:Title>NDVI</sld:Title>
-               <sld:MaxScaleDenominator>200000</sld:MaxScaleDenominator>
-               <sld:RasterSymbolizer>
-                  <sld:Opacity>0.8</sld:Opacity>
-                  <sld:ChannelSelection>
-                     <sld:GrayChannel>
-                        <sld:ContrastEnhancement>
-                           <sld:Normalize/>
-                        </sld:ContrastEnhancement>
-                        <sld:SourceChannelName>
-                           <ogc:Function name="Divide">
-                              <ogc:Function name="Subtract">
-                                 <ogc:PropertyName>B08</ogc:PropertyName>
-                                 <ogc:PropertyName>B04</ogc:PropertyName>
-                              </ogc:Function>
-                              <ogc:Function name="Add">
-                                 <ogc:PropertyName>B08</ogc:PropertyName>
-                                 <ogc:PropertyName>B04</ogc:PropertyName>
-                              </ogc:Function>
+   <NamedLayer>
+      <Name>Landuse</Name>
+      <UserStyle>
+         <Name>Styling a land use layer</Name>
+         <Abstract>Styling land use data with Style &amp; Symbology Dashes</Abstract>
+         <FeatureTypeStyle>
+            <Rule>
+               <Name>parking</Name>
+               <Title>parking</Title>
+               <LineSymbolizer>
+                  <Stroke>
+                     <CssParameter name="stroke">#000000</CssParameter>
+                     <CssParameter name="stroke-width">1</CssParameter>
+                     <CssParameter name="stroke-dasharray">5 2 1 2</CssParameter>
+                     <CssParameter name="stroke-dashoffset">2</CssParameter>
+                  </Stroke>
+               </LineSymbolizer>
+            </Rule>
+         </FeatureTypeStyle>
+      </UserStyle>
+   </NamedLayer>
+</StyledLayerDescriptor>
+----
+====
+
+=== Requirements Class "Casing and Centerline"
+
+.Mapping of the "Casing and Centerline" requirements class to SLD/SE constructs
+[width="90%",options="header"]
+|===
+| Construct                    | SE Equivalent
+| casing                       | `<Stroke>`
+| center                       | `<Stroke>`
+|===
+
+.SLD Example encoding style using "Casing and Centerline" requirements class
+====
+[source,sld]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<StyledLayerDescriptor version="1.1.0" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:ogr="http://www.opengis.net/ogr"
+    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/StyledLayerDescriptor.xsd">
+   <NamedLayer>
+      <Name>Landuse</Name>
+      <UserStyle>
+         <Name>Styling a land use layer</Name>
+         <Abstract>Styling land use data with Style &amp; Symbology Casing and Centerline</Abstract>
+         <FeatureTypeStyle>
+            <Rule>
+               <Name>parking</Name>
+               <Title>parking</Title>
+               <LineSymbolizer>
+                  <Stroke>
+                     <CssParameter name="stroke">#000000</CssParameter>
+                     <CssParameter name="stroke-width">1</CssParameter>
+                  </Stroke>
+                  <Stroke>
+                     <CssParameter name="stroke">#FFFFFF</CssParameter>
+                     <CssParameter name="stroke-width">3</CssParameter>
+                  </Stroke>
+               </LineSymbolizer>
+            </Rule>
+         </FeatureTypeStyle>
+      </UserStyle>
+   </NamedLayer>
+</StyledLayerDescriptor>
+----
+====
+
+=== Requirements Class "Hatch fills"
+
+.Mapping of the "Hatch fills" requirements class to SLD/SE constructs
+[width="90%",options="header"]
+|===
+| Construct                    | SE Equivalent
+| HatchStyle                   | `<GraphicFill>` with `<Graphic>` & `<Mark>` and CssParameter such as stroke, stroke-width etc
+|===
+
+.SLD Example encoding style using "Hatch fills" requirements class
+====
+[source,sld]
+----
+?xml version="1.0" encoding="UTF-8"?>
+<StyledLayerDescriptor
+xmlns="http://www.opengis.net/sld"
+xmlns:sld="http://www.opengis.net/sld"
+xmlns:ogc="http://www.opengis.net/ogc"
+xmlns:gml="http://www.opengis.net/gml"
+xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0.0">
+  <NamedLayer>
+    <UserStyle>
+      <Name>tl 2010 08013 arealm</Name>
+      <Title/>
+      <FeatureTypeStyle>
+        <Rule>
+          <Name>cemeteries</Name>
+          <ogc:Filter>
+            <ogc:PropertyIsEqualTo>
+              <ogc:PropertyName>MTFCC</ogc:PropertyName>
+              <ogc:Literal>K2582</ogc:Literal>
+            </ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <MaxScaleDenominator>500000.0</MaxScaleDenominator>
+          <sld:PolygonSymbolizer>
+            <Fill>
+              <GraphicFill>
+                <Graphic>
+                  <Mark>
+                    <WellKnownName>shape://times</WellKnownName>
+                    <Fill/>
+                    <Stroke>
+                      <CssParameter name="stroke">#ADD8E6</CssParameter>
+                      <CssParameter name="stroke-width">1.0</CssParameter>
+                    </Stroke>
+                  </Mark>
+                </Graphic>
+              </GraphicFill>
+            </Fill>
+          </sld:PolygonSymbolizer>
+        </Rule>
+      </FeatureTypeStyle>
+    </UserStyle>
+  </NamedLayer>
+</StyledLayerDescriptor>
+----
+====
+
+=== Requirements Class "Stipple fills"
+
+.Mapping of the "Stipple fills" requirements class to SLD/SE constructs
+[width="90%",options="header"]
+|===
+| Construct                    | SE Equivalent
+| StippleStyle                 | `<GraphicFill>` with `<Graphic>` & `<Mark>` and CssParameter such as stroke, stroke-width etc
+|===
+
+.SLD Example encoding style using "Stipple fills" requirements class
+====
+[source,sld]
+----
+?xml version="1.0" encoding="UTF-8"?>
+<StyledLayerDescriptor
+xmlns="http://www.opengis.net/sld"
+xmlns:sld="http://www.opengis.net/sld"
+xmlns:ogc="http://www.opengis.net/ogc"
+xmlns:gml="http://www.opengis.net/gml"
+xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0.0">
+  <NamedLayer>
+    <UserStyle>
+      <Name>tl 2010 08013 arealm</Name>
+      <Title/>
+      <FeatureTypeStyle>
+        <Rule>
+          <Name>cemeteries</Name>
+          <ogc:Filter>
+            <ogc:PropertyIsEqualTo>
+              <ogc:PropertyName>MTFCC</ogc:PropertyName>
+              <ogc:Literal>K2582</ogc:Literal>
+            </ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <MaxScaleDenominator>500000.0</MaxScaleDenominator>
+          <sld:PolygonSymbolizer>
+            <Fill>
+              <GraphicFill>
+                <Graphic>
+                  <sld:ExternalGraphic>
+                    <sld:OnlineResource
+                    xlink:type="simple"
+                    xlink:href="./img/landmarks/area/grave_yard.png" />
+                    <sld:Format>image/png</sld:Format>
+                  </sld:ExternalGraphic>
+                </Graphic>
+              </GraphicFill>
+            </Fill>
+          </sld:PolygonSymbolizer>
+        </Rule>
+      </FeatureTypeStyle>
+    </UserStyle>
+  </NamedLayer>
+</StyledLayerDescriptor>
+----
+====
+
+// === Requirements Class "Symbolizer Parameter Value Expressions"
+// Unnecessary, as the examples are already provided in the "Parameter Values" requirements class.
+
+// === Requirements Class "Any right-hand operands"
+// Unnecessary, as the examples are already provided in the "Core" requirements class.
+
+=== Requirements Class "Conditional Expressions"
+
+.Mapping of the "Conditional Expressions" requirements class to SLD/SE constructs
+[width="90%",options="header"]
+|===
+| Construct                    | SLD Equivalent
+| condition                    | `<ogc:Function>`
+| thenExp                      | `<ogc:Function>`
+| elseExp                      | `<ogc:Function>`
+|===
+
+.SLD Example encoding style using "Conditional Expressions" requirements class
+====
+[source,sld]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<StyledLayerDescriptor version="1.1.0" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:ogr="http://www.opengis.net/ogr"
+    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/StyledLayerDescriptor.xsd">
+   <NamedLayer>
+      <Name>Landuse</Name>
+      <UserStyle>
+         <Name>Styling a land use layer</Name>
+         <Abstract>Styling land use data with Style &amp; Symbology Conditional Expressions</Abstract>
+         <FeatureTypeStyle>
+            <Rule>
+               <Name>parking</Name>
+               <Title>parking</Title>
+               <PolygonSymbolizer>
+                  <Fill>
+                     <CssParameter name="fill">
+                        <ogc:Function name="if_then_else">
+                           <ogc:Function name="PropertyIsEqualTo">
+                              <ogc:PropertyName>landuse</ogc:PropertyName>
+                              <ogc:Literal>parking</ogc:Literal>
                            </ogc:Function>
-                        </sld:SourceChannelName>
-                     </sld:GrayChannel>
-                  <sld:ChannelSelection>
-                  <sld:ColorMap type="intervals" extended="false" >
-                     <sld:ColorMapEntry color="#8B4513" quantity="-1.0" label="saddleBrown"/>
-                     <sld:ColorMapEntry color="#CD853F" quantity="0.0" label="peru"/>
-                     <sld:ColorMapEntry color="#DAA520" quantity="0.2" label="goldenrod"/>
-                     <sld:ColorMapEntry color="#556B2F" quantity="0.5" label="olive"/>
-                     <sld:ColorMapEntry color="#9ACD32" quantity="0.6" label="yellowGreen"/>
-                     <sld:ColorMapEntry color="#ADFF2F" quantity="0.8" label="greenYellow"/>
-                     <sld:ColorMapEntry color="#00FF00" quantity="1.0" label="lime"/>
-                  </sld:ColorMap>
-               </sld:RasterSymbolizer>
-            </sld:Rule>
-         </sld:FeatureTypeStyle>
-      </sld:UserStyle>
-   </sld:NamedLayer>
+                           <ogc:Literal>#FF0000</ogc:Literal>
+                           <ogc:Literal>#00FF00</ogc:Literal>
+                        </ogc:Function>
+                     </CssParameter>
+                     <CssParameter name="fill-opacity">0.5</CssParameter>
+                  </Fill>
+               </PolygonSymbolizer>
+            </Rule>
+         </FeatureTypeStyle>
+      </UserStyle>
+   </NamedLayer>
+</StyledLayerDescriptor>
+----
+====
+
+=== Requirements Class "Variables"
+
+.Mapping of the "Variables" requirements class to SLD/SE constructs
+[width="90%",options="header"]
+|===
+| Construct                    | SE Equivalent
+| VariableExpression           | `<ogc:PropertyName>`
+|===
+
+.SLD Example encoding style using "Variables" requirements class
+====
+[source,sld]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<StyledLayerDescriptor version="1.1.0" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:ogr="http://www.opengis.net/ogr"
+    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/StyledLayerDescriptor.xsd">
+   <NamedLayer>
+      <Name>Landuse</Name>
+      <UserStyle>
+         <Name>Styling a land use layer</Name>
+         <Abstract>Styling land use data with Style &amp; Symbology Variables</Abstract>
+         <FeatureTypeStyle>
+            <Rule>
+               <Name>parking</Name>
+               <Title>parking</Title>
+               <PolygonSymbolizer>
+                  <Fill>
+                     <CssParameter name="fill">
+                        <ogc:PropertyName>landuse</ogc:PropertyName>
+                     </CssParameter>
+                     <CssParameter name="fill-opacity">0.5</CssParameter>
+                  </Fill>
+               </PolygonSymbolizer>
+            </Rule>
+         </FeatureTypeStyle>
+      </UserStyle>
+   </NamedLayer>
+</StyledLayerDescriptor>
+----
+====
+
+=== Requirements Class "Arithmetic Operators"
+
+.Mapping of the "Arithmetic Operators" requirements class to SLD/SE constructs
+[width="90%",options="header"]
+|===
+| Construct                    | SE Equivalent
+| ArithmeticOperator           | `<ogc:Function>`
+| add                          | `<ogc:Function>`
+| sub                          | `<ogc:Function>`
+| mul                          | `<ogc:Function>`
+| div                          | `<ogc:Function>`
+| intDiv                       | N/A
+| mod                          | N/A
+| pow                          | N/A
+|===
+
+.SLD Example encoding style using "Arithmetic Operators" requirements class
+====
+[source,sld]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<StyledLayerDescriptor version="1.1.0" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:ogr="http://www.opengis.net/ogr"
+    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/StyledLayerDescriptor.xsd">
+   <NamedLayer>
+      <Name>Landuse</Name>
+      <UserStyle>
+         <Name>Styling a land use layer</Name>
+         <Abstract>Styling land use data with Style &amp; Symbology Arithmetic Operators</Abstract>
+         <FeatureTypeStyle>
+            <Rule>
+               <Name>parking</Name>
+               <Title>parking</Title>
+               <PolygonSymbolizer>
+                  <Fill>
+                     <CssParameter name="fill">
+                        <ogc:Function name="add">
+                           <ogc:PropertyName>landuse</ogc:PropertyName>
+                           <ogc:Literal>parking</ogc:Literal>
+                        </ogc:Function>
+                     </CssParameter>
+                     <CssParameter name="fill-opacity">0.5</CssParameter>
+                  </Fill>
+               </PolygonSymbolizer>
+            </Rule>
+         </FeatureTypeStyle>
+      </UserStyle>
+   </NamedLayer>
+</StyledLayerDescriptor>
+----
+====
+
+=== Requirements Class "Text Relation Operators"
+
+.Mapping of the "Text Relation Operators" requirements class to SLD/SE constructs
+[width="90%",options="header"]
+|===
+| Construct                     | SE Equivalent
+| TextRelationOperator          | `<ogc:Function>`
+| like                          | `<ogc:Function>`
+| notLike                       | `<ogc:Function>`
+| contains                      | `<ogc:Function>`
+| startsWith                    | `<ogc:Function>`
+| endsWith                      | `<ogc:Function>`
+| notContains                   | `<ogc:Function>`
+| notStartsWith                 | `<ogc:Function>`
+| notEndsWith                   | `<ogc:Function>`
+| like                          | `<ogc:Function>`
+| notLike                       | `<ogc:Function>`
+| contains                      | `<ogc:Function>`
+| startsWith                    | `<ogc:Function>`
+| endsWith                      | `<ogc:Function>`
+| notContains                   | `<ogc:Function>`
+| notStartsWith                 | `<ogc:Function>`
+| notEndsWith                   | `<ogc:Function>`
+|===
+
+.SLD Example encoding style using "Text Relation Operators" requirements class
+====
+[source,sld]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<StyledLayerDescriptor version="1.1.0" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:ogr="http://www.opengis.net/ogr"
+    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/StyledLayerDescriptor.xsd">
+   <NamedLayer>
+      <Name>Landuse</Name>
+      <UserStyle>
+         <Name>Styling a land use layer</Name>
+         <Abstract>Styling land use data with Style &amp; Symbology Text Relation Operators</Abstract>
+         <FeatureTypeStyle>
+            <Rule>
+               <Name>parking</Name>
+               <Title>parking</Title>
+               <PolygonSymbolizer>
+                  <Fill>
+                     <CssParameter name="fill">
+                        <ogc:Function name="like">
+                           <ogc:PropertyName>landuse</ogc:PropertyName>
+                           <ogc:Literal>parking</ogc:Literal>
+                        </ogc:Function>
+                     </CssParameter>
+                     <CssParameter name="fill-opacity">0.5</CssParameter>
+                  </Fill>
+               </PolygonSymbolizer>
+            </Rule>
+         </FeatureTypeStyle>
+      </UserStyle>
+   </NamedLayer>
+</StyledLayerDescriptor>
+----
+====
+
+=== Requirements Class "Function Expressions"
+
+.Mapping of the "Function Expressions" requirements class to SLD/SE constructs
+[width="90%",options="header"]
+|===
+| Construct                    | SE Equivalent
+| FunctionCallExpression       | `<ogc:Function>`
+| Function                     | `<ogc:Function>`
+| uri                          | `<ogc:Function>`
+|===
+
+.SLD Example encoding style using "Function Expressions" requirements class
+====
+[source,sld]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<StyledLayerDescriptor version="1.1.0" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:ogr="http://www.opengis.net/ogr"
+    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/StyledLayerDescriptor.xsd">
+   <NamedLayer>
+      <Name>Landuse</Name>
+      <UserStyle>
+         <Name>Styling a land use layer</Name>
+         <Abstract>Styling land use data with Style &amp; Symbology Function Expressions</Abstract>
+         <FeatureTypeStyle>
+            <Rule>
+               <Name>parking</Name>
+               <Title>parking</Title>
+               <PolygonSymbolizer>
+                  <Fill>
+                     <CssParameter name="fill">
+                        <ogc:Function name="uri">
+                           <ogc:Literal>http://www.opengis.net/ogc</ogc:Literal>
+                        </ogc:Function>
+                     </CssParameter>
+                     <CssParameter name="fill-opacity">0.5</CssParameter>
+                  </Fill>
+               </PolygonSymbolizer>
+            </Rule>
+         </FeatureTypeStyle>
+      </UserStyle>
+   </NamedLayer>
+</StyledLayerDescriptor>
+----
+====
+
+=== Requirements Class "Math Functions"
+
+.Mapping of the "Math Functions" requirements class to SLD/SE constructs
+[width="90%",options="header"]
+|===
+| Construct                    | SE Equivalent
+| MathFunctions                | `<ogc:Function>`
+| abs                          | N/A
+| acos                         | N/A
+| asin                         | N/A
+| atan                         | N/A
+| atan2                        | N/A
+| ceil                         | N/A
+| cos                          | N/A
+| cosh                         | N/A
+| exp                          | N/A
+| floor                        | N/A
+| log                          | N/A
+| log10                        | N/A
+| max                          | N/A
+| min                          | N/A
+| pow                          | N/A
+| random                       | N/A
+| rint                         | N/A
+| round                        | N/A
+| sin                          | N/A
+| sinh                         | N/A
+| sqrt                         | N/A
+| tan                          | N/A
+| tanh                         | N/A
+|===
+
+.SLD Example encoding style using "Math Functions" requirements class
+====
+[source,sld]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<StyledLayerDescriptor version="1.1.0" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:ogr="http://www.opengis.net/ogr"
+    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/StyledLayerDescriptor.xsd">
+   <NamedLayer>
+      <Name>Landuse</Name>
+      <UserStyle>
+         <Name>Styling a land use layer</Name>
+         <Abstract>Styling land use data with Style &amp; Symbology Math Functions</Abstract>
+         <FeatureTypeStyle>
+            <Rule>
+               <Name>parking</Name>
+               <Title>parking</Title>
+               <PolygonSymbolizer>
+                  <Fill>
+                     <CssParameter name="fill">
+                        <ogc:Function name="round">
+                           <ogc:PropertyName>surface</ogc:PropertyName>
+                        </ogc:Function>
+                     </CssParameter>
+                     <CssParameter name="fill-opacity">0.5</CssParameter>
+                  </Fill>
+               </PolygonSymbolizer>
+            </Rule>
+         </FeatureTypeStyle>
+      </UserStyle>
+   </NamedLayer>
+</StyledLayerDescriptor>
+----
+====
+
+=== Requirements Class "Array Relation Functions"
+
+.Mapping of the "Array Relation Functions" requirements class to SLD/SE constructs
+[width="90%",options="header"]
+|===
+| Construct                    | SE Equivalent
+| ArrayRelationFunctions       | `<ogc:Function>`
+| a_containedBy                | `<ogc:Function>`
+| a_contains                   | `<ogc:Function>`
+| a_equals                     | `<ogc:Function>`
+| a_overlaps                   | `<ogc:Function>`
+|===
+
+.SLD Example encoding style using "Array Relation Functions" requirements class
+====
+[source,sld]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<StyledLayerDescriptor version="1.1.0" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:ogr="http://www.opengis.net/ogr"
+    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/StyledLayerDescriptor.xsd">
+   <NamedLayer>
+      <Name>Landuse</Name>
+      <UserStyle>
+         <Name>Styling a land use layer</Name>
+         <Abstract>Styling land use data with Style &amp; Symbology Array Relation Functions</Abstract>
+         <FeatureTypeStyle>
+            <Rule>
+               <Name>parking</Name>
+               <Title>parking</Title>
+               <PolygonSymbolizer>
+                  <Fill>
+                     <CssParameter name="fill">
+                        <ogc:Function name="a_containedBy">
+                           <ogc:PropertyName>landuse</ogc:PropertyName>
+                           <ogc:Literal>parking</ogc:Literal>
+                        </ogc:Function>
+                     </CssParameter>
+                     <CssParameter name="fill-opacity">0.5</CssParameter>
+                  </Fill>
+               </PolygonSymbolizer>
+            </Rule>
+         </FeatureTypeStyle>
+      </UserStyle>
+   </NamedLayer>
+</StyledLayerDescriptor>
+----
+====
+
+=== Requirements Class "Text Manipulation Functions"
+
+.Mapping of the "Text Manipulation Functions" requirements class to SLD/SE constructs
+[width="90%",options="header"]
+|===
+| Construct                    | SE Equivalent
+| TextManipulationFunctions    | `<ogc:Function>`
+| caseInsensitize              | `<ogc:Function>`
+| accentInsensitize            | `<ogc:Function>`
+| lowerCase                    | `<ogc:Function>`
+| upperCase                    | `<ogc:Function>`
+| concatenate                  | `<ogc:Function>`
+| substitute                   | `<ogc:Function>`
+| format                       | `<ogc:Function>`
+|===
+
+.SLD Example encoding style using "Text Manipulation Functions" requirements class
+====
+[source,sld]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<StyledLayerDescriptor version="1.1.0" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:ogr="http://www.opengis.net/ogr"
+    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/StyledLayerDescriptor.xsd">
+   <NamedLayer>
+      <Name>Landuse</Name>
+      <UserStyle>
+         <Name>Styling a land use layer</Name>
+         <Abstract>Styling land use data with Style &amp; Symbology Text Manipulation Functions</Abstract>
+         <FeatureTypeStyle>
+            <Rule>
+               <Name>parking</Name>
+               <Title>parking</Title>
+               <TextSymbolizer>
+                  <Label>
+                     <ogc:Function name="strCapitalize">
+                        <ogc:PropertyName>landuse</ogc:PropertyName>
+                     </ogc:Function>
+                  </Label>
+               </TextSymbolizer>
+            </Rule>
+         </FeatureTypeStyle>
+      </UserStyle>
+   </NamedLayer>
 </StyledLayerDescriptor>
 ----
 ====
