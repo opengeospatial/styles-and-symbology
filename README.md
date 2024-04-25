@@ -75,6 +75,7 @@ The following requirements classes are planned for the next parts of the standar
 - shape outlines,
 - vector graphic hierarchy, including full 2D transforms,
 - 3D model graphics and 3D transforms,
+- extrusion of vector features (with min and max height),
 - image outlines
 
 ## [Part 3](https://github.com/opengeospatial/styles-and-symbology/tree/main/3-geometry) Requirements classes
