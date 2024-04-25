@@ -51,8 +51,12 @@ _The current **published** version of OGC Symbology Conceptual Model: Core Part 
 
 ### Encodings
 
-- [JSON encoding](https://docs.ogc.org/DRAFTS/18-067r4.html) that can be readily parsed by a generic JSON parser,
-- [Cascading Cartographic Symbology Style Sheets](https://docs.ogc.org/DRAFTS/18-067r4.html), a more expressive encoding inspired from Web CSS and other cartographic CSS-like (e.g., GeoCSS, CartoCSS, MapCSS, GNOSIS CMSS) which is better suited to hand-edit styles.
+- [CartoSym-JSON](https://docs.ogc.org/DRAFTS/18-067r4.html) which can be readily parsed by a generic JSON parser.
+CartoSym-JSON inherits and extends [CQL2-JSON](https://docs.ogc.org/DRAFTS/21-065r1.html#cql2-json) for expressions used in selectors and parameter values.
+See [example style sheet](https://github.com/opengeospatial/styles-and-symbology/blob/main/1-core/examples/2-vector-polygon.cs.json) and [JSON Schema](https://github.com/opengeospatial/styles-and-symbology/blob/main/1-core/schemas/CartoSym-JSON.schema.json).
+- [CartoSym-CSS](https://docs.ogc.org/DRAFTS/18-067r4.html), a more expressive encoding inspired from Web CSS and other cartographic CSS-like styling languages (e.g., GeoCSS, CartoCSS, MapCSS, GNOSIS CMSS) which is better suited to hand-edit styles.
+CartoSym-CSS inherits and extends [CQL2-Text](https://docs.ogc.org/DRAFTS/21-065r1.html#cql2-text) for expressions used in selectors and parameter values.
+See [example style sheets](https://github.com/opengeospatial/styles-and-symbology/tree/main/1-core/examples) and ANTLR 4 BNF grammars for the [lexer](https://github.com/opengeospatial/styles-and-symbology/blob/main/1-core/schemas/CartoSym-CSS-Lexer.g4) and [parser](https://github.com/opengeospatial/styles-and-symbology/blob/main/1-core/schemas/CartoSym-CSS-Grammar.g4).
 
 The following requirements classes are planned for the next parts of the standard:
 
