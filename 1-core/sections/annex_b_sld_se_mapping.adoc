@@ -16,7 +16,8 @@ Standard.
 | Construct         | SE Equivalent
 | *Styling Rules*   | `<Rule>`
 | name              | `<Name>` inside `<Rule>`
-| symbolizer        | `<PointSymbolizer>`, `<LineSymbolizer>`, `<PolygonSymbolizer>`, `<TextSymbolizer>`, `<RasterSymbolizer>`
+| Symbolizer        | `<PointSymbolizer>`, `<LineSymbolizer>`, `<PolygonSymbolizer>`, `<TextSymbolizer>`, `<RasterSymbolizer>`
+| Symbolizer opacity | `<Opacity>` inside `<RasterSymbolizer>` (no global opacity for vector symbolizers)
 | Selector          | `<ogc:Filter>`
 | nestedRules       | `<ogc:ElseFilter>` provides limited support for one use case of nested rules 
 
@@ -49,8 +50,8 @@ Standard.
 | visualization.dateTime         | N/A
 | visualization.date             | N/A
 | visualization.timeOfDay        | N/A
-| visualization.pass             | 
-| feature.pass                   | 
+| visualization.pass             | Order of `<FeatureTypeStyles>` in a `<UserStyle>` (sortBy and sortByGroup vendor options in GeoServer for additional control)
+| feature.pass                   | Order of symbolizers in the `<Rule>`
 | dataLayer                      | N/A
 | dataLayer.identifier           | `<NamedLayer>` and `<Name>`
 | dataLayer.type                 | N/A
@@ -97,6 +98,8 @@ Standard.
 
 === Requirements Class "Parameter Values"
 
+Parameter Values are always supported everywhere in SLD/SE and you can assign any type of expression to any symbolizer properties.
+
 .SLD Example encoding style using "Parameter Values" requirements class
 ====
 [source,sld]
@@ -141,21 +144,24 @@ Standard.
 .Mapping of the "Basic Vector Features Styling" requirements class to SLD/SE constructs
 [width="90%",options="header"]
 |===
-| Construct                   | SE Equivalent
-| Text                        | `<TextSymbolizer>`
-| Font                        | <Font>` with `<SvgParameter name="font-family">`, `<SvgParameter name="font-size">`, `<SvgParameter name="font-style">`, `<SvgParameter name="font-weight">`
-| TextAlignment               | `<TextSymbolizer>`
-| HAlignment                  | `<TextSymbolizer>`
-| VAlignment                  | `<TextSymbolizer>`
+| Construct                   | SE Equivalent 
+| Text (inside Marker)        | `<WellKnownName>` pointing to a TrueType Font with a `<MarkIndex>` identifiying the character inside the font inside a `<Mark>` inside a `<Graphic>` in a `<PointSymbolizer>` (only for single characters text)
+| Font                        | `<Font>` with `<SvgParameter name="font-family">`, `<SvgParameter name="font-size">`, `<SvgParameter name="font-style">`, `<SvgParameter name="font-weight">`
+| TextAlignment               | `<AnchorPoint>` inside `<PointSymbolizer>`, or `<AnchorPoint>` inside `<PointPlacement>` inside `<LabelPlacement>` inside `<TextSymbolizer>`
 | Image                       | `<Graphic>`
-| Dot                         | `<PointSymbolizer>`
-| Marker                      | `<Graphic>`
-| GraphicalUnit               | N/A
+| Image hotSpot               | `<AnchorPoint>` inside `<PointSymbolizer>`, or `<AnchorPoint>` inside `<PointPlacement>` inside `<LabelPlacement>` inside `<TextSymbolizer>`
+| Dot                         | `<WellKnownName>` inside a `<Mark>` inside a `<Graphic>` inside a `<PointSymbolizer>`
+| Marker                      | `<PointSymbolizer>`
+| GraphicalUnit               | `uom` attribute of symbolizers
 | Stroke                      | `<Stroke>`
+| Stroke opacity              | `<SvgParameter name="stroke-opacity">` for SE 1.1.0, `<CssParameter name="stroke-opacity">` for SLD 1.0.0
+| Stroke color                | `<SvgParameter name="stroke">` for SE 1.1.0, `<CssParameter name="stroke">` for SLD 1.0.0
+| Stroke width                | `<SvgParameter name="stroke-width">` for SE 1.1.0, `<CssParameter name="stroke-width">` for SLD 1.0.0
 | Fill                        | `<Fill>`
-| Color                       | `<CssParameter>`
+| Fill opacity                | `<SvgParameter name="fill-opacity">` for SE 1.1.0, `<CssParameter name="fill-opacity">` for SLD 1.0.0
+| Fill color                  | `<SvgParameter name="fill">` for SE 1.1.0, `<CssParameter name="fill">` for SLD 1.0.0
+| Color                       | `fill` or `stroke` with `<SvgParameter>` (e.g., `<SvgParameter name="fill">#000000</SvgParameter>`)
 |===
-
 
 .SLD Example encoding style using "Basic Vector Features Styling" requirements class
 ====
@@ -200,19 +206,19 @@ Standard.
 [width="90%",options="header"]
 |===
 | Construct                    | SE Equivalent
-| ColorChannels                | `<ChannelSelection>` with `<RedChannel>`, `<GreenChannel>`, `<BlueChannel>` or `<GrayChannel>`
+| ColorChannels                | `<ChannelSelection>` with `<RedChannel>`, `<GreenChannel>` or `<BlueChannel>` for RasterSymbolizer
 | AlphaChannel                 | N/A
-| SingleChannel                | `<ChannelSelection>` with `<RedChannel>`, `<GreenChannel>`, `<BlueChannel>` or `<GrayChannel>` 
+| SingleChannel                | `<ChannelSelection>` with `<GrayChannel>` for RasterSymbolizer
 | ColorMap                     | `<ColorMap>`
-| OpacityMap                   | `<Opacity>`
-| ValueColor                   | `<ColorMapEntry>`
+| OpacityMap                   | N/A
+| Color                        | `<Value>` inside `<ColorMap>`
+| ValueColor                   | `<Value>` and `<Threshold>` inside `<Categorize>` inside `<ColorMap>` for SE 1.1.0, `<ColorMapEntry>` for SLD 1.0.0
 | ValueOpacity                 | `<ColorMapEntry>`
 
 |*Hill Shading*                |
-| Construct                    | SE Equivalent
-| AzimuthElevation             | `<ogc:Function>` with <ogc:PropertyName> and `<ogc:Literal>`
-| HillShading                  | `<ogc:Function>` with <ogc:PropertyName> and `<ogc:Literal>`
-| Symbolizer                   | `<RasterSymbolizer>`
+| AzimuthElevation             | N/A
+| HillShading                  | `<ShadedRelief>`
+| HillShading factor           | `<ReliefFactor>` in `<ShadedRelief>`
 
 |*Contrast Enhancement*        |
 | contrastEnhancement          | `<ContrastEnhancement>`
@@ -263,9 +269,10 @@ Standard.
 [width="90%",options="header"]
 |===
 | Construct                    | SLD Equivalent
-| Label                        | `<TextSymbolizer>` with `<Label>`
+| Text (inside Label)          | `<Label>` inside `<TextSymbolizer>`
+| Label                        | `<Label>` inside `<TextSymbolizer>` (no support for image or shape labels in SLD 1.0.0)
 | LabelPlacement               | `<LabelPlacement>`
-| ImageOutline                 | `<Graphic>`
+| ImageOutline                 | N/A
 | Font                         | `<Font>` with `<SvgParameter name="font-family">`, `<SvgParameter name="font-size">`, `<SvgParameter name="font-style">`, `<SvgParameter name="font-weight">`
 | FontOutline                  | `<Halo>`
 |===
@@ -326,8 +333,8 @@ Standard.
 [width="90%",options="header"]
 |===
 | Construct                    | SE Equivalent
-| dashPattern                  | GraphicStroke with GraphicStrokeType and Graphic
-| dashOffset                   | `<SvgParameter name="stroke-dashoffset">` with `<ogc:Literal>`
+| dashPattern                  | `<CssParameter name="stroke-dasharray">
+| dashOffset                   | `<CssParameter name="stroke-dashoffset">`
 |===
 
 .SLD Example encoding style using "Dashes" requirements class
@@ -369,8 +376,8 @@ Standard.
 [width="90%",options="header"]
 |===
 | Construct                    | SE Equivalent
-| casing                       | `<Stroke>`
-| center                       | `<Stroke>`
+| casing                       | multiple `<FeatureTypeStyle>` with different stroke widths
+| center                       | multiple `<FeatureTypeStyle>` with different stroke widths
 |===
 
 .SLD Example encoding style using "Casing and Centerline" requirements class
@@ -414,7 +421,7 @@ Standard.
 [width="90%",options="header"]
 |===
 | Construct                    | SE Equivalent
-| HatchStyle                   | `<GraphicFill>` with `<Graphic>` & `<Mark>` and CssParameter such as stroke, stroke-width etc
+| HatchStyle                   | Extended (GeoServer) `<WellknownName>`  prefixed by shape:// (vertline, horline, slash, backslash, plus, times) inside `<Mark>` inside `<Graphic>` inside `<GraphicFill>` and CssParameter such as stroke, stroke-width etc
 |===
 
 .SLD Example encoding style using "Hatch fills" requirements class
@@ -472,7 +479,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0.0">
 [width="90%",options="header"]
 |===
 | Construct                    | SE Equivalent
-| StippleStyle                 | `<GraphicFill>` with `<Graphic>` & `<Mark>` and CssParameter such as stroke, stroke-width etc
+| StippleStyle                 | Extended (GeoServer) `<WellknownName>`  shape://dot inside `<Mark>` inside `<Graphic>` inside `<GraphicFill>` and CssParameter such as stroke, stroke-width etc
 |===
 
 .SLD Example encoding style using "Stipple fills" requirements class
@@ -522,9 +529,6 @@ xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0.0">
 ----
 ====
 
-// === Requirements Class "Symbolizer Parameter Value Expressions"
-// Unnecessary, as the examples are already provided in the "Parameter Values" requirements class.
-
 // === Requirements Class "Any right-hand operands"
 // Unnecessary, as the examples are already provided in the "Core" requirements class.
 
@@ -533,10 +537,8 @@ xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0.0">
 .Mapping of the "Conditional Expressions" requirements class to SLD/SE constructs
 [width="90%",options="header"]
 |===
-| Construct                    | SLD Equivalent
-| condition                    | `<ogc:Function>`
-| thenExp                      | `<ogc:Function>`
-| elseExp                      | `<ogc:Function>`
+| Construct                    | SLD Equivalent 
+| conditional operator         | `if_then_else` `<ogc:Function>` in GeoServer
 |===
 
 .SLD Example encoding style using "Conditional Expressions" requirements class
@@ -585,41 +587,8 @@ xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0.0">
 [width="90%",options="header"]
 |===
 | Construct                    | SE Equivalent
-| VariableExpression           | `<ogc:PropertyName>`
+| VariableExpression           | N/A
 |===
-
-.SLD Example encoding style using "Variables" requirements class
-====
-[source,sld]
-----
-<?xml version="1.0" encoding="UTF-8"?>
-<StyledLayerDescriptor version="1.1.0" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:ogr="http://www.opengis.net/ogr"
-    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/StyledLayerDescriptor.xsd">
-   <NamedLayer>
-      <Name>Landuse</Name>
-      <UserStyle>
-         <Name>Styling a land use layer</Name>
-         <Abstract>Styling land use data with Style &amp; Symbology Variables</Abstract>
-         <FeatureTypeStyle>
-            <Rule>
-               <Name>parking</Name>
-               <Title>parking</Title>
-               <PolygonSymbolizer>
-                  <Fill>
-                     <CssParameter name="fill">
-                        <ogc:PropertyName>landuse</ogc:PropertyName>
-                     </CssParameter>
-                     <CssParameter name="fill-opacity">0.5</CssParameter>
-                  </Fill>
-               </PolygonSymbolizer>
-            </Rule>
-         </FeatureTypeStyle>
-      </UserStyle>
-   </NamedLayer>
-</StyledLayerDescriptor>
-----
-====
 
 === Requirements Class "Arithmetic Operators"
 
@@ -627,14 +596,14 @@ xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0.0">
 [width="90%",options="header"]
 |===
 | Construct                    | SE Equivalent
-| ArithmeticOperator           | `<ogc:Function>`
-| add                          | `<ogc:Function>`
-| sub                          | `<ogc:Function>`
-| mul                          | `<ogc:Function>`
-| div                          | `<ogc:Function>`
-| intDiv                       | N/A
-| mod                          | N/A
-| pow                          | N/A
+| **ArithmeticOperator**       | 
+| add                          | `<ogc:Add>`
+| sub                          | `<ogc:Sub>`
+| mul                          | `<ogc:Mul>`
+| div                          | `<ogc:Div>`
+| intDiv                       | `<ogc:Function>`
+| mod                          | `<ogc:Function>`
+| pow                          | `<ogc:Function>`
 |===
 
 .SLD Example encoding style using "Arithmetic Operators" requirements class
@@ -679,7 +648,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0.0">
 [width="90%",options="header"]
 |===
 | Construct                     | SE Equivalent
-| TextRelationOperator          | `<ogc:Function>`
+| **TextRelationOperator**      | 
 | like                          | `<ogc:Function>`
 | notLike                       | `<ogc:Function>`
 | contains                      | `<ogc:Function>`
