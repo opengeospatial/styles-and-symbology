@@ -14,32 +14,46 @@ Standard.
 [width="90%",options="header"]
 |===
 | Construct         | SE Equivalent
-| *Styling Rules*   | 
-| name              | `<UserStyle>` with <Name>
-| selector          | `<Rule>` with `<ogc:Filter>`
+| *Styling Rules*   | `<Rule>`
+| name              | `<Name>` inside `<Rule>`
 | symbolizer        | `<PointSymbolizer>`, `<LineSymbolizer>`, `<PolygonSymbolizer>`, `<TextSymbolizer>`, `<RasterSymbolizer>`
-| Selector          | `ogc:Filter`, `ogc:Function`
-| nestedRules       | N/A
+| Selector          | `<ogc:Filter>`
+| nestedRules       | `<ogc:ElseFilter>` provides limited support for one use case of nested rules 
 
-| *Literal Expression* | 
-| LiteralExpression | Literal values (strings, numbers, booleans) within SLD expressions
-| TextLiteral       | `<ogc:Literal>`
-| BoolLiteral       | Boolean literals (`<ogc:Literal>` with value "true" or "false")
-| NullLiteral       | `<PropertyIsNull>`
-| IntegerLiteral    | `<ogc:Literal>` with integer value
-| RealLiteral       | Real (floating-point) literals (`<ogc:Literal>` with double value)
-| ArrayLiteral      | Array literals (constructed using `<ogc:Literal>` elements)
-| InstanceLiteral   | `<ogc:PropertyName>`
+| *Literal Expression* | `<ogc:Literal>`
+| TextLiteral       | text directly in `<ogc:Literal>`
+| BoolLiteral       | true or false in `<ogc:Literal>`
+| NullLiteral       | `<PropertyIsNull>` when testing for null values
+| IntegerLiteral    | integer value directly in `<ogc:Literal>`
+| RealLiteral       | double value inside `<ogc:Literal>`
+| ArrayLiteral      | N/A
+| InstanceLiteral   | N/A
 
 | *Expression*         | 
-| Expression           | `<ogc:Filter>`, `<ogc:Function>`
-| IdentifierExpression | `<ogc:PropertyName>`, `<ogc:Literal>`
-| InstanceExpression   | `<ogc:Literal>`, `<ogc:PropertyName>`
-| ArrayExpression      | `<ogc:Literal>` elements within `<ogc:Function>` or `<ogc:Filter>`
+| FunctionExpression   | `<ogc:Function>`
+| IdentifierExpression | `<ogc:PropertyName>` for feature properties, `<SourceChannelName>` for raster fields
+| InstanceExpression   | N/A
+| ArrayExpression      | N/A
 
 | *Core Logic and Relational Operators* | 
-| Operator          | Comparison operators (`<ogc:PropertyIsEqualTo>`, `<ogc:PropertyIsLessThan>`, etc.)
-| LogicOperator     | Logical operators (`<ogc:And>`, `<ogc:Or>`, `<ogc:Not>`)
+| Relational Operator  | Comparison operators (`<ogc:PropertyIsEqualTo>`, `<ogc:PropertyIsLessThan>`, etc.)
+| LogicOperator        | Logical operators (`<ogc:And>`, `<ogc:Or>`, `<ogc:Not>`)
+|===
+
+.Mapping of the "Sytem Identifiers Expressions" requirements class to SLD/SE constructs
+[width="90%",options="header"]
+|===
+| Construct                      | SE Equivalent
+| visualization                  | N/A
+| visualization.scaleDenominator | `<MaxScaleDenominator>`, `<MinScaleDenominator>`
+| visualization.dateTime         | N/A
+| visualization.date             | N/A
+| visualization.timeOfDay        | N/A
+| visualization.pass             | 
+| feature.pass                   | 
+| dataLayer                      | N/A
+| dataLayer.identifier           | `<NamedLayer>` and `<Name>`
+| dataLayer.type                 | N/A
 |===
 
 .SLD Example encoding style using "Core" requirements class
@@ -82,21 +96,6 @@ Standard.
 ====
 
 === Requirements Class "Parameter Values"
-
-.Mapping of the "Parameter Values" requirements class to SLD/SE constructs
-[width="90%",options="header"]
-|===
-| Construct                      | SE Equivalent
-| visualization                  | N/A
-| dataLayer                      | N/A
-| visualization.scaleDenominator | `<MaxScaleDenominator>`, `<MinScaleDenominator>`
-| visualization.dateTime         | `<ogc:PropertyName>` with datetime (timestamp) value  and `<ogc:Literal>`
-| visualization.date             | `<ogc:PropertyName>` with date value and `<ogc:Literal>`
-| visualization.timeOfDay        | `<ogc:PropertyName>` with time value and `<ogc:Literal>`
-| visualization.pass             | N/A (drawing order)
-| dataLayer.identifier           | `<NamedLayer>` and `<Name>`
-| dataLayer.type                 | N/A
-|===
 
 .SLD Example encoding style using "Parameter Values" requirements class
 ====
