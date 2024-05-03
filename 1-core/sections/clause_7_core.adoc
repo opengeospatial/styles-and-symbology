@@ -94,7 +94,7 @@ What actually needs i18n? Rule labels for legends? The choice between feature pr
 
 The selector (also sometimes called a _filter_), for the rule is defined as a predicate expression evaluating to either true or false.
 
-.Example showcasing a Style made of StylingRules using CCSSS encoding
+.Example showcasing a Style made of StylingRules using CSCSS encoding
 ====
 [source,cscss]
 ----
@@ -143,7 +143,7 @@ Separate requirements classes and later parts will extend this Symbolizer class 
 | zOrder     | Specify a rendering order    | int                  | 0..1
 |===
 
-.CCSSS Example showcasing the limited symbolization possible with this Core requirements class
+.CSCSS Example showcasing the limited symbolization possible with this Core requirements class
 ====
 [source,cscss]
 ----
@@ -337,7 +337,7 @@ TOCHECK: How to handle parent objects ? e.g.,  visualization, dataLayer, feature
 | visualization.pass               | Current visualization rendering pass    | int
 |===
 
-.CCSSS Example showcasing scale-dependent selector using system identifiers
+.CSCSS Example showcasing scale-dependent selector using system identifiers
 ====
 [source,cscss]
 ----
@@ -440,7 +440,7 @@ with different symbolizers before rendering the next feature.
 | end             | end of the interval                          | TimeInstant | 1
 |===
 
-.CCSSS Example showcasing visualization time-dependent selector using system identifiers
+.CSCSS Example showcasing visualization time-dependent selector using system identifiers
 ====
 [source,cscss]
 ----
@@ -465,7 +465,7 @@ Landuse
 | dataLayer.type                          | Data type of data layers                                 | enumeration: vector, coverage, ...
 |===
 
-.CCSSS Example showcasing selectors depending on layer identifiers and data type using system identifiers
+.CSCSS Example showcasing selectors depending on layer identifiers and data type using system identifiers
 ====
 [source,cscss]
 ----
@@ -480,7 +480,7 @@ Landuse
       opacity: 0.8;
    }
 
-   // In CCSSS, the <layerid> syntax is equivalent
+   // In CSCSS, the <layerid> syntax is equivalent
    // to [dataLayer.identifier = '<layerid>']
    Roads
    {
@@ -543,14 +543,14 @@ A similar literal class concept was originally defined in the OGC Filter Encodin
 
 The following types of literals are defined:
 
-* An integer literal represents a whole numeric value (CCSSS example: `123`)
-* A real literal represents a real number (integer, fractional or irrational number) (CCSSS example: `0.85`)
-* Text literals are Unicode character strings (CCSSS example: `'København'`)
-* A null literal represents an unset value (CCSSS example: `null`)
-* Enumeration value literals allow to refer by name to a set of pre-defined values associated with the context where they are used (CCSSS example: `vector`)
-* Boolean literals are a specialized type of enumeration literals which are either true or false (CCSSS example: `false`)
-* Array literals (see <<array-expressions,Array Expressions>>) (CCSSS example: `(1, 2, 3)`)
-* Instance literals (see <<instance-expressions,Instance Expressions>>) (CCSSS examples: `Color(20, 100, 80)` or `Color(r: 20, g: 100, b: 80)`)
+* An integer literal represents a whole numeric value (CSCSS example: `123`)
+* A real literal represents a real number (integer, fractional or irrational number) (CSCSS example: `0.85`)
+* Text literals are Unicode character strings (CSCSS example: `'København'`)
+* A null literal represents an unset value (CSCSS example: `null`)
+* Enumeration value literals allow to refer by name to a set of pre-defined values associated with the context where they are used (CSCSS example: `vector`)
+* Boolean literals are a specialized type of enumeration literals which are either true or false (CSCSS example: `false`)
+* Array literals (see <<array-expressions,Array Expressions>>) (CSCSS example: `(1, 2, 3)`)
+* Instance literals (see <<instance-expressions,Instance Expressions>>) (CSCSS examples: `Color(20, 100, 80)` or `Color(r: 20, g: 100, b: 80)`)
 
 ===== Operation Expressions
 
@@ -601,7 +601,7 @@ This requirements class defines the following Logical Operators :
 .Logical Operators
 [width="90%",options="header"]
 |===
-| Name                     | CCSSS Example   | Type   | Definition
+| Name                     | CSCSS Example   | Type   | Definition
 | not                      | `not`           | unary  | True if and only if the operand is false
 | and                      | `and`           | binary | True if and only if both operands are true
 | or                       | `or`            | binary | True if and only if either or both of the operands is true
@@ -612,7 +612,7 @@ This requirements class defines the following Relational Operators:
 .Relational Operators
 [width="90%",options="header"]
 |===
-| Name                     | CCSSS Example         |Type     | Definition
+| Name                     | CSCSS Example         |Type     | Definition
 | equal                    | `=`                   |binary   | The first operand is equal to the second one
 | notEqual                 | `<>`                  |binary   | The first operand is not equal to the second one
 | is (null)                | `is`                  |binary   | Only used with `null` literal for second operand (the first operand is null)
@@ -627,7 +627,7 @@ This requirements class defines the following Relational Operators:
 | notBetween               | `not between ... and` |ternary  | The first operand is not between the second and third operands (inclusively)
 |===
 
-.CCSSS Example showcasing the use of logical and relational operators in a selector
+.CSCSS Example showcasing the use of logical and relational operators in a selector
 ====
 [source,cscss]
 ----
@@ -649,7 +649,7 @@ Roads
 
 An array expressions defines zero, one, or more element expressions forming an ordered set.
 
-CCSSS example: `(123.0, viz.sd)`.
+CSCSS example: `(123.0, viz.sd)`.
 
 An _array literal_ is a special type of array expression whose elements are all literals.
 
@@ -659,7 +659,7 @@ An _array literal_ is a special type of array expression whose elements are all 
 An instance expressions instantiates an object of a class while optionally specifying values for member components.
 The default values for any member if not explicitly overridden can is specified by the class member definitions.
 
-CCSSS examples:
+CSCSS examples:
 
 * `DateTime(year: 2022, month: april, day: 6)`
 * `Color(r: 20, g: 100, b: 80)`)
@@ -672,7 +672,7 @@ An _instance literal_ is a special type of instance expression assigning only li
 A Symbolizer may either set an object property with a complete new instance, or specifically override a particular member of that object property.
 This capability is particularly useful when using nested StylingRules, where a nested rule can inherit the Symbolizer from the parent StylingRule.
 
-.CCSSS Example showcasing the use of logical and relational operators in a selector
+.CSCSS Example showcasing the use of logical and relational operators in a selector
 ====
 [source,cscss]
 ----
