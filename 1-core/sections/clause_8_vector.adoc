@@ -153,6 +153,7 @@ A Stroke object inherits from a base _StrokeStyling_ class, which is re-used in 
 |===
 | Name      | Definition                           | Data type and value   | Multiplicity
 | color     | Color of the stroke                  | Color                 | 0..1
+| opacity   | Opacity of the stroke                | float                 | 0..1
 | width     | Width of the stroke                  | float (uom-qualified) | 0..1
 |===
 
