@@ -21,7 +21,7 @@ LabelPlacement : minSpacing: float
 LabelPlacement : maxSpacing: float
 ....
 
-This requirements class adds support for labels that are placed using using a placement algorithm (and may not always be placed)
+This requirements class adds support for labels that are placed using a placement algorithm (and may not always be placed)
 drawn as a separate pass on top of styled vector features and coverages.
 Like Markers, Labels inherit from the MultiGraphic class and may contain multiple graphical elements.
 
