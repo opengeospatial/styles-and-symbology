@@ -746,6 +746,24 @@ The following default values are defined by this encoding.
 | color          | white
 |===
 
+==== Vendor Extensions
+
+This core requirements class specifies two ways to extend the model to custom vendor extensions. First, new Symbolizer properties can be defined. Second, System Identifiers can be extended with new identifiers.
+
+In both cases, the vendor extension needs to be prefixed with: `vendor.<vendor name>` followed by the custom property or identifier name.
+
+The datatype could be any of the existing types from the core model and standard extensions or new ones defined by the vendor.
+
+Consumers should ignore any vendor extensions they do not understand.
+
+If a custom Sytem Identifier is used in the Selector of a Rule, the entire Rule should be ignored if the System Identifier is not understood.
+
+If a custom property is used in the Parameter Value of a Symbolizer property, that property should be left set to the last Parameter Value that was understood.
+
+The same principle applies for requirements clases that are not understood, whether defined in this core standard or additional extensions.
+
+NOTE: For this reason, the same property might be assigned different Parameter Values in the same Rule to provide for a fallback mechanism.
+
 === Requirements
 
 include::../requirements/rc-core.adoc[]
