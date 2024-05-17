@@ -153,7 +153,7 @@ is declared by appending `-partial-concept` to the conformance URI.
 |<<rc-casing,Casing and Centerline>>                              |http://www.opengis.net/spec/symbology-1/2.0/conf/casing
 |<<rc-parametervalues,Parameter Values>>                          |http://www.opengis.net/spec/symbology-1/2.0/conf/parametervalues
 |<<rc-functions,Function Expressions>>                            |http://www.opengis.net/spec/symbology-1/2.0/conf/functions
-|<<rc-math,Math Functions>>                                       |http://www.opengis.net/spec/symbology-1/2.0/conf/rc-math
+|<<rc-math,Math Functions>>                                       |http://www.opengis.net/spec/symbology-1/2.0/conf/math
 |<<rc-arrayrelations,Array Relation Functions>>                   |http://www.opengis.net/spec/symbology-1/2.0/conf/arrayrelations
 |<<rc-textmanipulation,Text Manipulation Functions>>              |http://www.opengis.net/spec/symbology-1/2.0/conf/textmanipulation
 |<<rc-arithmetic,Arithmetic Operators>>                           |http://www.opengis.net/spec/symbology-1/2.0/conf/arithmetic
