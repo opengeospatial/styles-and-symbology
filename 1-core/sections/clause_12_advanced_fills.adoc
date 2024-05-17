@@ -46,7 +46,7 @@ This requirements class adds support for hatch fills. A hatch fill is a pattern 
 
 include::../requirements/rc-hatches.adoc[]
 
-[[rcstipples]]
+[[rc-stipples]]
 === Requirements Class "Stipple fills"
 ==== Overview
 

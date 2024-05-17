@@ -1,6 +1,6 @@
 == Requirements Classes for Additional expressions
 
-[[rc-parameterValues]]
+[[rc-parametervalues]]
 === Requirements Class "Symbolizer Parameter Value Expressions"
 ==== Overview
 
