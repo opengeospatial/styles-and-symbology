@@ -144,23 +144,23 @@ is declared by appending `-partial-concept` to the conformance URI.
 |<<rc-core,Core>>                                                 |http://www.opengis.net/spec/symbology-1/2.0/conf/core
 |<<rc-vector,Basic Vector Features Styling>>                      |http://www.opengis.net/spec/symbology-1/2.0/conf/vector
 |<<rc-coverage,Basic Coverage Styling>>                           |http://www.opengis.net/spec/symbology-1/2.0/conf/coverage
-|<<rc-labels,Basic Labeling>>                                     |http://www.opengis.net/spec/symbology-1/2.0/conf/labels
 |<<rc-hillshading,Hill Shading>>                                  |http://www.opengis.net/spec/symbology-1/2.0/conf/hillshading
+|<<rc-labels,Basic Labeling>>                                     |http://www.opengis.net/spec/symbology-1/2.0/conf/labels
 |<<rc-fontoutlines,Font Outlines>>                                |http://www.opengis.net/spec/symbology-1/2.0/conf/fontoutlines
-|<<rc-hatches,Hatch Fills>>                                       |http://www.opengis.net/spec/symbology-1/2.0/conf/hatches
-|<<rc-stipples, Stipple Fills>>                                   |http://www.opengis.net/spec/symbology-1/2.0/conf/stipples
 |<<rc-dashes,Dashed Strokes>>                                     |http://www.opengis.net/spec/symbology-1/2.0/conf/dashes
 |<<rc-casing,Casing and Centerline>>                              |http://www.opengis.net/spec/symbology-1/2.0/conf/casing
+|<<rc-hatches,Hatch Fills>>                                       |http://www.opengis.net/spec/symbology-1/2.0/conf/hatches
+|<<rc-stipples, Stipple Fills>>                                   |http://www.opengis.net/spec/symbology-1/2.0/conf/stipples
 |<<rc-parametervalues,Parameter Values>>                          |http://www.opengis.net/spec/symbology-1/2.0/conf/parametervalues
+|<<rc-righthand,Any right-hand operands>>                         |http://www.opengis.net/spec/symbology-1/2.0/conf/righthand
+|<<rc-conditional,Conditional Expressions>>                       |http://www.opengis.net/spec/symbology-1/2.0/conf/conditional
+|<<rc-variables,Variables>>                                       |http://www.opengis.net/spec/symbology-1/2.0/conf/variables
+|<<rc-arithmetic,Arithmetic Operators>>                           |http://www.opengis.net/spec/symbology-1/2.0/conf/arithmetic
+|<<rc-textrelation,Text Relation Operators>>                      |http://www.opengis.net/spec/symbology-1/2.0/conf/textrelation
 |<<rc-functions,Function Expressions>>                            |http://www.opengis.net/spec/symbology-1/2.0/conf/functions
 |<<rc-math,Math Functions>>                                       |http://www.opengis.net/spec/symbology-1/2.0/conf/math
 |<<rc-arrayrelations,Array Relation Functions>>                   |http://www.opengis.net/spec/symbology-1/2.0/conf/arrayrelations
 |<<rc-textmanipulation,Text Manipulation Functions>>              |http://www.opengis.net/spec/symbology-1/2.0/conf/textmanipulation
-|<<rc-arithmetic,Arithmetic Operators>>                           |http://www.opengis.net/spec/symbology-1/2.0/conf/arithmetic
-|<<rc-textrelation,Text Relation Operators>>                      |http://www.opengis.net/spec/symbology-1/2.0/conf/textrelation
-|<<rc-righthand,Any right-hand operands>>                         |http://www.opengis.net/spec/symbology-1/2.0/conf/righthand
-|<<rc-conditional,Conditional Expressions>>                       |http://www.opengis.net/spec/symbology-1/2.0/conf/conditional
-|<<rc-variables,Variables>>                                       |http://www.opengis.net/spec/symbology-1/2.0/conf/variables
 |<<rc-json,JSON Styles and Symbology>>                            |http://www.opengis.net/spec/symbology-1/2.0/conf/json
 |<<rc-cscss,Cartographic Symbology Cascading Style Sheets>>       |http://www.opengis.net/spec/symbology-1/2.0/conf/cscss
 |===
