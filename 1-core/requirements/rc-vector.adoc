@@ -155,10 +155,8 @@ part:: An Encoding SHALL support defining Fonts with a `face` property indicatin
 part:: A Renderer SHALL support drawing text using the fonts specified.
 ====
 
-
 ////
 Below are the old requirements from SymCore 1.0 for the Core conformance class.
 They will be likely replaced by being more specific and less generic, and not necessarily map one-to-one to the UML classes,
 and discuss both Encoding as well as Renderer target implementations.
-
 ////
