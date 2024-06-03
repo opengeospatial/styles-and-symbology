@@ -799,7 +799,21 @@
              "properties": {
                 "factor": { "$ref": "#/$defs/numericExpression" },
                 "sun": { "$ref": "#/$defs/azimuthElevation" },
-                "colorMap": { "$ref": "#/$defs/hsColorMap" },
+                "colorMap": {
+                  "allOf": [
+                   {"$ref": "#/$defs/colorMap"},
+                   {"items": [
+                     {"type": "array",
+                      "minItems": 2,
+                      "maxItems": 3,
+                      "prefixItems": [
+                         { "$ref": "#/$defs/zeroToOne" },
+                         { "$ref": "#/$defs/color" },
+                         { "type": "string" }
+                      ]
+                     }
+                   ]}]
+                },
                 "opacityMap": { "$ref": "#/$defs/hsOpacityMap" },
                 "alter": { "type": "boolean" }
              }
@@ -816,27 +830,6 @@
                 "elevation": { "$ref": "#/$defs/angle" },
                 "alter": { "type": "boolean" }
              }
-         }
-       ]
-    },
-    "hsColorMap":
-    {
-       "oneOf": [
-         { "$ref": "#/$defs/idOrFnExpression" },
-         {
-            "type": "array",
-            "items":
-            {
-               "type": "array",
-               "minItems": 2,
-               "maxItems": 3,
-               "prefixItems": [
-                  { "$ref": "#/$defs/zeroToOne" },
-                  { "$ref": "#/$defs/color" },
-                  { "type": "string" }
-               ]
-            },
-            "minItems": 1
          }
        ]
     },
