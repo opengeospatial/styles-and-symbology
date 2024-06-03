@@ -30,14 +30,14 @@
           }
         }
       },
-      "linestring": {
-        "title": "GeoJSON LineString",
+      "multipoint": {
+        "title": "GeoJSON MultiPoint",
         "type": "object",
         "required": [ "type", "coordinates" ],
         "properties": {
           "type": {
             "type": "string",
-            "enum": [ "LineString" ]
+            "enum": [ "MultiPoint" ]
           },
           "coordinates": {
             "type": "array",
@@ -58,46 +58,14 @@
           }
         }
       },
-      "polygon": {
-        "title": "GeoJSON Polygon",
+      "linestring": {
+        "title": "GeoJSON LineString",
         "type": "object",
         "required": [ "type", "coordinates" ],
         "properties": {
           "type": {
             "type": "string",
-            "enum": [ "Polygon" ]
-          },
-          "coordinates": {
-            "type": "array",
-            "items": {
-              "type": "array",
-              "minItems": 4,
-              "items": {
-                "type": "array",
-                "minItems": 2,
-                "items": {
-                  "type": "number"
-                }
-              }
-            }
-          },
-          "bbox": {
-            "type": "array",
-            "minItems": 4,
-            "items": {
-              "type": "number"
-            }
-          }
-        }
-     },
-      "multipoint": {
-        "title": "GeoJSON MultiPoint",
-        "type": "object",
-        "required": [ "type", "coordinates" ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [ "MultiPoint" ]
+            "enum": [ "LineString" ]
           },
           "coordinates": {
             "type": "array",
@@ -150,6 +118,66 @@
           }
         }
       },
+      "linearRing": {
+        "title": "GeoJSON LinearRing",
+        "type": "object",
+        "required": [ "type", "coordinates" ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [ "LinearRing" ]
+          },
+          "coordinates": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "minItems": 4,
+              "items": {
+                "type": "number"
+              }
+            }
+          },
+          "bbox": {
+            "type": "array",
+            "minItems": 4,
+            "items": {
+              "type": "number"
+            }
+          }
+        }
+      },
+      "polygon": {
+        "title": "GeoJSON Polygon",
+        "type": "object",
+        "required": [ "type", "coordinates" ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [ "Polygon" ]
+          },
+          "coordinates": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "minItems": 4,
+              "items": {
+                "type": "array",
+                "minItems": 2,
+                "items": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "bbox": {
+            "type": "array",
+            "minItems": 4,
+            "items": {
+              "type": "number"
+            }
+          }
+        }
+     },
       "multipolygon": {
         "title": "GeoJSON MultiPolygon",
         "type": "object",

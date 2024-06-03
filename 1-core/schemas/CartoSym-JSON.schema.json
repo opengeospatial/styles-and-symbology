@@ -282,7 +282,6 @@
          { "$ref": "#/$defs/image" },
          { "$ref": "#/$defs/shape" },
          { "$ref": "#/$defs/text" },
-         { "$ref": "#/$defs/model" },
          { "$ref": "#/$defs/multiGraphic" }
        ]
     },
@@ -300,20 +299,6 @@
                 "tint": { "$ref": "#/$defs/color" },
                 "blackTint": { "$ref": "#/$defs/color" },
                 "alphaThreshold": { "$ref": "#/$defs/zeroToOne" }
-             }
-         }
-      ]
-    },
-    "model": {
-      "allOf": [
-         { "$ref": "#/$defs/abstractGraphic" },
-         {
-             "type": "object",
-             "required": [ "type", "model" ],
-             "properties":
-             {
-                "type": { "type": "string", "enum": [ "Model" ] },
-                "model": { "$ref": "#/$defs/resource" }
              }
          }
       ]

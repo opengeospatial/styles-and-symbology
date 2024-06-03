@@ -78,6 +78,18 @@
           { "type": "string", "enum": [ "butt", "round", "square" ] }
         ]
      },
+     "patternStroke": {
+        "allOf": [
+           { "$ref":  "#/$defs/stroke" },
+           {
+              "properties": {
+                 "pattern": { "$ref": "#/$defs/graphic" },
+                 "patternGap": {"type": "number"},
+                 "patternInitialGap": {"type": "number"}
+              }
+           }
+        ]
+     },
      "abstractGraphic": {
       "allOf": [
          { "$ref":  "#/$defs/abstractGraphic" },
@@ -89,6 +101,20 @@
          }
       ]
      },
+     "model": {
+      "allOf": [
+         { "$ref": "#/$defs/abstractGraphic" },
+         {
+             "type": "object",
+             "required": [ "type", "model" ],
+             "properties":
+             {
+                "type": { "type": "string", "enum": [ "Model" ] },
+                "model": { "$ref": "#/$defs/resource" }
+             }
+         }
+      ]
+    },
      "transform2D": {
         "type": "object",
         "properties": {
@@ -107,6 +133,40 @@
             "translation": { "$ref": "#/$defs/unitPoint" }
          }
       },
+      "vector3D":{
+         "type": "object",
+         "properties": {
+             "x": { "$ref": "#/$defs/unitPoint" },
+             "y": { "$ref": "#/$defs/unitPoint" },
+             "z": { "$ref": "#/$defs/unitPoint" }
+          }
+      },
+      "floatVector3D":{
+         "type": "object",
+         "properties": {
+            "x": { "$ref": "#/$defs/unitPoint" },
+            "y": { "$ref": "#/$defs/unitPoint" },
+            "z": { "$ref": "#/$defs/unitPoint" }
+          }
+      },
+      "quaternion":{
+         "type": "object",
+         "properties": {
+            "x": { "type": "number" },
+            "y": { "type": "number" },
+            "z": { "type": "number" },
+            "w": { "type": "number" }
+         }
+      },
+      "extrusion": {
+         "type": "object",
+         "properties": {
+           "terrain-relative": { "type": "boolean" },
+           "height": { "type": "number" },
+           "base": { "type": "number" }
+         },
+         "required": ["terrain-relative", "height", "base"]
+       },
       "graphicInstance": {
           "allOf": [
              { "$ref": "#/$defs/abstractGraphic" },
@@ -126,6 +186,7 @@
             { "$ref": "#/$defs/abstractGraphic" },
             {
                "oneOf": [
+                  { "$ref": "#/$defs/model" },
                   { "$ref": "#/$defs/graphicInstance" }
                ]
             }
