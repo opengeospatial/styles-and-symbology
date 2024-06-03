@@ -1,6 +1,6 @@
 == Requirements Classes for Advanced strokes
 
-[[rc-joinscaps]]
+[[rc-joins-caps]]
 === Requirements Class "Joins and Caps"
 ==== Overview
 
@@ -57,7 +57,7 @@ This requirements class adds support for Strokes rendered with additional join a
 
 include::../requirements/rc-joins-caps.adoc[]
 
-[[rc-patternstrokes]]
+[[rc-pattern-strokes]]
 === Requirements Class "Pattern Strokes"
 ==== Overview
 

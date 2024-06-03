@@ -38,7 +38,7 @@ ArithmeticOperator : pow
 
 include::../requirements/rc-arithmetic.adoc[]
 
-[[rc-textrelation]]
+[[rc-text-relation]]
 === Requirements Class "Text Relation Operators"
 ==== Overview
 

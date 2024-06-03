@@ -56,8 +56,8 @@ is declared by appending `-partial-concept` to the conformance URI.
 [cols="30,70",options="header"]
 |===
 | Conformance class                                               |URI
-|<<rc-geometry-symbolizer,Symbolizer Geometry Selection>>         |http://www.opengis.net/spec/symbology-3/1.0/conf/symbolizergeometry
+|<<rc-symbolizer-geometry,Symbolizer Geometry Selection>>         |http://www.opengis.net/spec/symbology-3/1.0/conf/symbolizergeometry
 |<<rc-spatial,Spatial Relation Functions>>                        |http://www.opengis.net/spec/symbology-3/1.0/conf/spatial
 |<<rc-temporal,Temporal Relation Functions>>                      |http://www.opengis.net/spec/symbology-3/1.0/conf/temporal
-|<<rc-geometrymanipulation,Geometry Manipulation Functions>>      |http://www.opengis.net/spec/symbology-3/1.0/conf/geometrymanipulation
+|<<rc-geometry-manipulation,Geometry Manipulation Functions>>      |http://www.opengis.net/spec/symbology-3/1.0/conf/geometrymanipulation
 |===

@@ -1,6 +1,6 @@
 == Requirements Classes for Advanced fills
 
-[[rc-patternfills]]
+[[rc-pattern-fills]]
 === Requirements Class "Pattern Fills"
 ==== Overview
 

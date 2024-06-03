@@ -52,4 +52,4 @@ This requirements class adds support for Strokes with a casing and centerline.
 
 ==== Requirements
 
-include::../requirements/rc-casing-centerline.adoc[]
+include::../requirements/rc-casing.adoc[]

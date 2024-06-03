@@ -1,6 +1,6 @@
 == Requirements Classes for additional coverage styling capabilities
 
-[rc-coverage-as-points]
+[[rc-coverage-as-points]]
 === Requirements Class "Coverage as points"
 
 ==== Overview
@@ -30,7 +30,7 @@ Symbolizer *-- Mark
 
 ==== Requirements
 
-//TODO: include::../requirements/rc-coverage-as-points.adoc[]
+include::../requirements/rc-coverage-as-points.adoc[]
 
 [rc-coverage-as-contours]
 === Requirements Class "Coverage as contours"
@@ -79,7 +79,7 @@ Symbolizer *-- Stroke
 
 ==== Requirements
 
-//TODO: include::../requirements/rc-coverage-as-contours.adoc[]
+include::../requirements/rc-coverage-as-contours.adoc[]
 
 [rc-contrast-enhancement]
 === Requirements Class "Contrast Enhancement"
@@ -123,7 +123,7 @@ pixels in the image at each brightness level on output
 
 ==== Requirements
 
-//TODO: include::../requirements/rc-contrast-enhancement.adoc[]
+include::../requirements/rc-contrast-enhancement.adoc[]
 
 [rc-hsv-modifier]
 === Requirements Class "Hue, Saturation, Value Modifier"
@@ -161,4 +161,4 @@ HSVModifier : value: double
 
 ==== Requirements
 
-//TODO: include::../requirements/rc-hsv-modifier.adoc[]
+include::../requirements/rc-hsv-modifier.adoc[]

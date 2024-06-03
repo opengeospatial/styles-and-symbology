@@ -521,4 +521,4 @@ include::../schemas/CartoSym-CSS-Grammar.g4[]
 
 === Requirements
 
-include::../requirements/rc-cscss-encoding.adoc[]
+include::../requirements/rc-cscss.adoc[]

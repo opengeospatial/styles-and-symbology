@@ -399,7 +399,7 @@ TemporalRelationFunctions --> TimeInterval
 
 include::../requirements/rc-temporal-relations.adoc[]
 
-[[rc-geometrymanipulation]]
+[[rc-geometry-manipulation]]
 === Requirements Class "Geometry Manipulation Functions"
 ==== Overview
 
