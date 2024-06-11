@@ -10,6 +10,103 @@ Standard.
 
 === Requirements Class "Core"
 
+.Mapping of Styling Rules to SLD/SE constructs
+[width="90%",options="header"]
+|===
+| Construct         | SE Equivalent
+| StylingRule       | `<Rule>`
+| name              | `<Name>` inside `<Rule>`
+| selector          | `<ogc:Filter>`
+| symbolizer        | `<PointSymbolizer>`, `<LineSymbolizer>`, `<PolygonSymbolizer>`, `<TextSymbolizer>`, `<RasterSymbolizer>`
+| nestedRules       | `<ogc:ElseFilter>` provides limited support for one use case of nested rules
+|===
+
+
+.Mapping of Symbolizers to SLD/SE constructs
+[width="90%",options="header"]
+|===
+| Construct         | SE Equivalent
+| visibility        | `<MaxScaleDenominator>`, `<MinScaleDenominator>`
+| opacity           | `<Opacity>` inside `<RasterSymbolizer>` (no global opacity for vector symbolizers)
+| zOrder            | sortBy and sortByGroup vendor options in GeoServer
+|===
+
+// Ajouter les liens vers les tables
+
+.Mapping of Expressions to SLD/SE constructs
+[width="90%",options="header"]
+|===
+| Construct            | SE Equivalent
+| LiteralExpression    | `<ogc:Literal>` (<<see table below>>)
+| IdentifierExpression | `<ogc:PropertyName>` for feature properties, `<SourceChannelName>` for raster fields, System Identifiers (<<see table below>>)
+| InstanceExpression   | N/A
+| ArrayExpression      | N/A
+| OperationExpression  | Comparison operators (<<see table below>>) with optional logical operators (<<see table below>>)
+|===
+
+.Mapping of System Identifiers Expressions to SLD/SE constructs
+[width="90%",options="header"]
+|===
+| Construct                      | SE Equivalent
+| visualization                  | N/A
+| visualization.scaleDenominator | `<MaxScaleDenominator>`, `<MinScaleDenominator>`
+| visualization.dateTime         | N/A
+| visualization.date             | N/A
+| visualization.timeOfDay        | N/A
+| visualization.timeInterval     | N/A
+| visualization.pass             | Order of `<FeatureTypeStyles>` in a `<UserStyle>` (sortBy and sortByGroup vendor options in GeoServer for additional control)
+| feature.pass                   | Order of symbolizers in the `<Rule>`
+| dataLayer                      | N/A
+| dataLayer.identifier           | `<NamedLayer>` and `<Name>`
+| dataLayer.type                 | N/A
+|===
+
+.Mapping of Operation Expressions to SLD/SE constructs
+[width="90%",options="header"]
+|===
+| Construct            | SE Equivalent
+| RelationalOperator   | Comparison operators (`<ogc:PropertyIsEqualTo>`, `<ogc:PropertyIsLessThan>`, etc.)
+| LogicOperator        | Logical operators (`<ogc:And>`, `<ogc:Or>`, `<ogc:Not>`)
+|===
+
+.Mapping of Literal Expressions to SLD/SE constructs
+[width="90%",options="header"]
+|===
+| Construct         | SE Equivalent
+| TextLiteral       | text directly in `<ogc:Literal>`
+| BoolLiteral       | true or false in `<ogc:Literal>`
+| NullLiteral       | `<PropertyIsNull>` when testing for null values
+| IntegerLiteral    | integer value directly in `<ogc:Literal>`
+| RealLiteral       | double value inside `<ogc:Literal>`
+| ArrayLiteral      | N/A
+| InstanceLiteral   | N/A
+|===
+
+.Mapping of Operation Expressions to SLD/SE constructs
+[width="90%",options="header"]
+|===
+| Construct            | SE Equivalent
+| RelationalOperator   | Comparison operators (`<ogc:PropertyIsEqualTo>`, `<ogc:PropertyIsLessThan>`, etc.)
+| LogicOperator        | Logical operators (`<ogc:And>`, `<ogc:Or>`, `<ogc:Not>`)
+|===
+
+// A compléter
+
+.Mapping of Relational Operators to SLD/SE constructs
+[width="90%",options="header"]
+|===
+| Construct         | SE Equivalent
+| equal             | `<ogc:PropertyIsEqualTo>`
+| notEqual          | `<ogc:PropertyIsNotEqualTo>`
+| is (null)         | 
+| lesser            | `<ogc:PropertyIsLessThan>`
+| greater           | `<ogc:PropertyIsGreaterThan>`
+| lesserEqual       | `<ogc:PropertyIsLessThanOrEqualTo>`
+| greaterEqual      | `<ogc:PropertyIsGreaterThanOrEqualTo>`
+|===
+
+// Reprendre à partir d'ici
+
 .Mapping of the "Core" requirements class to SLD/SE constructs
 [width="90%",options="header"]
 |===
@@ -21,23 +118,15 @@ Standard.
 | Selector          | `<ogc:Filter>`
 | nestedRules       | `<ogc:ElseFilter>` provides limited support for one use case of nested rules 
 
-| *Literal Expression* | `<ogc:Literal>`
-| TextLiteral       | text directly in `<ogc:Literal>`
-| BoolLiteral       | true or false in `<ogc:Literal>`
-| NullLiteral       | `<PropertyIsNull>` when testing for null values
-| IntegerLiteral    | integer value directly in `<ogc:Literal>`
-| RealLiteral       | double value inside `<ogc:Literal>`
-| ArrayLiteral      | N/A
-| InstanceLiteral   | N/A
-
 | *Expression*         | 
-| FunctionExpression   | `<ogc:Function>`
+| LiteralExpression    | `<ogc:Literal>`
 | IdentifierExpression | `<ogc:PropertyName>` for feature properties, `<SourceChannelName>` for raster fields
 | InstanceExpression   | N/A
 | ArrayExpression      | N/A
+| OperationExpression  | Comparison operators (`<ogc:PropertyIsEqualTo>`, `<ogc:PropertyIsLessThan>`, etc.) with optional logical operators (`<ogc:And>`, `<ogc:Or>`, `<ogc:Not>`)
 
-| *Core Logic and Relational Operators* | 
-| Relational Operator  | Comparison operators (`<ogc:PropertyIsEqualTo>`, `<ogc:PropertyIsLessThan>`, etc.)
+| *Operation Expressions* | 
+| RelationalOperator   | Comparison operators (`<ogc:PropertyIsEqualTo>`, `<ogc:PropertyIsLessThan>`, etc.)
 | LogicOperator        | Logical operators (`<ogc:And>`, `<ogc:Or>`, `<ogc:Not>`)
 |===
 
@@ -152,6 +241,8 @@ Parameter Values are always supported everywhere in SLD/SE and you can assign an
 | Image hotSpot               | `<AnchorPoint>` inside `<PointSymbolizer>`, or `<AnchorPoint>` inside `<PointPlacement>` inside `<LabelPlacement>` inside `<TextSymbolizer>`
 | Dot                         | `<WellKnownName>` inside a `<Mark>` inside a `<Graphic>` inside a `<PointSymbolizer>`
 | Marker                      | `<PointSymbolizer>`
+| Marker opacity              | `<SvgParameter name="fill-opacity">` for SE 1.1.0, `<CssParameter name="fill-opacity">` for SLD 1.0.0 inside a <PointSymbolizer>
+| Marker position             | `<AnchorPoint>` inside `<PointSymbolizer>`
 | GraphicalUnit               | `uom` attribute of symbolizers
 | Stroke                      | `<Stroke>`
 | Stroke opacity              | `<SvgParameter name="stroke-opacity">` for SE 1.1.0, `<CssParameter name="stroke-opacity">` for SLD 1.0.0
@@ -376,41 +467,49 @@ Parameter Values are always supported everywhere in SLD/SE and you can assign an
 [width="90%",options="header"]
 |===
 | Construct                    | SE Equivalent
-| casing                       | multiple `<FeatureTypeStyle>` with different stroke widths
-| center                       | multiple `<FeatureTypeStyle>` with different stroke widths
+| casing                       | multiple `<UserStyle>` with different stroke widths
+| center                       | multiple `<UserStyle>` with different stroke widths
 |===
 
 .SLD Example encoding style using "Casing and Centerline" requirements class
 ====
 [source,sld]
 ----
-<?xml version="1.0" encoding="UTF-8"?>
-<StyledLayerDescriptor version="1.1.0" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:ogr="http://www.opengis.net/ogr"
-    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/StyledLayerDescriptor.xsd">
-   <NamedLayer>
-      <Name>Landuse</Name>
-      <UserStyle>
-         <Name>Styling a land use layer</Name>
-         <Abstract>Styling land use data with Style &amp; Symbology Casing and Centerline</Abstract>
-         <FeatureTypeStyle>
-            <Rule>
-               <Name>parking</Name>
-               <Title>parking</Title>
-               <LineSymbolizer>
-                  <Stroke>
-                     <CssParameter name="stroke">#000000</CssParameter>
-                     <CssParameter name="stroke-width">1</CssParameter>
-                  </Stroke>
-                  <Stroke>
-                     <CssParameter name="stroke">#FFFFFF</CssParameter>
-                     <CssParameter name="stroke-width">3</CssParameter>
-                  </Stroke>
-               </LineSymbolizer>
-            </Rule>
-         </FeatureTypeStyle>
-      </UserStyle>
-   </NamedLayer>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<StyledLayerDescriptor version="1.0.0" xsi:schemaLocation="http://www.opengis.net/sld StyledLayerDescriptor.xsd" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:se="http://www.opengis.net/se">
+  <NamedLayer>
+    <Name>Casing and Centerline</Name>
+    <UserStyle>
+      <Name>Casing</Name>
+      <Title>Casing</Title>
+      <FeatureTypeStyle>
+        <Rule>
+          <Name>Casing</Name>
+          <LineSymbolizer>
+            <Stroke>
+              <CssParameter name="stroke">#000000</CssParameter>
+              <CssParameter name="stroke-width">100</CssParameter>
+            </Stroke>
+          </LineSymbolizer>
+        </Rule>
+      </FeatureTypeStyle>
+    </UserStyle>
+    <UserStyle>
+      <Name>Centerline</Name>
+      <Title>Centerline</Title>
+      <FeatureTypeStyle>
+        <Rule>
+          <Name>Centerline</Name>
+          <LineSymbolizer>
+            <Stroke>
+              <CssParameter name="stroke">#ffffff</CssParameter>
+              <CssParameter name="stroke-width">30</CssParameter>
+            </Stroke>
+          </LineSymbolizer>
+        </Rule>
+      </FeatureTypeStyle>
+    </UserStyle>
+  </NamedLayer>
 </StyledLayerDescriptor>
 ----
 ====
