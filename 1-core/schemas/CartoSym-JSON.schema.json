@@ -1647,7 +1647,6 @@
     },
     "spatialInstance": {
       "oneOf": [
-        { "$ref": "#/$defs/geometryLiteral" },
         { "$ref": "#/$defs/geometryManipulationBinary" },
         { "$ref": "#/$defs/geometryManipulationUnary" },
         { "$ref": "#/$defs/geometryBuffer" }

@@ -247,7 +247,8 @@
           { "$ref": "#/$defs/spatialInstance" },
           { 
             "oneOf": [
-              { "$ref": "#/$defs/bboxLiteral" }
+              { "$ref": "#/$defs/bboxLiteral" },
+              { "$ref": "#/$defs/geometryLiteral" }
             ]
           }
         ]
