@@ -1,6 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
-  "$ref": "#/$defs/style",
+  "allOf": [{
+    "$ref": "#/$defs/style"
+  }],
   "$defs": {
     "style": {
       "type": "object",
@@ -1995,8 +1997,8 @@
           "maxItems": 3,
           "prefixItems": [
              { "$dynamicRef": "#boolExpression" },
-             { "$ref": "anyExpression" },
-             { "$ref": "anyExpression" }
+             { "$ref": "#/$defs/anyExpression" },
+             { "$ref": "#/$defs/anyExpression" }
           ]
         }
       }
