@@ -21,7 +21,6 @@ Standard.
 | nestedRules       | `<ogc:ElseFilter>` provides limited support for one use case of nested rules
 |===
 
-
 .Mapping of Symbolizers to SLD/SE constructs
 [width="90%",options="header"]
 |===
@@ -80,14 +79,6 @@ Standard.
 | RealLiteral       | double value inside `<ogc:Literal>`
 | ArrayLiteral      | N/A
 | InstanceLiteral   | N/A
-|===
-
-.Mapping of Operation Expressions to SLD/SE constructs
-[width="90%",options="header"]
-|===
-| Construct            | SE Equivalent
-| RelationalOperator   | Comparison operators (`<ogc:PropertyIsEqualTo>`, `<ogc:PropertyIsLessThan>`, etc.)
-| LogicOperator        | Logical operators (`<ogc:And>`, `<ogc:Or>`, `<ogc:Not>`)
 |===
 
 // A compléter
