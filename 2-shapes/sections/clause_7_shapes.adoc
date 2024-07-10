@@ -57,7 +57,7 @@ Ellipse *-- UnitPoint
 
 ====== Rounded Rectangles
 
-.Class RoundRectangle
+.Class RoundedRectangle
 [width="90%",options="header"]
 |===
 | Name          | Definition                               | Data type and value   | Multiplicity

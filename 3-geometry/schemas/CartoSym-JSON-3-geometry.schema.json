@@ -1,0 +1,257 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "title": "OGC Cartographic Symbology - Part 3: Model extension for geometry relations and manipulation",
+    "$defs": {
+      "allOf": [
+           { "$ref": "../1-core/schema/CartoSym-JSON.schema.json" }
+      ],
+      "point": {
+        "title": "GeoJSON Point",
+        "type": "object",
+        "required": [ "type", "coordinates" ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [ "Point" ]
+          },
+          "coordinates": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": "number"
+            }
+          },
+          "bbox": {
+            "type": "array",
+            "minItems": 4,
+            "items": {
+              "type": "number"
+            }
+          }
+        }
+      },
+      "multipoint": {
+        "title": "GeoJSON MultiPoint",
+        "type": "object",
+        "required": [ "type", "coordinates" ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [ "MultiPoint" ]
+          },
+          "coordinates": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "type": "number"
+              }
+            }
+          },
+          "bbox": {
+            "type": "array",
+            "minItems": 4,
+            "items": {
+              "type": "number"
+            }
+          }
+        }
+      },
+      "linestring": {
+        "title": "GeoJSON LineString",
+        "type": "object",
+        "required": [ "type", "coordinates" ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [ "LineString" ]
+          },
+          "coordinates": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "type": "number"
+              }
+            }
+          },
+          "bbox": {
+            "type": "array",
+            "minItems": 4,
+            "items": {
+              "type": "number"
+            }
+          }
+        }
+      },
+      "multilinestring": {
+        "title": "GeoJSON MultiLineString",
+        "type": "object",
+        "required": [ "type", "coordinates" ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [ "MultiLineString" ]
+          },
+          "coordinates": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "type": "array",
+                "minItems": 2,
+                "items": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "bbox": {
+            "type": "array",
+            "minItems": 4,
+            "items": {
+              "type": "number"
+            }
+          }
+        }
+      },
+      "linearRing": {
+        "title": "GeoJSON LinearRing",
+        "type": "object",
+        "required": [ "type", "coordinates" ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [ "LinearRing" ]
+          },
+          "coordinates": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "minItems": 4,
+              "items": {
+                "type": "number"
+              }
+            }
+          },
+          "bbox": {
+            "type": "array",
+            "minItems": 4,
+            "items": {
+              "type": "number"
+            }
+          }
+        }
+      },
+      "polygon": {
+        "title": "GeoJSON Polygon",
+        "type": "object",
+        "required": [ "type", "coordinates" ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [ "Polygon" ]
+          },
+          "coordinates": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "minItems": 4,
+              "items": {
+                "type": "array",
+                "minItems": 2,
+                "items": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "bbox": {
+            "type": "array",
+            "minItems": 4,
+            "items": {
+              "type": "number"
+            }
+          }
+        }
+     },
+      "multipolygon": {
+        "title": "GeoJSON MultiPolygon",
+        "type": "object",
+        "required": [ "type", "coordinates" ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [ "MultiPolygon" ]
+          },
+          "coordinates": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "minItems": 4,
+              "items": {
+                "type": "array",
+                "minItems": 4,
+                "items": {
+                  "type": "array",
+                  "minItems": 2,
+                  "items": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          },
+          "bbox": {
+            "type": "array",
+            "minItems": 4,
+            "items": {
+              "type": "number"
+            }
+          }
+        }
+      },
+      "geometryLiteral": {
+        "oneOf": [
+          { "$ref": "#/$defs/point" },
+          { "$ref": "#/$defs/linestring" },
+          { "$ref": "#/$defs/multipoint" },
+          { "$ref": "#/$defs/multilinestring" },
+          { "$ref": "#/$defs/multipolygon" }
+        ]
+      },
+      "bboxLiteral": {
+        "type": "object",
+        "required": [
+          "bbox"
+        ],
+        "properties": {
+          "bbox": {
+            "$ref": "#/$defs/bbox"
+          }
+        }
+      },
+      "bbox": {
+        "type": "array",
+        "oneOf": [
+          { "minItems": 4, "maxItems": 4 },
+          { "minItems": 6, "maxItems": 6 }
+        ],
+        "items": { "type": "number" }
+      },
+      "spatialInstance": {
+        "allOf": [
+          { "$ref": "#/$defs/spatialInstance" },
+          { 
+            "oneOf": [
+              { "$ref": "#/$defs/bboxLiteral" },
+              { "$ref": "#/$defs/geometryLiteral" }
+            ]
+          }
+        ]
+      }
+    }
+}

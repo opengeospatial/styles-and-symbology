@@ -1,5 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "title": "OGC Cartographic Symbology - Part 1: Core Model and Encodings - JSON Schema",
+  "$ref": "#/$defs/style",
   "allOf": [{
     "$ref": "#/$defs/style"
   }],
@@ -84,51 +86,11 @@
                "color": { "$ref": "#/$defs/color" },
                "opacity": { "$ref": "#/$defs/zeroToOne" },
                "pattern": { "$ref": "#/$defs/graphic" },
-               "gradient": { "$ref": "#/$defs/gradient" },
                "stippleStyle": { "$ref": "#/$defs/stippleStyle" },
                "hatchStyle": { "$ref": "#/$defs/hatchStyle" }
             }
          }
        ]
-    },
-    "gradient":
-    {
-       "oneOf": [
-         { "$ref": "#/$defs/idOrFnExpression" },
-         {
-            "type": "object",
-            "properties": {
-               "alter": { "type": "boolean" },
-               "type": { "type": "string", "enum": [ "linear", "radial" ] },
-               "keys": {
-                  "oneOf": [
-                     {
-                        "type": "array",
-                        "items": { "$ref": "#/$defs/colorKey" }
-                     },
-                     {
-                        "type": "object",
-                        "required": [ "index", "value" ],
-                        "properties": {
-                           "index": { "type": "integer", "minimum": 0 },
-                           "value": { "$ref": "#/$defs/colorKey" }
-                        }
-                     }
-                  ]
-               }
-            }
-         }
-       ]
-    },
-    "colorKey":
-    {
-       "type": "object",
-       "properties": {
-          "alter": { "type": "boolean" },
-          "percent": { "$ref": "#/$defs/percent" },
-          "color": { "$ref": "#/$defs/color" },
-          "opacity": { "$ref": "#/$defs/zeroToOne" }
-       }
     },
     "stippleStyle":
     {
@@ -157,8 +119,6 @@
                   {
                      "casing": { "$ref": "#/$defs/strokeStyling" },
                      "centerLine": { "$ref": "#/$defs/strokeStyling" },
-                     "join": { "$ref": "#/$defs/strokeJoin" },
-                     "cap": { "$ref": "#/$defs/strokeCap" },
                      "dashPattern": { "$ref": "#/$defs/dashPattern" },
                      "pattern": { "$ref": "#/$defs/graphic" }
                   }
@@ -187,20 +147,6 @@
                "value": { "type": "integer", "minimum": 0 }
             }
          }
-       ]
-    },
-    "strokeJoin":
-    {
-       "oneOf": [
-         { "$ref": "#/$defs/idOrFnExpression" },
-         { "type": "string", "enum": [ "miter", "round", "bevel" ] }
-       ]
-    },
-    "strokeCap":
-    {
-       "oneOf": [
-         { "$ref": "#/$defs/idOrFnExpression" },
-         { "type": "string", "enum": [ "butt", "round", "square" ] }
        ]
     },
     "marker": { "$ref": "#/$defs/multiGraphic" },
@@ -256,27 +202,7 @@
        "properties": {
           "alter": { "type": "boolean" },
           "position": { "$ref": "#/$defs/unitPoint" },
-          "opacity": { "$ref": "#/$defs/zeroToOne" },
-          "transform": { "$ref": "#/$defs/transform2D" },
-          "transform3D": { "$ref": "#/$defs/transform3D" }
-       }
-    },
-    "transform2D": {
-       "type": "object",
-       "properties": {
-          "alter": { "type": "boolean" },
-          "orientation": { "$ref": "#/$defs/angle" },
-          "scaling": { "$ref": "#/$defs/scale2D" },
-          "translation": { "$ref": "#/$defs/unitPoint" }
-       }
-    },
-    "transform3D": {
-       "type": "object",
-       "properties": {
-          "alter": { "type": "boolean" },
-          "orientation": { "$ref": "#/$defs/orientation3D" },
-          "scaling": { "$ref": "#/$defs/scale3D" },
-          "translation": { "$ref": "#/$defs/unitPoint" }
+          "opacity": { "$ref": "#/$defs/zeroToOne" }
        }
     },
     "scale2D":
@@ -361,24 +287,8 @@
          { "$ref": "#/$defs/image" },
          { "$ref": "#/$defs/shape" },
          { "$ref": "#/$defs/text" },
-         { "$ref": "#/$defs/model" },
-         { "$ref": "#/$defs/multiGraphic" },
-         { "$ref": "#/$defs/graphicInstance" }
+         { "$ref": "#/$defs/multiGraphic" }
        ]
-    },
-    "graphicInstance": {
-      "allOf": [
-         { "$ref": "#/$defs/abstractGraphic" },
-         {
-             "type": "object",
-             "required": [ "type", "element" ],
-             "properties":
-             {
-                "type": { "type": "string", "enum": [ "GraphicInstance" ] },
-                "element": { "$ref": "#/$defs/graphic" }
-             }
-         }
-      ]
     },
     "image": {
       "allOf": [
@@ -394,20 +304,6 @@
                 "tint": { "$ref": "#/$defs/color" },
                 "blackTint": { "$ref": "#/$defs/color" },
                 "alphaThreshold": { "$ref": "#/$defs/zeroToOne" }
-             }
-         }
-      ]
-    },
-    "model": {
-      "allOf": [
-         { "$ref": "#/$defs/abstractGraphic" },
-         {
-             "type": "object",
-             "required": [ "type", "model" ],
-             "properties":
-             {
-                "type": { "type": "string", "enum": [ "Model" ] },
-                "model": { "$ref": "#/$defs/resource" }
              }
          }
       ]
@@ -502,20 +398,6 @@
           }
        ]
     },
-    "shapeOutline": {
-       "oneOf": [
-          { "$ref": "#/$defs/idOrFnExpression" },
-          {
-             "type": "object",
-             "properties": {
-                "alter": { "type": "boolean" },
-                "thickness": { "$ref": "#/$defs/unitValue" },
-                "opacity": { "$ref": "#/$defs/zeroToOne" },
-                "color": { "$ref": "#/$defs/color" }
-             }
-          }
-       ]
-    },
     "abstractShape": {
       "allOf": [
          { "$ref": "#/$defs/abstractGraphic" },
@@ -524,35 +406,15 @@
             "required": [ "type" ],
             "properties": {
                "type": { "type": "string" },
-               "stroke": { "$ref": "#/$defs/stroke" },
-               "outline": { "$ref": "#/$defs/shapeOutline" }
+               "stroke": { "$ref": "#/$defs/stroke" }
             }
          }
       ]
     },
     "shape": {
       "oneOf": [
-         { "$ref": "#/$defs/dot" },
-         { "$ref": "#/$defs/arc" },
-         { "$ref": "#/$defs/path" },
-         { "$ref": "#/$defs/rectangle" },
-         { "$ref": "#/$defs/circle" },
-         { "$ref": "#/$defs/ellipse" },
-         { "$ref": "#/$defs/sectorArc" },
-         { "$ref": "#/$defs/chordArc" },
-         { "$ref": "#/$defs/closedPath" }
-      ]
-    },
-    "closedShape": {
-      "allOf": [
-         { "$ref": "#/$defs/abstractShape" },
-         {
-            "type": "object",
-            "properties": {
-               "fill": { "$ref": "#/$defs/fill" }
-            }
-         }
-      ]
+         { "$ref": "#/$defs/dot" }
+        ]
     },
     "dot": {
       "allOf": [
@@ -582,219 +444,6 @@
           }
          }
        ]
-    },
-    "arc": {
-       "allOf" : [
-         { "$ref": "#/$defs/abstractArc" },
-         {
-             "type": "object",
-             "required": [ "type" ],
-             "properties":
-             {
-                "type": { "type": "string", "enum": [ "Arc" ] }
-             }
-         }
-       ]
-    },
-    "sectorArc": {
-       "allOf" : [
-         { "$ref": "#/$defs/closedShape" },
-         { "$ref": "#/$defs/abstractArc" },
-         {
-             "type": "object",
-             "required": [ "type" ],
-             "properties":
-             {
-                "type": { "type": "string", "enum": [ "SectorArc" ] }
-             }
-         }
-       ]
-    },
-    "chordArc": {
-       "allOf" : [
-         { "$ref": "#/$defs/closedShape" },
-         { "$ref": "#/$defs/abstractArc" },
-         {
-             "type": "object",
-             "required": [ "type" ],
-             "properties":
-             {
-                "type": { "type": "string", "enum": [ "ChordArc" ] }
-             }
-         }
-       ]
-    },
-    "circle": {
-       "allOf" : [
-         { "$ref": "#/$defs/closedShape" },
-         {
-          "type": "object",
-          "required": [ "type" ],
-          "properties":
-          {
-             "type": { "type": "string", "enum": [ "Circle" ] },
-             "center": { "$ref": "#/$defs/unitPoint" },
-             "radius": { "$ref": "#/$defs/unitValue" }
-          }
-         }
-       ]
-    },
-    "ellipse": {
-       "allOf" : [
-         { "$ref": "#/$defs/closedShape" },
-         {
-          "type": "object",
-          "required": [ "type", "radii" ],
-          "properties":
-          {
-             "type": { "type": "string", "enum": [ "Ellipse" ] },
-             "center": { "$ref": "#/$defs/unitPoint" },
-             "radii": {
-                "oneOf": [
-                   {
-                      "type": "array",
-                      "minItems": 2,
-                      "maxItems": 2,
-                      "items": { "$ref": "#/$defs/unitValue" }
-                   },
-                   {
-                      "type": "object",
-                      "properties":
-                      {
-                        "x": { "$ref": "#/$defs/unitValue" },
-                        "y": { "$ref": "#/$defs/unitValue" },
-                        "alter": { "type": "boolean" }
-                      }
-                   }
-                ]
-             }
-          }
-         }
-       ]
-    },
-    "rectangle": {
-       "allOf" : [
-         { "$ref": "#/$defs/closedShape" },
-         {
-          "type": "object",
-          "required": [ "type", "topLeft", "bottomRight" ],
-          "properties":
-          {
-             "type": { "type": "string", "enum": [ "Rectangle" ] },
-             "topLeft": { "$ref": "#/$defs/unitPoint" },
-             "bottomRight": { "$ref": "#/$defs/unitPoint" }
-          }
-         }
-       ]
-    },
-    "roundedRectangle": {
-       "allOf" : [
-         { "$ref": "#/$defs/closedShape" },
-         {
-          "type": "object",
-          "required": [ "type", "topLeft", "bottomRight" ],
-          "properties":
-          {
-             "type": { "type": "string", "enum": [ "RoundedRectangle" ] },
-             "topLeft": { "$ref": "#/$defs/unitPoint" },
-             "bottomRight": { "$ref": "#/$defs/unitPoint" },
-             "radii": {
-                "oneOf": [
-                   {
-                      "type": "array",
-                      "minItems": 2,
-                      "maxItems": 2,
-                      "items": { "$ref": "#/$defs/unitValue" }
-                   },
-                   {
-                      "type": "object",
-                      "properties":
-                      {
-                        "x": { "$ref": "#/$defs/unitValue" },
-                        "y": { "$ref": "#/$defs/unitValue" },
-                        "alter": { "type": "boolean" }
-                      }
-                   }
-                ]
-             }
-          }
-         }
-       ]
-    },
-    "abstractPath": {
-       "allOf": [
-         { "$ref": "#/$defs/abstractShape" },
-         {
-          "type": "object",
-          "required": [ "nodes" ],
-          "properties":
-          {
-             "nodes": { "$ref": "#/$defs/pathNodes" }
-          }
-         }
-       ]
-    },
-    "path": {
-       "allOf": [
-         { "$ref": "#/$defs/abstractPath" },
-         {
-            "type": "object",
-            "required": [ "type" ],
-            "properties":
-            {
-               "type": { "type": "string", "enum": [ "Path" ] }
-            }
-         }
-       ]
-    },
-    "closedPath": {
-       "allOf": [
-         { "$ref": "#/$defs/abstractPath" },
-         { "$ref": "#/$defs/closedShape" },
-         {
-          "type": "object",
-          "properties":
-          {
-             "type": { "type": "string", "enum": [ "ClosedPath" ] },
-             "innerNodes":
-             {
-                "anyOf": [
-                  { "$ref": "#/$defs/arrayExpression" },
-                  {
-                     "type": "array",
-                     "items": { "$ref": "#/$defs/pathNodes" }
-                  },
-                  {
-                     "type": "object",
-                     "required": [ "index", "value" ],
-                     "properties": {
-                        "index": { "type": "integer", "minimum": 0 },
-                        "value": { "$ref": "#/$defs/pathNodes" }
-                     }
-                  }
-                ]
-             }
-          }
-         }
-       ]
-    },
-    "pathNodes": {
-      "oneOf": [
-         { "$ref": "#/$defs/arrayExpression" },
-         {
-            "type": "array",
-            "minItems": 1,
-            "items": { "$ref": "#/$defs/unitPoint" }
-         },
-         {
-            "type": "object",
-            "required": [ "index", "value" ],
-            "properties": {
-               "index": { "type": "integer", "minimum": 0 },
-               "value": { "$ref": "#/$defs/unitPoint" }
-            }
-         }
-      ]
     },
     "resource": {
        "type": "object",
@@ -1155,7 +804,21 @@
              "properties": {
                 "factor": { "$ref": "#/$defs/numericExpression" },
                 "sun": { "$ref": "#/$defs/azimuthElevation" },
-                "colorMap": { "$ref": "#/$defs/hsColorMap" },
+                "colorMap": {
+                  "allOf": [
+                   {"$ref": "#/$defs/colorMap"},
+                   {"items": [
+                     {"type": "array",
+                      "minItems": 2,
+                      "maxItems": 3,
+                      "prefixItems": [
+                         { "$ref": "#/$defs/zeroToOne" },
+                         { "$ref": "#/$defs/color" },
+                         { "type": "string" }
+                      ]
+                     }
+                   ]}]
+                },
                 "opacityMap": { "$ref": "#/$defs/hsOpacityMap" },
                 "alter": { "type": "boolean" }
              }
@@ -1172,27 +835,6 @@
                 "elevation": { "$ref": "#/$defs/angle" },
                 "alter": { "type": "boolean" }
              }
-         }
-       ]
-    },
-    "hsColorMap":
-    {
-       "oneOf": [
-         { "$ref": "#/$defs/idOrFnExpression" },
-         {
-            "type": "array",
-            "items":
-            {
-               "type": "array",
-               "minItems": 2,
-               "maxItems": 3,
-               "prefixItems": [
-                  { "$ref": "#/$defs/zeroToOne" },
-                  { "$ref": "#/$defs/color" },
-                  { "type": "string" }
-               ]
-            },
-            "minItems": 1
          }
        ]
     },
@@ -1326,7 +968,6 @@
         }
       }
     },
-
     "notExpression": {
       "type": "object",
       "required": [ "op", "args" ],
@@ -1345,7 +986,6 @@
         }
       }
     },
-
     "comparisonPredicate": {
       "oneOf": [
         { "$ref": "#/$defs/binaryComparisonPredicate" },
@@ -1356,7 +996,6 @@
         { "$ref": "#/$defs/isNullPredicate" }
       ]
     },
-
     "binaryComparisonPredicate": {
       "type": "object",
       "required": [ "op", "args" ],
@@ -1379,7 +1018,6 @@
         { "$ref": "#/$defs/scalarExpression" }
       ]
     },
-
     "scalarExpression": {
       "oneOf": [
         { "$ref": "#/$defs/characterExpression" },
@@ -1388,7 +1026,6 @@
         { "$ref": "#/$defs/temporalInstantExpression" }
       ]
     },
-
     "temporalInstantExpression": {
       "oneOf": [
         { "$ref": "#/$defs/instantInstance" },
@@ -1398,7 +1035,6 @@
         { "$ref": "#/$defs/conditionalExpression" }
       ]
     },
-
     "isLikePredicate": {
       "type": "object",
       "required": [ "op", "args" ],
@@ -1499,7 +1135,6 @@
         { "$ref": "#/$defs/conditionalExpression" }
       ]
     },
-
     "isInListPredicate": {
       "type": "object",
       "required": [ "op", "args" ],
@@ -1528,7 +1163,6 @@
       ],
       "additionalItems": false
     },
-
     "isNullPredicate": {
       "type": "object",
       "required": [ "op", "args" ],
@@ -1551,7 +1185,6 @@
         { "$ref": "#/$defs/temporalExpression" }
       ]
     },
-
     "spatialPredicate": {
       "type": "object",
       "required": [ "op", "args" ],
@@ -1591,7 +1224,6 @@
         { "$ref": "#/$defs/conditionalExpression" }
       ]
     },
-
     "temporalPredicate": {
       "type": "object",
       "required": [ "op", "args" ],
@@ -1636,7 +1268,6 @@
         { "$ref": "#/$defs/conditionalExpression" }
       ]
     },
-
     "arrayPredicate": {
       "type": "object",
       "required": [ "op", "args" ],
@@ -1692,7 +1323,6 @@
         ]
       }
     },
-
     "arithmeticExpression": {
       "type": "object",
       "required": [ "op", "args" ],
@@ -1724,7 +1354,6 @@
         ]
       }
     },
-
     "hexNumber": {
        "type": "string",
        "pattern": "^([a-fA-F0-9])+"
@@ -1797,7 +1426,6 @@
           { "$ref": "#/$defs/hexNumber" }
         ]
     },
-
     "propertyRef": {
       "type": "object",
       "required": [ "property" ],
@@ -1805,7 +1433,6 @@
         "property": { "type": "string" }
       }
     },
-
     "casei": {
       "type": "object",
       "required": [ "op", "args" ],
@@ -1819,7 +1446,6 @@
         }
       }
     },
-
     "accenti": {
       "type": "object",
       "required": [ "op", "args" ],
@@ -1833,7 +1459,6 @@
         }
       }
     },
-
     "lowerUpperCase": {
       "type": "object",
       "required": [ "op", "args" ],
@@ -1850,7 +1475,6 @@
          }
       }
     },
-
     "concatenate": {
       "type": "object",
       "required": [ "op", "args" ],
@@ -1867,7 +1491,6 @@
          }
       }
     },
-
     "substitute": {
       "type": "object",
       "required": [ "op", "args" ],
@@ -1885,7 +1508,6 @@
          }
       }
     },
-
     "format": {
       "type": "object",
       "required": [ "op", "args" ],
@@ -1914,7 +1536,6 @@
          }
       }
     },
-
     "characterExpression": {
       "oneOf": [
         { "$ref": "#/$defs/casei" },
@@ -1930,7 +1551,6 @@
         { "$ref": "#/$defs/conditionalExpression" }
       ]
     },
-
     "geometryManipulationBinary": {
       "type": "object",
       "required": [ "op", "args" ],
@@ -1948,7 +1568,6 @@
          }
       }
     },
-
     "geometryManipulationUnary": {
       "type": "object",
       "required": [ "op", "args" ],
@@ -1966,7 +1585,6 @@
          }
       }
     },
-
     "geometryBuffer": {
       "type": "object",
       "required": [ "op", "args" ],
@@ -1987,7 +1605,6 @@
          }
       }
     },
-
     "conditionalExpression": {
       "type": "object",
       "required": [ "op", "args" ],
@@ -2024,7 +1641,6 @@
         }
       }
     },
-
     "scalarLiteral": {
       "oneOf": [
         { "type": "string" },
@@ -2033,227 +1649,13 @@
         { "$ref": "#/$defs/instantInstance" }
       ]
     },
-
     "spatialInstance": {
       "oneOf": [
-        { "$ref": "#/$defs/geometryLiteral" },
-        { "$ref": "#/$defs/bboxLiteral" },
         { "$ref": "#/$defs/geometryManipulationBinary" },
         { "$ref": "#/$defs/geometryManipulationUnary" },
         { "$ref": "#/$defs/geometryBuffer" }
       ]
     },
-    "geometryLiteral": {
-      "oneOf": [
-        { "$ref": "#/$defs/point" },
-        { "$ref": "#/$defs/linestring" },
-        { "$ref": "#/$defs/polygon" },
-        { "$ref": "#/$defs/multipoint" },
-        { "$ref": "#/$defs/multilinestring" },
-        { "$ref": "#/$defs/multipolygon" }
-      ]
-    },
-    "point": {
-      "title": "GeoJSON Point",
-      "type": "object",
-      "required": [ "type", "coordinates" ],
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [ "Point" ]
-        },
-        "coordinates": {
-          "type": "array",
-          "minItems": 2,
-          "items": {
-            "type": "number"
-          }
-        },
-        "bbox": {
-          "type": "array",
-          "minItems": 4,
-          "items": {
-            "type": "number"
-          }
-        }
-      }
-    },
-    "linestring": {
-      "title": "GeoJSON LineString",
-      "type": "object",
-      "required": [ "type", "coordinates" ],
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [ "LineString" ]
-        },
-        "coordinates": {
-          "type": "array",
-          "minItems": 2,
-          "items": {
-            "type": "array",
-            "minItems": 2,
-            "items": {
-              "type": "number"
-            }
-          }
-        },
-        "bbox": {
-          "type": "array",
-          "minItems": 4,
-          "items": {
-            "type": "number"
-          }
-        }
-      }
-    },
-    "polygon": {
-      "title": "GeoJSON Polygon",
-      "type": "object",
-      "required": [ "type", "coordinates" ],
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [ "Polygon" ]
-        },
-        "coordinates": {
-          "type": "array",
-          "items": {
-            "type": "array",
-            "minItems": 4,
-            "items": {
-              "type": "array",
-              "minItems": 2,
-              "items": {
-                "type": "number"
-              }
-            }
-          }
-        },
-        "bbox": {
-          "type": "array",
-          "minItems": 4,
-          "items": {
-            "type": "number"
-          }
-        }
-      }
-    },
-    "multipoint": {
-      "title": "GeoJSON MultiPoint",
-      "type": "object",
-      "required": [ "type", "coordinates" ],
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [ "MultiPoint" ]
-        },
-        "coordinates": {
-          "type": "array",
-          "items": {
-            "type": "array",
-            "minItems": 2,
-            "items": {
-              "type": "number"
-            }
-          }
-        },
-        "bbox": {
-          "type": "array",
-          "minItems": 4,
-          "items": {
-            "type": "number"
-          }
-        }
-      }
-    },
-    "multilinestring": {
-      "title": "GeoJSON MultiLineString",
-      "type": "object",
-      "required": [ "type", "coordinates" ],
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [ "MultiLineString" ]
-        },
-        "coordinates": {
-          "type": "array",
-          "items": {
-            "type": "array",
-            "minItems": 2,
-            "items": {
-              "type": "array",
-              "minItems": 2,
-              "items": {
-                "type": "number"
-              }
-            }
-          }
-        },
-        "bbox": {
-          "type": "array",
-          "minItems": 4,
-          "items": {
-            "type": "number"
-          }
-        }
-      }
-    },
-    "multipolygon": {
-      "title": "GeoJSON MultiPolygon",
-      "type": "object",
-      "required": [ "type", "coordinates" ],
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [ "MultiPolygon" ]
-        },
-        "coordinates": {
-          "type": "array",
-          "items": {
-            "type": "array",
-            "items": {
-              "type": "array",
-              "minItems": 4,
-              "items": {
-                "type": "array",
-                "minItems": 2,
-                "items": {
-                  "type": "number"
-                }
-              }
-            }
-          }
-        },
-        "bbox": {
-          "type": "array",
-          "minItems": 4,
-          "items": {
-            "type": "number"
-          }
-        }
-      }
-    },
-    "bboxLiteral": {
-      "type": "object",
-      "required": [
-        "bbox"
-      ],
-      "properties": {
-        "bbox": {
-          "$ref": "#/$defs/bbox"
-        }
-      }
-    },
-    "bbox": {
-      "type": "array",
-      "oneOf": [
-        { "minItems": 4, "maxItems": 4 },
-        { "minItems": 6, "maxItems": 6 }
-      ],
-      "items": { "type": "number" }
-    },
-
     "temporalInstance": {
       "oneOf": [
         { "$ref": "#/$defs/instantInstance" },

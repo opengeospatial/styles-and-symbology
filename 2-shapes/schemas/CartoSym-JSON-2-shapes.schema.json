@@ -1,0 +1,462 @@
+{
+   "$schema": "https://json-schema.org/draft/2019-09/schema",
+   "title": "OGC Cartographic Symbology - Part 2: Model extension for graphical shapes and transformations",
+   "$defs": {
+     "allOf": [
+          { "$ref": "../1-core/schema/CartoSym-JSON.schema.json" }
+     ],
+     "fill":{
+         "allOf":[
+            { "$ref":"#/$defs/fill" },
+            {
+               "properties":{
+                  "gradient": { "$ref": "#/$defs/gradient" }
+               }
+            }
+         ]
+     },
+     "colorKey": {
+        "type": "object",
+        "properties": {
+            "alter": { "type": "boolean" },
+            "percent": { "$ref": "#/$defs/percent" },
+            "color": { "$ref": "#/$defs/color" },
+            "opacity": { "$ref": "#/$defs/zeroToOne" }
+        }
+     },
+     "gradient":
+     {
+        "oneOf": [
+          { "$ref": "#/$defs/idOrFnExpression" },
+          {
+             "type": "object",
+             "properties": {
+                "alter": { "type": "boolean" },
+                "type": { "type": "string", "enum": [ "linear", "radial" ] },
+                "keys": {
+                   "oneOf": [
+                      {
+                         "type": "array",
+                         "items": { "$ref": "#/$defs/colorKey" }
+                      },
+                      {
+                         "type": "object",
+                         "required": [ "index", "value" ],
+                         "properties": {
+                            "index": { "type": "integer", "minimum": 0 },
+                            "value": { "$ref": "#/$defs/colorKey" }
+                         }
+                      }
+                   ]
+                }
+             }
+          }
+        ]
+     },
+     "stroke": {
+      "allOf": [
+         { "$ref":  "#/$defs/stroke" },
+         {
+            "properties": {
+               "join": { "$ref": "#/$defs/strokeJoin" },
+               "cap": { "$ref": "#/$defs/strokeCap" }
+            }
+         }
+      ]
+     },
+     "strokeJoin":
+     {
+        "oneOf": [
+          { "$ref": "#/$defs/idOrFnExpression" },
+          { "type": "string", "enum": [ "miter", "round", "bevel" ] }
+        ]
+     },
+     "strokeCap":
+     {
+        "oneOf": [
+          { "$ref": "#/$defs/idOrFnExpression" },
+          { "type": "string", "enum": [ "butt", "round", "square" ] }
+        ]
+     },
+     "patternStroke": {
+        "allOf": [
+           { "$ref":  "#/$defs/stroke" },
+           {
+              "properties": {
+                 "pattern": { "$ref": "#/$defs/graphic" },
+                 "patternGap": {"type": "number"},
+                 "patternInitialGap": {"type": "number"}
+              }
+           }
+        ]
+     },
+     "abstractGraphic": {
+      "allOf": [
+         { "$ref":  "#/$defs/abstractGraphic" },
+         {
+            "properties": {
+               "transform": { "$ref": "#/$defs/transform2D" },
+               "transform3D": { "$ref": "#/$defs/transform3D" }
+            }
+         }
+      ]
+     },
+     "model": {
+      "allOf": [
+         { "$ref": "#/$defs/abstractGraphic" },
+         {
+             "type": "object",
+             "required": [ "type", "model" ],
+             "properties":
+             {
+                "type": { "type": "string", "enum": [ "Model" ] },
+                "model": { "$ref": "#/$defs/resource" }
+             }
+         }
+      ]
+    },
+     "transform2D": {
+        "type": "object",
+        "properties": {
+           "alter": { "type": "boolean" },
+           "orientation": { "$ref": "#/$defs/angle" },
+           "scaling": { "$ref": "#/$defs/scale2D" },
+           "translation": { "$ref": "#/$defs/unitPoint" }
+         }
+      },
+      "transform3D": {
+         "type": "object",
+         "properties": {
+            "alter": { "type": "boolean" },
+            "orientation": { "$ref": "#/$defs/orientation3D" },
+            "scaling": { "$ref": "#/$defs/scale3D" },
+            "translation": { "$ref": "#/$defs/unitPoint" }
+         }
+      },
+      "vector3D":{
+         "type": "object",
+         "properties": {
+             "x": { "$ref": "#/$defs/unitPoint" },
+             "y": { "$ref": "#/$defs/unitPoint" },
+             "z": { "$ref": "#/$defs/unitPoint" }
+          }
+      },
+      "floatVector3D":{
+         "type": "object",
+         "properties": {
+            "x": { "$ref": "#/$defs/unitPoint" },
+            "y": { "$ref": "#/$defs/unitPoint" },
+            "z": { "$ref": "#/$defs/unitPoint" }
+          }
+      },
+      "quaternion":{
+         "type": "object",
+         "properties": {
+            "x": { "type": "number" },
+            "y": { "type": "number" },
+            "z": { "type": "number" },
+            "w": { "type": "number" }
+         }
+      },
+      "extrusion": {
+         "type": "object",
+         "properties": {
+           "terrain-relative": { "type": "boolean" },
+           "height": { "type": "number" },
+           "base": { "type": "number" }
+         },
+         "required": ["terrain-relative", "height", "base"]
+       },
+      "graphicInstance": {
+          "allOf": [
+             { "$ref": "#/$defs/abstractGraphic" },
+             {
+                 "type": "object",
+                 "required": [ "type", "element" ],
+                 "properties":
+                 {
+                    "type": { "type": "string", "enum": [ "GraphicInstance" ] },
+                    "element": { "$ref": "#/$defs/graphic" }
+                 }
+             }
+          ]
+      },
+      "graphic": {
+         "allOf": [
+            { "$ref": "#/$defs/abstractGraphic" },
+            {
+               "oneOf": [
+                  { "$ref": "#/$defs/model" },
+                  { "$ref": "#/$defs/graphicInstance" }
+               ]
+            }
+         ]
+      },
+      "shapeOutline": {
+          "oneOf": [
+             { "$ref": "#/$defs/idOrFnExpression" },
+             {
+                "type": "object",
+                "properties": {
+                   "alter": { "type": "boolean" },
+                   "thickness": { "$ref": "#/$defs/unitValue" },
+                   "opacity": { "$ref": "#/$defs/zeroToOne" },
+                   "color": { "$ref": "#/$defs/color" }
+                }
+             }
+          ]
+      },
+      "abstractShape": {
+         "allOf": [
+            { "$ref": "#/$defs/abstractGraphic" },
+            {
+               "properties": {
+                  "outline": { "$ref": "#/$defs/shapeOutline" }
+               }
+            }
+         ]
+      },
+      "closedShape": {
+          "allOf": [
+             { "$ref": "#/$defs/abstractShape" },
+             {
+                "type": "object",
+                "properties": {
+                   "fill": { "$ref": "#/$defs/fill" }
+                }
+             }
+          ]
+      },
+      "arc": {
+          "allOf" : [
+            { "$ref": "#/$defs/abstractArc" },
+            {
+                "type": "object",
+                "required": [ "type" ],
+                "properties":
+                {
+                   "type": { "type": "string", "enum": [ "Arc" ] }
+                }
+            }
+          ]
+      },
+      "sectorArc": {
+          "allOf" : [
+            { "$ref": "#/$defs/closedShape" },
+            { "$ref": "#/$defs/abstractArc" },
+                        {
+                            "type": "object",
+                            "required": [ "type" ],
+                            "properties":
+                            {
+                               "type": { "type": "string", "enum": [ "SectorArc" ] }
+                            }
+                        }
+                      ]
+      },
+      "chordArc": {
+                      "allOf" : [
+                        { "$ref": "#/$defs/closedShape" },
+                        { "$ref": "#/$defs/abstractArc" },
+                        {
+                            "type": "object",
+                            "required": [ "type" ],
+                            "properties":
+                            {
+                               "type": { "type": "string", "enum": [ "ChordArc" ] }
+                            }
+                        }
+                      ]
+      },
+      "circle": {
+                      "allOf" : [
+                        { "$ref": "#/$defs/closedShape" },
+                        {
+                         "type": "object",
+                         "required": [ "type" ],
+                         "properties":
+                         {
+                            "type": { "type": "string", "enum": [ "Circle" ] },
+                            "center": { "$ref": "#/$defs/unitPoint" },
+                            "radius": { "$ref": "#/$defs/unitValue" }
+                         }
+                        }
+                      ]
+      },
+      "ellipse": {
+                      "allOf" : [
+                        { "$ref": "#/$defs/closedShape" },
+                        {
+                         "type": "object",
+                         "required": [ "type", "radii" ],
+                         "properties":
+                         {
+                            "type": { "type": "string", "enum": [ "Ellipse" ] },
+                            "center": { "$ref": "#/$defs/unitPoint" },
+                            "radii": {
+                               "oneOf": [
+                                  {
+                                     "type": "array",
+                                     "minItems": 2,
+                                     "maxItems": 2,
+                                     "items": { "$ref": "#/$defs/unitValue" }
+                                  },
+                                  {
+                                     "type": "object",
+                                     "properties":
+                                     {
+                                       "x": { "$ref": "#/$defs/unitValue" },
+                                       "y": { "$ref": "#/$defs/unitValue" },
+                                       "alter": { "type": "boolean" }
+                                     }
+                                  }
+                               ]
+                            }
+                         }
+                        }
+                      ]
+      },
+      "rectangle": {
+                      "allOf" : [
+                        { "$ref": "#/$defs/closedShape" },
+                        {
+                         "type": "object",
+                         "required": [ "type", "topLeft", "bottomRight" ],
+                         "properties":
+                         {
+                            "type": { "type": "string", "enum": [ "Rectangle" ] },
+                            "topLeft": { "$ref": "#/$defs/unitPoint" },
+                            "bottomRight": { "$ref": "#/$defs/unitPoint" }
+                         }
+                        }
+                      ]
+      },
+      "roundedRectangle": {
+                      "allOf" : [
+                        { "$ref": "#/$defs/closedShape" },
+                        {
+                         "type": "object",
+                         "required": [ "type", "topLeft", "bottomRight" ],
+                         "properties":
+                         {
+                            "type": { "type": "string", "enum": [ "RoundedRectangle" ] },
+                            "topLeft": { "$ref": "#/$defs/unitPoint" },
+                            "bottomRight": { "$ref": "#/$defs/unitPoint" },
+                            "radii": {
+                               "oneOf": [
+                                  {
+                                     "type": "array",
+                                     "minItems": 2,
+                                     "maxItems": 2,
+                                     "items": { "$ref": "#/$defs/unitValue" }
+                                  },
+                                  {
+                                     "type": "object",
+                                     "properties":
+                                     {
+                                       "x": { "$ref": "#/$defs/unitValue" },
+                                       "y": { "$ref": "#/$defs/unitValue" },
+                                       "alter": { "type": "boolean" }
+                                     }
+                                  }
+                               ]
+                            }
+                         }
+                        }
+                      ]
+      },
+      "closedPath": {
+                      "allOf": [
+                        { "$ref": "#/$defs/abstractPath" },
+                        { "$ref": "#/$defs/closedShape" },
+                        {
+                         "type": "object",
+                         "properties":
+                         {
+                            "type": { "type": "string", "enum": [ "ClosedPath" ] },
+                            "innerNodes":
+                            {
+                               "anyOf": [
+                                 { "$ref": "#/$defs/arrayExpression" },
+                                 {
+                                    "type": "array",
+                                    "items": { "$ref": "#/$defs/pathNodes" }
+                                 },
+                                 {
+                                    "type": "object",
+                                    "required": [ "index", "value" ],
+                                    "properties": {
+                                       "index": { "type": "integer", "minimum": 0 },
+                                       "value": { "$ref": "#/$defs/pathNodes" }
+                                    }
+                                 }
+                               ]
+                            }
+                         }
+                        }
+                      ]
+      },
+      "shape": {
+         "allOf": [
+            { "$ref": "#/$defs/shape" },
+            {
+               "oneOf": [
+                  { "$ref": "#/$defs/path" },
+                  { "$ref": "#/$defs/arc" },
+                  { "$ref": "#/$defs/sectorArc" },
+                  { "$ref": "#/$defs/chordArc" },
+                  { "$ref": "#/$defs/circle" },
+                  { "$ref": "#/$defs/ellipse" },
+                  { "$ref": "#/$defs/rectangle" },
+                  { "$ref": "#/$defs/closedPath" }
+               ]
+            }
+         ]
+      },
+      "pathNodes": {
+                     "oneOf": [
+                        { "$ref": "#/$defs/arrayExpression" },
+                        {
+                           "type": "array",
+                           "minItems": 1,
+                           "items": { "$ref": "#/$defs/unitPoint" }
+                        },
+                        {
+                           "type": "object",
+                           "required": [ "index", "value" ],
+                           "properties": {
+                              "index": { "type": "integer", "minimum": 0 },
+                              "value": { "$ref": "#/$defs/unitPoint" }
+                           }
+                        }
+                     ]
+      },
+      "abstractPath": {
+         "allOf": [
+           { "$ref": "#/$defs/abstractShape" },
+           {
+            "type": "object",
+            "required": [ "nodes" ],
+            "properties":
+            {
+               "nodes": { "$ref": "#/$defs/pathNodes" }
+            }
+           }
+         ]
+      },
+      "path": {
+         "allOf": [
+           { "$ref": "#/$defs/abstractPath" },
+           {
+              "type": "object",
+              "required": [ "type" ],
+              "properties":
+              {
+                 "type": { "type": "string", "enum": [ "Path" ] }
+              }
+           }
+         ]
+      }
+   }
+}
+

@@ -1,0 +1,9 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "title": "OGC Cartographic Symbology - Part 4: Model extension for additional coverage symbolization",
+    "$defs": {
+      "allOf": [
+           { "$ref": "../1-core/schema/CartoSym-JSON.schema.json" }
+      ]
+    }
+}
