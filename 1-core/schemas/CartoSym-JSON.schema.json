@@ -53,7 +53,6 @@
       "type": "object",
       "properties":
       {
-         "name": { "type": "string" },
          "$comment": { "type": "string" },
 
          "visibility": { "$ref": "#/$defs/boolExpression" },
