@@ -23,6 +23,7 @@
                "title": { "type": "string" },
                "abstract": { "type": "string" },
                "authors": { "type": "array", "items": { "type": "string" } },
+               "keywords": { "type": "array", "items": { "type": "string" } },
                "geoDataClasses": { "type": "array", "items": { "type": "string", "format": "uri" } }
             }
          },
@@ -37,6 +38,7 @@
       "type": "object",
       "properties":
       {
+         "name": { "type": "string" },
          "$comment": { "type": "string" },
          "selector": { "$ref": "#/$defs/boolExpression" },
          "symbolizer": { "$ref": "#/$defs/symbolizer" },
