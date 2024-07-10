@@ -85,15 +85,14 @@ is declared by appending `-partial-concept` to the conformance URI.
 [cols="30,70",options="header"]
 |===
 | Conformance class                                               |URI
-|<<rc-gradients,Gradients, Dills>>                                |http://www.opengis.net/spec/symbology-1/1.0/conf/gradients
-|<<rc-arithmetic,Arithmetic Operators>>                           |http://www.opengis.net/spec/symbology-1/1.0/conf/arithmetic
-|<<rc-joinscaps,Joins and Caps>>                                  |http://www.opengis.net/spec/symbology-1/1.0/conf/joinscaps
-|<<rc-patternstrokes,Pattern Strokes>>                            |http://www.opengis.net/spec/symbology-1/1.0/conf/patternstrokes
-|<<rc-patternfills,Pattern Fills>>                                |http://www.opengis.net/spec/symbology-1/1.0/conf/patternfills
+|<<rc-shapegraphics,Shape Graphics>>                              |http://www.opengis.net/spec/symbology-1/1.0/conf/shapegraphics
 |<<rc-shapeoutlines,Shape Outlines>>                              |http://www.opengis.net/spec/symbology-1/1.0/conf/shapeoutlines
-|<<rc-imageoutlines,Image Outlines>>                              |http://www.opengis.net/spec/symbology-1/1.0/conf/imageoutlines
 |<<rc-transforms,Multi Graphics and Transforms>>                  |http://www.opengis.net/spec/symbology-1/1.0/conf/transforms
+|<<rc-joins-caps,Joins and Caps>>                                  |http://www.opengis.net/spec/symbology-1/1.0/conf/joinscaps
+|<<rc-pattern-strokes,Pattern Strokes>>                            |http://www.opengis.net/spec/symbology-1/1.0/conf/patternstrokes
+|<<rc-pattern-fills,Pattern Fills>>                                |http://www.opengis.net/spec/symbology-1/1.0/conf/patternfills
+|<<rc-gradients,Gradients Fills>>                                |http://www.opengis.net/spec/symbology-1/1.0/conf/gradients
 |<<rc-threedim,3D Graphics, Models and Transforms>>               |http://www.opengis.net/spec/symbology-1/1.0/conf/threedim
-|<<rc-geometryproperties,Vector Geometry Properties>>             |http://www.opengis.net/spec/symbology-1/1.0/conf/geometryproperties
+|<<rc-image-outlines,Image Outlines>>                              |http://www.opengis.net/spec/symbology-1/1.0/conf/imageoutlines
+|<<rc-geometry-properties,Vector Geometry Properties>>             |http://www.opengis.net/spec/symbology-1/1.0/conf/geometryproperties
 |===
-s

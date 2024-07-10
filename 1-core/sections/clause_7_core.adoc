@@ -11,6 +11,7 @@ The requirements described in this section define the symbology core requirement
 Style : stylingRules: StylingRule[0..*]
 Style *-- StylingRule
 
+StylingRule : name: string
 StylingRule : symbolizer: Symbolizer[0..1]
 StylingRule : selector: Expression[0..1]
 StylingRule : nestedRules: StylingRule[0..*]

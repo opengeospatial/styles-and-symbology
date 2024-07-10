@@ -42,7 +42,6 @@ part:: An Encoding SHALL support defining a `singleChannel` Symbolizer property 
 part:: A Renderer SHALL support ...
 ====
 
-
 ===== Symbolizer `colorMap` property
 
 [requirement]

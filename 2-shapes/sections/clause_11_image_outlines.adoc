@@ -1,4 +1,4 @@
-
+[[rc-image-outlines]]
 == Requirements Class "Image Outlines"
 
 === Image Outlines
@@ -29,4 +29,4 @@ This requirements class adds support for Image outlines to improve readability o
 
 === Requirements
 
-//TODO: include::../requirements/rc-image-outlines.adoc[]
+include::../requirements/rc-image-outlines.adoc[]

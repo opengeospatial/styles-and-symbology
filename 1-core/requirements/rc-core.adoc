@@ -57,7 +57,6 @@ part:: An Encoding SHALL support ...
 part:: A Renderer SHALL support ...
 ====
 
-
 [[req-core-symbolizer]]
 ===== StylingRule `symbolizer` property
 
@@ -79,7 +78,6 @@ identifier:: /req/core/parameters
 part:: An Encoding SHALL support ...
 part:: A Renderer SHALL support ...
 ====
-
 
 [[req-core-visibility]]
 ===== Symbolizer `visibility` property
@@ -127,7 +125,6 @@ part:: An Encoding SHALL support ...
 part:: A Renderer SHALL support ...
 ====
 
-
 [[req-core-identifiers]]
 ===== Identifier Expressions
 
@@ -138,7 +135,6 @@ identifier:: /req/core/identifiers
 part:: An Encoding SHALL support ...
 part:: A Renderer SHALL support ...
 ====
-
 
 [[req-core-scale]]
 ===== Visualization Scale Denominator System Identifiers
@@ -151,7 +147,6 @@ part:: An Encoding SHALL support ...
 part:: A Renderer SHALL support ...
 ====
 
-
 [[req-core-time]]
 ===== Visualization Time System Identifiers
 
@@ -162,7 +157,6 @@ identifier:: /req/core/time
 part:: An Encoding SHALL support ...
 part:: A Renderer SHALL support ...
 ====
-
 
 [[req-core-layers]]
 ===== Data Layer System Identifiers
@@ -187,7 +181,6 @@ part:: An Encoding SHALL support defining the priority of expressions using mult
 part:: A Renderer SHALL support evaluating operation expressions while respecting the priority of operations.
 ====
 
-
 [[req-core-logical]]
 ===== Logical Operation Expressions
 
@@ -198,7 +191,6 @@ identifier:: /req/core/logical
 part:: An Encoding SHALL support ...
 part:: A Renderer SHALL support ...
 ====
-
 
 [[req-core-relational]]
 ===== Relational Operation Expressions
@@ -211,7 +203,6 @@ part:: An Encoding SHALL support ...
 part:: A Renderer SHALL support ...
 ====
 
-
 [[req-core-arrays]]
 ===== Array Expressions
 
@@ -222,7 +213,6 @@ identifier:: /req/core/arrays
 part:: An Encoding SHALL support ...
 part:: A Renderer SHALL support ...
 ====
-
 
 [[req-core-instances]]
 ===== Instance Expressions

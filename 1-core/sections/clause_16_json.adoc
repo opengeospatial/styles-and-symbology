@@ -67,4 +67,4 @@ include::../schemas/CartoSym-JSON.schema.json[]
 
 === Requirements
 
-include::../requirements/rc-json-encoding.adoc[]
+include::../requirements/rc-json.adoc[]

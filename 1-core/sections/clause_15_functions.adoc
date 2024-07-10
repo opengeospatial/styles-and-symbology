@@ -94,9 +94,9 @@ MathFunctions : tanh(x : double) double
 ....
 
 ==== Requirements
-include::../requirements/rc-math-functions.adoc[]
+include::../requirements/rc-math.adoc[]
 
-[[rc-arrayrelations]]
+[[rc-array-relations]]
 === Requirements Class "Array Relation Functions"
 ==== Overview
 
@@ -127,7 +127,7 @@ ArrayRelationFunctions --> ArrayExpression
 
 include::../requirements/rc-array-relations.adoc[]
 
-[[rc-textmanipulation]]
+[[rc-text-manipulation]]
 === Requirements Class "Text Manipulation Functions"
 ==== Overview
 
