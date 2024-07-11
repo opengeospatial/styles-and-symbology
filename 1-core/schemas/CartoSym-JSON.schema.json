@@ -105,16 +105,16 @@
                "minItems": 2,
                "maxItems": 2,
                "prefixItems": [
-                 { "$ref": "#/$defs/hDistance" },
-                 { "$ref": "#/$defs/vDistance" }
+                 { "$ref": "#/$defs/horizontal" },
+                 { "$ref": "#/$defs/vertical" }
                ]
              },
              {
                "type": "object",
                "properties":
                {
-                 "hDistance": { "$ref":  "#/$defs/unitValue"},
-                 "vDistance": { "$ref":  "#/$defs/unitValue"}
+                 "horizontal": { "$ref":  "#/$defs/unitValue"},
+                 "vertical": { "$ref":  "#/$defs/unitValue"}
                }
              }
            ]
