@@ -98,8 +98,6 @@ include::../requirements/rc-dotpatterns.adoc[]
 === Requirements Class "Stipple fills"
 ==== Overview
 
-#TODO: Change the model to allow a full definition with an arbitrary stipple density (and dot size?). However, define specific values corresponding to the current enums (and to classic legacy system capabilities) that should be used for maximum interoperability and would be tested by the ATS/ETS.#
-
 [#img-uml-stipples]
 .Stipple Fills UML Diagram
 [plantuml, target=diagram-classes, format=png]
