@@ -86,8 +86,8 @@
                "color": { "$ref": "#/$defs/color" },
                "opacity": { "$ref": "#/$defs/zeroToOne" },
                "pattern": { "$ref": "#/$defs/graphic" },
-               "dotpattern": { "$ref": "#/$defs/dotpattern" },
-               "hatchStyle": { "$ref": "#/$defs/hatchStyle" }
+               "hatch": { "$ref": "#/$defs/hatch" },
+               "dotpattern": { "$ref": "#/$defs/dotpattern" }
             }
          }
        ]
@@ -122,12 +122,19 @@
          }
        ]
     },
-    "hatchStyle":
+    "hatch":
     {
-       "oneOf": [
-         { "$ref": "#/$defs/idOrFnExpression" },
-         { "type": "string", "enum": [ "forward", "backward", "xCross", "cross" ] }
-       ]
+      "oneOf": [
+        { "$ref": "#/$defs/idOrFnExpression" },
+        {
+          "type": "object",
+          "properties": {
+            "width": { "$ref":  "#/$defs/unitValue" },
+            "angle": { "$ref": "#/$defs/numericExpression" },
+            "distance": { "$ref":  "#/$defs/unitValue"}
+          }
+        }
+      ]
     },
     "stroke":
     {
