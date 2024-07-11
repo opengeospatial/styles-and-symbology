@@ -10,6 +10,15 @@ The requirements described in this section define the symbology core requirement
 ....
 Style : stylingRules: StylingRule[0..*]
 Style *-- StylingRule
+Style : metadata: Metadata[0..1]
+Style *-- Metadata
+
+Metadata : title: string[0..1]
+Metadata : abstract: string[0..1]
+Metadata : description: string[0..1]
+Metadata : authors: string[0..*]
+Metadata : keywords: string[0..*]
+Metadata : geoDataClasses: string[0..*]
 
 StylingRule : name: string
 StylingRule : symbolizer: Symbolizer[0..1]
@@ -29,6 +38,23 @@ and how to relate to encodings where the visual priority order
 comes from the order of the rules.'/
 ....
 
+==== Metadata
+
+Metadata is a container for descriptive information about a Style. It might includes a title, an abstract, a description, a list of authors, a list of keywords, and a list of geoDataClasses.
+
+.Metadata class
+[width="90%",options="header"]
+|===
+| Name         | Definition                        | Data type and value | Multiplicity
+| name         | A string value to reference the Metadata | string              | 0..1
+| title        | Human readable title               | string              | 0..1
+| abstract     | Human readable description         | string              | 0..1
+| description  | Human readable description         | string              | 0..1
+| authors      | List of authors                   | string              | 0..*
+| keywords     | List of keywords                  | string              | 0..*
+| geoDataClasses | List of geo data classes         | string              | 0..*
+|===
+
 ==== Styles
 
 A Style is the root concept of the Styles and Symbology Conceptual Model and consists of an ordered list of StylingRules.
@@ -42,13 +68,6 @@ This class organizes the rules of symbolizing instructions to be applied by a re
 Please note that the graphic pipeline of the rendering engine must be expressed unambiguously for each concrete implementation of a Style in order to enable cartographic portrayal interoperability.
 ////
 
-////
-Can we omit this metadata? This might belon instead to the encoding or styles metadata.
-
-| name      | A string value to reference the Style   | ParameterValue data type   | Zero or one
-| title      | Human readable title   | ParameterValue data type   | 0..1
-| abstract   | Human readable description   | ParameterValue data type   | 0..1
-////
 
 .Style class
 [width="90%",options="header"]
