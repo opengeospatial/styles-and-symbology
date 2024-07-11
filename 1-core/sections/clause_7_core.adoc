@@ -14,7 +14,6 @@ Style : metadata: Metadata[0..1]
 Style *-- Metadata
 
 Metadata : title: string[0..1]
-Metadata : abstract: string[0..1]
 Metadata : description: string[0..1]
 Metadata : authors: string[0..*]
 Metadata : keywords: string[0..*]
@@ -47,12 +46,11 @@ Metadata is a container for descriptive information about a Style. It might incl
 |===
 | Name         | Definition                        | Data type and value | Multiplicity
 | name         | A string value to reference the Metadata | string              | 0..1
-| title        | Human readable title               | string              | 0..1
-| abstract     | Human readable description         | string              | 0..1
-| description  | Human readable description         | string              | 0..1
-| authors      | List of authors                   | string              | 0..*
+| title        | Short human-readable title for the style               | string              | 0..1
+| description  | Detailed description of the style         | string              | 0..1
+| authors      | Authors of the style                   | string              | 0..*
 | keywords     | List of keywords                  | string              | 0..*
-| geoDataClasses | List of geo data classes         | string              | 0..*
+| geoDataClasses | Comma-separated URIs of GeoDataClasses allowing to identify data sources for which the style is suitable         | string              | 0..*
 |===
 
 ==== Styles

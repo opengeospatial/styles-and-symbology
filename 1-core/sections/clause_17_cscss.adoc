@@ -30,18 +30,6 @@ A style sheet can also contain comments either using C-style multi-line comments
 In addition to styling rules, the style sheet can define metadata elements prefixed by a dot (`.`) as the first character on a line.
 The following metadata elements are defined:
 
-.Metadata elements
-[width="90%",options="header"]
-|===
-| Name           | Definition
-| title          | Short human-readable title for the style
-| abstract       | Detailed description of the style
-| authors        | Authors of the style
-| geoDataClasses | Comma-separated URIs of GeoDataClasses allowing to identify data sources for which the style is suitable
-|===
-
-NOTE: We should probably include these metadata elements in Core conceptual model.
-
 ==== Styling Rules and Symbolizers
 
 A styling rule applies zero or more symbolizer properties if its Selector is evaluated to _true_.
