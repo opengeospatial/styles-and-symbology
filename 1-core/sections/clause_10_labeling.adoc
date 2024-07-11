@@ -55,7 +55,7 @@ LabelClass properties are documented in the following table.
 
 include::../requirements/rc-labels.adoc[]
 
-[[rc-fontoutlines]]
+[[rc-font-outlines]]
 === Requirements Class "Font Outlines"
 ==== Overview
 

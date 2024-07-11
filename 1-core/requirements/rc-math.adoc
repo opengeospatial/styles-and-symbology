@@ -1,0 +1,264 @@
+// NOTE: Including an extra heading level for conformance class alone in their section
+==== Functions
+
+[[rc_table-math-functions]]
+.Math Functions
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/symbology-1/2.0/req/math-functions
+inherit:: http://www.opengis.net/spec/symbology-1/2.0/req/core
+subject:: Style encodings and Renderers
+====
+
+[[req-math-functions-abs]]
+===== Math `abs` function
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/math-functions/abs
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-math-functions-acos]]
+===== Math `acos` function
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/math-functions/acos
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-math-functions-asin]]
+===== Math `asin` function
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/math-functions/asin
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-math-functions-atan]]
+===== Math `atan` function
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/math-functions/atan
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-math-functions-atan2]]
+===== Math `atan2` function
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/math-functions/atan2
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-math-functions-ceil]]
+===== Math `ceil` function
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/math-functions/ceil
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-math-functions-cos]]
+===== Math `cos` function
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/math-functions/cos
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-math-functions-cosh]]
+===== Math `cosh` function
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/math-functions/cosh
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-math-functions-exp]]
+===== Math `exp` function
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/math-functions/exp
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-math-functions-floor]]
+===== Math `floor` function
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/math-functions/floor
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-math-functions-log]]
+===== Math `log` function
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/math-functions/log
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-math-functions-log10]]
+===== Math `log10` function
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/math-functions/log10
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-math-functions-max]]
+===== Math `max` function
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/math-functions/max
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-math-functions-min]]
+===== Math `min` function
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/math-functions/min
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-math-functions-pow]]
+===== Math `pow` function
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/math-functions/pow
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-math-functions-random]]
+===== Math `random` function
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/math-functions/random
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-math-functions-rint]]
+===== Math `rint` function
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/math-functions/rint
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-math-functions-round]]
+===== Math `round` function
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/math-functions/round
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-math-functions-sin]]
+===== Math `sin` function
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/math-functions/sin
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-math-functions-sinh]]
+===== Math `sinh` function
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/math-functions/sinh
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-math-functions-sqrt]]
+===== Math `sqrt` function
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/math-functions/sqrt
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-math-functions-tan]]
+===== Math `tan` function
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/math-functions/tan
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-math-functions-tanh]]
+===== Math `tanh` function
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/math-functions/tanh
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====

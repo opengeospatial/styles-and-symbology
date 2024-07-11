@@ -1,0 +1,35 @@
+// NOTE: Including an extra heading level for conformance class alone in their section
+==== Casing and Centerline
+
+[[rc_table-casing]]
+
+[requirements_class]
+.Casing and Centerline
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/symbology-1/2.0/req/casing
+inherit:: http://www.opengis.net/spec/symbology-1/2.0/req/core
+subject:: Style encodings and Renderers
+====
+
+[[req-casing-casing]]
+===== Casing `casing` operator
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/casing/casing
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-casing-center]
+===== Centerline `center` operator
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/casing/center
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====

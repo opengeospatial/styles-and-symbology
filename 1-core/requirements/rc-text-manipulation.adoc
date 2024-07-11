@@ -1,0 +1,93 @@
+// NOTE: Including an extra heading level for conformance class alone in their section
+==== Text Manipulation Functions
+
+[[rc_table-text-manipulation]]
+
+[requirements_class]
+.Text Manipulation Functions
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/symbology-1/2.0/req/text-manipulation
+inherit:: http://www.opengis.net/spec/symbology-1/2.0/req/core
+subject:: Style encodings and Renderers
+====
+
+[[req-text-manipulation-caseInsensitize]]
+===== Text `caseInsensitize` function
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/text-manipulation/caseInsensitize
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-text-manipulation-accentInsensitize]]
+===== Text `accentInsensitize` function
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/text-manipulation/accentInsensitize
+part:: An Encoding SHALL support defining an `accentInsensitize` function that removes accents from a string.
+part:: A Renderer SHALL support removing accents from a string using the `accentInsensitize` function.
+====
+
+[[req-text-manipulation-lowerCase]]
+===== Text `lowerCase` function
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/text-manipulation/lowerCase
+part:: An Encoding SHALL support defining a `lowerCase` function that converts a string to lowercase.
+part:: A Renderer SHALL support converting a string to lowercase using the `lowerCase` function.
+====
+
+[[req-text-manipulation-upperCase]]
+===== Text `upperCase` function
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/text-manipulation/upperCase
+part:: An Encoding SHALL support defining an `upperCase` function that converts a string to uppercase.
+part:: A Renderer SHALL support converting a string to uppercase using the `upperCase` function.
+====
+
+[[req-text-manipulation-concatenate]]
+===== Text `concatenate` function
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/text-manipulation/concatenate
+part:: An Encoding SHALL support defining a `concatenate` function that concatenates strings.
+part:: A Renderer SHALL support concatenating strings using the `concatenate` function
+====
+
+[[req-text-manipulation-substitute]]
+===== Text `substitute` function
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/text-manipulation/substitute
+part:: An Encoding SHALL support defining a `substitute` function that replaces a substring with another string.
+part:: A Renderer SHALL support replacing a substring with another string using the `substitute` function.
+====
+
+[[req-text-manipulation-format]]
+===== Text `format` function
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/text-manipulation/format
+part:: An Encoding SHALL support defining a `format` function that formats a string.
+part:: A Renderer SHALL support formatting a string using the `format` function.
+====
+
+
+

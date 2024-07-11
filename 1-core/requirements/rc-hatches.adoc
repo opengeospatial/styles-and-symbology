@@ -1,0 +1,26 @@
+// NOTE: Including an extra heading level for conformance class alone in their section
+==== Hatch fills
+
+[[rc_table-hatches]]
+
+[requirements_class]
+.Hatch fills
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/symbology-1/2.0/req/hatches
+inherit:: http://www.opengis.net/spec/symbology-1/2.0/req/core
+subject:: Style encodings and Renderers
+====
+
+[[req-hatches]]
+===== Hatch fills
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/hatches
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+// TODO: Adapt according to pending PR

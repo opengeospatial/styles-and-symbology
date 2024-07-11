@@ -10,7 +10,7 @@ This Standard defines conformance classes for:
    ** label placement and font outlines capabilities (<<rc-labels,Section 10>>),
    ** advanced strokes capabilities, including dashed lines, casing and centerlines (<<rc-dashes,Section 11>>),
    ** advanced fill capabilities, including hatches and stipples (<<rc-hatches,Section 12>>),
-   ** using expressions as parameter values for any symbolizer properties, using identifiers in the right side of operation expressions, conditional expressions and variables (<<rc-parametervalues,Section 13>>),
+   ** using expressions as parameter values for any symbolizer properties, using identifiers in the right side of operation expressions, conditional expressions and variables (<<rc-parameter-values,Section 13>>),
    ** arithmetic and text relation operators (<<rc-arithmetic,Section 14>>),
    ** function call expressions and standardized functions mathematics, temporal and array relations, as well as text manipulation (<<rc-functions,Section 15>>), and
 * two encodings for the logical and conceptual model covering all of these conformance classes:

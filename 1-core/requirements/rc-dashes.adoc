@@ -1,0 +1,33 @@
+// NOTE: Including an extra heading level for conformance class alone in their section
+==== Dashes
+
+[[rc_table-dashes]]
+
+[requirements_class]
+.Dashes
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/symbology-1/2.0/req/dashes
+inherit:: http://www.opengis.net/spec/symbology-1/2.0/req/core
+subject:: Style encodings and Renderers
+====
+
+[[req-dashes-dashPattern]]
+===== Dash Pattern
+
+[requirement]
+====
+[%metadata]
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-dashes-dashOffset]]
+===== Dash Offset
+
+[requirement]
+====
+[%metadata]
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====

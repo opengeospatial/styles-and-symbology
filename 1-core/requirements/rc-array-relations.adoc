@@ -1,0 +1,58 @@
+// NOTE: Including an extra heading level for conformance class alone in their section
+==== Array Relation Functions
+
+[[rc_table-array-relations]]
+
+[requirements_class]
+.Array Relation Functions
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/symbology-1/2.0/req/array-relations
+inherit:: http://www.opengis.net/spec/symbology-1/2.0/req/core
+subject:: Style encodings and Renderers
+====
+
+[[req-array-relations-a_containedBy]]
+===== Array `a_containedBy` operator
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/array-relations/a_containedBy
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-array-relations-a_contains]]
+===== Array `a_contains` operator
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/array-relations/a_contains
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-array-relations-a_equals]]
+===== Array `a_equals` operator
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/array-relations/a_equals
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-array-relations-a_overlaps]]
+===== Array `a_overlaps` operator
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/array-relations/a_overlaps
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+

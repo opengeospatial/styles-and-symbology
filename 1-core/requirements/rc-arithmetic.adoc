@@ -1,0 +1,92 @@
+// NOTE: Including an extra heading level for conformance class alone in their section
+==== Arithmetic Operators
+
+[[rc_table-arithmetic]]
+
+[requirements_class]
+.Arithmetic Operators
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/symbology-1/2.0/req/arithmetic
+inherit:: http://www.opengis.net/spec/symbology-1/2.0/req/core
+subject:: Style encodings and Renderers
+====
+
+[[req-arithmetic-add]]
+===== Arithmetic `add` operator
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/arithmetic/add
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-arithmetic-sub]]
+===== Arithmetic `sub` operator
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/arithmetic/sub
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-arithmetic-mul]]
+===== Arithmetic `mul` operator
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/arithmetic/mul
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-arithmetic-div]]
+===== Arithmetic `div` operator
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/arithmetic/div
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-arithmetic-intDiv]]
+===== Arithmetic `intDiv` operator
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/arithmetic/intDiv
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-arithmetic-mod]]
+===== Arithmetic `mod` operator
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/arithmetic/mod
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-arithmetic-pow]]
+===== Arithmetic `pow` operator
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/arithmetic/pow
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+

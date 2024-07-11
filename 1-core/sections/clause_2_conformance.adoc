@@ -48,7 +48,7 @@ The Basic Labeling Requirements Class specifies requirements for defining labels
 
 The Hill Shading Requirements Class specifies requirements for styling elevation coverage data with a hill-shaded style.
 
-*<<rc-fontoutlines,Requirements Class "Font Outlines">>* (http://www.opengis.net/spec/symbology-1/2.0/req/fontoutlines)
+*<<rc-font-outlines,Requirements Class "Font Outlines">>* (http://www.opengis.net/spec/symbology-1/2.0/req/fontoutlines)
 
 The Font Outlines Requirements Class specifies requirements for displaying fonts with outlines so that text can be legible on any background.
 
@@ -74,7 +74,7 @@ TODO: Clarify how this differs to using a Stroke with a casing on the Shape, and
 
 === Requirements classes for additional expression capabilities
 
-*<<rc-parametervalues,Requirements Class "Parameter Values">>* (http://www.opengis.net/spec/symbology-1/2.0/req/parametervalues)
+*<<rc-parameter-values,Requirements Class "Parameter Values">>* (http://www.opengis.net/spec/symbology-1/2.0/req/parametervalues)
 
 The Parameter Values Requirements Class specifies requirements for using an Expression to define any property of a Symbolizer.
 
@@ -94,7 +94,7 @@ The Variables Requirements Class specifies requirements for defining variables w
 
 The Arithmetic Operators Requirements Class specifies requirements for defining arithmetic operation expressions.
 
-*<<rc-textrelation,Requirements Class "Text Relation Operators">>* (http://www.opengis.net/spec/symbology-1/2.0/req/textrelation)
+*<<rc-text-relation,Requirements Class "Text Relation Operators">>* (http://www.opengis.net/spec/symbology-1/2.0/req/textrelation)
 
 The Text Relation Operators Requirements Class specifies requirements for defining text relation operation expressions.
 
@@ -106,11 +106,11 @@ The Functions Requirements Class specifies requirements for defining function ca
 
 The Math Functions Requirements Class specifies requirements for defining math functions to be used with numeric properties.
 
-*<<rc-arrayrelations,Requirements Class "Array Relation Functions">>* (http://www.opengis.net/spec/symbology-1/2.0/req/arrayrelations)
+*<<rc-array-relations,Requirements Class "Array Relation Functions">>* (http://www.opengis.net/spec/symbology-1/2.0/req/arrayrelations)
 
 The Array Relation Requirements Class specifies requirements for standardized array relation functions to be used with array properties.
 
-*<<rc-textmanipulation,Requirements Class "Text Manipulation Functions">>* (http://www.opengis.net/spec/symbology-1/2.0/req/textmanipulation)
+*<<rc-text-manipulation,Requirements Class "Text Manipulation Functions">>* (http://www.opengis.net/spec/symbology-1/2.0/req/textmanipulation)
 
 The Text Manipulation Requirements Class specifies requirements for standardized text manipulation functions to be used with text properties.
 

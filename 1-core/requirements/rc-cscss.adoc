@@ -1,0 +1,13 @@
+// NOTE: Including an extra heading level for conformance class alone in their section
+==== Cartographic Symbology Cascading Style Sheets
+
+[[rc_table-cscss]]
+
+[requirements_class]
+.Cascading Style Sheets
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/symbology-1/2.0/req/cscss
+inherit:: http://www.opengis.net/spec/symbology-1/2.0/req/core
+subject:: Style encodings and Renderers
+====

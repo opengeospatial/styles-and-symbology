@@ -1,0 +1,24 @@
+// NOTE: Including an extra heading level for conformance class alone in their section
+==== Basic Labeling
+
+[[rc_table-labels]]
+
+[requirements_class]
+.Basic Labeling
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/symbology-1/2.0/req/labels
+inherit:: http://www.opengis.net/spec/symbology-1/2.0/req/core
+subject:: Style encodings and Renderers
+====
+
+[[req-labels]]
+===== Basic Labeling
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/labels
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
