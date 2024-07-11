@@ -87,7 +87,8 @@
                "opacity": { "$ref": "#/$defs/zeroToOne" },
                "pattern": { "$ref": "#/$defs/graphic" },
                "hatch": { "$ref": "#/$defs/hatch" },
-               "dotpattern": { "$ref": "#/$defs/dotpattern" }
+               "dotpattern": { "$ref": "#/$defs/dotpattern" },
+               "stipple": { "$ref": "#/$defs/stipple" }
             }
          }
        ]
@@ -130,8 +131,20 @@
           "type": "object",
           "properties": {
             "width": { "$ref":  "#/$defs/unitValue" },
-            "angle": { "$ref": "#/$defs/numericExpression" },
+            "angle": { "$ref": "#/$defs/numericExpression"},
             "distance": { "$ref":  "#/$defs/unitValue"}
+          }
+        }
+      ]
+    },
+    "stipple":
+    {
+      "oneOf": [
+        { "$ref": "#/$defs/idOrFnExpression" },
+        {
+          "type": "object",
+          "properties": {
+            "ratio": { "$ref":  "#/$defs/numericExpression" }
           }
         }
       ]
