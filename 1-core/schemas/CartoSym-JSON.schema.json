@@ -86,13 +86,13 @@
                "color": { "$ref": "#/$defs/color" },
                "opacity": { "$ref": "#/$defs/zeroToOne" },
                "pattern": { "$ref": "#/$defs/graphic" },
-               "stipple": { "$ref": "#/$defs/stipple" },
+               "dotpattern": { "$ref": "#/$defs/dotpattern" },
                "hatchStyle": { "$ref": "#/$defs/hatchStyle" }
             }
          }
        ]
     },
-    "stipple":
+    "dotpattern":
     {
        "oneOf": [
          { "$ref": "#/$defs/idOrFnExpression" },

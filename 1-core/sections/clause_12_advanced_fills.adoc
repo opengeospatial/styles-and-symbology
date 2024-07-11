@@ -46,22 +46,21 @@ This requirements class adds support for hatch fills. A hatch fill is a pattern 
 
 include::../requirements/rc-hatches.adoc[]
 
-[[rc-stipples]]
-=== Requirements Class "Stipple fills"
+[[rc-dotpattern]]
+=== Requirements Class "Dotpattern fills"
 ==== Overview
 
-#TODO: Change the model to allow a full definition with an arbitrary stipple density (and dot size?). However, define specific values corresponding to the current enums (and to classic legacy system capabilities) that should be used for maximum interoperability and would be tested by the ATS/ETS.#
 
-[#img-uml-stipples]
-.Stipple Fills UML Diagram
+[#img-uml-dotpatterns]
+.Dotpattern Fills UML Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
 class Fill <<extended>>
-Fill : stipple: Stipple
-Fill *-- Stipple
+Fill : dotpattern: Dotpattern
+Fill *-- Dotpattern
 
-Stipple : distance: Distance
-Stipple *-- Distance
+Dotpattern : distance: Distance
+Dotpattern *-- Distance
 
 Distance : horizontal: float
 Distance : vertical: float
@@ -69,18 +68,18 @@ Distance : vertical: float
 
 ....
 
-This requirements class extends Fill capabilities by adding support for stipple fills with a point-based pattern.
+This requirements class extends Fill capabilities by adding support for dot fills with a point-based pattern.
 
-.Fill class extended for stipples
+.Fill class extended for dotpatterns
 [width="90%",options="header"]
 |===
 | Name           | Definition       | Type         | Multiplicity
-| stipple   | Point-based pattern fill    | Stipple | 0..1
+| dotpattern   | Point-based pattern fill    | Dotpattern | 0..1
 |===
 
 ====== Stipples
 
-.Stipple class
+.Dotpattern class
 [width="90%",options="header"]
 |===
 | Name       | Definition      | Data type and value   | Multiplicity
@@ -98,4 +97,4 @@ This requirements class extends Fill capabilities by adding support for stipple 
 
 ==== Requirements
 
-include::../requirements/rc-stipples.adoc[]
+include::../requirements/rc-dotpatterns.adoc[]
