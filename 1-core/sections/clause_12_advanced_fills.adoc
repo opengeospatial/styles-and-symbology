@@ -24,7 +24,7 @@ This requirements class adds support for hatch fills. A hatch fill is a pattern 
 [width="90%",options="header"]
 |===
 | Name           | Definition       | Type         | Multiplicity
-| hatch     | Hatch      | Hatch   | 0..1
+| hatch     | Line_based hatch fill      | Hatch   | 0..1
 |===
 
 ====== Hatches
