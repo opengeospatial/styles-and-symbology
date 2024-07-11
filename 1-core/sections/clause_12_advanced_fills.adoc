@@ -41,46 +41,55 @@ This requirements class adds support for hatch fills. A hatch fill is a pattern 
 
 include::../requirements/rc-hatches.adoc[]
 
-[[rc-stipples]]
-=== Requirements Class "Stipple fills"
+[[rc-dotpattern]]
+=== Requirements Class "Dotpattern fills"
 ==== Overview
 
-#TODO: Change the model to allow a full definition with an arbitrary stipple density (and dot size?). However, define specific values corresponding to the current enums (and to classic legacy system capabilities) that should be used for maximum interoperability and would be tested by the ATS/ETS.#
 
-[#img-uml-stipples]
-.Stipple Fills UML Diagram
+[#img-uml-dotpatterns]
+.Dotpattern Fills UML Diagram
 [plantuml, target=diagram-classes, format=png]
 ....
 class Fill <<extended>>
-Fill : stippleStyle: StippleStyle
-Fill *-- StippleStyle
+Fill : dotpattern: Dotpattern
+Fill *-- Dotpattern
 
-enum StippleStyle
-StippleStyle : light
-StippleStyle : medium
-StippleStyle : heavy
+Dotpattern : distance: Distance
+Dotpattern *-- Distance
+
+Distance : horizontal: float
+Distance : vertical: float
+
+
 ....
 
-This requirements class adds support for stipple fills. A stipple fill is a pattern of dots.
+This requirements class extends Fill capabilities by adding support for dot fills with a point-based pattern.
 
-.Fill class extended for stipples
+.Fill class extended for dotpatterns
 [width="90%",options="header"]
 |===
 | Name           | Definition       | Type         | Multiplicity
-| stippleStyle   | Stipple style    | StippleStyle | 0..1
+| dotpattern   | Point-based pattern fill    | Dotpattern | 0..1
 |===
 
 ====== Stipples
 
-.StippleStyle class
+.Dotpattern class
 [width="90%",options="header"]
 |===
 | Name       | Definition      | Data type and value   | Multiplicity
-| light      | Light           | float                 | 1
-| medium     | Medium          | float                 | 1
-| heavy      | Heavy           | float                 | 1
+| distance      | Distance between rendered points in the fill           | Distance                 | 0..1
+|===
+
+.Distance class
+[width="90%",options="header"]
+|===
+| Name       | Definition      | Data type and value   | Multiplicity
+| horizontal    | Horizontal distance between rendered points in the fill.           | float                 | 0..1
+| vertical      | vertical distance between rendered points in the fill.           | float                 | 0..1
+
 |===
 
 ==== Requirements
 
-include::../requirements/rc-stipples.adoc[]
+include::../requirements/rc-dotpatterns.adoc[]
