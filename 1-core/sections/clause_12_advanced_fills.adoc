@@ -72,7 +72,7 @@ This requirements class extends Fill capabilities by adding support for dot fill
 | dotpattern   | Point-based pattern fill    | Dotpattern | 0..1
 |===
 
-====== Stipples
+====== Dot pattern
 
 .Dotpattern class
 [width="90%",options="header"]
@@ -93,3 +93,40 @@ This requirements class extends Fill capabilities by adding support for dot fill
 ==== Requirements
 
 include::../requirements/rc-dotpatterns.adoc[]
+
+[[rc-stipples]]
+=== Requirements Class "Stipple fills"
+==== Overview
+
+[#img-uml-stipples]
+.Stipple Fills UML Diagram
+[plantuml, target=diagram-classes, format=png]
+....
+class Fill <<extended>>
+Fill : stipple: Stipple
+Fill *-- Stipple
+
+Stipple : ratio
+....
+
+This requirements class adds support for stipple fills. A stipple fill is a pattern of dots.
+
+.Fill class extended for stipples
+[width="90%",options="header"]
+|===
+| Name           | Definition       | Type         | Multiplicity
+| stipple   | Stipple fill    | Stipple | 0..1
+|===
+
+====== Stipples
+
+.Stipple class
+[width="90%",options="header"]
+|===
+| Name       | Definition      | Data type and value   | Multiplicity
+| ratio      | Ratio of dots according area fill (betwwen 0 an 1)           | float                 | 1
+|===
+
+==== Requirements
+
+include::../requirements/rc-stipples.adoc[]
