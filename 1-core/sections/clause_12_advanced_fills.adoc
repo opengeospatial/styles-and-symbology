@@ -35,8 +35,8 @@ This requirements class adds support for hatch fills. A hatch fill is a pattern 
 | Name      | Definition       | Data type and value   | Multiplicity
 | width   | Thickness of hatch          | float                 | 0..1
 | angle  | Hatches orientation clockwise degree         | float                 | 0..1
-| distance    | Distance between two consecutive hatches     | float                 | 0..1
-| offset    |  Offset from the feature boundary           | float                 | 0..1
+| distance  | Distance between two consecutive hatches     | float                 | 0..1
+| offset   |  Offset from the feature bounding box           | float                 | 0..1
 |===
 
 ==== Requirements
