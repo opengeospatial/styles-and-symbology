@@ -108,8 +108,7 @@
           "properties": {
             "width": { "$ref":  "#/$defs/unitValue" },
             "angle": { "$ref": "#/$defs/numericExpression" },
-            "distance": { "$ref":  "#/$defs/unitValue"},
-            "offset": { "$ref":  "#/$defs/unitValue"}
+            "distance": { "$ref":  "#/$defs/unitValue"}
           }
         }
       ]
