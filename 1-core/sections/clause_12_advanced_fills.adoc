@@ -57,33 +57,43 @@ include::../requirements/rc-hatches.adoc[]
 [plantuml, target=diagram-classes, format=png]
 ....
 class Fill <<extended>>
-Fill : stippleStyle: StippleStyle
-Fill *-- StippleStyle
+Fill : stipple: Stipple
+Fill *-- Stipple
 
-enum StippleStyle
-StippleStyle : light
-StippleStyle : medium
-StippleStyle : heavy
+Stipple : distance: Distance
+Stipple *-- Distance
+
+Distance : horizontal: float
+Distance : vertical: float
+
+
 ....
 
-This requirements class adds support for stipple fills. A stipple fill is a pattern of dots.
+This requirements class extends Fill capabilities by adding support for stipple fills with a point-based pattern.
 
 .Fill class extended for stipples
 [width="90%",options="header"]
 |===
 | Name           | Definition       | Type         | Multiplicity
-| stippleStyle   | Stipple style    | StippleStyle | 0..1
+| stipple   | Point-based pattern fill    | Stipple | 0..1
 |===
 
 ====== Stipples
 
-.StippleStyle class
+.Stipple class
 [width="90%",options="header"]
 |===
 | Name       | Definition      | Data type and value   | Multiplicity
-| light      | Light           | float                 | 1
-| medium     | Medium          | float                 | 1
-| heavy      | Heavy           | float                 | 1
+| distance      | Distance between rendered points in the fill           | Distance                 | 0..1
+|===
+
+.Distance class
+[width="90%",options="header"]
+|===
+| Name       | Definition      | Data type and value   | Multiplicity
+| horizontal    | Horizontal distance between rendered points in the fill.           | float                 | 0..1
+| vertical      | vertical distance between rendered points in the fill.           | float                 | 0..1
+
 |===
 
 ==== Requirements
