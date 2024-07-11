@@ -1,0 +1,24 @@
+// NOTE: Including an extra heading level for conformance class alone in their section
+==== Parameter Values
+
+[[rc_table-parameter-values]]
+
+[requirements_class]
+.Parameter Values
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/symbology-1/2.0/req/parameter-values
+inherit:: http://www.opengis.net/spec/symbology-1/2.0/req/core
+subject:: Style encodings and Renderers
+====
+
+[[req-parameter-values]]
+===== Parameter Values
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/parameter-values
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====

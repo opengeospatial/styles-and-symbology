@@ -1,0 +1,46 @@
+// NOTE: Including an extra heading level for conformance class alone in their section
+==== Conditional Expressions
+
+[[rc_table-conditional]]
+
+[requirements_class]
+.Conditional Expressions
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/symbology-1/2.0/req/conditional
+inherit:: http://www.opengis.net/spec/symbology-1/2.0/req/core
+subject:: Style encodings and Renderers
+====
+
+[[req-conditional-condition]]
+===== Conditional `condition` operator
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/conditional/condition
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-conditional-thenExp]]
+===== Conditional `thenExp` operator
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/conditional/thenExp
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-conditional-elseExp]]
+===== Conditional `elseExp` operator
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/conditional/elseExp
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====

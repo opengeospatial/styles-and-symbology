@@ -1,0 +1,26 @@
+// NOTE: Including an extra heading level for conformance class alone in their section
+==== Any right-hand operands
+
+[[rc_table-righthand]]
+
+[requirements_class]
+.Any right-hand operands
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/symbology-1/2.0/req/righthand
+inherit:: http://www.opengis.net/spec/symbology-1/2.0/req/core
+subject:: Style encodings and Renderers
+====
+
+[[req-righthand-literal]]
+===== Any right-hand operands
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/arithmetic/add
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+//TODO: add part for condition, thenExp, elseExp

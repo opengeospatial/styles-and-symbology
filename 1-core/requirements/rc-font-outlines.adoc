@@ -1,0 +1,26 @@
+// NOTE: Including an extra heading level for conformance class alone in their section
+==== Font Outlines
+
+[[rc_table-font-outlines]]
+
+[requirements_class]
+.Font Outlines
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/symbology-1/2.0/req/font-outlines
+inherit:: http://www.opengis.net/spec/symbology-1/2.0/req/core
+subject:: Style encodings and Renderers
+====
+
+[[req-font-outlines]]
+===== Font Outlines
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/font-outlines
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+// TODO: Define Encoding & Render parts for outline, size, opacity, color

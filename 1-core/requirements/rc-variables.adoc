@@ -1,0 +1,24 @@
+// NOTE: Including an extra heading level for conformance class alone in their section
+==== Variables
+
+[[rc-variables]]
+
+[requirements_class]
+.Variables
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/symbology-1/2.0/req/variables
+inherit:: http://www.opengis.net/spec/symbology-1/2.0/req/core
+subject:: Style encodings and Renderers
+====
+
+[[req-variables]]
+===== Variables
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/variables
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====

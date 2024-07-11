@@ -1,0 +1,36 @@
+// NOTE: Including an extra heading level for conformance class alone in their section
+==== Functions
+
+[[rc_table-functions]]
+
+[requirements_class]
+.Functions
+
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/symbology-1/2.0/req/functions
+inherit:: http://www.opengis.net/spec/symbology-1/2.0/req/core
+subject:: Style encodings and Renderers
+====
+
+[[req-functions-call-expressions]]
+===== Function call expressions
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/functions/functions-call-expressions
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-functions-standard-functions]]
+===== Standard functions
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/functions/standard-functions
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====

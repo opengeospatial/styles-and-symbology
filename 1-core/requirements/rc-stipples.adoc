@@ -1,0 +1,27 @@
+// NOTE: Including an extra heading level for conformance class alone in their section
+==== Stipple fills
+
+[[rc_table-stipples]]
+
+[requirements_class]
+.Stipple fills
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/symbology-1/2.0/req/stipples
+inherit:: http://www.opengis.net/spec/symbology-1/2.0/req/core
+subject:: Style encodings and Renderers
+====
+
+[[req-stipples]]
+===== Stipple fills
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/arithmetic/add
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+//TODO: Complete according to the pending PR
+

@@ -1,0 +1,104 @@
+// NOTE: Including an extra heading level for conformance class alone in their section
+==== Text Relation Operators
+
+[[rc_table-text-relation]]
+
+[requirements_class]
+.Text Relation Operators
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/symbology-1/2.0/req/text-relation
+inherit:: http://www.opengis.net/spec/symbology-1/2.0/req/core
+subject:: Style encodings and Renderers
+====
+
+[[req-text-relation-like]]
+===== Text `like` operator
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/text-relation/like
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-text-relation-notLike]]
+===== Text `notLike` operator
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/text-relation/notLike
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-text-relation-contains]]
+===== Text `contains` operator
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/text-relation/contains
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-text-relation-startsWith]]
+===== Text `startsWith` operator
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/text-relation/startsWith
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-text-relation-endsWith]]
+===== Text `endsWith` operator
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/text-relation/endsWith
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-text-relation-notContains]]
+===== Text `notContains` operator
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/text-relation/notContains
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-text-relation-notStartsWith]]
+===== Text `notStartsWith` operator
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/text-relation/notStartsWith
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+[[req-text-relation-notEndsWith]]
+===== Text `notEndsWith` operator
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/text-relation/notEndsWith
+part:: An Encoding SHALL support ...
+part:: A Renderer SHALL support ...
+====
+
+
+

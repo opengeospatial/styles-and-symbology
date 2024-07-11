@@ -1,0 +1,13 @@
+// NOTE: Including an extra heading level for conformance class alone in their section
+==== JSON Styles and Symbology
+
+[[rc_table-json]]
+
+[requirements_class]
+.JSON Styles and Symbology
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/symbology-1/2.0/req/json
+inherit:: http://www.opengis.net/spec/symbology-1/2.0/req/core
+subject:: Style encodings and Renderers
+====
