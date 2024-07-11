@@ -23,7 +23,6 @@
             {
                "$comment": { "type": "string" },
                "title": { "type": "string" },
-               "abstract": { "type": "string" },
                "description": { "type": "string" },
                "authors": { "type": "array", "items": { "type": "string" } },
                "keywords": { "type": "array", "items": { "type": "string" } },
