@@ -22,8 +22,6 @@ Hatch : angle: float
 Hatch : distance: float
 ....
 
-
-
 ==== Requirements
 
 include::../requirements/rc-hatches.adoc[]
@@ -31,7 +29,6 @@ include::../requirements/rc-hatches.adoc[]
 [[rc-dotpattern]]
 === Requirements Class "Dotpattern fills"
 ==== Overview
-
 
 [#img-uml-dotpatterns]
 .Dotpattern Fills UML Diagram
@@ -46,8 +43,6 @@ Dotpattern *-- Distance
 
 Distance : horizontal: float
 Distance : vertical: float
-
-
 ....
 
 This requirements class extends Fill capabilities by adding support for dot fills with a point-based pattern.
@@ -74,7 +69,6 @@ This requirements class extends Fill capabilities by adding support for dot fill
 | Name       | Definition      | Data type and value   | Multiplicity
 | horizontal    | Horizontal distance between rendered points in the fill.           | float                 | 0..1
 | vertical      | vertical distance between rendered points in the fill.           | float                 | 0..1
-
 |===
 
 ==== Requirements
