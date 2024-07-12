@@ -41,7 +41,7 @@ inherit:: http://www.opengis.net/spec/symbology-1/2.0/req/dashes
 part:: An Encoding SHALL support defining a dashPattern property for the stroke symbolizer.
 part:: A Renderer SHALL support dashing vector geometry based on a dashPattern property.
 
-.In black stroke without dashes, in red with a dash pattern alternating a long dash with a short gap
+.In black stroke without dashes, in red with a dash pattern alternating a long dash with a short gap.
 image::figures/stroke_dashPattern.png[]
 ====
 
@@ -55,6 +55,7 @@ identifier:: http://www.opengis.net/spec/symbology-1/2.0/req/dashOffset
 inherit:: http://www.opengis.net/spec/symbology-1/2.0/req/dashes
 part:: An Encoding SHALL support defining a dashOffset property for the stroke symbolizer.
 part:: A Renderer SHALL support dashing vector geometry based on a dashOffset property.
+
 .In black stroke without dashes, in red with a dash pattern preceded by an offset on the rendering of the associated dash pattern.
 image::figures/stroke_dashOffset.png[]
 ====
