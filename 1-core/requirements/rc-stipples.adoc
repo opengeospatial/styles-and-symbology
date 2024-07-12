@@ -18,7 +18,7 @@ subject:: Style encodings and Renderers
 [requirement]
 ====
 [%metadata]
-identifier:: /req/arithmetic/add
+identifier:: /req/stipples
 part:: An Encoding SHALL support ...
 part:: A Renderer SHALL support ...
 ====
