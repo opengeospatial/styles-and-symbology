@@ -5,23 +5,10 @@
 ==== Overview
 
 [#img-uml-class-dashes]
-.Dashed strokes class UML diagram
-[plantuml, target=diagram-classes, format=png]
-....
-class Stroke <<extended>>
-Stroke : dashPattern: integer [*]
-Stroke : dashOffset: float [0..1]
-....
 
-This requirements class adds support for dashed Strokes.
-
-.Extended Stroke class
-[width="90%",options="header"]
-|===
-| Name          | Definition         | Type         | Multiplicity
-| dashPattern   | Dash pattern       | int          | 0..*
-| dashOffset    | Dash offset        | UnitValue    | 0..1
-|===
+This requirements class adds capabilities for strokes with the possibility to define :
+* the pattern of dashes and gaps used to paint the stroke
+* an offset on the rendering of the associated dash array.
 
 ==== Requirements
 

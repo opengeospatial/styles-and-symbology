@@ -12,14 +12,37 @@ inherit:: http://www.opengis.net/spec/symbology-1/2.0/req/core
 subject:: Style encodings and Renderers
 ====
 
+Implementations shall support all properties in the below table for style encodings and renderers.
+
+.Dashed strokes class UML diagram
+[plantuml, target=diagram-classes, format=png]
+....
+class Stroke <<extended>>
+Stroke : dashPattern: integer [*]
+Stroke : dashOffset: float [0..1]
+....
+
+.Extended Stroke class for dashes
+[width="90%",options="header"]
+|===
+| Name          | Definition         | Type         | Multiplicity
+| dashPattern   | Dash pattern       | int          | 0..*
+| dashOffset    | Dash offset        | UnitValue    | 0..1
+|===
+
 [[req-dashes-dashPattern]]
 ===== Dash Pattern
 
 [requirement]
 ====
 [%metadata]
-part:: An Encoding SHALL support ...
-part:: A Renderer SHALL support ...
+identifier:: http://www.opengis.net/spec/symbology-1/2.0/req/dashPattern
+inherit:: http://www.opengis.net/spec/symbology-1/2.0/req/dashes
+part:: An Encoding SHALL support defining a dashPattern property for the stroke symbolizer.
+part:: A Renderer SHALL support dashing vector geometry based on a dashPattern property.
+
+.In black stroke without dashes, in red with a dash pattern alternating a long dash with a short gap
+image::figures/stroke_dashPattern.png[]
 ====
 
 [[req-dashes-dashOffset]]
@@ -28,6 +51,10 @@ part:: A Renderer SHALL support ...
 [requirement]
 ====
 [%metadata]
-part:: An Encoding SHALL support ...
-part:: A Renderer SHALL support ...
+identifier:: http://www.opengis.net/spec/symbology-1/2.0/req/dashOffset
+inherit:: http://www.opengis.net/spec/symbology-1/2.0/req/dashes
+part:: An Encoding SHALL support defining a dashOffset property for the stroke symbolizer.
+part:: A Renderer SHALL support dashing vector geometry based on a dashOffset property.
+.In black stroke without dashes, in red with a dash pattern preceded by an offset on the rendering of the associated dash pattern.
+image::figures/stroke_dashOffset.png[]
 ====
