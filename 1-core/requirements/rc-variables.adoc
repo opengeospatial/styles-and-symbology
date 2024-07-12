@@ -1,7 +1,7 @@
 // NOTE: Including an extra heading level for conformance class alone in their section
 ==== Variables
 
-[[rc-variables]]
+[[rc_table-variables]]
 
 [requirements_class]
 .Variables
