@@ -15,13 +15,22 @@ subject:: Style encodings and Renderers
 [[req-stipples]]
 ===== Stipple fills
 
+Implementations shall support all properties in the below table for style encodings and renderers.
+
+.Fill class extended for stippling
+[width="90%",options="header"]
+|===
+| Name           | Definition                                       | Type                  | Multiplicity
+| stipplingRatio | Ratio of stippling dots according to area filled | float (betwwen 0 an 1)| 0..1
+|===
+
 [requirement]
 ====
 [%metadata]
-identifier:: /req/stipples
-part:: An Encoding SHALL support ...
-part:: A Renderer SHALL support ...
+identifier:: /req/stippling-ratio
+part:: An Encoding SHALL support defining a ratio property for the stipple fill symbolizer.
+part:: A Renderer SHALL support stipple fill vector geometry based on a ratio property.
+
+.Fill a shape area with dots defined by a ratio (0.2, 0.5, 0.8)
+image::figures/stipples.png[]
 ====
-
-//TODO: Complete according to the pending PR
-
