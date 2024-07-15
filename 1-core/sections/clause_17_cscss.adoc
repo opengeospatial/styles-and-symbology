@@ -25,11 +25,6 @@ Because later rules allow to override earlier ones, this cascading allows to app
 
 A style sheet can also contain comments either using C-style multi-line comments (between `/\*` and `*/`) or C++-style single-line comments (starting with `//`).
 
-==== Metadata elements
-
-In addition to styling rules, the style sheet can define metadata elements prefixed by a dot (`.`) as the first character on a line.
-The following metadata elements are defined:
-
 ==== Styling Rules and Symbolizers
 
 A styling rule applies zero or more symbolizer properties if its Selector is evaluated to _true_.
