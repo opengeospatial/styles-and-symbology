@@ -39,7 +39,7 @@ comes from the order of the rules.'/
 
 ==== Metadata
 
-Metadata is a container for descriptive information about a Style. It might includes a title, an abstract, a description, a list of authors, a list of keywords, and a list of geoDataClasses.
+Metadata is a container for descriptive information about a Style. It might includes a title, an abstract, a description, a list of authors, a list of keywords, and a list of geoDataClasses. All metadata elements are prefixed by a dot (`.`) as the first character of a line.
 
 .Metadata class
 [width="90%",options="header"]
