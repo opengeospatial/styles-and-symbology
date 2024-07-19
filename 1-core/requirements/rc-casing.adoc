@@ -23,7 +23,7 @@ part:: An Encoding SHALL support ...
 part:: A Renderer SHALL support ...
 ====
 
-[[req-casing-center]
+[[req-casing-center]]
 ===== Centerline `center` operator
 
 [requirement]
