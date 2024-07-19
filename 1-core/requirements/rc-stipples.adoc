@@ -1,5 +1,3 @@
-// NOTE: Including an extra heading level for conformance class alone in their section
-==== Stipple fills
 
 [[rc_table-stipples]]
 
@@ -30,7 +28,7 @@ Implementations shall support all properties in the below table for style encodi
 identifier:: /req/stippling-ratio
 part:: An Encoding SHALL support defining a ratio property for the stipple fill symbolizer.
 part:: A Renderer SHALL support stipple fill vector geometry based on a ratio property.
+====
 
 .Fill a shape area with dots defined by a ratio (0.2, 0.5, 0.8)
 image::figures/stipples.png[]
-====

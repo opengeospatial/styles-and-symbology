@@ -5,9 +5,10 @@
 ==== Overview
 
 This requirements class adds capabilities for defining hatch fills as a pattern of lines controlled by:
-• the width of the line (i.e. thickness)
-• the distance between two lines
-• the angle of the lines
+
+* the width (thickness) of the line,
+* the distance between two lines,
+* the angle of the lines.
 
 [#img-uml-hatches]
 .Hatches Fills UML Diagram
@@ -27,7 +28,7 @@ Hatch : distance: float
 include::../requirements/rc-hatches.adoc[]
 
 [[rc-dotpattern]]
-=== Requirements Class "Dotpattern fills"
+=== Requirements Class "Dot pattern fills"
 ==== Overview
 
 [#img-uml-dotpatterns]
@@ -47,14 +48,12 @@ Distance : vertical: float
 
 This requirements class extends Fill capabilities by adding support for dot fills with a point-based pattern.
 
-.Fill class extended for dotpatterns
+.Fill class extended for dot patterns
 [width="90%",options="header"]
 |===
 | Name           | Definition       | Type         | Multiplicity
 | dotpattern   | Point-based pattern fill    | Dotpattern | 0..1
 |===
-
-====== Dot pattern
 
 .Dotpattern class
 [width="90%",options="header"]

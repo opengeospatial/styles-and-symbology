@@ -1,5 +1,3 @@
-// NOTE: Including an extra heading level for conformance class alone in their section
-==== Hatch fills
 
 [[rc_table-hatches]]
 
@@ -12,26 +10,30 @@ inherit:: http://www.opengis.net/spec/symbology-1/2.0/req/core
 subject:: Style encodings and Renderers
 ====
 
-[[req-hatches]]
 ===== Hatch fills
 
-Implementations shall support all properties in the below table for style encodings and renderers.
+[[req-hatches]]
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/hatch-fills
+part:: Encodings and Renderers SHALL support a `hatch` property within the `Fill` class, defined as a `Hatch` class.
+====
 
 .Fill class extended for hatches
 [width="90%",options="header"]
 |===
-| Name           | Definition       | Type         | Multiplicity
+| Name      | Definition       | Type         | Multiplicity
 | hatch     | Line-based hatch fill      | Hatch   | 0..1
 |===
-
-====== Hatches
 
 .Hatch class
 [width="90%",options="header"]
 |===
 | Name      | Definition       | Data type and value   | Multiplicity
-| width   | Thickness of hatch          | float                 | 0..1
-| angle  | Hatches orientation clockwise degree         | float                 | 0..1
+| width     | Thickness of hatch          | float                 | 0..1
+| angle     | Hatches orientation clockwise degree         | float                 | 0..1
 | distance  | Distance between two consecutive hatches     | float                 | 0..1
 |===
 
@@ -41,39 +43,47 @@ image::figures/hatches_empty.png[]
 .Default hatch properties (width : 1 px, angle : 45 °, distance : 10 px)
 image::figures/hatches_default.png[]
 
-[[req-hatches-width]]
 ===== Width
+
+[[req-hatches-width]]
+
+[requirement]
+====
 [%metadata]
-identifier:: http://www.opengis.net/spec/symbology-1/2.0/req/width
-inherit:: http://www.opengis.net/spec/symbology-1/2.0/req/hatches
-part:: An Encoding SHALL support defining a width property for the hatch fill symbolizer.
+identifier:: /req/hatch-width
+part:: An Encoding SHALL support defining a `width` property for the hatch fill symbolizer.
 part:: A Renderer SHALL support fill hatching vector geometry based on a width property.
+====
 
 .A hatch lines with a width of 5px
 image::figures/hatches_width_5px.png[]
-====
+
+===== Angle
 
 [[req-hatches-angle]]
-===== Angle
+
+[requirement]
+====
 [%metadata]
-identifier:: http://www.opengis.net/spec/symbology-1/2.0/req/angle
-inherit:: http://www.opengis.net/spec/symbology-1/2.0/req/hatches
-part:: An Encoding SHALL support defining a angle property for the hatch fill symbolizer.
+identifier:: /req/hatch-angle
+part:: An Encoding SHALL support defining an `angle` property for the hatch fill symbolizer.
 part:: A Renderer SHALL support fill hatching vector geometry based on an angle property.
+====
 
 .A hatch lines with an angle of 0 degree
 image::figures/hatches_angle_0.png[]
-====
+
+===== Distance
 
 [[req-hatches-distance]]
-===== Distance
+
+[requirement]
+====
 [%metadata]
-identifier:: http://www.opengis.net/spec/symbology-1/2.0/req/distance
-inherit:: http://www.opengis.net/spec/symbology-1/2.0/req/hatches
-part:: An Encoding SHALL support defining a distance property for the hatch fill symbolizer.
+identifier:: /req/hatch-distance
+part:: An Encoding SHALL support defining a `distance` property for the hatch fill symbolizer.
 part:: A Renderer SHALL support fill hatching vector geometry based on a distance property.
+====
 
 .A hatch lines with a distance of 5px
 image::figures/hatches_distance_5px.png[]
-====
-

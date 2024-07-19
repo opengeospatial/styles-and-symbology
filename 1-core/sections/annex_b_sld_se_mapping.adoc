@@ -36,13 +36,14 @@ Standard.
 [width="90%",options="header"]
 |===
 | Construct            | SE Equivalent
-| LiteralExpression    | `<ogc:Literal>` (<<see table below>>)
-| IdentifierExpression | `<ogc:PropertyName>` for feature properties, `<SourceChannelName>` for raster fields, System Identifiers (<<see table below>>)
+| LiteralExpression    | `<ogc:Literal>` (see <<sldse-literal-maping, table below>>)
+| IdentifierExpression | `<ogc:PropertyName>` for feature properties, `<SourceChannelName>` for raster fields, System Identifiers (see <<sldse-systemids-maping, table below>>)
 | InstanceExpression   | N/A
 | ArrayExpression      | N/A
-| OperationExpression  | Comparison operators (<<see table below>>) with optional logical operators (<<see table below>>)
+| OperationExpression  | Comparison operators with optional logical operators (see <<sldse-operators-maping, table below>>)
 |===
 
+[[sldse-systemids-maping]]
 .Mapping of System Identifiers Expressions to SLD/SE constructs
 [width="90%",options="header"]
 |===
@@ -60,7 +61,8 @@ Standard.
 | dataLayer.type                 | N/A
 |===
 
-.Mapping of Operation Expressions to SLD/SE constructs
+[[sldse-operators-maping]]
+.Mapping of Operators to SLD/SE constructs
 [width="90%",options="header"]
 |===
 | Construct            | SE Equivalent
@@ -68,6 +70,7 @@ Standard.
 | LogicOperator        | Logical operators (`<ogc:And>`, `<ogc:Or>`, `<ogc:Not>`)
 |===
 
+[[sldse-literal-maping]]
 .Mapping of Literal Expressions to SLD/SE constructs
 [width="90%",options="header"]
 |===
@@ -89,7 +92,7 @@ Standard.
 | Construct         | SE Equivalent
 | equal             | `<ogc:PropertyIsEqualTo>`
 | notEqual          | `<ogc:PropertyIsNotEqualTo>`
-| is (null)         | 
+| is (null)         |
 | lesser            | `<ogc:PropertyIsLessThan>`
 | greater           | `<ogc:PropertyIsGreaterThan>`
 | lesserEqual       | `<ogc:PropertyIsLessThanOrEqualTo>`
@@ -107,16 +110,16 @@ Standard.
 | Symbolizer        | `<PointSymbolizer>`, `<LineSymbolizer>`, `<PolygonSymbolizer>`, `<TextSymbolizer>`, `<RasterSymbolizer>`
 | Symbolizer opacity | `<Opacity>` inside `<RasterSymbolizer>` (no global opacity for vector symbolizers)
 | Selector          | `<ogc:Filter>`
-| nestedRules       | `<ogc:ElseFilter>` provides limited support for one use case of nested rules 
+| nestedRules       | `<ogc:ElseFilter>` provides limited support for one use case of nested rules
 
-| *Expression*         | 
+| *Expression*         |
 | LiteralExpression    | `<ogc:Literal>`
 | IdentifierExpression | `<ogc:PropertyName>` for feature properties, `<SourceChannelName>` for raster fields
 | InstanceExpression   | N/A
 | ArrayExpression      | N/A
 | OperationExpression  | Comparison operators (`<ogc:PropertyIsEqualTo>`, `<ogc:PropertyIsLessThan>`, etc.) with optional logical operators (`<ogc:And>`, `<ogc:Or>`, `<ogc:Not>`)
 
-| *Operation Expressions* | 
+| *Operation Expressions* |
 | RelationalOperator   | Comparison operators (`<ogc:PropertyIsEqualTo>`, `<ogc:PropertyIsLessThan>`, etc.)
 | LogicOperator        | Logical operators (`<ogc:And>`, `<ogc:Or>`, `<ogc:Not>`)
 |===
@@ -224,7 +227,7 @@ Parameter Values are always supported everywhere in SLD/SE and you can assign an
 .Mapping of the "Basic Vector Features Styling" requirements class to SLD/SE constructs
 [width="90%",options="header"]
 |===
-| Construct                   | SE Equivalent 
+| Construct                   | SE Equivalent
 | Text (inside Marker)        | `<WellKnownName>` pointing to a TrueType Font with a `<MarkIndex>` identifiying the character inside the font inside a `<Mark>` inside a `<Graphic>` in a `<PointSymbolizer>` (only for single characters text)
 | Font                        | `<Font>` with `<SvgParameter name="font-family">`, `<SvgParameter name="font-size">`, `<SvgParameter name="font-style">`, `<SvgParameter name="font-weight">`
 | TextAlignment               | `<AnchorPoint>` inside `<PointSymbolizer>`, or `<AnchorPoint>` inside `<PointPlacement>` inside `<LabelPlacement>` inside `<TextSymbolizer>`
@@ -627,7 +630,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0.0">
 .Mapping of the "Conditional Expressions" requirements class to SLD/SE constructs
 [width="90%",options="header"]
 |===
-| Construct                    | SLD Equivalent 
+| Construct                    | SLD Equivalent
 | conditional operator         | `if_then_else` `<ogc:Function>` in GeoServer
 |===
 
@@ -686,7 +689,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0.0">
 [width="90%",options="header"]
 |===
 | Construct                    | SE Equivalent
-| **ArithmeticOperator**       | 
+| **ArithmeticOperator**       |
 | add                          | `<ogc:Add>`
 | sub                          | `<ogc:Sub>`
 | mul                          | `<ogc:Mul>`
@@ -738,7 +741,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0.0">
 [width="90%",options="header"]
 |===
 | Construct                     | SE Equivalent
-| **TextRelationOperator**      | 
+| **TextRelationOperator**      |
 | like                          | `<ogc:Function>`
 | notLike                       | `<ogc:Function>`
 | contains                      | `<ogc:Function>`
