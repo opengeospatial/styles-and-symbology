@@ -23,22 +23,23 @@ Style *-- StylingRule
 Style : metadata: Metadata[0..1]
 Style *-- Metadata
 
+Metadata : identifier: string[0..1]
 Metadata : title: string[0..1]
 Metadata : description: string[0..1]
 Metadata : authors: string[0..*]
 Metadata : keywords: string[0..*]
 Metadata : geoDataClasses: string[0..*]
 
-StylingRule : name: string
+StylingRule : name: string[0..1]
 StylingRule : symbolizer: Symbolizer[0..1]
 StylingRule : selector: Expression[0..1]
 StylingRule : nestedRules: StylingRule[0..*]
 StylingRule *-- StylingRule
 StylingRule *-- Expression : selector
 
-Symbolizer : visibility: bool
-Symbolizer : opacity: float
-Symbolizer : zOrder: integer
+Symbolizer : visibility: bool[0..1]
+Symbolizer : opacity: float[0..1]
+Symbolizer : zOrder: integer[0..1]
 Symbolizer --* StylingRule
 Symbolizer --> Expression : parameter values
 
@@ -56,7 +57,7 @@ Metadata is a container for descriptive information about a Style. It might incl
 [width="90%",options="header"]
 |===
 | Name         | Definition                        | Data type and value | Multiplicity
-| name         | A string value to reference the Metadata | string              | 0..1
+| identifier   | An identifier to reference the style | string              | 0..1
 | title        | Short human-readable title for the style               | string              | 0..1
 | description  | Detailed description of the style         | string              | 0..1
 | authors      | Authors of the style                   | string              | 0..*
@@ -83,6 +84,7 @@ Please note that the graphic pipeline of the rendering engine must be expressed 
 |===
 | Name         | Definition                        | Data type and value | Multiplicity
 | stylingRules | Styling rules defining the style   | StylingRule         | 0..*
+| metadata     | Container for descriptive information about a style | Metadata | 0..1
 |===
 
 [[req-core-rules]]
